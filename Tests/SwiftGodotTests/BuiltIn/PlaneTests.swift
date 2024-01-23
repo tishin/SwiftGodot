@@ -26,6 +26,12 @@ final class PlaneTests: GodotTestCase {
         XCTAssertEqual (value.normal.z, -7.7)
         XCTAssertEqual (value.d, 8.8)
         
+        value = -Plane (normal: Vector3 (x: -.greatestFiniteMagnitude, y: .greatestFiniteMagnitude, z: -.greatestFiniteMagnitude), d: .greatestFiniteMagnitude)
+        XCTAssertEqual (value.normal.x, .greatestFiniteMagnitude)
+        XCTAssertEqual (value.normal.y, -.greatestFiniteMagnitude)
+        XCTAssertEqual (value.normal.z, .greatestFiniteMagnitude)
+        XCTAssertEqual (value.d, -.greatestFiniteMagnitude)
+        
         value = -Plane (normal: Vector3 (x: .infinity, y: -.infinity, z: .infinity), d: -.infinity)
         XCTAssertEqual (value.normal.x, -.infinity)
         XCTAssertEqual (value.normal.y, .infinity)

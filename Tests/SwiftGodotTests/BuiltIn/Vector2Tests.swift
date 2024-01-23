@@ -22,6 +22,10 @@ final class Vector2Tests: GodotTestCase {
         XCTAssertEqual (value.x, -3.3)
         XCTAssertEqual (value.y, 4.4)
         
+        value = -Vector2 (x: -.greatestFiniteMagnitude, y: .greatestFiniteMagnitude)
+        XCTAssertEqual (value.x, .greatestFiniteMagnitude)
+        XCTAssertEqual (value.y, -.greatestFiniteMagnitude)
+        
         value = -Vector2 (x: .infinity, y: -.infinity)
         XCTAssertEqual (value.x, -.infinity)
         XCTAssertEqual (value.y, .infinity)

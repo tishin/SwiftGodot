@@ -26,6 +26,12 @@ final class QuaternionTests: GodotTestCase {
         XCTAssertEqual (value.z, -7.7)
         XCTAssertEqual (value.w, 8.8)
         
+        value = -Quaternion (x: -.greatestFiniteMagnitude, y: .greatestFiniteMagnitude, z: -.greatestFiniteMagnitude, w: .greatestFiniteMagnitude)
+        XCTAssertEqual (value.x, .greatestFiniteMagnitude)
+        XCTAssertEqual (value.y, -.greatestFiniteMagnitude)
+        XCTAssertEqual (value.z, .greatestFiniteMagnitude)
+        XCTAssertEqual (value.w, -.greatestFiniteMagnitude)
+        
         value = -Quaternion (x: .infinity, y: -.infinity, z: .infinity, w: -.infinity)
         XCTAssertEqual (value.x, -.infinity)
         XCTAssertEqual (value.y, .infinity)
