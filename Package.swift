@@ -79,7 +79,7 @@ var targets: [Target] = [
         name: "GDExtension"),
 ]
 
-var swiftGodotPlugins: [Target.PluginUsage] = ["CodeGeneratorPlugin"]
+var swiftGodotPlugins: [Target.PluginUsage] = [/*"CodeGeneratorPlugin"*/]
 
 // Macros aren't supported on Windows before 5.9.1
 #if !(os(Windows) && swift(<5.9.1))
@@ -181,3 +181,43 @@ let package = Package(
     ],
     targets: targets
 )
+
+/*
+let package = Package(
+    name: "SwiftGodot",
+    platforms: [
+        .macOS(.v13),
+        .iOS (.v15)
+    ],
+    products: [],
+    dependencies: [
+        .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.15.0"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
+    ],
+    targets: [
+        // This contains GDExtension's JSON API data models
+        .target(
+            name: "ExtensionApi",
+            exclude: ["ExtensionApiJson.swift", "extension_api.json"]),
+        // This contains a resource bundle with extension_api.json
+        .target(
+            name: "ExtensionApiJson",
+            path: "Sources/ExtensionApi",
+            sources: ["ExtensionApiJson.swift"],
+            resources: [.process("extension_api.json")]),
+        
+        // The generator takes Godot's JSON-based API description as input and
+        // produces Swift API bindings that can be used to call into Godot.
+        .executableTarget(
+            name: "Generator",
+            dependencies: [
+                "XMLCoder",
+                "ExtensionApi",
+            ],
+            path: "Generator",
+            exclude: ["README.md"]),
+    ]
+)
+*/
+
