@@ -31,7 +31,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
     }
     
     static var constructor1: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_COLOR, 1)!
@@ -41,7 +41,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         var copy_from = from
         var args: [UnsafeRawPointer?] = []
         withUnsafePointer (to: &copy_from) { p0 in
@@ -59,7 +59,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         var copy_from = from
         var copy_alpha = Double (alpha)
         var args: [UnsafeRawPointer?] = []
@@ -81,7 +81,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         var copy_r = Double (r)
         var copy_g = Double (g)
         var copy_b = Double (b)
@@ -107,7 +107,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         var copy_r = Double (r)
         var copy_g = Double (g)
         var copy_b = Double (b)
@@ -136,7 +136,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         let gstr_code = GString (code)
         var args: [UnsafeRawPointer?] = []
         withUnsafePointer (to: &gstr_code.content) { p0 in
@@ -153,7 +153,7 @@ public struct Color: Equatable, Hashable {
         self.red = 0
         self.green = 0
         self.blue = 0
-        self.alpha = 0
+        self.alpha = 1
         let gstr_code = GString (code)
         var copy_alpha = Double (alpha)
         var args: [UnsafeRawPointer?] = []
