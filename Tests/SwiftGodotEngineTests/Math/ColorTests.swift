@@ -57,9 +57,9 @@ final class ColorTests: GodotTestCase {
         XCTAssertEqual (cyan.toArgb32 (), 0xff00ffff, "The returned 32-bit RGB number should match the expected value.")
         XCTAssertEqual (cyan.toAbgr32 (), 0xffffff00, "The returned 32-bit BGR number should match the expected value.")
         XCTAssertEqual (cyan.toRgba32 (), 0x00ffffff, "The returned 32-bit BGR number should match the expected value.")
-        //XCTAssertEqual (cyan.toArgb64 (), 0xffff_0000_ffff_ffff, "The returned 64-bit RGB number should match the expected value.")
-        //XCTAssertEqual (cyan.toAbgr64 (), 0xffff_ffff_ffff_0000, "The returned 64-bit BGR number should match the expected value.")
-        XCTAssertEqual (cyan.toRgba64 (), 0x0000_ffff_ffff_ffff, "The returned 64-bit BGR number should match the expected value.")
+        XCTAssertEqual (cyan.toArgb64 (), Int64 (bitPattern: 0xffff_0000_ffff_ffff), "The returned 64-bit RGB number should match the expected value.")
+        XCTAssertEqual (cyan.toAbgr64 (), Int64 (bitPattern: 0xffff_ffff_ffff_0000), "The returned 64-bit BGR number should match the expected value.")
+        XCTAssertEqual (cyan.toRgba64 (), Int64 (bitPattern: 0x0000_ffff_ffff_ffff), "The returned 64-bit BGR number should match the expected value.")
         XCTAssertEqual (Variant (cyan).description, "(0, 1, 1, 1)", "The string representation should match the expected value.")
     }
 
