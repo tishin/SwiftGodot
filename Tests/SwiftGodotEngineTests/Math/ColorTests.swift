@@ -31,20 +31,20 @@ final class ColorTests: GodotTestCase {
         let darkRed: Color = Color (r: 0.3, g: 0.1, b: 0.1)
         
         // Color components may be negative. Also, the alpha component may be greater than 1.0.
-        XCTAssertTrue ((blue + darkRed).isEqualApprox (to: Color (r: 0.5, g: 0.3, b: 1.1, a: 2)), "Color addition should behave as expected.")
-        XCTAssertTrue ((blue - darkRed).isEqualApprox (to: Color (r: -0.1, g: 0.1, b: 0.9, a: 0)), "Color subtraction should behave as expected.")
-        XCTAssertTrue ((blue * 2).isEqualApprox (to: Color (r: 0.4, g: 0.4, b: 2, a: 2)), "Color multiplication with a scalar should behave as expected.")
-        XCTAssertTrue ((blue / 2).isEqualApprox (to: Color (r: 0.1, g: 0.1, b: 0.5, a: 0.5)), "Color division with a scalar should behave as expected.")
-        XCTAssertTrue ((blue * darkRed).isEqualApprox (to: Color (r: 0.06, g: 0.02, b: 0.1)), "Color multiplication with another Color should behave as expected.")
-        XCTAssertTrue ((blue / darkRed).isEqualApprox (to: Color (r: 0.666667, g: 2, b: 10)), "Color division with another Color should behave as expected.")
-        XCTAssertTrue ((-blue).isEqualApprox (to: Color (r: 0.8, g: 0.8, b: 0, a: 0)), "Color negation should behave as expected (affecting the alpha channel, unlike `invert ()`).")
+        assertApproxEqual (blue + darkRed, Color (r: 0.5, g: 0.3, b: 1.1, a: 2), "Color addition should behave as expected.")
+        assertApproxEqual (blue - darkRed, Color (r: -0.1, g: 0.1, b: 0.9, a: 0), "Color subtraction should behave as expected.")
+        assertApproxEqual (blue * 2, Color (r: 0.4, g: 0.4, b: 2, a: 2), "Color multiplication with a scalar should behave as expected.")
+        assertApproxEqual (blue / 2, Color (r: 0.1, g: 0.1, b: 0.5, a: 0.5), "Color division with a scalar should behave as expected.")
+        assertApproxEqual (blue * darkRed, Color (r: 0.06, g: 0.02, b: 0.1), "Color multiplication with another Color should behave as expected.")
+        assertApproxEqual (blue / darkRed, Color (r: 0.666667, g: 2, b: 10), "Color division with another Color should behave as expected.")
+        assertApproxEqual (-blue, Color (r: 0.8, g: 0.8, b: 0, a: 0), "Color negation should behave as expected (affecting the alpha channel, unlike `invert ()`).")
     }
 
     func testReadingMethods () {
         let darkBlue: Color = Color (r: 0, g: 0, b: 0.5, a: 0.4)
-        //XCTAssertEqual (darkBlue.getH (), 240.0 / 360.0, "The returned HSV hue should match the expected value.")
-        //XCTAssertEqual (darkBlue.getS (), 1.0, "The returned HSV saturation should match the expected value.")
-        //XCTAssertEqual (darkBlue.getV (), 0.5, "The returned HSV value should match the expected value.")
+        XCTAssertEqual (darkBlue.hue, 240.0 / 360.0, "The returned HSV hue should match the expected value.")
+        XCTAssertEqual (darkBlue.saturation, 1.0, "The returned HSV saturation should match the expected value.")
+        XCTAssertEqual (darkBlue.value, 0.5, "The returned HSV value should match the expected value.")
     }
 
 

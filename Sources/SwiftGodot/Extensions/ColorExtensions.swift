@@ -17,7 +17,7 @@ extension Color {
         }
         
         var hue: Float
-        if green == max {
+        if red == max {
             hue = (green - blue) / delta // between yellow & magenta
         } else if green == max {
             hue = 2 + (blue - red) / delta // between cyan & yellow
