@@ -123,6 +123,7 @@ public class PackedStringArray: Equatable, Collection {
     }()
     
     /// Appends a string element at end of the array.
+    @discardableResult /* 1: push_back */ 
     public final func pushBack (value: String)-> Bool {
         var result: Bool = Bool()
         let gstr_value = GString (value)

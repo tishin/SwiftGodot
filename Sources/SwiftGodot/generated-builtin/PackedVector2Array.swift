@@ -123,6 +123,7 @@ public class PackedVector2Array: Equatable, Collection {
     }()
     
     /// Inserts a ``Vector2`` at the end.
+    @discardableResult /* 1: push_back */ 
     public final func pushBack (value: Vector2)-> Bool {
         var result: Bool = Bool()
         var copy_value = value

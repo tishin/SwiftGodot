@@ -123,6 +123,7 @@ public class PackedColorArray: Equatable, Collection {
     }()
     
     /// Appends a value to the array.
+    @discardableResult /* 1: push_back */ 
     public final func pushBack (value: Color)-> Bool {
         var result: Bool = Bool()
         var copy_value = value

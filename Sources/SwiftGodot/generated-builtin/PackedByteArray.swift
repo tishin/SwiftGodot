@@ -123,6 +123,7 @@ public class PackedByteArray: Equatable, Collection {
     }()
     
     /// Appends an element at the end of the array.
+    @discardableResult /* 1: push_back */ 
     public final func pushBack (value: Int64)-> Bool {
         var result: Bool = Bool()
         var copy_value = value

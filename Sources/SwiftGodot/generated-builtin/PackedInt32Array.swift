@@ -123,6 +123,7 @@ public class PackedInt32Array: Equatable, Collection {
     }()
     
     /// Appends a value to the array.
+    @discardableResult /* 1: push_back */ 
     public final func pushBack (value: Int64)-> Bool {
         var result: Bool = Bool()
         var copy_value = value
