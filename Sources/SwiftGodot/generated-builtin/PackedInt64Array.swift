@@ -20,6 +20,8 @@ public class PackedInt64Array: Equatable, Collection {
         
     }
     
+    /// The number of elements in the array
+    public var count: Int { Int (size()) }
     // Contains a binary blob where this type information is stored
     public var content: ContentType = (0, 0)
     // Used to initialize empty types

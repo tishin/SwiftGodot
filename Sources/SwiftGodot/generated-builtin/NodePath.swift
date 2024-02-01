@@ -41,9 +41,10 @@ public class NodePath: Equatable, ExpressibleByStringLiteral, ExpressibleByStrin
         
     }
     
+    /// Produces a string representation of this NodePath
     public var description: String {
-        let sub = getConcatenatedSubnames ().description
-        return getConcatenatedNames ().description + (sub == "" ? sub : ":\(sub)")
+        let sub = getSubnameCount () > 0 ? getConcatenatedSubnames ().description : ""
+        return (isAbsolute() ? "/" : "") + (getNameCount () > 0 ? getConcatenatedNames ().description : "") + (sub == "" ? sub : ":\(sub)")
     }
     
     static var destructor: GDExtensionPtrDestructor = {
