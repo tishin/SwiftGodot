@@ -64,7 +64,7 @@ final class Geometry3DTests: GodotTestCase {
     }
 
     func testGetClosestPointToSegment () {
-        let output: Vector3 = Geometry3D.getClosestPointToSegment(point: Vector3 (x: 2, y: 1, z: 4), s1: Vector3 (x: 1, y: 1, z: 1), s2: Vector3 (x: 5, y: 5, z: 5))
+        let output: Vector3 = Geometry3D.getClosestPointToSegment (point: Vector3 (x: 2, y: 1, z: 4), s1: Vector3 (x: 1, y: 1, z: 1), s2: Vector3 (x: 5, y: 5, z: 5))
         assertApproxEqual (output, Vector3 (x: 2.33333, y: 2.33333, z: 2.33333))
     }
 
