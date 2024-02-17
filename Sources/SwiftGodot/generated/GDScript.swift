@@ -43,7 +43,7 @@ open class GDScript: Script {
         }
         
         gi.object_method_bind_call (GDScript.method_new, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
     }
     
 }

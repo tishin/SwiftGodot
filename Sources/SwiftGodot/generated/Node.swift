@@ -3259,7 +3259,7 @@ open class Node: Object {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Node.method_rpc, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_method.content)
-        return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+        return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
         #else
         
         let copy_method = Variant (method)
@@ -3275,7 +3275,7 @@ open class Node: Object {
         }
         
             gi.object_method_bind_call (Node.method_rpc, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+            return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
         }
         
         #endif
@@ -3301,7 +3301,7 @@ open class Node: Object {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Node.method_rpc_id, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_peer_id.content, &copy_method.content)
-        return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+        return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
         #else
         
         let copy_peer_id = Variant (peerId)
@@ -3320,7 +3320,7 @@ open class Node: Object {
         }
         
                 gi.object_method_bind_call (Node.method_rpc_id, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-                return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+                return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
             }
         }
         
@@ -3365,7 +3365,7 @@ open class Node: Object {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Node.method_call_deferred_thread_group, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_method.content)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_method = Variant (method)
@@ -3381,7 +3381,7 @@ open class Node: Object {
         }
         
             gi.object_method_bind_call (Node.method_call_deferred_thread_group, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return Variant (fromContent: _result)
+            return Variant (fromContentPtr: &_result)
         }
         
         #endif
@@ -3471,7 +3471,7 @@ open class Node: Object {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Node.method_call_thread_safe, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_method.content)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_method = Variant (method)
@@ -3487,7 +3487,7 @@ open class Node: Object {
         }
         
             gi.object_method_bind_call (Node.method_call_thread_safe, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return Variant (fromContent: _result)
+            return Variant (fromContentPtr: &_result)
         }
         
         #endif

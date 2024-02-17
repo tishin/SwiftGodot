@@ -154,7 +154,7 @@ open class JavaScriptBridge: Object {
         let copy_object = Variant (object)
         
         gi.object_method_bind_call_v (JavaScriptBridge.method_create_object, UnsafeMutableRawPointer (mutating: shared.handle), &_result, nil, &copy_object.content)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_object = Variant (object)
@@ -170,7 +170,7 @@ open class JavaScriptBridge: Object {
         }
         
             gi.object_method_bind_call (JavaScriptBridge.method_create_object, UnsafeMutableRawPointer (mutating: shared.handle), &_args, Int64 (_args.count), &_result, nil)
-            return Variant (fromContent: _result)
+            return Variant (fromContentPtr: &_result)
         }
         
         #endif

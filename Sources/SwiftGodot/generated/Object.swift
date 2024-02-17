@@ -800,7 +800,7 @@ open class Object: Wrapped, GodotObject {
         let copy_signal = Variant (signal)
         
         gi.object_method_bind_call_v (Object.method_emit_signal, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_signal.content)
-        return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+        return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
         #else
         
         let copy_signal = Variant (signal)
@@ -816,7 +816,7 @@ open class Object: Wrapped, GodotObject {
         }
         
             gi.object_method_bind_call (Object.method_emit_signal, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return GodotError (rawValue: Int64 (Variant (fromContent: _result))!)!
+            return GodotError (rawValue: Int64 (Variant (fromContentPtr: &_result))!)!
         }
         
         #endif
@@ -844,7 +844,7 @@ open class Object: Wrapped, GodotObject {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Object.method_call, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_method.content)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_method = Variant (method)
@@ -860,7 +860,7 @@ open class Object: Wrapped, GodotObject {
         }
         
             gi.object_method_bind_call (Object.method_call, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return Variant (fromContent: _result)
+            return Variant (fromContentPtr: &_result)
         }
         
         #endif
@@ -896,7 +896,7 @@ open class Object: Wrapped, GodotObject {
         let copy_method = Variant (method)
         
         gi.object_method_bind_call_v (Object.method_call_deferred, UnsafeMutableRawPointer (mutating: handle), &_result, nil, &copy_method.content)
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_method = Variant (method)
@@ -912,7 +912,7 @@ open class Object: Wrapped, GodotObject {
         }
         
             gi.object_method_bind_call (Object.method_call_deferred, UnsafeMutableRawPointer (mutating: handle), &_args, Int64 (_args.count), &_result, nil)
-            return Variant (fromContent: _result)
+            return Variant (fromContentPtr: &_result)
         }
         
         #endif

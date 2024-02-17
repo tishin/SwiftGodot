@@ -332,7 +332,7 @@ public class GDictionary: Equatable {
             var result = Variant.zero
             if Self.keyed_checker (&content, &keyCopy.content) != 0 {
                 Self.keyed_getter (&content, &keyCopy.content, &result)
-                return Variant (fromContent: result)
+                return Variant (fromContentPtr: &result)
             }
             
             else {

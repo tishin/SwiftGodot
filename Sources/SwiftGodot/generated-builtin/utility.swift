@@ -1334,7 +1334,7 @@ public class GD {
         withArgPointers(&copy_arg1.content, &copy_arg2.content) { _args in
             method_max (&_result, _args, Int32 (_args.count))
         }
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_arg1 = Variant (arg1)
@@ -1353,7 +1353,7 @@ public class GD {
         }
         
                 method_max (&_result, &_args, Int32 (_args.count))
-                return Variant (fromContent: _result)
+                return Variant (fromContentPtr: &_result)
             }
         }
         
@@ -1458,7 +1458,7 @@ public class GD {
         withArgPointers(&copy_arg1.content, &copy_arg2.content) { _args in
             method_min (&_result, _args, Int32 (_args.count))
         }
-        return Variant (fromContent: _result)
+        return Variant (fromContentPtr: &_result)
         #else
         
         let copy_arg1 = Variant (arg1)
@@ -1477,7 +1477,7 @@ public class GD {
         }
         
                 method_min (&_result, &_args, Int32 (_args.count))
-                return Variant (fromContent: _result)
+                return Variant (fromContentPtr: &_result)
             }
         }
         
@@ -2125,7 +2125,7 @@ public class GD {
         withArgPointers(&copy_arg1.content) { _args in
             method_str (&_result, _args, Int32 (_args.count))
         }
-        return GString (Variant (fromContent: _result))?.description ?? ""
+        return GString (Variant (fromContentPtr: &_result))?.description ?? ""
         #else
         
         let copy_arg1 = Variant (arg1)
@@ -2141,7 +2141,7 @@ public class GD {
         }
         
             method_str (&_result, &_args, Int32 (_args.count))
-            return GString (Variant (fromContent: _result))?.description ?? ""
+            return GString (Variant (fromContentPtr: &_result))?.description ?? ""
         }
         
         #endif
