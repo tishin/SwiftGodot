@@ -49,19 +49,19 @@ final class AStarTests: GodotTestCase {
         let abcx = ABCX ()
         let path = abcx.getIdPath (fromId: ABCX.A, toId: ABCX.C)
         XCTAssertEqual (path.size (), 3)
-        XCTAssertEqual (path [safe: 0], Int64(ABCX.A))
-        XCTAssertEqual (path [safe: 1], Int64(ABCX.B))
-        XCTAssertEqual (path [safe: 2], Int64(ABCX.C))
+        XCTAssertEqual (path [safe: 0], Int64 (ABCX.A))
+        XCTAssertEqual (path [safe: 1], Int64 (ABCX.B))
+        XCTAssertEqual (path [safe: 2], Int64 (ABCX.C))
     }
 
     func testAbcxPath () {
         let abcx = ABCX ()
         let path = abcx.getIdPath (fromId: ABCX.X, toId: ABCX.C)
         XCTAssertEqual (path.size (), 4)
-        XCTAssertEqual (path [safe: 0], Int64(ABCX.X))
-        XCTAssertEqual (path [safe: 1], Int64(ABCX.A))
-        XCTAssertEqual (path [safe: 2], Int64(ABCX.B))
-        XCTAssertEqual (path [safe: 3], Int64(ABCX.C))
+        XCTAssertEqual (path [safe: 0], Int64 (ABCX.X))
+        XCTAssertEqual (path [safe: 1], Int64 (ABCX.A))
+        XCTAssertEqual (path [safe: 2], Int64 (ABCX.B))
+        XCTAssertEqual (path [safe: 3], Int64 (ABCX.C))
     }
     
     func testAddRemove () {
@@ -246,7 +246,7 @@ final class AStarTests: GodotTestCase {
                 }
             }
             // Floyd-Warshall.
-            var d: [[Double]] = [[Double]].init (repeating: [Double].init(repeating: 0, count: N), count: N)
+            var d: [[Double]] = [[Double]].init (repeating: [Double].init (repeating: 0, count: N), count: N)
             for u in 0..<N {
                 for v in 0..<N {
                     d [u][v] = (u == v || adj [u][v]) ? p [u].distanceTo (p [v]) : .infinity
@@ -294,14 +294,14 @@ final class AStarTests: GodotTestCase {
                                     return false
                                 }
                                 var astarDist: Double = 0
-                                for i: Int in 1..<Int(route.size ()) {
+                                for i: Int in 1..<Int (route.size ()) {
                                     if !adj [Int (route [i - 1])][Int (route [i])] {
                                         //printVerbose (vformat ("From %d to %d: edge (%d, %d) does not exist\n", u, v, route [i - 1], route [i]))
                                         return false
                                     }
                                     astarDist += p [Int (route [i - 1])].distanceTo (p [Int (route [i])])
                                 }
-                                if !astarDist.isEqualApprox(d [u][v]) {
+                                if !astarDist.isEqualApprox (d [u][v]) {
                                     //printVerbose (vformat ("From %d to %d: Floyd-Warshall gives %.6f, A* gives %.6f\n", u, v, d [u][v], astarDist))
                                     return false
                                 }
