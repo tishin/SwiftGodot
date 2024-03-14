@@ -10,7 +10,7 @@
 /// A multiplication operation on a transform (4x4 matrix) and a vector, with support for different multiplication operators.
 open class VisualShaderNodeTransformVecMult: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeTransformVecMult" }
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Multiplies transform `a` by the vector `b`.
         case axb = 0 // OP_AxB
         /// Multiplies vector `b` by the transform `a`.
@@ -21,6 +21,18 @@ open class VisualShaderNodeTransformVecMult: VisualShaderNode {
         case op3x3BxA = 3 // OP_3x3_BxA
         /// Represents the size of the ``VisualShaderNodeTransformVecMult/Operator`` enum.
         case max = 4 // OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .axb: return ".axb"
+                case .bxa: return ".bxa"
+                case .op3x3AxB: return ".op3x3AxB"
+                case .op3x3BxA: return ".op3x3BxA"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

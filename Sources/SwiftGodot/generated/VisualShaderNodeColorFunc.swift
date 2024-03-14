@@ -10,7 +10,7 @@
 /// Accept a ``Color`` to the input port and transform it according to ``function``.
 open class VisualShaderNodeColorFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeColorFunc" }
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Converts the color to grayscale using the following formula:
         /// 
         case grayscale = 0 // FUNC_GRAYSCALE
@@ -23,6 +23,18 @@ open class VisualShaderNodeColorFunc: VisualShaderNode {
         case sepia = 3 // FUNC_SEPIA
         /// Represents the size of the ``VisualShaderNodeColorFunc/Function`` enum.
         case max = 4 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .grayscale: return ".grayscale"
+                case .hsv2rgb: return ".hsv2rgb"
+                case .rgb2hsv: return ".rgb2hsv"
+                case .sepia: return ".sepia"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

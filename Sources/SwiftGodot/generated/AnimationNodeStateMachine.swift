@@ -13,13 +13,23 @@
 /// 
 open class AnimationNodeStateMachine: AnimationRootNode {
     override open class var godotClassName: StringName { "AnimationNodeStateMachine" }
-    public enum StateMachineType: Int64 {
+    public enum StateMachineType: Int64, CustomDebugStringConvertible {
         /// Seeking to the beginning is treated as playing from the start state. Transition to the end state is treated as exiting the state machine.
         case root = 0 // STATE_MACHINE_TYPE_ROOT
         /// Seeking to the beginning is treated as seeking to the beginning of the animation in the current state. Transition to the end state, or the absence of transitions in each state, is treated as exiting the state machine.
         case nested = 1 // STATE_MACHINE_TYPE_NESTED
         /// This is a grouped state machine that can be controlled from a parent state machine. It does not work on standalone. There must be a state machine with ``stateMachineType`` of .root or .nested in the parent or ancestor.
         case grouped = 2 // STATE_MACHINE_TYPE_GROUPED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .root: return ".root"
+                case .nested: return ".nested"
+                case .grouped: return ".grouped"
+            }
+            
+        }
+        
     }
     
     

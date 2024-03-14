@@ -10,7 +10,7 @@
 /// A control that displays a texture, for example an icon inside a GUI. The texture's placement can be controlled with the ``stretchMode`` property. It can scale, tile, or stay centered inside its bounding rectangle.
 open class TextureRect: Control {
     override open class var godotClassName: StringName { "TextureRect" }
-    public enum ExpandMode: Int64 {
+    public enum ExpandMode: Int64, CustomDebugStringConvertible {
         /// The minimum size will be equal to texture size, i.e. ``TextureRect`` can't be smaller than the texture.
         case keepSize = 0 // EXPAND_KEEP_SIZE
         /// The size of the texture won't be considered for minimum size calculation, so the ``TextureRect`` can be shrunk down past the texture size.
@@ -23,9 +23,22 @@ open class TextureRect: Control {
         case fitHeight = 4 // EXPAND_FIT_HEIGHT
         /// Same as .expandFitHeight, but keeps texture's aspect ratio.
         case fitHeightProportional = 5 // EXPAND_FIT_HEIGHT_PROPORTIONAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .keepSize: return ".keepSize"
+                case .ignoreSize: return ".ignoreSize"
+                case .fitWidth: return ".fitWidth"
+                case .fitWidthProportional: return ".fitWidthProportional"
+                case .fitHeight: return ".fitHeight"
+                case .fitHeightProportional: return ".fitHeightProportional"
+            }
+            
+        }
+        
     }
     
-    public enum StretchMode: Int64 {
+    public enum StretchMode: Int64, CustomDebugStringConvertible {
         /// Scale to fit the node's bounding rectangle.
         case scale = 0 // STRETCH_SCALE
         /// Tile inside the node's bounding rectangle.
@@ -40,6 +53,20 @@ open class TextureRect: Control {
         case keepAspectCentered = 5 // STRETCH_KEEP_ASPECT_CENTERED
         /// Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
         case keepAspectCovered = 6 // STRETCH_KEEP_ASPECT_COVERED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scale: return ".scale"
+                case .tile: return ".tile"
+                case .keep: return ".keep"
+                case .keepCentered: return ".keepCentered"
+                case .keepAspect: return ".keepAspect"
+                case .keepAspectCentered: return ".keepAspectCentered"
+                case .keepAspectCovered: return ".keepAspectCovered"
+            }
+            
+        }
+        
     }
     
     

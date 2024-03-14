@@ -21,7 +21,7 @@
 /// 
 open class FileAccess: RefCounted {
     override open class var godotClassName: StringName { "FileAccess" }
-    public enum ModeFlags: Int64 {
+    public enum ModeFlags: Int64, CustomDebugStringConvertible {
         /// Opens the file for read operations. The cursor is positioned at the beginning of the file.
         case read = 1 // READ
         /// Opens the file for write operations. The file is created if it does not exist, and truncated if it does.
@@ -30,9 +30,20 @@ open class FileAccess: RefCounted {
         case readWrite = 3 // READ_WRITE
         /// Opens the file for read and write operations. The file is created if it does not exist, and truncated if it does. The cursor is positioned at the beginning of the file.
         case writeRead = 7 // WRITE_READ
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .read: return ".read"
+                case .write: return ".write"
+                case .readWrite: return ".readWrite"
+                case .writeRead: return ".writeRead"
+            }
+            
+        }
+        
     }
     
-    public enum CompressionMode: Int64 {
+    public enum CompressionMode: Int64, CustomDebugStringConvertible {
         /// Uses the [url=https://fastlz.org/]FastLZ[/url] compression method.
         case fastlz = 0 // COMPRESSION_FASTLZ
         /// Uses the [url=https://en.wikipedia.org/wiki/DEFLATE]DEFLATE[/url] compression method.
@@ -43,6 +54,18 @@ open class FileAccess: RefCounted {
         case gzip = 3 // COMPRESSION_GZIP
         /// Uses the [url=https://github.com/google/brotli]brotli[/url] compression method (only decompression is supported).
         case brotli = 4 // COMPRESSION_BROTLI
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .fastlz: return ".fastlz"
+                case .deflate: return ".deflate"
+                case .zstd: return ".zstd"
+                case .gzip: return ".gzip"
+                case .brotli: return ".brotli"
+            }
+            
+        }
+        
     }
     
     public struct UnixPermissionFlags: OptionSet, CustomDebugStringConvertible {

@@ -28,7 +28,7 @@
 /// - ``requestCompleted``
 open class HTTPRequest: Node {
     override open class var godotClassName: StringName { "HTTPRequest" }
-    public enum Result: Int64 {
+    public enum Result: Int64, CustomDebugStringConvertible {
         /// Request successful.
         case success = 0 // RESULT_SUCCESS
         /// 
@@ -57,6 +57,27 @@ open class HTTPRequest: Node {
         case redirectLimitReached = 12 // RESULT_REDIRECT_LIMIT_REACHED
         /// Request failed due to a timeout. If you expect requests to take a long time, try increasing the value of ``timeout`` or setting it to `0.0` to remove the timeout completely.
         case timeout = 13 // RESULT_TIMEOUT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .success: return ".success"
+                case .chunkedBodySizeMismatch: return ".chunkedBodySizeMismatch"
+                case .cantConnect: return ".cantConnect"
+                case .cantResolve: return ".cantResolve"
+                case .connectionError: return ".connectionError"
+                case .tlsHandshakeError: return ".tlsHandshakeError"
+                case .noResponse: return ".noResponse"
+                case .bodySizeLimitExceeded: return ".bodySizeLimitExceeded"
+                case .bodyDecompressFailed: return ".bodyDecompressFailed"
+                case .requestFailed: return ".requestFailed"
+                case .downloadFileCantOpen: return ".downloadFileCantOpen"
+                case .downloadFileWriteError: return ".downloadFileWriteError"
+                case .redirectLimitReached: return ".redirectLimitReached"
+                case .timeout: return ".timeout"
+            }
+            
+        }
+        
     }
     
     

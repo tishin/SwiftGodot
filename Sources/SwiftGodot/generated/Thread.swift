@@ -21,13 +21,23 @@
 /// 
 open class Thread: RefCounted {
     override open class var godotClassName: StringName { "Thread" }
-    public enum Priority: Int64 {
+    public enum Priority: Int64, CustomDebugStringConvertible {
         /// A thread running with lower priority than normally.
         case low = 0 // PRIORITY_LOW
         /// A thread with a standard priority.
         case normal = 1 // PRIORITY_NORMAL
         /// A thread running with higher priority than normally.
         case high = 2 // PRIORITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .low: return ".low"
+                case .normal: return ".normal"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
     /* Methods */

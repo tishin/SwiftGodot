@@ -18,7 +18,7 @@ open class Geometry2D: Object {
     }()
     
     override open class var godotClassName: StringName { "Geometry2D" }
-    public enum PolyBooleanOperation: Int64 {
+    public enum PolyBooleanOperation: Int64, CustomDebugStringConvertible {
         /// Create regions where either subject or clip polygons (or both) are filled.
         case union = 0 // OPERATION_UNION
         /// Create regions where subject polygons are filled except where clip polygons are filled.
@@ -27,18 +27,39 @@ open class Geometry2D: Object {
         case intersection = 2 // OPERATION_INTERSECTION
         /// Create regions where either subject or clip polygons are filled but not where both are filled.
         case xor = 3 // OPERATION_XOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .union: return ".union"
+                case .difference: return ".difference"
+                case .intersection: return ".intersection"
+                case .xor: return ".xor"
+            }
+            
+        }
+        
     }
     
-    public enum PolyJoinType: Int64 {
+    public enum PolyJoinType: Int64, CustomDebugStringConvertible {
         /// Squaring is applied uniformally at all convex edge joins at `1 * delta`.
         case square = 0 // JOIN_SQUARE
         /// While flattened paths can never perfectly trace an arc, they are approximated by a series of arc chords.
         case round = 1 // JOIN_ROUND
         /// There's a necessary limit to mitered joins since offsetting edges that join at very acute angles will produce excessively long and narrow "spikes". For any given edge join, when miter offsetting would exceed that maximum distance, "square" joining is applied.
         case miter = 2 // JOIN_MITER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .square: return ".square"
+                case .round: return ".round"
+                case .miter: return ".miter"
+            }
+            
+        }
+        
     }
     
-    public enum PolyEndType: Int64 {
+    public enum PolyEndType: Int64, CustomDebugStringConvertible {
         /// Endpoints are joined using the ``Geometry2D/PolyJoinType`` value and the path filled as a polygon.
         case polygon = 0 // END_POLYGON
         /// Endpoints are joined using the ``Geometry2D/PolyJoinType`` value and the path filled as a polyline.
@@ -49,6 +70,18 @@ open class Geometry2D: Object {
         case square = 3 // END_SQUARE
         /// Endpoints are rounded off and extended by `delta` units.
         case round = 4 // END_ROUND
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .polygon: return ".polygon"
+                case .joined: return ".joined"
+                case .butt: return ".butt"
+                case .square: return ".square"
+                case .round: return ".round"
+            }
+            
+        }
+        
     }
     
     /* Methods */

@@ -19,7 +19,7 @@
 /// 
 open class RenderingDevice: Object {
     override open class var godotClassName: StringName { "RenderingDevice" }
-    public enum DeviceType: Int64 {
+    public enum DeviceType: Int64, CustomDebugStringConvertible {
         /// Rendering device type does not match any of the other enum values or is unknown.
         case other = 0 // DEVICE_TYPE_OTHER
         /// Rendering device is an integrated GPU, which is typically _(but not always)_ slower than dedicated GPUs (.discreteGpu). On Android and iOS, the rendering device type is always considered to be .integratedGpu.
@@ -32,9 +32,22 @@ open class RenderingDevice: Object {
         case cpu = 4 // DEVICE_TYPE_CPU
         /// Represents the size of the ``RenderingDevice/DeviceType`` enum.
         case max = 5 // DEVICE_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .other: return ".other"
+                case .integratedGpu: return ".integratedGpu"
+                case .discreteGpu: return ".discreteGpu"
+                case .virtualGpu: return ".virtualGpu"
+                case .cpu: return ".cpu"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum DriverResource: Int64 {
+    public enum DriverResource: Int64, CustomDebugStringConvertible {
         /// Vulkan device driver resource. This is a "global" resource and ignores the RID passed in
         case device = 0 // DRIVER_RESOURCE_VULKAN_DEVICE
         /// Physical device (graphics card) driver resource.
@@ -61,9 +74,29 @@ open class RenderingDevice: Object {
         case computePipeline = 11 // DRIVER_RESOURCE_VULKAN_COMPUTE_PIPELINE
         /// Vulkan render pipeline driver resource.
         case renderPipeline = 12 // DRIVER_RESOURCE_VULKAN_RENDER_PIPELINE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .device: return ".device"
+                case .physicalDevice: return ".physicalDevice"
+                case .instance: return ".instance"
+                case .queue: return ".queue"
+                case .queueFamilyIndex: return ".queueFamilyIndex"
+                case .image: return ".image"
+                case .imageView: return ".imageView"
+                case .imageNativeTextureFormat: return ".imageNativeTextureFormat"
+                case .sampler: return ".sampler"
+                case .descriptorSet: return ".descriptorSet"
+                case .buffer: return ".buffer"
+                case .computePipeline: return ".computePipeline"
+                case .renderPipeline: return ".renderPipeline"
+            }
+            
+        }
+        
     }
     
-    public enum DataFormat: Int64 {
+    public enum DataFormat: Int64, CustomDebugStringConvertible {
         /// 4-bit-per-channel red/green channel data format, packed into 8 bits. Values are in the `[0.0, 1.0]` range.
         /// 
         /// > Note: More information on all data formats can be found on the [url=https://registry.khronos.org/vulkan/specs/1.1/html/vkspec.html#_identification_of_formats]Identification of formats[/url] section of the Vulkan specification, as well as the [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkFormat.html]VkFormat[/url] enum.
@@ -505,6 +538,232 @@ open class RenderingDevice: Object {
         case g16B16R163plane444Unorm = 217 // DATA_FORMAT_G16_B16_R16_3PLANE_444_UNORM
         /// Represents the size of the ``RenderingDevice/DataFormat`` enum.
         case max = 218 // DATA_FORMAT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .r4g4UnormPack8: return ".r4g4UnormPack8"
+                case .r4g4b4a4UnormPack16: return ".r4g4b4a4UnormPack16"
+                case .b4g4r4a4UnormPack16: return ".b4g4r4a4UnormPack16"
+                case .r5g6b5UnormPack16: return ".r5g6b5UnormPack16"
+                case .b5g6r5UnormPack16: return ".b5g6r5UnormPack16"
+                case .r5g5b5a1UnormPack16: return ".r5g5b5a1UnormPack16"
+                case .b5g5r5a1UnormPack16: return ".b5g5r5a1UnormPack16"
+                case .a1r5g5b5UnormPack16: return ".a1r5g5b5UnormPack16"
+                case .r8Unorm: return ".r8Unorm"
+                case .r8Snorm: return ".r8Snorm"
+                case .r8Uscaled: return ".r8Uscaled"
+                case .r8Sscaled: return ".r8Sscaled"
+                case .r8Uint: return ".r8Uint"
+                case .r8Sint: return ".r8Sint"
+                case .r8Srgb: return ".r8Srgb"
+                case .r8g8Unorm: return ".r8g8Unorm"
+                case .r8g8Snorm: return ".r8g8Snorm"
+                case .r8g8Uscaled: return ".r8g8Uscaled"
+                case .r8g8Sscaled: return ".r8g8Sscaled"
+                case .r8g8Uint: return ".r8g8Uint"
+                case .r8g8Sint: return ".r8g8Sint"
+                case .r8g8Srgb: return ".r8g8Srgb"
+                case .r8g8b8Unorm: return ".r8g8b8Unorm"
+                case .r8g8b8Snorm: return ".r8g8b8Snorm"
+                case .r8g8b8Uscaled: return ".r8g8b8Uscaled"
+                case .r8g8b8Sscaled: return ".r8g8b8Sscaled"
+                case .r8g8b8Uint: return ".r8g8b8Uint"
+                case .r8g8b8Sint: return ".r8g8b8Sint"
+                case .r8g8b8Srgb: return ".r8g8b8Srgb"
+                case .b8g8r8Unorm: return ".b8g8r8Unorm"
+                case .b8g8r8Snorm: return ".b8g8r8Snorm"
+                case .b8g8r8Uscaled: return ".b8g8r8Uscaled"
+                case .b8g8r8Sscaled: return ".b8g8r8Sscaled"
+                case .b8g8r8Uint: return ".b8g8r8Uint"
+                case .b8g8r8Sint: return ".b8g8r8Sint"
+                case .b8g8r8Srgb: return ".b8g8r8Srgb"
+                case .r8g8b8a8Unorm: return ".r8g8b8a8Unorm"
+                case .r8g8b8a8Snorm: return ".r8g8b8a8Snorm"
+                case .r8g8b8a8Uscaled: return ".r8g8b8a8Uscaled"
+                case .r8g8b8a8Sscaled: return ".r8g8b8a8Sscaled"
+                case .r8g8b8a8Uint: return ".r8g8b8a8Uint"
+                case .r8g8b8a8Sint: return ".r8g8b8a8Sint"
+                case .r8g8b8a8Srgb: return ".r8g8b8a8Srgb"
+                case .b8g8r8a8Unorm: return ".b8g8r8a8Unorm"
+                case .b8g8r8a8Snorm: return ".b8g8r8a8Snorm"
+                case .b8g8r8a8Uscaled: return ".b8g8r8a8Uscaled"
+                case .b8g8r8a8Sscaled: return ".b8g8r8a8Sscaled"
+                case .b8g8r8a8Uint: return ".b8g8r8a8Uint"
+                case .b8g8r8a8Sint: return ".b8g8r8a8Sint"
+                case .b8g8r8a8Srgb: return ".b8g8r8a8Srgb"
+                case .a8b8g8r8UnormPack32: return ".a8b8g8r8UnormPack32"
+                case .a8b8g8r8SnormPack32: return ".a8b8g8r8SnormPack32"
+                case .a8b8g8r8UscaledPack32: return ".a8b8g8r8UscaledPack32"
+                case .a8b8g8r8SscaledPack32: return ".a8b8g8r8SscaledPack32"
+                case .a8b8g8r8UintPack32: return ".a8b8g8r8UintPack32"
+                case .a8b8g8r8SintPack32: return ".a8b8g8r8SintPack32"
+                case .a8b8g8r8SrgbPack32: return ".a8b8g8r8SrgbPack32"
+                case .a2r10g10b10UnormPack32: return ".a2r10g10b10UnormPack32"
+                case .a2r10g10b10SnormPack32: return ".a2r10g10b10SnormPack32"
+                case .a2r10g10b10UscaledPack32: return ".a2r10g10b10UscaledPack32"
+                case .a2r10g10b10SscaledPack32: return ".a2r10g10b10SscaledPack32"
+                case .a2r10g10b10UintPack32: return ".a2r10g10b10UintPack32"
+                case .a2r10g10b10SintPack32: return ".a2r10g10b10SintPack32"
+                case .a2b10g10r10UnormPack32: return ".a2b10g10r10UnormPack32"
+                case .a2b10g10r10SnormPack32: return ".a2b10g10r10SnormPack32"
+                case .a2b10g10r10UscaledPack32: return ".a2b10g10r10UscaledPack32"
+                case .a2b10g10r10SscaledPack32: return ".a2b10g10r10SscaledPack32"
+                case .a2b10g10r10UintPack32: return ".a2b10g10r10UintPack32"
+                case .a2b10g10r10SintPack32: return ".a2b10g10r10SintPack32"
+                case .r16Unorm: return ".r16Unorm"
+                case .r16Snorm: return ".r16Snorm"
+                case .r16Uscaled: return ".r16Uscaled"
+                case .r16Sscaled: return ".r16Sscaled"
+                case .r16Uint: return ".r16Uint"
+                case .r16Sint: return ".r16Sint"
+                case .r16Sfloat: return ".r16Sfloat"
+                case .r16g16Unorm: return ".r16g16Unorm"
+                case .r16g16Snorm: return ".r16g16Snorm"
+                case .r16g16Uscaled: return ".r16g16Uscaled"
+                case .r16g16Sscaled: return ".r16g16Sscaled"
+                case .r16g16Uint: return ".r16g16Uint"
+                case .r16g16Sint: return ".r16g16Sint"
+                case .r16g16Sfloat: return ".r16g16Sfloat"
+                case .r16g16b16Unorm: return ".r16g16b16Unorm"
+                case .r16g16b16Snorm: return ".r16g16b16Snorm"
+                case .r16g16b16Uscaled: return ".r16g16b16Uscaled"
+                case .r16g16b16Sscaled: return ".r16g16b16Sscaled"
+                case .r16g16b16Uint: return ".r16g16b16Uint"
+                case .r16g16b16Sint: return ".r16g16b16Sint"
+                case .r16g16b16Sfloat: return ".r16g16b16Sfloat"
+                case .r16g16b16a16Unorm: return ".r16g16b16a16Unorm"
+                case .r16g16b16a16Snorm: return ".r16g16b16a16Snorm"
+                case .r16g16b16a16Uscaled: return ".r16g16b16a16Uscaled"
+                case .r16g16b16a16Sscaled: return ".r16g16b16a16Sscaled"
+                case .r16g16b16a16Uint: return ".r16g16b16a16Uint"
+                case .r16g16b16a16Sint: return ".r16g16b16a16Sint"
+                case .r16g16b16a16Sfloat: return ".r16g16b16a16Sfloat"
+                case .r32Uint: return ".r32Uint"
+                case .r32Sint: return ".r32Sint"
+                case .r32Sfloat: return ".r32Sfloat"
+                case .r32g32Uint: return ".r32g32Uint"
+                case .r32g32Sint: return ".r32g32Sint"
+                case .r32g32Sfloat: return ".r32g32Sfloat"
+                case .r32g32b32Uint: return ".r32g32b32Uint"
+                case .r32g32b32Sint: return ".r32g32b32Sint"
+                case .r32g32b32Sfloat: return ".r32g32b32Sfloat"
+                case .r32g32b32a32Uint: return ".r32g32b32a32Uint"
+                case .r32g32b32a32Sint: return ".r32g32b32a32Sint"
+                case .r32g32b32a32Sfloat: return ".r32g32b32a32Sfloat"
+                case .r64Uint: return ".r64Uint"
+                case .r64Sint: return ".r64Sint"
+                case .r64Sfloat: return ".r64Sfloat"
+                case .r64g64Uint: return ".r64g64Uint"
+                case .r64g64Sint: return ".r64g64Sint"
+                case .r64g64Sfloat: return ".r64g64Sfloat"
+                case .r64g64b64Uint: return ".r64g64b64Uint"
+                case .r64g64b64Sint: return ".r64g64b64Sint"
+                case .r64g64b64Sfloat: return ".r64g64b64Sfloat"
+                case .r64g64b64a64Uint: return ".r64g64b64a64Uint"
+                case .r64g64b64a64Sint: return ".r64g64b64a64Sint"
+                case .r64g64b64a64Sfloat: return ".r64g64b64a64Sfloat"
+                case .b10g11r11UfloatPack32: return ".b10g11r11UfloatPack32"
+                case .e5b9g9r9UfloatPack32: return ".e5b9g9r9UfloatPack32"
+                case .d16Unorm: return ".d16Unorm"
+                case .x8D24UnormPack32: return ".x8D24UnormPack32"
+                case .d32Sfloat: return ".d32Sfloat"
+                case .s8Uint: return ".s8Uint"
+                case .d16UnormS8Uint: return ".d16UnormS8Uint"
+                case .d24UnormS8Uint: return ".d24UnormS8Uint"
+                case .d32SfloatS8Uint: return ".d32SfloatS8Uint"
+                case .bc1RgbUnormBlock: return ".bc1RgbUnormBlock"
+                case .bc1RgbSrgbBlock: return ".bc1RgbSrgbBlock"
+                case .bc1RgbaUnormBlock: return ".bc1RgbaUnormBlock"
+                case .bc1RgbaSrgbBlock: return ".bc1RgbaSrgbBlock"
+                case .bc2UnormBlock: return ".bc2UnormBlock"
+                case .bc2SrgbBlock: return ".bc2SrgbBlock"
+                case .bc3UnormBlock: return ".bc3UnormBlock"
+                case .bc3SrgbBlock: return ".bc3SrgbBlock"
+                case .bc4UnormBlock: return ".bc4UnormBlock"
+                case .bc4SnormBlock: return ".bc4SnormBlock"
+                case .bc5UnormBlock: return ".bc5UnormBlock"
+                case .bc5SnormBlock: return ".bc5SnormBlock"
+                case .bc6hUfloatBlock: return ".bc6hUfloatBlock"
+                case .bc6hSfloatBlock: return ".bc6hSfloatBlock"
+                case .bc7UnormBlock: return ".bc7UnormBlock"
+                case .bc7SrgbBlock: return ".bc7SrgbBlock"
+                case .etc2R8g8b8UnormBlock: return ".etc2R8g8b8UnormBlock"
+                case .etc2R8g8b8SrgbBlock: return ".etc2R8g8b8SrgbBlock"
+                case .etc2R8g8b8a1UnormBlock: return ".etc2R8g8b8a1UnormBlock"
+                case .etc2R8g8b8a1SrgbBlock: return ".etc2R8g8b8a1SrgbBlock"
+                case .etc2R8g8b8a8UnormBlock: return ".etc2R8g8b8a8UnormBlock"
+                case .etc2R8g8b8a8SrgbBlock: return ".etc2R8g8b8a8SrgbBlock"
+                case .eacR11UnormBlock: return ".eacR11UnormBlock"
+                case .eacR11SnormBlock: return ".eacR11SnormBlock"
+                case .eacR11g11UnormBlock: return ".eacR11g11UnormBlock"
+                case .eacR11g11SnormBlock: return ".eacR11g11SnormBlock"
+                case .astc4x4UnormBlock: return ".astc4x4UnormBlock"
+                case .astc4x4SrgbBlock: return ".astc4x4SrgbBlock"
+                case .astc5x4UnormBlock: return ".astc5x4UnormBlock"
+                case .astc5x4SrgbBlock: return ".astc5x4SrgbBlock"
+                case .astc5x5UnormBlock: return ".astc5x5UnormBlock"
+                case .astc5x5SrgbBlock: return ".astc5x5SrgbBlock"
+                case .astc6x5UnormBlock: return ".astc6x5UnormBlock"
+                case .astc6x5SrgbBlock: return ".astc6x5SrgbBlock"
+                case .astc6x6UnormBlock: return ".astc6x6UnormBlock"
+                case .astc6x6SrgbBlock: return ".astc6x6SrgbBlock"
+                case .astc8x5UnormBlock: return ".astc8x5UnormBlock"
+                case .astc8x5SrgbBlock: return ".astc8x5SrgbBlock"
+                case .astc8x6UnormBlock: return ".astc8x6UnormBlock"
+                case .astc8x6SrgbBlock: return ".astc8x6SrgbBlock"
+                case .astc8x8UnormBlock: return ".astc8x8UnormBlock"
+                case .astc8x8SrgbBlock: return ".astc8x8SrgbBlock"
+                case .astc10x5UnormBlock: return ".astc10x5UnormBlock"
+                case .astc10x5SrgbBlock: return ".astc10x5SrgbBlock"
+                case .astc10x6UnormBlock: return ".astc10x6UnormBlock"
+                case .astc10x6SrgbBlock: return ".astc10x6SrgbBlock"
+                case .astc10x8UnormBlock: return ".astc10x8UnormBlock"
+                case .astc10x8SrgbBlock: return ".astc10x8SrgbBlock"
+                case .astc10x10UnormBlock: return ".astc10x10UnormBlock"
+                case .astc10x10SrgbBlock: return ".astc10x10SrgbBlock"
+                case .astc12x10UnormBlock: return ".astc12x10UnormBlock"
+                case .astc12x10SrgbBlock: return ".astc12x10SrgbBlock"
+                case .astc12x12UnormBlock: return ".astc12x12UnormBlock"
+                case .astc12x12SrgbBlock: return ".astc12x12SrgbBlock"
+                case .g8b8g8r8422Unorm: return ".g8b8g8r8422Unorm"
+                case .b8g8r8g8422Unorm: return ".b8g8r8g8422Unorm"
+                case .g8B8R83plane420Unorm: return ".g8B8R83plane420Unorm"
+                case .g8B8r82plane420Unorm: return ".g8B8r82plane420Unorm"
+                case .g8B8R83plane422Unorm: return ".g8B8R83plane422Unorm"
+                case .g8B8r82plane422Unorm: return ".g8B8r82plane422Unorm"
+                case .g8B8R83plane444Unorm: return ".g8B8R83plane444Unorm"
+                case .r10x6UnormPack16: return ".r10x6UnormPack16"
+                case .r10x6g10x6Unorm2pack16: return ".r10x6g10x6Unorm2pack16"
+                case .r10x6g10x6b10x6a10x6Unorm4pack16: return ".r10x6g10x6b10x6a10x6Unorm4pack16"
+                case .g10x6b10x6g10x6r10x6422Unorm4pack16: return ".g10x6b10x6g10x6r10x6422Unorm4pack16"
+                case .b10x6g10x6r10x6g10x6422Unorm4pack16: return ".b10x6g10x6r10x6g10x6422Unorm4pack16"
+                case .g10x6B10x6R10x63plane420Unorm3pack16: return ".g10x6B10x6R10x63plane420Unorm3pack16"
+                case .g10x6B10x6r10x62plane420Unorm3pack16: return ".g10x6B10x6r10x62plane420Unorm3pack16"
+                case .g10x6B10x6R10x63plane422Unorm3pack16: return ".g10x6B10x6R10x63plane422Unorm3pack16"
+                case .g10x6B10x6r10x62plane422Unorm3pack16: return ".g10x6B10x6r10x62plane422Unorm3pack16"
+                case .g10x6B10x6R10x63plane444Unorm3pack16: return ".g10x6B10x6R10x63plane444Unorm3pack16"
+                case .r12x4UnormPack16: return ".r12x4UnormPack16"
+                case .r12x4g12x4Unorm2pack16: return ".r12x4g12x4Unorm2pack16"
+                case .r12x4g12x4b12x4a12x4Unorm4pack16: return ".r12x4g12x4b12x4a12x4Unorm4pack16"
+                case .g12x4b12x4g12x4r12x4422Unorm4pack16: return ".g12x4b12x4g12x4r12x4422Unorm4pack16"
+                case .b12x4g12x4r12x4g12x4422Unorm4pack16: return ".b12x4g12x4r12x4g12x4422Unorm4pack16"
+                case .g12x4B12x4R12x43plane420Unorm3pack16: return ".g12x4B12x4R12x43plane420Unorm3pack16"
+                case .g12x4B12x4r12x42plane420Unorm3pack16: return ".g12x4B12x4r12x42plane420Unorm3pack16"
+                case .g12x4B12x4R12x43plane422Unorm3pack16: return ".g12x4B12x4R12x43plane422Unorm3pack16"
+                case .g12x4B12x4r12x42plane422Unorm3pack16: return ".g12x4B12x4r12x42plane422Unorm3pack16"
+                case .g12x4B12x4R12x43plane444Unorm3pack16: return ".g12x4B12x4R12x43plane444Unorm3pack16"
+                case .g16b16g16r16422Unorm: return ".g16b16g16r16422Unorm"
+                case .b16g16r16g16422Unorm: return ".b16g16r16g16422Unorm"
+                case .g16B16R163plane420Unorm: return ".g16B16R163plane420Unorm"
+                case .g16B16r162plane420Unorm: return ".g16B16r162plane420Unorm"
+                case .g16B16R163plane422Unorm: return ".g16B16R163plane422Unorm"
+                case .g16B16r162plane422Unorm: return ".g16B16r162plane422Unorm"
+                case .g16B16R163plane444Unorm: return ".g16B16R163plane444Unorm"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct BarrierMask: OptionSet, CustomDebugStringConvertible {
@@ -543,7 +802,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureType: Int64 {
+    public enum TextureType: Int64, CustomDebugStringConvertible {
         /// 1-dimensional texture.
         case textureType1d = 0 // TEXTURE_TYPE_1D
         /// 2-dimensional texture.
@@ -560,9 +819,24 @@ open class RenderingDevice: Object {
         case cubeArray = 6 // TEXTURE_TYPE_CUBE_ARRAY
         /// Represents the size of the ``RenderingDevice/TextureType`` enum.
         case max = 7 // TEXTURE_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .textureType1d: return ".textureType1d"
+                case .textureType2d: return ".textureType2d"
+                case .textureType3d: return ".textureType3d"
+                case .cube: return ".cube"
+                case .textureType1dArray: return ".textureType1dArray"
+                case .textureType2dArray: return ".textureType2dArray"
+                case .cubeArray: return ".cubeArray"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureSamples: Int64 {
+    public enum TextureSamples: Int64, CustomDebugStringConvertible {
         /// Perform 1 texture sample (this is the fastest but lowest-quality for antialiasing).
         case textureSamples1 = 0 // TEXTURE_SAMPLES_1
         /// Perform 2 texture samples.
@@ -579,6 +853,21 @@ open class RenderingDevice: Object {
         case textureSamples64 = 6 // TEXTURE_SAMPLES_64
         /// Represents the size of the ``RenderingDevice/TextureSamples`` enum.
         case max = 7 // TEXTURE_SAMPLES_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .textureSamples1: return ".textureSamples1"
+                case .textureSamples2: return ".textureSamples2"
+                case .textureSamples4: return ".textureSamples4"
+                case .textureSamples8: return ".textureSamples8"
+                case .textureSamples16: return ".textureSamples16"
+                case .textureSamples32: return ".textureSamples32"
+                case .textureSamples64: return ".textureSamples64"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct TextureUsageBits: OptionSet, CustomDebugStringConvertible {
@@ -626,7 +915,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureSwizzle: Int64 {
+    public enum TextureSwizzle: Int64, CustomDebugStringConvertible {
         /// Return the sampled value as-is.
         case identity = 0 // TEXTURE_SWIZZLE_IDENTITY
         /// Always return `0.0` when sampling.
@@ -643,25 +932,59 @@ open class RenderingDevice: Object {
         case a = 6 // TEXTURE_SWIZZLE_A
         /// Represents the size of the ``RenderingDevice/TextureSwizzle`` enum.
         case max = 7 // TEXTURE_SWIZZLE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .identity: return ".identity"
+                case .zero: return ".zero"
+                case .one: return ".one"
+                case .r: return ".r"
+                case .g: return ".g"
+                case .b: return ".b"
+                case .a: return ".a"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureSliceType: Int64 {
+    public enum TextureSliceType: Int64, CustomDebugStringConvertible {
         /// 2-dimensional texture slice.
         case textureSlice2d = 0 // TEXTURE_SLICE_2D
         /// Cubemap texture slice.
         case cubemap = 1 // TEXTURE_SLICE_CUBEMAP
         /// 3-dimensional texture slice.
         case textureSlice3d = 2 // TEXTURE_SLICE_3D
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .textureSlice2d: return ".textureSlice2d"
+                case .cubemap: return ".cubemap"
+                case .textureSlice3d: return ".textureSlice3d"
+            }
+            
+        }
+        
     }
     
-    public enum SamplerFilter: Int64 {
+    public enum SamplerFilter: Int64, CustomDebugStringConvertible {
         /// Nearest-neighbor sampler filtering. Sampling at higher resolutions than the source will result in a pixelated look.
         case nearest = 0 // SAMPLER_FILTER_NEAREST
         /// Bilinear sampler filtering. Sampling at higher resolutions than the source will result in a blurry look.
         case linear = 1 // SAMPLER_FILTER_LINEAR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+            }
+            
+        }
+        
     }
     
-    public enum SamplerRepeatMode: Int64 {
+    public enum SamplerRepeatMode: Int64, CustomDebugStringConvertible {
         /// Sample with repeating enabled.
         case `repeat` = 0 // SAMPLER_REPEAT_MODE_REPEAT
         /// Sample with mirrored repeating enabled. When sampling outside the `[0.0, 1.0]` range, return a mirrored version of the sampler. This mirrored version is mirrored again if sampling further away, with the pattern repeating indefinitely.
@@ -674,9 +997,22 @@ open class RenderingDevice: Object {
         case mirrorClampToEdge = 4 // SAMPLER_REPEAT_MODE_MIRROR_CLAMP_TO_EDGE
         /// Represents the size of the ``RenderingDevice/SamplerRepeatMode`` enum.
         case max = 5 // SAMPLER_REPEAT_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`repeat`: return ".`repeat`"
+                case .mirroredRepeat: return ".mirroredRepeat"
+                case .clampToEdge: return ".clampToEdge"
+                case .clampToBorder: return ".clampToBorder"
+                case .mirrorClampToEdge: return ".mirrorClampToEdge"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SamplerBorderColor: Int64 {
+    public enum SamplerBorderColor: Int64, CustomDebugStringConvertible {
         /// Return a floating-point transparent black color when sampling outside the `[0.0, 1.0]` range. Only effective if the sampler repeat mode is .clampToBorder.
         case floatTransparentBlack = 0 // SAMPLER_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK
         /// Return a integer transparent black color when sampling outside the `[0.0, 1.0]` range. Only effective if the sampler repeat mode is .clampToBorder.
@@ -691,20 +1027,52 @@ open class RenderingDevice: Object {
         case intOpaqueWhite = 5 // SAMPLER_BORDER_COLOR_INT_OPAQUE_WHITE
         /// Represents the size of the ``RenderingDevice/SamplerBorderColor`` enum.
         case max = 6 // SAMPLER_BORDER_COLOR_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .floatTransparentBlack: return ".floatTransparentBlack"
+                case .intTransparentBlack: return ".intTransparentBlack"
+                case .floatOpaqueBlack: return ".floatOpaqueBlack"
+                case .intOpaqueBlack: return ".intOpaqueBlack"
+                case .floatOpaqueWhite: return ".floatOpaqueWhite"
+                case .intOpaqueWhite: return ".intOpaqueWhite"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VertexFrequency: Int64 {
+    public enum VertexFrequency: Int64, CustomDebugStringConvertible {
         /// Vertex attribute addressing is a function of the vertex. This is used to specify the rate at which vertex attributes are pulled from buffers.
         case vertex = 0 // VERTEX_FREQUENCY_VERTEX
         /// Vertex attribute addressing is a function of the instance index. This is used to specify the rate at which vertex attributes are pulled from buffers.
         case instance = 1 // VERTEX_FREQUENCY_INSTANCE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertex: return ".vertex"
+                case .instance: return ".instance"
+            }
+            
+        }
+        
     }
     
-    public enum IndexBufferFormat: Int64 {
+    public enum IndexBufferFormat: Int64, CustomDebugStringConvertible {
         /// Index buffer in 16-bit unsigned integer format. This limits the maximum index that can be specified to `65535`.
         case uint16 = 0 // INDEX_BUFFER_FORMAT_UINT16
         /// Index buffer in 32-bit unsigned integer format. This limits the maximum index that can be specified to `4294967295`.
         case uint32 = 1 // INDEX_BUFFER_FORMAT_UINT32
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .uint16: return ".uint16"
+                case .uint32: return ".uint32"
+            }
+            
+        }
+        
     }
     
     public struct StorageBufferUsage: OptionSet, CustomDebugStringConvertible {
@@ -725,7 +1093,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum UniformType: Int64 {
+    public enum UniformType: Int64, CustomDebugStringConvertible {
         /// Sampler uniform.
         case sampler = 0 // UNIFORM_TYPE_SAMPLER
         /// Sampler uniform with a texture.
@@ -748,9 +1116,27 @@ open class RenderingDevice: Object {
         case inputAttachment = 9 // UNIFORM_TYPE_INPUT_ATTACHMENT
         /// Represents the size of the ``RenderingDevice/UniformType`` enum.
         case max = 10 // UNIFORM_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sampler: return ".sampler"
+                case .samplerWithTexture: return ".samplerWithTexture"
+                case .texture: return ".texture"
+                case .image: return ".image"
+                case .textureBuffer: return ".textureBuffer"
+                case .samplerWithTextureBuffer: return ".samplerWithTextureBuffer"
+                case .imageBuffer: return ".imageBuffer"
+                case .uniformBuffer: return ".uniformBuffer"
+                case .storageBuffer: return ".storageBuffer"
+                case .inputAttachment: return ".inputAttachment"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum RenderPrimitive: Int64 {
+    public enum RenderPrimitive: Int64, CustomDebugStringConvertible {
         /// Point rendering primitive (with constant size, regardless of distance from camera).
         case points = 0 // RENDER_PRIMITIVE_POINTS
         /// Line list rendering primitive. Lines are drawn separated from each other.
@@ -790,25 +1176,63 @@ open class RenderingDevice: Object {
         case tesselationPatch = 10 // RENDER_PRIMITIVE_TESSELATION_PATCH
         /// Represents the size of the ``RenderingDevice/RenderPrimitive`` enum.
         case max = 11 // RENDER_PRIMITIVE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .points: return ".points"
+                case .lines: return ".lines"
+                case .linesWithAdjacency: return ".linesWithAdjacency"
+                case .linestrips: return ".linestrips"
+                case .linestripsWithAdjacency: return ".linestripsWithAdjacency"
+                case .triangles: return ".triangles"
+                case .trianglesWithAdjacency: return ".trianglesWithAdjacency"
+                case .triangleStrips: return ".triangleStrips"
+                case .triangleStripsWithAjacency: return ".triangleStripsWithAjacency"
+                case .triangleStripsWithRestartIndex: return ".triangleStripsWithRestartIndex"
+                case .tesselationPatch: return ".tesselationPatch"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum PolygonCullMode: Int64 {
+    public enum PolygonCullMode: Int64, CustomDebugStringConvertible {
         /// Do not use polygon front face or backface culling.
         case disabled = 0 // POLYGON_CULL_DISABLED
         /// Use polygon frontface culling (faces pointing towards the camera are hidden).
         case front = 1 // POLYGON_CULL_FRONT
         /// Use polygon backface culling (faces pointing away from the camera are hidden).
         case back = 2 // POLYGON_CULL_BACK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .front: return ".front"
+                case .back: return ".back"
+            }
+            
+        }
+        
     }
     
-    public enum PolygonFrontFace: Int64 {
+    public enum PolygonFrontFace: Int64, CustomDebugStringConvertible {
         /// Clockwise winding order to determine which face of a polygon is its front face.
         case clockwise = 0 // POLYGON_FRONT_FACE_CLOCKWISE
         /// Counter-clockwise winding order to determine which face of a polygon is its front face.
         case counterClockwise = 1 // POLYGON_FRONT_FACE_COUNTER_CLOCKWISE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clockwise: return ".clockwise"
+                case .counterClockwise: return ".counterClockwise"
+            }
+            
+        }
+        
     }
     
-    public enum StencilOperation: Int64 {
+    public enum StencilOperation: Int64, CustomDebugStringConvertible {
         /// Keep the current stencil value.
         case keep = 0 // STENCIL_OP_KEEP
         /// Set the stencil value to `0`.
@@ -827,9 +1251,25 @@ open class RenderingDevice: Object {
         case decrementAndWrap = 7 // STENCIL_OP_DECREMENT_AND_WRAP
         /// Represents the size of the ``RenderingDevice/StencilOperation`` enum.
         case max = 8 // STENCIL_OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .keep: return ".keep"
+                case .zero: return ".zero"
+                case .replace: return ".replace"
+                case .incrementAndClamp: return ".incrementAndClamp"
+                case .decrementAndClamp: return ".decrementAndClamp"
+                case .invert: return ".invert"
+                case .incrementAndWrap: return ".incrementAndWrap"
+                case .decrementAndWrap: return ".decrementAndWrap"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum CompareOperator: Int64 {
+    public enum CompareOperator: Int64, CustomDebugStringConvertible {
         /// "Never" comparison (opposite of .compareOpAlways).
         case never = 0 // COMPARE_OP_NEVER
         /// "Less than" comparison.
@@ -848,9 +1288,25 @@ open class RenderingDevice: Object {
         case always = 7 // COMPARE_OP_ALWAYS
         /// Represents the size of the ``RenderingDevice/CompareOperator`` enum.
         case max = 8 // COMPARE_OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .never: return ".never"
+                case .less: return ".less"
+                case .equal: return ".equal"
+                case .lessOrEqual: return ".lessOrEqual"
+                case .greater: return ".greater"
+                case .notEqual: return ".notEqual"
+                case .greaterOrEqual: return ".greaterOrEqual"
+                case .always: return ".always"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum LogicOperation: Int64 {
+    public enum LogicOperation: Int64, CustomDebugStringConvertible {
         /// Clear logic operation (result is always `0`). See also .logicOpSet.
         case clear = 0 // LOGIC_OP_CLEAR
         /// AND logic operation.
@@ -885,9 +1341,33 @@ open class RenderingDevice: Object {
         case set = 15 // LOGIC_OP_SET
         /// Represents the size of the ``RenderingDevice/LogicOperation`` enum.
         case max = 16 // LOGIC_OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clear: return ".clear"
+                case .and: return ".and"
+                case .andReverse: return ".andReverse"
+                case .copy: return ".copy"
+                case .andInverted: return ".andInverted"
+                case .noOp: return ".noOp"
+                case .xor: return ".xor"
+                case .or: return ".or"
+                case .nor: return ".nor"
+                case .equivalent: return ".equivalent"
+                case .invert: return ".invert"
+                case .orReverse: return ".orReverse"
+                case .copyInverted: return ".copyInverted"
+                case .orInverted: return ".orInverted"
+                case .nand: return ".nand"
+                case .set: return ".set"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum BlendFactor: Int64 {
+    public enum BlendFactor: Int64, CustomDebugStringConvertible {
         /// Constant `0.0` blend factor.
         case zero = 0 // BLEND_FACTOR_ZERO
         /// Constant `1.0` blend factor.
@@ -928,9 +1408,36 @@ open class RenderingDevice: Object {
         case oneMinusSrc1Alpha = 18 // BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA
         /// Represents the size of the ``RenderingDevice/BlendFactor`` enum.
         case max = 19 // BLEND_FACTOR_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .zero: return ".zero"
+                case .one: return ".one"
+                case .srcColor: return ".srcColor"
+                case .oneMinusSrcColor: return ".oneMinusSrcColor"
+                case .dstColor: return ".dstColor"
+                case .oneMinusDstColor: return ".oneMinusDstColor"
+                case .srcAlpha: return ".srcAlpha"
+                case .oneMinusSrcAlpha: return ".oneMinusSrcAlpha"
+                case .dstAlpha: return ".dstAlpha"
+                case .oneMinusDstAlpha: return ".oneMinusDstAlpha"
+                case .constantColor: return ".constantColor"
+                case .oneMinusConstantColor: return ".oneMinusConstantColor"
+                case .constantAlpha: return ".constantAlpha"
+                case .oneMinusConstantAlpha: return ".oneMinusConstantAlpha"
+                case .srcAlphaSaturate: return ".srcAlphaSaturate"
+                case .src1Color: return ".src1Color"
+                case .oneMinusSrc1Color: return ".oneMinusSrc1Color"
+                case .src1Alpha: return ".src1Alpha"
+                case .oneMinusSrc1Alpha: return ".oneMinusSrc1Alpha"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum BlendOperation: Int64 {
+    public enum BlendOperation: Int64, CustomDebugStringConvertible {
         /// Additive blending operation (`source + destination`).
         case add = 0 // BLEND_OP_ADD
         /// Subtractive blending operation (`source - destination`).
@@ -943,6 +1450,19 @@ open class RenderingDevice: Object {
         case maximum = 4 // BLEND_OP_MAXIMUM
         /// Represents the size of the ``RenderingDevice/BlendOperation`` enum.
         case max = 5 // BLEND_OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .subtract: return ".subtract"
+                case .reverseSubtract: return ".reverseSubtract"
+                case .minimum: return ".minimum"
+                case .maximum: return ".maximum"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct PipelineDynamicStateFlags: OptionSet, CustomDebugStringConvertible {
@@ -981,7 +1501,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum InitialAction: Int64 {
+    public enum InitialAction: Int64, CustomDebugStringConvertible {
         /// Start rendering and clear the whole framebuffer.
         case clear = 0 // INITIAL_ACTION_CLEAR
         /// Start rendering and clear the framebuffer in the specified region.
@@ -996,9 +1516,23 @@ open class RenderingDevice: Object {
         case `continue` = 5 // INITIAL_ACTION_CONTINUE
         /// Represents the size of the ``RenderingDevice/InitialAction`` enum.
         case max = 6 // INITIAL_ACTION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clear: return ".clear"
+                case .clearRegion: return ".clearRegion"
+                case .clearRegionContinue: return ".clearRegionContinue"
+                case .keep: return ".keep"
+                case .drop: return ".drop"
+                case .`continue`: return ".`continue`"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum FinalAction: Int64 {
+    public enum FinalAction: Int64, CustomDebugStringConvertible {
         /// Store the texture for reading and make it read-only if it has the .textureUsageSamplingBit bit (only applies to color, depth and stencil attachments).
         case read = 0 // FINAL_ACTION_READ
         /// Discard the texture data and make it read-only if it has the .textureUsageSamplingBit bit (only applies to color, depth and stencil attachments).
@@ -1007,9 +1541,20 @@ open class RenderingDevice: Object {
         case `continue` = 2 // FINAL_ACTION_CONTINUE
         /// Represents the size of the ``RenderingDevice/FinalAction`` enum.
         case max = 3 // FINAL_ACTION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .read: return ".read"
+                case .discard: return ".discard"
+                case .`continue`: return ".`continue`"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ShaderStage: Int64 {
+    public enum ShaderStage: Int64, CustomDebugStringConvertible {
         /// Vertex shader stage. This can be used to manipulate vertices from a shader (but not create new vertices).
         case vertex = 0 // SHADER_STAGE_VERTEX
         /// Fragment shader stage (called "pixel shader" in Direct3D). This can be used to manipulate pixels from a shader.
@@ -1032,25 +1577,59 @@ open class RenderingDevice: Object {
         case tesselationEvaluationBit = 8 // SHADER_STAGE_TESSELATION_EVALUATION_BIT
         /// Compute shader stage bit (see also .compute).
         case computeBit = 16 // SHADER_STAGE_COMPUTE_BIT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertex: return ".vertex"
+                case .fragment: return ".fragment"
+                case .tesselationControl: return ".tesselationControl"
+                case .tesselationEvaluation: return ".tesselationEvaluation"
+                case .compute: return ".compute"
+                case .max: return ".max"
+                case .tesselationEvaluationBit: return ".tesselationEvaluationBit"
+                case .computeBit: return ".computeBit"
+            }
+            
+        }
+        
     }
     
-    public enum ShaderLanguage: Int64 {
+    public enum ShaderLanguage: Int64, CustomDebugStringConvertible {
         /// Khronos' GLSL shading language (used natively by OpenGL and Vulkan). This is the language used for core Godot shaders.
         case glsl = 0 // SHADER_LANGUAGE_GLSL
         /// Microsoft's High-Level Shading Language (used natively by Direct3D, but can also be used in Vulkan).
         case hlsl = 1 // SHADER_LANGUAGE_HLSL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .glsl: return ".glsl"
+                case .hlsl: return ".hlsl"
+            }
+            
+        }
+        
     }
     
-    public enum PipelineSpecializationConstantType: Int64 {
+    public enum PipelineSpecializationConstantType: Int64, CustomDebugStringConvertible {
         /// Boolean specialization constant.
         case bool = 0 // PIPELINE_SPECIALIZATION_CONSTANT_TYPE_BOOL
         /// Integer specialization constant.
         case int = 1 // PIPELINE_SPECIALIZATION_CONSTANT_TYPE_INT
         /// Floating-point specialization constant.
         case float = 2 // PIPELINE_SPECIALIZATION_CONSTANT_TYPE_FLOAT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bool: return ".bool"
+                case .int: return ".int"
+                case .float: return ".float"
+            }
+            
+        }
+        
     }
     
-    public enum Limit: Int64 {
+    public enum Limit: Int64, CustomDebugStringConvertible {
         /// Maximum number of uniform sets that can be bound at a given time.
         case maxBoundUniformSets = 0 // LIMIT_MAX_BOUND_UNIFORM_SETS
         /// Maximum number of color framebuffer attachments that can be used at a given time.
@@ -1125,15 +1704,69 @@ open class RenderingDevice: Object {
         case maxViewportDimensionsX = 35 // LIMIT_MAX_VIEWPORT_DIMENSIONS_X
         /// Maximum viewport height (in pixels).
         case maxViewportDimensionsY = 36 // LIMIT_MAX_VIEWPORT_DIMENSIONS_Y
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .maxBoundUniformSets: return ".maxBoundUniformSets"
+                case .maxFramebufferColorAttachments: return ".maxFramebufferColorAttachments"
+                case .maxTexturesPerUniformSet: return ".maxTexturesPerUniformSet"
+                case .maxSamplersPerUniformSet: return ".maxSamplersPerUniformSet"
+                case .maxStorageBuffersPerUniformSet: return ".maxStorageBuffersPerUniformSet"
+                case .maxStorageImagesPerUniformSet: return ".maxStorageImagesPerUniformSet"
+                case .maxUniformBuffersPerUniformSet: return ".maxUniformBuffersPerUniformSet"
+                case .maxDrawIndexedIndex: return ".maxDrawIndexedIndex"
+                case .maxFramebufferHeight: return ".maxFramebufferHeight"
+                case .maxFramebufferWidth: return ".maxFramebufferWidth"
+                case .maxTextureArrayLayers: return ".maxTextureArrayLayers"
+                case .maxTextureSize1d: return ".maxTextureSize1d"
+                case .maxTextureSize2d: return ".maxTextureSize2d"
+                case .maxTextureSize3d: return ".maxTextureSize3d"
+                case .maxTextureSizeCube: return ".maxTextureSizeCube"
+                case .maxTexturesPerShaderStage: return ".maxTexturesPerShaderStage"
+                case .maxSamplersPerShaderStage: return ".maxSamplersPerShaderStage"
+                case .maxStorageBuffersPerShaderStage: return ".maxStorageBuffersPerShaderStage"
+                case .maxStorageImagesPerShaderStage: return ".maxStorageImagesPerShaderStage"
+                case .maxUniformBuffersPerShaderStage: return ".maxUniformBuffersPerShaderStage"
+                case .maxPushConstantSize: return ".maxPushConstantSize"
+                case .maxUniformBufferSize: return ".maxUniformBufferSize"
+                case .maxVertexInputAttributeOffset: return ".maxVertexInputAttributeOffset"
+                case .maxVertexInputAttributes: return ".maxVertexInputAttributes"
+                case .maxVertexInputBindings: return ".maxVertexInputBindings"
+                case .maxVertexInputBindingStride: return ".maxVertexInputBindingStride"
+                case .minUniformBufferOffsetAlignment: return ".minUniformBufferOffsetAlignment"
+                case .maxComputeSharedMemorySize: return ".maxComputeSharedMemorySize"
+                case .maxComputeWorkgroupCountX: return ".maxComputeWorkgroupCountX"
+                case .maxComputeWorkgroupCountY: return ".maxComputeWorkgroupCountY"
+                case .maxComputeWorkgroupCountZ: return ".maxComputeWorkgroupCountZ"
+                case .maxComputeWorkgroupInvocations: return ".maxComputeWorkgroupInvocations"
+                case .maxComputeWorkgroupSizeX: return ".maxComputeWorkgroupSizeX"
+                case .maxComputeWorkgroupSizeY: return ".maxComputeWorkgroupSizeY"
+                case .maxComputeWorkgroupSizeZ: return ".maxComputeWorkgroupSizeZ"
+                case .maxViewportDimensionsX: return ".maxViewportDimensionsX"
+                case .maxViewportDimensionsY: return ".maxViewportDimensionsY"
+            }
+            
+        }
+        
     }
     
-    public enum MemoryType: Int64 {
+    public enum MemoryType: Int64, CustomDebugStringConvertible {
         /// Memory taken by textures.
         case textures = 0 // MEMORY_TEXTURES
         /// Memory taken by buffers.
         case buffers = 1 // MEMORY_BUFFERS
         /// Total memory taken. This is greater than the sum of .memoryTextures and .memoryBuffers, as it also includes miscellaneous memory usage.
         case total = 2 // MEMORY_TOTAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .textures: return ".textures"
+                case .buffers: return ".buffers"
+                case .total: return ".total"
+            }
+            
+        }
+        
     }
     
     /* Constants */

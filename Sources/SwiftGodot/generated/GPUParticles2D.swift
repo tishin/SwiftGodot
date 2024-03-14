@@ -20,16 +20,26 @@
 /// - ``finished``
 open class GPUParticles2D: Node2D {
     override open class var godotClassName: StringName { "GPUParticles2D" }
-    public enum DrawOrder: Int64 {
+    public enum DrawOrder: Int64, CustomDebugStringConvertible {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX
         /// Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
         case lifetime = 1 // DRAW_ORDER_LIFETIME
         /// Particles are drawn in reverse order of remaining lifetime. In other words, the particle with the lowest lifetime is drawn at the front.
         case reverseLifetime = 2 // DRAW_ORDER_REVERSE_LIFETIME
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .index: return ".index"
+                case .lifetime: return ".lifetime"
+                case .reverseLifetime: return ".reverseLifetime"
+            }
+            
+        }
+        
     }
     
-    public enum EmitFlags: Int64 {
+    public enum EmitFlags: Int64, CustomDebugStringConvertible {
         /// Particle starts at the specified position.
         case position = 1 // EMIT_FLAG_POSITION
         /// Particle starts with specified rotation and scale.
@@ -40,6 +50,18 @@ open class GPUParticles2D: Node2D {
         case color = 8 // EMIT_FLAG_COLOR
         /// Particle starts with specified `CUSTOM` data.
         case custom = 16 // EMIT_FLAG_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .position: return ".position"
+                case .rotationScale: return ".rotationScale"
+                case .velocity: return ".velocity"
+                case .color: return ".color"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
     

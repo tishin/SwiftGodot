@@ -30,7 +30,7 @@
 /// - ``titlebarChanged``
 open class Window: Viewport {
     override open class var godotClassName: StringName { "Window" }
-    public enum Mode: Int64 {
+    public enum Mode: Int64, CustomDebugStringConvertible {
         /// Windowed mode, i.e. ``Window`` doesn't occupy the whole screen (unless set to the size of the screen).
         case windowed = 0 // MODE_WINDOWED
         /// Minimized window mode, i.e. ``Window`` is not visible and available on window manager's window list. Normally happens when the minimize button is pressed.
@@ -61,9 +61,21 @@ open class Window: Viewport {
         /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]multiple resolutions[/url] when enabling full screen mode.
         /// 
         case exclusiveFullscreen = 4 // MODE_EXCLUSIVE_FULLSCREEN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .windowed: return ".windowed"
+                case .minimized: return ".minimized"
+                case .maximized: return ".maximized"
+                case .fullscreen: return ".fullscreen"
+                case .exclusiveFullscreen: return ".exclusiveFullscreen"
+            }
+            
+        }
+        
     }
     
-    public enum Flags: Int64 {
+    public enum Flags: Int64, CustomDebugStringConvertible {
         /// The window can't be resized by dragging its resize grip. It's still possible to resize the window using ``size``. This flag is ignored for full screen windows. Set with ``unresizable``.
         case resizeDisabled = 0 // FLAG_RESIZE_DISABLED
         /// The window do not have native title bar and other decorations. This flag is ignored for full-screen windows. Set with ``borderless``.
@@ -96,18 +108,44 @@ open class Window: Viewport {
         case mousePassthrough = 7 // FLAG_MOUSE_PASSTHROUGH
         /// Max value of the ``Window/Flags``.
         case max = 8 // FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .resizeDisabled: return ".resizeDisabled"
+                case .borderless: return ".borderless"
+                case .alwaysOnTop: return ".alwaysOnTop"
+                case .transparent: return ".transparent"
+                case .noFocus: return ".noFocus"
+                case .popup: return ".popup"
+                case .extendToTitle: return ".extendToTitle"
+                case .mousePassthrough: return ".mousePassthrough"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ContentScaleMode: Int64 {
+    public enum ContentScaleMode: Int64, CustomDebugStringConvertible {
         /// The content will not be scaled to match the ``Window``'s size.
         case disabled = 0 // CONTENT_SCALE_MODE_DISABLED
         /// The content will be rendered at the target size. This is more performance-expensive than .viewport, but provides better results.
         case canvasItems = 1 // CONTENT_SCALE_MODE_CANVAS_ITEMS
         /// The content will be rendered at the base size and then scaled to the target size. More performant than .canvasItems, but results in pixelated image.
         case viewport = 2 // CONTENT_SCALE_MODE_VIEWPORT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .canvasItems: return ".canvasItems"
+                case .viewport: return ".viewport"
+            }
+            
+        }
+        
     }
     
-    public enum ContentScaleAspect: Int64 {
+    public enum ContentScaleAspect: Int64, CustomDebugStringConvertible {
         /// The aspect will be ignored. Scaling will simply stretch the content to fit the target size.
         case ignore = 0 // CONTENT_SCALE_ASPECT_IGNORE
         /// The content's aspect will be preserved. If the target size has different aspect from the base one, the image will be centered and black bars will appear on left and right sides.
@@ -118,16 +156,37 @@ open class Window: Viewport {
         case keepHeight = 3 // CONTENT_SCALE_ASPECT_KEEP_HEIGHT
         /// The content's aspect will be preserved. If the target size has different aspect from the base one, the content will stay in the top-left corner and add an extra visible area in the stretched space.
         case expand = 4 // CONTENT_SCALE_ASPECT_EXPAND
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ignore: return ".ignore"
+                case .keep: return ".keep"
+                case .keepWidth: return ".keepWidth"
+                case .keepHeight: return ".keepHeight"
+                case .expand: return ".expand"
+            }
+            
+        }
+        
     }
     
-    public enum ContentScaleStretch: Int64 {
+    public enum ContentScaleStretch: Int64, CustomDebugStringConvertible {
         /// The content will be stretched according to a fractional factor. This fills all the space available in the window, but allows "pixel wobble" to occur due to uneven pixel scaling.
         case fractional = 0 // CONTENT_SCALE_STRETCH_FRACTIONAL
         /// The content will be stretched only according to an integer factor, preserving sharp pixels. This may leave a black background visible on the window's edges depending on the window size.
         case integer = 1 // CONTENT_SCALE_STRETCH_INTEGER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .fractional: return ".fractional"
+                case .integer: return ".integer"
+            }
+            
+        }
+        
     }
     
-    public enum LayoutDirection: Int64 {
+    public enum LayoutDirection: Int64, CustomDebugStringConvertible {
         /// Automatic layout direction, determined from the parent window layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
         /// Automatic layout direction, determined from the current locale.
@@ -136,9 +195,20 @@ open class Window: Viewport {
         case ltr = 2 // LAYOUT_DIRECTION_LTR
         /// Right-to-left layout direction.
         case rtl = 3 // LAYOUT_DIRECTION_RTL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherited: return ".inherited"
+                case .locale: return ".locale"
+                case .ltr: return ".ltr"
+                case .rtl: return ".rtl"
+            }
+            
+        }
+        
     }
     
-    public enum WindowInitialPosition: Int64 {
+    public enum WindowInitialPosition: Int64, CustomDebugStringConvertible {
         /// Initial window position is determined by ``position``.
         case absolute = 0 // WINDOW_INITIAL_POSITION_ABSOLUTE
         /// Initial window position is the center of the primary screen.
@@ -151,6 +221,19 @@ open class Window: Viewport {
         case centerScreenWithMouseFocus = 4 // WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS
         /// Initial window position is the center of the screen containing the window with the keyboard focus.
         case centerScreenWithKeyboardFocus = 5 // WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .absolute: return ".absolute"
+                case .centerPrimaryScreen: return ".centerPrimaryScreen"
+                case .centerMainWindowScreen: return ".centerMainWindowScreen"
+                case .centerOtherScreen: return ".centerOtherScreen"
+                case .centerScreenWithMouseFocus: return ".centerScreenWithMouseFocus"
+                case .centerScreenWithKeyboardFocus: return ".centerScreenWithKeyboardFocus"
+            }
+            
+        }
+        
     }
     
     /* Constants */

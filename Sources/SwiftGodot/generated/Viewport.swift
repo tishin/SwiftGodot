@@ -25,7 +25,7 @@
 /// - ``guiFocusChanged``
 open class Viewport: Node {
     override open class var godotClassName: StringName { "Viewport" }
-    public enum PositionalShadowAtlasQuadrantSubdiv: Int64 {
+    public enum PositionalShadowAtlasQuadrantSubdiv: Int64, CustomDebugStringConvertible {
         /// This quadrant will not be used.
         case disabled = 0 // SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED
         /// This quadrant will only be used by one shadow map.
@@ -42,9 +42,24 @@ open class Viewport: Node {
         case shadowAtlasQuadrantSubdiv1024 = 6 // SHADOW_ATLAS_QUADRANT_SUBDIV_1024
         /// Represents the size of the ``Viewport/PositionalShadowAtlasQuadrantSubdiv`` enum.
         case max = 7 // SHADOW_ATLAS_QUADRANT_SUBDIV_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .shadowAtlasQuadrantSubdiv1: return ".shadowAtlasQuadrantSubdiv1"
+                case .shadowAtlasQuadrantSubdiv4: return ".shadowAtlasQuadrantSubdiv4"
+                case .shadowAtlasQuadrantSubdiv16: return ".shadowAtlasQuadrantSubdiv16"
+                case .shadowAtlasQuadrantSubdiv64: return ".shadowAtlasQuadrantSubdiv64"
+                case .shadowAtlasQuadrantSubdiv256: return ".shadowAtlasQuadrantSubdiv256"
+                case .shadowAtlasQuadrantSubdiv1024: return ".shadowAtlasQuadrantSubdiv1024"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Scaling3DMode: Int64 {
+    public enum Scaling3DMode: Int64, CustomDebugStringConvertible {
         /// Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be set using ``scaling3dScale``. Values less than `1.0` will result in undersampling while values greater than `1.0` will result in supersampling. A value of `1.0` disables scaling.
         case bilinear = 0 // SCALING_3D_MODE_BILINEAR
         /// Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
@@ -53,9 +68,20 @@ open class Viewport: Node {
         case fsr2 = 2 // SCALING_3D_MODE_FSR2
         /// Represents the size of the ``Viewport/Scaling3DMode`` enum.
         case max = 3 // SCALING_3D_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bilinear: return ".bilinear"
+                case .fsr: return ".fsr"
+                case .fsr2: return ".fsr2"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum MSAA: Int64 {
+    public enum MSAA: Int64, CustomDebugStringConvertible {
         /// Multisample antialiasing mode disabled. This is the default value, and is also the fastest setting.
         case disabled = 0 // MSAA_DISABLED
         /// Use 2× Multisample Antialiasing. This has a moderate performance cost. It helps reduce aliasing noticeably, but 4× MSAA still looks substantially better.
@@ -66,18 +92,40 @@ open class Viewport: Node {
         case msaa8x = 3 // MSAA_8X
         /// Represents the size of the ``Viewport/MSAA`` enum.
         case max = 4 // MSAA_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .msaa2x: return ".msaa2x"
+                case .msaa4x: return ".msaa4x"
+                case .msaa8x: return ".msaa8x"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ScreenSpaceAA: Int64 {
+    public enum ScreenSpaceAA: Int64, CustomDebugStringConvertible {
         /// Do not perform any antialiasing in the full screen post-process.
         case disabled = 0 // SCREEN_SPACE_AA_DISABLED
         /// Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
         case fxaa = 1 // SCREEN_SPACE_AA_FXAA
         /// Represents the size of the ``Viewport/ScreenSpaceAA`` enum.
         case max = 2 // SCREEN_SPACE_AA_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .fxaa: return ".fxaa"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum RenderInfo: Int64 {
+    public enum RenderInfo: Int64, CustomDebugStringConvertible {
         /// Amount of objects in frame.
         case objectsInFrame = 0 // RENDER_INFO_OBJECTS_IN_FRAME
         /// Amount of vertices in frame.
@@ -86,18 +134,39 @@ open class Viewport: Node {
         case drawCallsInFrame = 2 // RENDER_INFO_DRAW_CALLS_IN_FRAME
         /// Represents the size of the ``Viewport/RenderInfo`` enum.
         case max = 3 // RENDER_INFO_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .objectsInFrame: return ".objectsInFrame"
+                case .primitivesInFrame: return ".primitivesInFrame"
+                case .drawCallsInFrame: return ".drawCallsInFrame"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum RenderInfoType: Int64 {
+    public enum RenderInfoType: Int64, CustomDebugStringConvertible {
         /// 
         case visible = 0 // RENDER_INFO_TYPE_VISIBLE
         /// 
         case shadow = 1 // RENDER_INFO_TYPE_SHADOW
         /// 
         case max = 2 // RENDER_INFO_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .visible: return ".visible"
+                case .shadow: return ".shadow"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum DebugDraw: Int64 {
+    public enum DebugDraw: Int64, CustomDebugStringConvertible {
         /// Objects are displayed normally.
         case disabled = 0 // DEBUG_DRAW_DISABLED
         /// Objects are displayed without light information.
@@ -152,9 +221,43 @@ open class Viewport: Node {
         case motionVectors = 25 // DEBUG_DRAW_MOTION_VECTORS
         /// Draws the internal resolution buffer of the scene before post-processing is applied.
         case internalBuffer = 26 // DEBUG_DRAW_INTERNAL_BUFFER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .unshaded: return ".unshaded"
+                case .lighting: return ".lighting"
+                case .overdraw: return ".overdraw"
+                case .wireframe: return ".wireframe"
+                case .normalBuffer: return ".normalBuffer"
+                case .voxelGiAlbedo: return ".voxelGiAlbedo"
+                case .voxelGiLighting: return ".voxelGiLighting"
+                case .voxelGiEmission: return ".voxelGiEmission"
+                case .shadowAtlas: return ".shadowAtlas"
+                case .directionalShadowAtlas: return ".directionalShadowAtlas"
+                case .sceneLuminance: return ".sceneLuminance"
+                case .ssao: return ".ssao"
+                case .ssil: return ".ssil"
+                case .pssmSplits: return ".pssmSplits"
+                case .decalAtlas: return ".decalAtlas"
+                case .sdfgi: return ".sdfgi"
+                case .sdfgiProbes: return ".sdfgiProbes"
+                case .giBuffer: return ".giBuffer"
+                case .disableLod: return ".disableLod"
+                case .clusterOmniLights: return ".clusterOmniLights"
+                case .clusterSpotLights: return ".clusterSpotLights"
+                case .clusterDecals: return ".clusterDecals"
+                case .clusterReflectionProbes: return ".clusterReflectionProbes"
+                case .occluders: return ".occluders"
+                case .motionVectors: return ".motionVectors"
+                case .internalBuffer: return ".internalBuffer"
+            }
+            
+        }
+        
     }
     
-    public enum DefaultCanvasItemTextureFilter: Int64 {
+    public enum DefaultCanvasItemTextureFilter: Int64, CustomDebugStringConvertible {
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
         case nearest = 0 // DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
         /// The texture filter blends between the nearest 4 pixels. Use this when you want to avoid a pixelated style, but do not want mipmaps.
@@ -165,9 +268,21 @@ open class Viewport: Node {
         case nearestWithMipmaps = 3 // DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
         /// Max value for ``Viewport/DefaultCanvasItemTextureFilter`` enum.
         case max = 4 // DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .linearWithMipmaps: return ".linearWithMipmaps"
+                case .nearestWithMipmaps: return ".nearestWithMipmaps"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum DefaultCanvasItemTextureRepeat: Int64 {
+    public enum DefaultCanvasItemTextureRepeat: Int64, CustomDebugStringConvertible {
         /// Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
         case disabled = 0 // DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED
         /// Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
@@ -176,9 +291,20 @@ open class Viewport: Node {
         case mirror = 2 // DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR
         /// Max value for ``Viewport/DefaultCanvasItemTextureRepeat`` enum.
         case max = 3 // DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .mirror: return ".mirror"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SDFOversize: Int64 {
+    public enum SDFOversize: Int64, CustomDebugStringConvertible {
         /// 
         case sdfOversize100Percent = 0 // SDF_OVERSIZE_100_PERCENT
         /// 
@@ -189,9 +315,21 @@ open class Viewport: Node {
         case sdfOversize200Percent = 3 // SDF_OVERSIZE_200_PERCENT
         /// 
         case max = 4 // SDF_OVERSIZE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sdfOversize100Percent: return ".sdfOversize100Percent"
+                case .sdfOversize120Percent: return ".sdfOversize120Percent"
+                case .sdfOversize150Percent: return ".sdfOversize150Percent"
+                case .sdfOversize200Percent: return ".sdfOversize200Percent"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SDFScale: Int64 {
+    public enum SDFScale: Int64, CustomDebugStringConvertible {
         /// 
         case sdfScale100Percent = 0 // SDF_SCALE_100_PERCENT
         /// 
@@ -200,9 +338,20 @@ open class Viewport: Node {
         case sdfScale25Percent = 2 // SDF_SCALE_25_PERCENT
         /// 
         case max = 3 // SDF_SCALE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sdfScale100Percent: return ".sdfScale100Percent"
+                case .sdfScale50Percent: return ".sdfScale50Percent"
+                case .sdfScale25Percent: return ".sdfScale25Percent"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VRSMode: Int64 {
+    public enum VRSMode: Int64, CustomDebugStringConvertible {
         /// VRS is disabled.
         case disabled = 0 // VRS_DISABLED
         /// VRS uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.
@@ -211,6 +360,17 @@ open class Viewport: Node {
         case xr = 2 // VRS_XR
         /// Represents the size of the ``Viewport/VRSMode`` enum.
         case max = 3 // VRS_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .texture: return ".texture"
+                case .xr: return ".xr"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

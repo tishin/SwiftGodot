@@ -10,7 +10,7 @@
 /// This plugin type exists to modify the process of importing scenes, allowing to change the content as well as add importer options at every stage of the process.
 open class EditorScenePostImportPlugin: RefCounted {
     override open class var godotClassName: StringName { "EditorScenePostImportPlugin" }
-    public enum InternalImportCategory: Int64 {
+    public enum InternalImportCategory: Int64, CustomDebugStringConvertible {
         /// 
         case node = 0 // INTERNAL_IMPORT_CATEGORY_NODE
         /// 
@@ -27,6 +27,21 @@ open class EditorScenePostImportPlugin: RefCounted {
         case skeleton3dNode = 6 // INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE
         /// 
         case max = 7 // INTERNAL_IMPORT_CATEGORY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .node: return ".node"
+                case .mesh3dNode: return ".mesh3dNode"
+                case .mesh: return ".mesh"
+                case .material: return ".material"
+                case .animation: return ".animation"
+                case .animationNode: return ".animationNode"
+                case .skeleton3dNode: return ".skeleton3dNode"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

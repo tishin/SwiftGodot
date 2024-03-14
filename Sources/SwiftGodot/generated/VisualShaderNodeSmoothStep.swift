@@ -13,7 +13,7 @@
 /// 
 open class VisualShaderNodeSmoothStep: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeSmoothStep" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar type.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.
@@ -30,6 +30,21 @@ open class VisualShaderNodeSmoothStep: VisualShaderNode {
         case vector4dScalar = 6 // OP_TYPE_VECTOR_4D_SCALAR
         /// Represents the size of the ``VisualShaderNodeSmoothStep/OpType`` enum.
         case max = 7 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .vector2d: return ".vector2d"
+                case .vector2dScalar: return ".vector2dScalar"
+                case .vector3d: return ".vector3d"
+                case .vector3dScalar: return ".vector3dScalar"
+                case .vector4d: return ".vector4d"
+                case .vector4dScalar: return ".vector4dScalar"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

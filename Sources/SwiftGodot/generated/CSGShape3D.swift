@@ -13,13 +13,23 @@
 /// 
 open class CSGShape3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "CSGShape3D" }
-    public enum Operation: Int64 {
+    public enum Operation: Int64, CustomDebugStringConvertible {
         /// Geometry of both primitives is merged, intersecting geometry is removed.
         case union = 0 // OPERATION_UNION
         /// Only intersecting geometry remains, the rest is removed.
         case intersection = 1 // OPERATION_INTERSECTION
         /// The second shape is subtracted from the first, leaving a dent with its shape.
         case subtraction = 2 // OPERATION_SUBTRACTION
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .union: return ".union"
+                case .intersection: return ".intersection"
+                case .subtraction: return ".subtraction"
+            }
+            
+        }
+        
     }
     
     

@@ -10,7 +10,7 @@
 /// Accept an integer scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeIntFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeIntFunc" }
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Returns the absolute value of the parameter. Translates to `abs(x)` in the Godot Shader Language.
         case abs = 0 // FUNC_ABS
         /// Negates the `x` using `-(x)`.
@@ -21,6 +21,18 @@ open class VisualShaderNodeIntFunc: VisualShaderNode {
         case bitwiseNot = 3 // FUNC_BITWISE_NOT
         /// Represents the size of the ``VisualShaderNodeIntFunc/Function`` enum.
         case max = 4 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .abs: return ".abs"
+                case .negate: return ".negate"
+                case .sign: return ".sign"
+                case .bitwiseNot: return ".bitwiseNot"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

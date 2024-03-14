@@ -10,7 +10,7 @@
 /// This node internally calls `emit_subparticle` shader method. It will emit a particle from the configured sub-emitter and also allows to customize how its emitted. Requires a sub-emitter assigned to the particles node with this shader.
 open class VisualShaderNodeParticleEmit: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeParticleEmit" }
-    public enum EmitFlags: Int64 {
+    public enum EmitFlags: Int64, CustomDebugStringConvertible {
         /// If enabled, the particle starts with the position defined by this node.
         case position = 1 // EMIT_FLAG_POSITION
         /// If enabled, the particle starts with the rotation and scale defined by this node.
@@ -21,6 +21,18 @@ open class VisualShaderNodeParticleEmit: VisualShaderNode {
         case color = 8 // EMIT_FLAG_COLOR
         /// If enabled, the particle starts with the `CUSTOM` data defined by this node.
         case custom = 16 // EMIT_FLAG_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .position: return ".position"
+                case .rotScale: return ".rotScale"
+                case .velocity: return ".velocity"
+                case .color: return ".color"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
     

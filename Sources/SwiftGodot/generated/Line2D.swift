@@ -15,31 +15,61 @@
 /// 
 open class Line2D: Node2D {
     override open class var godotClassName: StringName { "Line2D" }
-    public enum LineJointMode: Int64 {
+    public enum LineJointMode: Int64, CustomDebugStringConvertible {
         /// Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on ``sharpLimit``), the joint falls back to .lineJointBevel to prevent very long miters.
         case sharp = 0 // LINE_JOINT_SHARP
         /// Makes the polyline's joints bevelled/chamfered, connecting the sides of the two segments with a simple line.
         case bevel = 1 // LINE_JOINT_BEVEL
         /// Makes the polyline's joints rounded, connecting the sides of the two segments with an arc. The detail of this arc depends on ``roundPrecision``.
         case round = 2 // LINE_JOINT_ROUND
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sharp: return ".sharp"
+                case .bevel: return ".bevel"
+                case .round: return ".round"
+            }
+            
+        }
+        
     }
     
-    public enum LineCapMode: Int64 {
+    public enum LineCapMode: Int64, CustomDebugStringConvertible {
         /// Draws no line cap.
         case none = 0 // LINE_CAP_NONE
         /// Draws the line cap as a box, slightly extending the first/last segment.
         case box = 1 // LINE_CAP_BOX
         /// Draws the line cap as a semicircle attached to the first/last segment.
         case round = 2 // LINE_CAP_ROUND
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .box: return ".box"
+                case .round: return ".round"
+            }
+            
+        }
+        
     }
     
-    public enum LineTextureMode: Int64 {
+    public enum LineTextureMode: Int64, CustomDebugStringConvertible {
         /// Takes the left pixels of the texture and renders them over the whole polyline.
         case none = 0 // LINE_TEXTURE_NONE
         /// Tiles the texture over the polyline. ``CanvasItem/textureRepeat`` of the ``Line2D`` node must be ``CanvasItem/TextureRepeat/enabled`` or ``CanvasItem/TextureRepeat/mirror`` for it to work properly.
         case tile = 1 // LINE_TEXTURE_TILE
         /// Stretches the texture across the polyline. ``CanvasItem/textureRepeat`` of the ``Line2D`` node must be ``CanvasItem/TextureRepeat/disabled`` for best results.
         case stretch = 2 // LINE_TEXTURE_STRETCH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .tile: return ".tile"
+                case .stretch: return ".stretch"
+            }
+            
+        }
+        
     }
     
     

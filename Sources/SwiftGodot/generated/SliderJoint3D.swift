@@ -10,7 +10,7 @@
 /// A physics joint that restricts the movement of a 3D physics body along an axis relative to another physics body. For example, Body A could be a ``StaticBody3D`` representing a piston base, while Body B could be a ``RigidBody3D`` representing the piston head, moving up and down.
 open class SliderJoint3D: Joint3D {
     override open class var godotClassName: StringName { "SliderJoint3D" }
-    public enum Param: Int64 {
+    public enum Param: Int64, CustomDebugStringConvertible {
         /// The maximum difference between the pivot points on their X axis before damping happens.
         case linearLimitUpper = 0 // PARAM_LINEAR_LIMIT_UPPER
         /// The minimum difference between the pivot points on their X axis before damping happens.
@@ -57,6 +57,36 @@ open class SliderJoint3D: Joint3D {
         case angularOrthogonalDamping = 21 // PARAM_ANGULAR_ORTHOGONAL_DAMPING
         /// Represents the size of the ``SliderJoint3D/Param`` enum.
         case max = 22 // PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearLimitUpper: return ".linearLimitUpper"
+                case .linearLimitLower: return ".linearLimitLower"
+                case .linearLimitSoftness: return ".linearLimitSoftness"
+                case .linearLimitRestitution: return ".linearLimitRestitution"
+                case .linearLimitDamping: return ".linearLimitDamping"
+                case .linearMotionSoftness: return ".linearMotionSoftness"
+                case .linearMotionRestitution: return ".linearMotionRestitution"
+                case .linearMotionDamping: return ".linearMotionDamping"
+                case .linearOrthogonalSoftness: return ".linearOrthogonalSoftness"
+                case .linearOrthogonalRestitution: return ".linearOrthogonalRestitution"
+                case .linearOrthogonalDamping: return ".linearOrthogonalDamping"
+                case .angularLimitUpper: return ".angularLimitUpper"
+                case .angularLimitLower: return ".angularLimitLower"
+                case .angularLimitSoftness: return ".angularLimitSoftness"
+                case .angularLimitRestitution: return ".angularLimitRestitution"
+                case .angularLimitDamping: return ".angularLimitDamping"
+                case .angularMotionSoftness: return ".angularMotionSoftness"
+                case .angularMotionRestitution: return ".angularMotionRestitution"
+                case .angularMotionDamping: return ".angularMotionDamping"
+                case .angularOrthogonalSoftness: return ".angularOrthogonalSoftness"
+                case .angularOrthogonalRestitution: return ".angularOrthogonalRestitution"
+                case .angularOrthogonalDamping: return ".angularOrthogonalDamping"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

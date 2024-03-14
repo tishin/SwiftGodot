@@ -22,7 +22,7 @@
 /// - ``projectSettingsChanged``
 open class EditorPlugin: Node {
     override open class var godotClassName: StringName { "EditorPlugin" }
-    public enum CustomControlContainer: Int64 {
+    public enum CustomControlContainer: Int64, CustomDebugStringConvertible {
         /// Main editor toolbar, next to play buttons.
         case toolbar = 0 // CONTAINER_TOOLBAR
         /// The toolbar that appears when 3D editor is active.
@@ -47,9 +47,28 @@ open class EditorPlugin: Node {
         case projectSettingTabLeft = 10 // CONTAINER_PROJECT_SETTING_TAB_LEFT
         /// Tab of Project Settings dialog, to the right of other tabs.
         case projectSettingTabRight = 11 // CONTAINER_PROJECT_SETTING_TAB_RIGHT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .toolbar: return ".toolbar"
+                case .spatialEditorMenu: return ".spatialEditorMenu"
+                case .spatialEditorSideLeft: return ".spatialEditorSideLeft"
+                case .spatialEditorSideRight: return ".spatialEditorSideRight"
+                case .spatialEditorBottom: return ".spatialEditorBottom"
+                case .canvasEditorMenu: return ".canvasEditorMenu"
+                case .canvasEditorSideLeft: return ".canvasEditorSideLeft"
+                case .canvasEditorSideRight: return ".canvasEditorSideRight"
+                case .canvasEditorBottom: return ".canvasEditorBottom"
+                case .inspectorBottom: return ".inspectorBottom"
+                case .projectSettingTabLeft: return ".projectSettingTabLeft"
+                case .projectSettingTabRight: return ".projectSettingTabRight"
+            }
+            
+        }
+        
     }
     
-    public enum DockSlot: Int64 {
+    public enum DockSlot: Int64, CustomDebugStringConvertible {
         /// Dock slot, left side, upper-left (empty in default layout).
         case leftUl = 0 // DOCK_SLOT_LEFT_UL
         /// Dock slot, left side, bottom-left (empty in default layout).
@@ -68,15 +87,41 @@ open class EditorPlugin: Node {
         case rightBr = 7 // DOCK_SLOT_RIGHT_BR
         /// Represents the size of the ``EditorPlugin/DockSlot`` enum.
         case max = 8 // DOCK_SLOT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .leftUl: return ".leftUl"
+                case .leftBl: return ".leftBl"
+                case .leftUr: return ".leftUr"
+                case .leftBr: return ".leftBr"
+                case .rightUl: return ".rightUl"
+                case .rightBl: return ".rightBl"
+                case .rightUr: return ".rightUr"
+                case .rightBr: return ".rightBr"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum AfterGUIInput: Int64 {
+    public enum AfterGUIInput: Int64, CustomDebugStringConvertible {
         /// Forwards the ``InputEvent`` to other EditorPlugins.
         case pass = 0 // AFTER_GUI_INPUT_PASS
         /// Prevents the ``InputEvent`` from reaching other Editor classes.
         case stop = 1 // AFTER_GUI_INPUT_STOP
         /// Pass the ``InputEvent`` to other editor plugins except the main ``Node3D`` one. This can be used to prevent node selection changes and work with sub-gizmos instead.
         case custom = 2 // AFTER_GUI_INPUT_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .pass: return ".pass"
+                case .stop: return ".stop"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
     /* Methods */

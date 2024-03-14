@@ -18,7 +18,7 @@
 /// - ``finished``
 open class GPUParticles3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "GPUParticles3D" }
-    public enum DrawOrder: Int64 {
+    public enum DrawOrder: Int64, CustomDebugStringConvertible {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX
         /// Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
@@ -27,9 +27,20 @@ open class GPUParticles3D: GeometryInstance3D {
         case reverseLifetime = 2 // DRAW_ORDER_REVERSE_LIFETIME
         /// Particles are drawn in order of depth.
         case viewDepth = 3 // DRAW_ORDER_VIEW_DEPTH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .index: return ".index"
+                case .lifetime: return ".lifetime"
+                case .reverseLifetime: return ".reverseLifetime"
+                case .viewDepth: return ".viewDepth"
+            }
+            
+        }
+        
     }
     
-    public enum EmitFlags: Int64 {
+    public enum EmitFlags: Int64, CustomDebugStringConvertible {
         /// Particle starts at the specified position.
         case position = 1 // EMIT_FLAG_POSITION
         /// Particle starts with specified rotation and scale.
@@ -40,9 +51,21 @@ open class GPUParticles3D: GeometryInstance3D {
         case color = 8 // EMIT_FLAG_COLOR
         /// Particle starts with specified `CUSTOM` data.
         case custom = 16 // EMIT_FLAG_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .position: return ".position"
+                case .rotationScale: return ".rotationScale"
+                case .velocity: return ".velocity"
+                case .color: return ".color"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
-    public enum TransformAlign: Int64 {
+    public enum TransformAlign: Int64, CustomDebugStringConvertible {
         /// 
         case disabled = 0 // TRANSFORM_ALIGN_DISABLED
         /// 
@@ -51,6 +74,17 @@ open class GPUParticles3D: GeometryInstance3D {
         case yToVelocity = 2 // TRANSFORM_ALIGN_Y_TO_VELOCITY
         /// 
         case zBillboardYToVelocity = 3 // TRANSFORM_ALIGN_Z_BILLBOARD_Y_TO_VELOCITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .zBillboard: return ".zBillboard"
+                case .yToVelocity: return ".yToVelocity"
+                case .zBillboardYToVelocity: return ".zBillboardYToVelocity"
+            }
+            
+        }
+        
     }
     
     /* Constants */

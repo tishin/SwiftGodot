@@ -10,7 +10,7 @@
 /// Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
 open class VisualShaderNodeParticleRandomness: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeParticleRandomness" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.
@@ -21,6 +21,18 @@ open class VisualShaderNodeParticleRandomness: VisualShaderNode {
         case vector4d = 3 // OP_TYPE_VECTOR_4D
         /// Represents the size of the ``VisualShaderNodeParticleRandomness/OpType`` enum.
         case max = 4 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

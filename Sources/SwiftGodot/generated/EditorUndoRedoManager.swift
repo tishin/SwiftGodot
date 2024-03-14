@@ -31,13 +31,23 @@
 /// - ``versionChanged``
 open class EditorUndoRedoManager: Object {
     override open class var godotClassName: StringName { "EditorUndoRedoManager" }
-    public enum SpecialHistory: Int64 {
+    public enum SpecialHistory: Int64, CustomDebugStringConvertible {
         /// Global history not associated with any scene, but with external resources etc.
         case globalHistory = 0 // GLOBAL_HISTORY
         /// History associated with remote inspector. Used when live editing a running project.
         case remoteHistory = -9 // REMOTE_HISTORY
         /// Invalid "null" history. It's a special value, not associated with any object.
         case invalidHistory = -99 // INVALID_HISTORY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .globalHistory: return ".globalHistory"
+                case .remoteHistory: return ".remoteHistory"
+                case .invalidHistory: return ".invalidHistory"
+            }
+            
+        }
+        
     }
     
     /* Methods */

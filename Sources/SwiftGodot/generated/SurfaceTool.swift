@@ -21,7 +21,7 @@
 /// 
 open class SurfaceTool: RefCounted {
     override open class var godotClassName: StringName { "SurfaceTool" }
-    public enum CustomFormat: Int64 {
+    public enum CustomFormat: Int64, CustomDebugStringConvertible {
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to unsigned normalized 0 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/arrayCustomRgba8Unorm``.
         case rgba8Unorm = 0 // CUSTOM_RGBA8_UNORM
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to signed normalized -1 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/arrayCustomRgba8Snorm``.
@@ -40,13 +40,38 @@ open class SurfaceTool: RefCounted {
         case rgbaFloat = 7 // CUSTOM_RGBA_FLOAT
         /// Used to indicate a disabled custom channel.
         case max = 8 // CUSTOM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgba8Unorm: return ".rgba8Unorm"
+                case .rgba8Snorm: return ".rgba8Snorm"
+                case .rgHalf: return ".rgHalf"
+                case .rgbaHalf: return ".rgbaHalf"
+                case .rFloat: return ".rFloat"
+                case .rgFloat: return ".rgFloat"
+                case .rgbFloat: return ".rgbFloat"
+                case .rgbaFloat: return ".rgbaFloat"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SkinWeightCount: Int64 {
+    public enum SkinWeightCount: Int64, CustomDebugStringConvertible {
         /// Each individual vertex can be influenced by only 4 bone weights.
         case skin4Weights = 0 // SKIN_4_WEIGHTS
         /// Each individual vertex can be influenced by up to 8 bone weights.
         case skin8Weights = 1 // SKIN_8_WEIGHTS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .skin4Weights: return ".skin4Weights"
+                case .skin8Weights: return ".skin8Weights"
+            }
+            
+        }
+        
     }
     
     /* Methods */

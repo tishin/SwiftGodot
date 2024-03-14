@@ -15,7 +15,7 @@
 /// 
 open class NavigationPolygon: Resource {
     override open class var godotClassName: StringName { "NavigationPolygon" }
-    public enum ParsedGeometryType: Int64 {
+    public enum ParsedGeometryType: Int64, CustomDebugStringConvertible {
         /// Parses mesh instances as obstruction geometry. This includes ``Polygon2D``, ``MeshInstance2D``, ``MultiMeshInstance2D``, and ``TileMap`` nodes.
         /// 
         /// Meshes are only parsed when they use a 2D vertices surface format.
@@ -27,9 +27,20 @@ open class NavigationPolygon: Resource {
         case both = 2 // PARSED_GEOMETRY_BOTH
         /// Represents the size of the ``NavigationPolygon/ParsedGeometryType`` enum.
         case max = 3 // PARSED_GEOMETRY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .meshInstances: return ".meshInstances"
+                case .staticColliders: return ".staticColliders"
+                case .both: return ".both"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SourceGeometryMode: Int64 {
+    public enum SourceGeometryMode: Int64, CustomDebugStringConvertible {
         /// Scans the child nodes of the root node recursively for geometry.
         case rootNodeChildren = 0 // SOURCE_GEOMETRY_ROOT_NODE_CHILDREN
         /// Scans nodes in a group and their child nodes recursively for geometry. The group is specified by ``sourceGeometryGroupName``.
@@ -38,6 +49,17 @@ open class NavigationPolygon: Resource {
         case groupsExplicit = 2 // SOURCE_GEOMETRY_GROUPS_EXPLICIT
         /// Represents the size of the ``NavigationPolygon/SourceGeometryMode`` enum.
         case max = 3 // SOURCE_GEOMETRY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rootNodeChildren: return ".rootNodeChildren"
+                case .groupsWithChildren: return ".groupsWithChildren"
+                case .groupsExplicit: return ".groupsExplicit"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

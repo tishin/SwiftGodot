@@ -10,7 +10,7 @@
 /// ``CanvasItemMaterial``s provide a means of modifying the textures associated with a CanvasItem. They specialize in describing blend and lighting behaviors for textures. Use a ``ShaderMaterial`` to more fully customize a material's interactions with a ``CanvasItem``.
 open class CanvasItemMaterial: Material {
     override open class var godotClassName: StringName { "CanvasItemMaterial" }
-    public enum BlendMode: Int64 {
+    public enum BlendMode: Int64, CustomDebugStringConvertible {
         /// Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
         case mix = 0 // BLEND_MODE_MIX
         /// Additive blending mode.
@@ -21,15 +21,37 @@ open class CanvasItemMaterial: Material {
         case mul = 3 // BLEND_MODE_MUL
         /// Mix blending mode. Colors are assumed to be premultiplied by the alpha (opacity) value.
         case premultAlpha = 4 // BLEND_MODE_PREMULT_ALPHA
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .mix: return ".mix"
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mul: return ".mul"
+                case .premultAlpha: return ".premultAlpha"
+            }
+            
+        }
+        
     }
     
-    public enum LightMode: Int64 {
+    public enum LightMode: Int64, CustomDebugStringConvertible {
         /// Render the material using both light and non-light sensitive material properties.
         case normal = 0 // LIGHT_MODE_NORMAL
         /// Render the material as if there were no light.
         case unshaded = 1 // LIGHT_MODE_UNSHADED
         /// Render the material as if there were only light.
         case lightOnly = 2 // LIGHT_MODE_LIGHT_ONLY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .normal: return ".normal"
+                case .unshaded: return ".unshaded"
+                case .lightOnly: return ".lightOnly"
+            }
+            
+        }
+        
     }
     
     

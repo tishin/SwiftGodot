@@ -2,7 +2,7 @@
 
 @_implementationOnly import GDExtension
 
-public enum Side: Int64 {
+public enum Side: Int64, CustomDebugStringConvertible {
     /// Left side, usually used for ``Control`` or ``StyleBox``-derived classes.
     case left = 0 // SIDE_LEFT
     /// Top side, usually used for ``Control`` or ``StyleBox``-derived classes.
@@ -11,9 +11,20 @@ public enum Side: Int64 {
     case right = 2 // SIDE_RIGHT
     /// Bottom side, usually used for ``Control`` or ``StyleBox``-derived classes.
     case bottom = 3 // SIDE_BOTTOM
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .left: return ".left"
+            case .top: return ".top"
+            case .right: return ".right"
+            case .bottom: return ".bottom"
+        }
+        
+    }
+    
 }
 
-public enum Corner: Int64 {
+public enum Corner: Int64, CustomDebugStringConvertible {
     /// Top-left corner.
     case topLeft = 0 // CORNER_TOP_LEFT
     /// Top-right corner.
@@ -22,23 +33,52 @@ public enum Corner: Int64 {
     case bottomRight = 2 // CORNER_BOTTOM_RIGHT
     /// Bottom-left corner.
     case bottomLeft = 3 // CORNER_BOTTOM_LEFT
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .topLeft: return ".topLeft"
+            case .topRight: return ".topRight"
+            case .bottomRight: return ".bottomRight"
+            case .bottomLeft: return ".bottomLeft"
+        }
+        
+    }
+    
 }
 
-public enum Orientation: Int64 {
+public enum Orientation: Int64, CustomDebugStringConvertible {
     /// General vertical alignment, usually used for ``Separator``, ``ScrollBar``, ``Slider``, etc.
     case vertical = 1 // VERTICAL
     /// General horizontal alignment, usually used for ``Separator``, ``ScrollBar``, ``Slider``, etc.
     case horizontal = 0 // HORIZONTAL
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .vertical: return ".vertical"
+            case .horizontal: return ".horizontal"
+        }
+        
+    }
+    
 }
 
-public enum ClockDirection: Int64 {
+public enum ClockDirection: Int64, CustomDebugStringConvertible {
     /// Clockwise rotation. Used by some methods (e.g. ``Image/rotate90(direction:)``).
     case clockwise = 0 // CLOCKWISE
     /// Counter-clockwise rotation. Used by some methods (e.g. ``Image/rotate90(direction:)``).
     case counterclockwise = 1 // COUNTERCLOCKWISE
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .clockwise: return ".clockwise"
+            case .counterclockwise: return ".counterclockwise"
+        }
+        
+    }
+    
 }
 
-public enum HorizontalAlignment: Int64 {
+public enum HorizontalAlignment: Int64, CustomDebugStringConvertible {
     /// Horizontal left alignment, usually for text-derived classes.
     case left = 0 // HORIZONTAL_ALIGNMENT_LEFT
     /// Horizontal center alignment, usually for text-derived classes.
@@ -47,9 +87,20 @@ public enum HorizontalAlignment: Int64 {
     case right = 2 // HORIZONTAL_ALIGNMENT_RIGHT
     /// Expand row to fit width, usually for text-derived classes.
     case fill = 3 // HORIZONTAL_ALIGNMENT_FILL
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .left: return ".left"
+            case .center: return ".center"
+            case .right: return ".right"
+            case .fill: return ".fill"
+        }
+        
+    }
+    
 }
 
-public enum VerticalAlignment: Int64 {
+public enum VerticalAlignment: Int64, CustomDebugStringConvertible {
     /// Vertical top alignment, usually for text-derived classes.
     case top = 0 // VERTICAL_ALIGNMENT_TOP
     /// Vertical center alignment, usually for text-derived classes.
@@ -58,9 +109,20 @@ public enum VerticalAlignment: Int64 {
     case bottom = 2 // VERTICAL_ALIGNMENT_BOTTOM
     /// Expand rows to fit height, usually for text-derived classes.
     case fill = 3 // VERTICAL_ALIGNMENT_FILL
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .top: return ".top"
+            case .center: return ".center"
+            case .bottom: return ".bottom"
+            case .fill: return ".fill"
+        }
+        
+    }
+    
 }
 
-public enum InlineAlignment: Int64 {
+public enum InlineAlignment: Int64, CustomDebugStringConvertible {
     /// Aligns the center of the inline object (e.g. image, table) to the position of the text specified by `INLINE_ALIGNMENT_TO_*` constant.
     case centerTo = 1 // INLINE_ALIGNMENT_CENTER_TO
     /// Aligns the baseline (user defined) of the inline object (e.g. image, table) to the position of the text specified by `INLINE_ALIGNMENT_TO_*` constant.
@@ -79,9 +141,25 @@ public enum InlineAlignment: Int64 {
     case center = 5 // INLINE_ALIGNMENT_CENTER
     /// Aligns bottom of the inline object (e.g. image, table) to the bottom of the text. Equivalent to `INLINE_ALIGNMENT_BOTTOM_TO | INLINE_ALIGNMENT_TO_BOTTOM`.
     case bottom = 14 // INLINE_ALIGNMENT_BOTTOM
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .centerTo: return ".centerTo"
+            case .baselineTo: return ".baselineTo"
+            case .bottomTo: return ".bottomTo"
+            case .toCenter: return ".toCenter"
+            case .toBaseline: return ".toBaseline"
+            case .toBottom: return ".toBottom"
+            case .top: return ".top"
+            case .center: return ".center"
+            case .bottom: return ".bottom"
+        }
+        
+    }
+    
 }
 
-public enum EulerOrder: Int64 {
+public enum EulerOrder: Int64, CustomDebugStringConvertible {
     /// Specifies that Euler angles should be in XYZ order. When composing, the order is X, Y, Z. When decomposing, the order is reversed, first Z, then Y, and X last.
     case xyz = 0 // EULER_ORDER_XYZ
     /// Specifies that Euler angles should be in XZY order. When composing, the order is X, Z, Y. When decomposing, the order is reversed, first Y, then Z, and X last.
@@ -94,9 +172,22 @@ public enum EulerOrder: Int64 {
     case zxy = 4 // EULER_ORDER_ZXY
     /// Specifies that Euler angles should be in ZYX order. When composing, the order is Z, Y, X. When decomposing, the order is reversed, first X, then Y, and Z last.
     case zyx = 5 // EULER_ORDER_ZYX
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .xyz: return ".xyz"
+            case .xzy: return ".xzy"
+            case .yxz: return ".yxz"
+            case .yzx: return ".yzx"
+            case .zxy: return ".zxy"
+            case .zyx: return ".zyx"
+        }
+        
+    }
+    
 }
 
-public enum Key: Int64 {
+public enum Key: Int64, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any key. This is used to initialize ``Key`` properties with a generic state.
     case none = 0 // KEY_NONE
     /// Keycodes with this bit applied are non-printable.
@@ -483,6 +574,206 @@ public enum Key: Int64 {
     case yen = 165 // KEY_YEN
     /// § key.
     case section = 167 // KEY_SECTION
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .none: return ".none"
+            case .special: return ".special"
+            case .escape: return ".escape"
+            case .tab: return ".tab"
+            case .backtab: return ".backtab"
+            case .backspace: return ".backspace"
+            case .enter: return ".enter"
+            case .kpEnter: return ".kpEnter"
+            case .insert: return ".insert"
+            case .delete: return ".delete"
+            case .pause: return ".pause"
+            case .print: return ".print"
+            case .sysreq: return ".sysreq"
+            case .clear: return ".clear"
+            case .home: return ".home"
+            case .end: return ".end"
+            case .left: return ".left"
+            case .up: return ".up"
+            case .right: return ".right"
+            case .down: return ".down"
+            case .pageup: return ".pageup"
+            case .pagedown: return ".pagedown"
+            case .shift: return ".shift"
+            case .ctrl: return ".ctrl"
+            case .meta: return ".meta"
+            case .alt: return ".alt"
+            case .capslock: return ".capslock"
+            case .numlock: return ".numlock"
+            case .scrolllock: return ".scrolllock"
+            case .f1: return ".f1"
+            case .f2: return ".f2"
+            case .f3: return ".f3"
+            case .f4: return ".f4"
+            case .f5: return ".f5"
+            case .f6: return ".f6"
+            case .f7: return ".f7"
+            case .f8: return ".f8"
+            case .f9: return ".f9"
+            case .f10: return ".f10"
+            case .f11: return ".f11"
+            case .f12: return ".f12"
+            case .f13: return ".f13"
+            case .f14: return ".f14"
+            case .f15: return ".f15"
+            case .f16: return ".f16"
+            case .f17: return ".f17"
+            case .f18: return ".f18"
+            case .f19: return ".f19"
+            case .f20: return ".f20"
+            case .f21: return ".f21"
+            case .f22: return ".f22"
+            case .f23: return ".f23"
+            case .f24: return ".f24"
+            case .f25: return ".f25"
+            case .f26: return ".f26"
+            case .f27: return ".f27"
+            case .f28: return ".f28"
+            case .f29: return ".f29"
+            case .f30: return ".f30"
+            case .f31: return ".f31"
+            case .f32: return ".f32"
+            case .f33: return ".f33"
+            case .f34: return ".f34"
+            case .f35: return ".f35"
+            case .kpMultiply: return ".kpMultiply"
+            case .kpDivide: return ".kpDivide"
+            case .kpSubtract: return ".kpSubtract"
+            case .kpPeriod: return ".kpPeriod"
+            case .kpAdd: return ".kpAdd"
+            case .kp0: return ".kp0"
+            case .kp1: return ".kp1"
+            case .kp2: return ".kp2"
+            case .kp3: return ".kp3"
+            case .kp4: return ".kp4"
+            case .kp5: return ".kp5"
+            case .kp6: return ".kp6"
+            case .kp7: return ".kp7"
+            case .kp8: return ".kp8"
+            case .kp9: return ".kp9"
+            case .menu: return ".menu"
+            case .hyper: return ".hyper"
+            case .help: return ".help"
+            case .back: return ".back"
+            case .forward: return ".forward"
+            case .stop: return ".stop"
+            case .refresh: return ".refresh"
+            case .volumedown: return ".volumedown"
+            case .volumemute: return ".volumemute"
+            case .volumeup: return ".volumeup"
+            case .mediaplay: return ".mediaplay"
+            case .mediastop: return ".mediastop"
+            case .mediaprevious: return ".mediaprevious"
+            case .medianext: return ".medianext"
+            case .mediarecord: return ".mediarecord"
+            case .homepage: return ".homepage"
+            case .favorites: return ".favorites"
+            case .search: return ".search"
+            case .standby: return ".standby"
+            case .openurl: return ".openurl"
+            case .launchmail: return ".launchmail"
+            case .launchmedia: return ".launchmedia"
+            case .launch0: return ".launch0"
+            case .launch1: return ".launch1"
+            case .launch2: return ".launch2"
+            case .launch3: return ".launch3"
+            case .launch4: return ".launch4"
+            case .launch5: return ".launch5"
+            case .launch6: return ".launch6"
+            case .launch7: return ".launch7"
+            case .launch8: return ".launch8"
+            case .launch9: return ".launch9"
+            case .launcha: return ".launcha"
+            case .launchb: return ".launchb"
+            case .launchc: return ".launchc"
+            case .launchd: return ".launchd"
+            case .launche: return ".launche"
+            case .launchf: return ".launchf"
+            case .globe: return ".globe"
+            case .keyboard: return ".keyboard"
+            case .jisEisu: return ".jisEisu"
+            case .jisKana: return ".jisKana"
+            case .unknown: return ".unknown"
+            case .space: return ".space"
+            case .exclam: return ".exclam"
+            case .quotedbl: return ".quotedbl"
+            case .numbersign: return ".numbersign"
+            case .dollar: return ".dollar"
+            case .percent: return ".percent"
+            case .ampersand: return ".ampersand"
+            case .apostrophe: return ".apostrophe"
+            case .parenleft: return ".parenleft"
+            case .parenright: return ".parenright"
+            case .asterisk: return ".asterisk"
+            case .plus: return ".plus"
+            case .comma: return ".comma"
+            case .minus: return ".minus"
+            case .period: return ".period"
+            case .slash: return ".slash"
+            case .key0: return ".key0"
+            case .key1: return ".key1"
+            case .key2: return ".key2"
+            case .key3: return ".key3"
+            case .key4: return ".key4"
+            case .key5: return ".key5"
+            case .key6: return ".key6"
+            case .key7: return ".key7"
+            case .key8: return ".key8"
+            case .key9: return ".key9"
+            case .colon: return ".colon"
+            case .semicolon: return ".semicolon"
+            case .less: return ".less"
+            case .equal: return ".equal"
+            case .greater: return ".greater"
+            case .question: return ".question"
+            case .at: return ".at"
+            case .a: return ".a"
+            case .b: return ".b"
+            case .c: return ".c"
+            case .d: return ".d"
+            case .e: return ".e"
+            case .f: return ".f"
+            case .g: return ".g"
+            case .h: return ".h"
+            case .i: return ".i"
+            case .j: return ".j"
+            case .k: return ".k"
+            case .l: return ".l"
+            case .m: return ".m"
+            case .n: return ".n"
+            case .o: return ".o"
+            case .p: return ".p"
+            case .q: return ".q"
+            case .r: return ".r"
+            case .s: return ".s"
+            case .t: return ".t"
+            case .u: return ".u"
+            case .v: return ".v"
+            case .w: return ".w"
+            case .x: return ".x"
+            case .y: return ".y"
+            case .z: return ".z"
+            case .bracketleft: return ".bracketleft"
+            case .backslash: return ".backslash"
+            case .bracketright: return ".bracketright"
+            case .asciicircum: return ".asciicircum"
+            case .underscore: return ".underscore"
+            case .quoteleft: return ".quoteleft"
+            case .braceleft: return ".braceleft"
+            case .bar: return ".bar"
+            case .braceright: return ".braceright"
+            case .asciitilde: return ".asciitilde"
+            case .yen: return ".yen"
+            case .section: return ".section"
+        }
+        
+    }
+    
 }
 
 public struct KeyModifierMask: OptionSet, CustomDebugStringConvertible {
@@ -527,7 +818,7 @@ public struct KeyModifierMask: OptionSet, CustomDebugStringConvertible {
     
 }
 
-public enum MouseButton: Int64 {
+public enum MouseButton: Int64, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any mouse button. This is used to initialize ``MouseButton`` properties with a generic state.
     case none = 0 // MOUSE_BUTTON_NONE
     /// Primary mouse button, usually assigned to the left button.
@@ -548,6 +839,23 @@ public enum MouseButton: Int64 {
     case xbutton1 = 8 // MOUSE_BUTTON_XBUTTON1
     /// Extra mouse button 2. This is sometimes present, usually to the sides of the mouse.
     case xbutton2 = 9 // MOUSE_BUTTON_XBUTTON2
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .none: return ".none"
+            case .left: return ".left"
+            case .right: return ".right"
+            case .middle: return ".middle"
+            case .wheelUp: return ".wheelUp"
+            case .wheelDown: return ".wheelDown"
+            case .wheelLeft: return ".wheelLeft"
+            case .wheelRight: return ".wheelRight"
+            case .xbutton1: return ".xbutton1"
+            case .xbutton2: return ".xbutton2"
+        }
+        
+    }
+    
 }
 
 public struct MouseButtonMask: OptionSet, CustomDebugStringConvertible {
@@ -580,7 +888,7 @@ public struct MouseButtonMask: OptionSet, CustomDebugStringConvertible {
     
 }
 
-public enum JoyButton: Int64 {
+public enum JoyButton: Int64, CustomDebugStringConvertible {
     /// An invalid game controller button.
     case invalid = -1 // JOY_BUTTON_INVALID
     /// Game controller SDL button A. Corresponds to the bottom action button: Sony Cross, Xbox A, Nintendo B.
@@ -636,9 +944,40 @@ public enum JoyButton: Int64 {
     /// - **Windows** and **macOS:** Up to 128 buttons.
     /// 
     case max = 128 // JOY_BUTTON_MAX
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .invalid: return ".invalid"
+            case .a: return ".a"
+            case .b: return ".b"
+            case .x: return ".x"
+            case .y: return ".y"
+            case .back: return ".back"
+            case .guide: return ".guide"
+            case .start: return ".start"
+            case .leftStick: return ".leftStick"
+            case .rightStick: return ".rightStick"
+            case .leftShoulder: return ".leftShoulder"
+            case .rightShoulder: return ".rightShoulder"
+            case .dpadUp: return ".dpadUp"
+            case .dpadDown: return ".dpadDown"
+            case .dpadLeft: return ".dpadLeft"
+            case .dpadRight: return ".dpadRight"
+            case .misc1: return ".misc1"
+            case .paddle1: return ".paddle1"
+            case .paddle2: return ".paddle2"
+            case .paddle3: return ".paddle3"
+            case .paddle4: return ".paddle4"
+            case .touchpad: return ".touchpad"
+            case .sdlMax: return ".sdlMax"
+            case .max: return ".max"
+        }
+        
+    }
+    
 }
 
-public enum JoyAxis: Int64 {
+public enum JoyAxis: Int64, CustomDebugStringConvertible {
     /// An invalid game controller axis.
     case invalid = -1 // JOY_AXIS_INVALID
     /// Game controller left joystick x-axis.
@@ -657,9 +996,25 @@ public enum JoyAxis: Int64 {
     case sdlMax = 6 // JOY_AXIS_SDL_MAX
     /// The maximum number of game controller axes: OpenVR supports up to 5 Joysticks making a total of 10 axes.
     case max = 10 // JOY_AXIS_MAX
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .invalid: return ".invalid"
+            case .leftX: return ".leftX"
+            case .leftY: return ".leftY"
+            case .rightX: return ".rightX"
+            case .rightY: return ".rightY"
+            case .triggerLeft: return ".triggerLeft"
+            case .triggerRight: return ".triggerRight"
+            case .sdlMax: return ".sdlMax"
+            case .max: return ".max"
+        }
+        
+    }
+    
 }
 
-public enum MIDIMessage: Int64 {
+public enum MIDIMessage: Int64, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any MIDI message. This is used to initialize ``MIDIMessage`` properties with a generic state.
     case none = 0 // MIDI_MESSAGE_NONE
     /// MIDI note OFF message. Not all MIDI devices send this event; some send ``MIDIMessage/noteOn`` with zero velocity instead. See the documentation of ``InputEventMIDI`` for information of how to use MIDI inputs.
@@ -698,9 +1053,35 @@ public enum MIDIMessage: Int64 {
     case activeSensing = 254 // MIDI_MESSAGE_ACTIVE_SENSING
     /// MIDI system reset message. Reset all receivers in the system to power-up status. It should not be sent on power-up itself.
     case systemReset = 255 // MIDI_MESSAGE_SYSTEM_RESET
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .none: return ".none"
+            case .noteOff: return ".noteOff"
+            case .noteOn: return ".noteOn"
+            case .aftertouch: return ".aftertouch"
+            case .controlChange: return ".controlChange"
+            case .programChange: return ".programChange"
+            case .channelPressure: return ".channelPressure"
+            case .pitchBend: return ".pitchBend"
+            case .systemExclusive: return ".systemExclusive"
+            case .quarterFrame: return ".quarterFrame"
+            case .songPositionPointer: return ".songPositionPointer"
+            case .songSelect: return ".songSelect"
+            case .tuneRequest: return ".tuneRequest"
+            case .timingClock: return ".timingClock"
+            case .start: return ".start"
+            case .`continue`: return ".`continue`"
+            case .stop: return ".stop"
+            case .activeSensing: return ".activeSensing"
+            case .systemReset: return ".systemReset"
+        }
+        
+    }
+    
 }
 
-public enum GodotError: Int64 {
+public enum GodotError: Int64, CustomDebugStringConvertible, Error {
     /// Methods that return ``GodotError`` return ``GodotError/ok`` when no error occurred.
     /// 
     /// Since ``GodotError/ok`` has value 0, and all other error constants are positive integers, it can also be used in boolean checks.
@@ -809,9 +1190,66 @@ public enum GodotError: Int64 {
     case errBug = 47 // ERR_BUG
     /// Printer on fire error (This is an easter egg, no built-in methods return this error code).
     case errPrinterOnFire = 48 // ERR_PRINTER_ON_FIRE
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .ok: return ".ok"
+            case .failed: return ".failed"
+            case .errUnavailable: return ".errUnavailable"
+            case .errUnconfigured: return ".errUnconfigured"
+            case .errUnauthorized: return ".errUnauthorized"
+            case .errParameterRangeError: return ".errParameterRangeError"
+            case .errOutOfMemory: return ".errOutOfMemory"
+            case .errFileNotFound: return ".errFileNotFound"
+            case .errFileBadDrive: return ".errFileBadDrive"
+            case .errFileBadPath: return ".errFileBadPath"
+            case .errFileNoPermission: return ".errFileNoPermission"
+            case .errFileAlreadyInUse: return ".errFileAlreadyInUse"
+            case .errFileCantOpen: return ".errFileCantOpen"
+            case .errFileCantWrite: return ".errFileCantWrite"
+            case .errFileCantRead: return ".errFileCantRead"
+            case .errFileUnrecognized: return ".errFileUnrecognized"
+            case .errFileCorrupt: return ".errFileCorrupt"
+            case .errFileMissingDependencies: return ".errFileMissingDependencies"
+            case .errFileEof: return ".errFileEof"
+            case .errCantOpen: return ".errCantOpen"
+            case .errCantCreate: return ".errCantCreate"
+            case .errQueryFailed: return ".errQueryFailed"
+            case .errAlreadyInUse: return ".errAlreadyInUse"
+            case .errLocked: return ".errLocked"
+            case .errTimeout: return ".errTimeout"
+            case .errCantConnect: return ".errCantConnect"
+            case .errCantResolve: return ".errCantResolve"
+            case .errConnectionError: return ".errConnectionError"
+            case .errCantAcquireResource: return ".errCantAcquireResource"
+            case .errCantFork: return ".errCantFork"
+            case .errInvalidData: return ".errInvalidData"
+            case .errInvalidParameter: return ".errInvalidParameter"
+            case .errAlreadyExists: return ".errAlreadyExists"
+            case .errDoesNotExist: return ".errDoesNotExist"
+            case .errDatabaseCantRead: return ".errDatabaseCantRead"
+            case .errDatabaseCantWrite: return ".errDatabaseCantWrite"
+            case .errCompilationFailed: return ".errCompilationFailed"
+            case .errMethodNotFound: return ".errMethodNotFound"
+            case .errLinkFailed: return ".errLinkFailed"
+            case .errScriptFailed: return ".errScriptFailed"
+            case .errCyclicLink: return ".errCyclicLink"
+            case .errInvalidDeclaration: return ".errInvalidDeclaration"
+            case .errDuplicateSymbol: return ".errDuplicateSymbol"
+            case .errParseError: return ".errParseError"
+            case .errBusy: return ".errBusy"
+            case .errSkip: return ".errSkip"
+            case .errHelp: return ".errHelp"
+            case .errBug: return ".errBug"
+            case .errPrinterOnFire: return ".errPrinterOnFire"
+        }
+        
+    }
+    
+    public var localizedDescription: String { debugDescription }
 }
 
-public enum PropertyHint: Int64 {
+public enum PropertyHint: Int64, CustomDebugStringConvertible {
     /// The property has no hint for the editor.
     case none = 0 // PROPERTY_HINT_NONE
     /// Hints that an integer or float property should be within a range specified via the hint string `"min,max"` or `"min,max,step"`. The hint string can optionally include `"or_greater"` and/or `"or_less"` to allow manual input going respectively above the max or below the min values.
@@ -918,6 +1356,52 @@ public enum PropertyHint: Int64 {
     case password = 36 // PROPERTY_HINT_PASSWORD
     /// Represents the size of the ``PropertyHint`` enum.
     case max = 38 // PROPERTY_HINT_MAX
+    /// A textual representation of this instance, suitable for debugging
+    public var debugDescription: String {
+        switch self {
+            case .none: return ".none"
+            case .range: return ".range"
+            case .`enum`: return ".`enum`"
+            case .enumSuggestion: return ".enumSuggestion"
+            case .expEasing: return ".expEasing"
+            case .link: return ".link"
+            case .flags: return ".flags"
+            case .layers2dRender: return ".layers2dRender"
+            case .layers2dPhysics: return ".layers2dPhysics"
+            case .layers2dNavigation: return ".layers2dNavigation"
+            case .layers3dRender: return ".layers3dRender"
+            case .layers3dPhysics: return ".layers3dPhysics"
+            case .layers3dNavigation: return ".layers3dNavigation"
+            case .layersAvoidance: return ".layersAvoidance"
+            case .file: return ".file"
+            case .dir: return ".dir"
+            case .globalFile: return ".globalFile"
+            case .globalDir: return ".globalDir"
+            case .resourceType: return ".resourceType"
+            case .multilineText: return ".multilineText"
+            case .expression: return ".expression"
+            case .placeholderText: return ".placeholderText"
+            case .colorNoAlpha: return ".colorNoAlpha"
+            case .objectId: return ".objectId"
+            case .typeString: return ".typeString"
+            case .nodePathToEditedNode: return ".nodePathToEditedNode"
+            case .objectTooBig: return ".objectTooBig"
+            case .nodePathValidTypes: return ".nodePathValidTypes"
+            case .saveFile: return ".saveFile"
+            case .globalSaveFile: return ".globalSaveFile"
+            case .intIsObjectid: return ".intIsObjectid"
+            case .intIsPointer: return ".intIsPointer"
+            case .arrayType: return ".arrayType"
+            case .localeId: return ".localeId"
+            case .localizableString: return ".localizableString"
+            case .nodeType: return ".nodeType"
+            case .hideQuaternionEdit: return ".hideQuaternionEdit"
+            case .password: return ".password"
+            case .max: return ".max"
+        }
+        
+    }
+    
 }
 
 public struct PropertyUsageFlags: OptionSet, CustomDebugStringConvertible {
@@ -1074,7 +1558,7 @@ public struct MethodFlags: OptionSet, CustomDebugStringConvertible {
 }
 
 extension Variant {
-    public enum GType: Int64 {
+    public enum GType: Int64, CustomDebugStringConvertible {
         /// Variable is `null`.
         case `nil` = 0 // TYPE_NIL
         /// Variable is of type [bool].
@@ -1153,12 +1637,58 @@ extension Variant {
         case packedColorArray = 37 // TYPE_PACKED_COLOR_ARRAY
         /// Represents the size of the ``Variant.GType`` enum.
         case max = 38 // TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`nil`: return ".`nil`"
+                case .bool: return ".bool"
+                case .int: return ".int"
+                case .float: return ".float"
+                case .string: return ".string"
+                case .vector2: return ".vector2"
+                case .vector2i: return ".vector2i"
+                case .rect2: return ".rect2"
+                case .rect2i: return ".rect2i"
+                case .vector3: return ".vector3"
+                case .vector3i: return ".vector3i"
+                case .transform2d: return ".transform2d"
+                case .vector4: return ".vector4"
+                case .vector4i: return ".vector4i"
+                case .plane: return ".plane"
+                case .quaternion: return ".quaternion"
+                case .aabb: return ".aabb"
+                case .basis: return ".basis"
+                case .transform3d: return ".transform3d"
+                case .projection: return ".projection"
+                case .color: return ".color"
+                case .stringName: return ".stringName"
+                case .nodePath: return ".nodePath"
+                case .rid: return ".rid"
+                case .object: return ".object"
+                case .callable: return ".callable"
+                case .signal: return ".signal"
+                case .dictionary: return ".dictionary"
+                case .array: return ".array"
+                case .packedByteArray: return ".packedByteArray"
+                case .packedInt32Array: return ".packedInt32Array"
+                case .packedInt64Array: return ".packedInt64Array"
+                case .packedFloat32Array: return ".packedFloat32Array"
+                case .packedFloat64Array: return ".packedFloat64Array"
+                case .packedStringArray: return ".packedStringArray"
+                case .packedVector2Array: return ".packedVector2Array"
+                case .packedVector3Array: return ".packedVector3Array"
+                case .packedColorArray: return ".packedColorArray"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
 }
 
 extension Variant {
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Equality operator (`==`).
         case equal = 0 // OP_EQUAL
         /// Inequality operator (`!=`).
@@ -1211,6 +1741,39 @@ extension Variant {
         case `in` = 24 // OP_IN
         /// Represents the size of the ``Variant.Operator`` enum.
         case max = 25 // OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .equal: return ".equal"
+                case .notEqual: return ".notEqual"
+                case .less: return ".less"
+                case .lessEqual: return ".lessEqual"
+                case .greater: return ".greater"
+                case .greaterEqual: return ".greaterEqual"
+                case .add: return ".add"
+                case .subtract: return ".subtract"
+                case .multiply: return ".multiply"
+                case .divide: return ".divide"
+                case .negate: return ".negate"
+                case .positive: return ".positive"
+                case .module: return ".module"
+                case .power: return ".power"
+                case .shiftLeft: return ".shiftLeft"
+                case .shiftRight: return ".shiftRight"
+                case .bitAnd: return ".bitAnd"
+                case .bitOr: return ".bitOr"
+                case .bitXor: return ".bitXor"
+                case .bitNegate: return ".bitNegate"
+                case .and: return ".and"
+                case .or: return ".or"
+                case .xor: return ".xor"
+                case .not: return ".not"
+                case .`in`: return ".`in`"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
 }

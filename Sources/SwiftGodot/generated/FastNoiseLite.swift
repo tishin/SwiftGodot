@@ -13,7 +13,7 @@
 /// 
 open class FastNoiseLite: Noise {
     override open class var godotClassName: StringName { "FastNoiseLite" }
-    public enum NoiseType: Int64 {
+    public enum NoiseType: Int64, CustomDebugStringConvertible {
         /// A lattice of points are assigned random values then interpolated based on neighboring values.
         case value = 5 // TYPE_VALUE
         /// Similar to Value noise, but slower. Has more variance in peaks and valleys.
@@ -29,9 +29,22 @@ open class FastNoiseLite: Noise {
         case simplex = 0 // TYPE_SIMPLEX
         /// Modified, higher quality version of .typeSimplex, but slower.
         case simplexSmooth = 1 // TYPE_SIMPLEX_SMOOTH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .value: return ".value"
+                case .valueCubic: return ".valueCubic"
+                case .perlin: return ".perlin"
+                case .cellular: return ".cellular"
+                case .simplex: return ".simplex"
+                case .simplexSmooth: return ".simplexSmooth"
+            }
+            
+        }
+        
     }
     
-    public enum FractalType: Int64 {
+    public enum FractalType: Int64, CustomDebugStringConvertible {
         /// No fractal noise.
         case none = 0 // FRACTAL_NONE
         /// Method using Fractional Brownian Motion to combine octaves into a fractal.
@@ -40,9 +53,20 @@ open class FastNoiseLite: Noise {
         case ridged = 2 // FRACTAL_RIDGED
         /// Method of combining octaves into a fractal with a ping pong effect.
         case pingPong = 3 // FRACTAL_PING_PONG
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .fbm: return ".fbm"
+                case .ridged: return ".ridged"
+                case .pingPong: return ".pingPong"
+            }
+            
+        }
+        
     }
     
-    public enum CellularDistanceFunction: Int64 {
+    public enum CellularDistanceFunction: Int64, CustomDebugStringConvertible {
         /// Euclidean distance to the nearest point.
         case euclidean = 0 // DISTANCE_EUCLIDEAN
         /// Squared Euclidean distance to the nearest point.
@@ -51,9 +75,20 @@ open class FastNoiseLite: Noise {
         case manhattan = 2 // DISTANCE_MANHATTAN
         /// Blend of .distanceEuclidean and .distanceManhattan to give curved cell boundaries
         case hybrid = 3 // DISTANCE_HYBRID
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .euclidean: return ".euclidean"
+                case .euclideanSquared: return ".euclideanSquared"
+                case .manhattan: return ".manhattan"
+                case .hybrid: return ".hybrid"
+            }
+            
+        }
+        
     }
     
-    public enum CellularReturnType: Int64 {
+    public enum CellularReturnType: Int64, CustomDebugStringConvertible {
         /// The cellular distance function will return the same value for all points within a cell.
         case cellValue = 0 // RETURN_CELL_VALUE
         /// The cellular distance function will return a value determined by the distance to the nearest point.
@@ -68,24 +103,58 @@ open class FastNoiseLite: Noise {
         case distance2Mul = 5 // RETURN_DISTANCE2_MUL
         /// The distance to the nearest point is divided by the distance to the second-nearest point.
         case distance2Div = 6 // RETURN_DISTANCE2_DIV
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .cellValue: return ".cellValue"
+                case .distance: return ".distance"
+                case .distance2: return ".distance2"
+                case .distance2Add: return ".distance2Add"
+                case .distance2Sub: return ".distance2Sub"
+                case .distance2Mul: return ".distance2Mul"
+                case .distance2Div: return ".distance2Div"
+            }
+            
+        }
+        
     }
     
-    public enum DomainWarpType: Int64 {
+    public enum DomainWarpType: Int64, CustomDebugStringConvertible {
         /// The domain is warped using the simplex noise algorithm.
         case simplex = 0 // DOMAIN_WARP_SIMPLEX
         /// The domain is warped using a simplified version of the simplex noise algorithm.
         case simplexReduced = 1 // DOMAIN_WARP_SIMPLEX_REDUCED
         /// The domain is warped using a simple noise grid (not as smooth as the other methods, but more performant).
         case basicGrid = 2 // DOMAIN_WARP_BASIC_GRID
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .simplex: return ".simplex"
+                case .simplexReduced: return ".simplexReduced"
+                case .basicGrid: return ".basicGrid"
+            }
+            
+        }
+        
     }
     
-    public enum DomainWarpFractalType: Int64 {
+    public enum DomainWarpFractalType: Int64, CustomDebugStringConvertible {
         /// No fractal noise for warping the space.
         case none = 0 // DOMAIN_WARP_FRACTAL_NONE
         /// Warping the space progressively, octave for octave, resulting in a more "liquified" distortion.
         case progressive = 1 // DOMAIN_WARP_FRACTAL_PROGRESSIVE
         /// Warping the space independently for each octave, resulting in a more chaotic distortion.
         case independent = 2 // DOMAIN_WARP_FRACTAL_INDEPENDENT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .progressive: return ".progressive"
+                case .independent: return ".independent"
+            }
+            
+        }
+        
     }
     
     

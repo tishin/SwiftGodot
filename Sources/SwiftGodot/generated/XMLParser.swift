@@ -15,7 +15,7 @@
 /// 
 open class XMLParser: RefCounted {
     override open class var godotClassName: StringName { "XMLParser" }
-    public enum NodeType: Int64 {
+    public enum NodeType: Int64, CustomDebugStringConvertible {
         /// There's no node (no file or buffer opened).
         case none = 0 // NODE_NONE
         /// An element node type, also known as a tag, e.g. `<title>`.
@@ -30,6 +30,20 @@ open class XMLParser: RefCounted {
         case cdata = 5 // NODE_CDATA
         /// An unknown node type.
         case unknown = 6 // NODE_UNKNOWN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .element: return ".element"
+                case .elementEnd: return ".elementEnd"
+                case .text: return ".text"
+                case .comment: return ".comment"
+                case .cdata: return ".cdata"
+                case .unknown: return ".unknown"
+            }
+            
+        }
+        
     }
     
     /* Methods */

@@ -19,7 +19,7 @@ public struct Projection: Equatable, Hashable {
     public var z: Vector4
     /// The projection matrix's W vector (column 3). Equivalent to array index `3`.
     public var w: Vector4
-    public enum Planes: Int64 {
+    public enum Planes: Int64, CustomDebugStringConvertible {
         /// The index value of the projection's near clipping plane.
         case near = 0 // PLANE_NEAR
         /// The index value of the projection's far clipping plane.
@@ -32,6 +32,19 @@ public struct Projection: Equatable, Hashable {
         case right = 4 // PLANE_RIGHT
         /// The index value of the projection bottom clipping plane.
         case bottom = 5 // PLANE_BOTTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .near: return ".near"
+                case .far: return ".far"
+                case .left: return ".left"
+                case .top: return ".top"
+                case .right: return ".right"
+                case .bottom: return ".bottom"
+            }
+            
+        }
+        
     }
     
     static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_PROJECTION, 0)!

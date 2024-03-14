@@ -10,13 +10,23 @@
 /// Computes an inverse or transpose function on the provided ``Transform3D``.
 open class VisualShaderNodeTransformFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeTransformFunc" }
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Perform the inverse operation on the ``Transform3D`` matrix.
         case inverse = 0 // FUNC_INVERSE
         /// Perform the transpose operation on the ``Transform3D`` matrix.
         case transpose = 1 // FUNC_TRANSPOSE
         /// Represents the size of the ``VisualShaderNodeTransformFunc/Function`` enum.
         case max = 2 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inverse: return ".inverse"
+                case .transpose: return ".transpose"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

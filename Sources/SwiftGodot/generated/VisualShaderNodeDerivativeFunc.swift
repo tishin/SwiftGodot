@@ -10,7 +10,7 @@
 /// This node is only available in `Fragment` and `Light` visual shaders.
 open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeDerivativeFunc" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.
@@ -21,9 +21,21 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         case vector4d = 3 // OP_TYPE_VECTOR_4D
         /// Represents the size of the ``VisualShaderNodeDerivativeFunc/OpType`` enum.
         case max = 4 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Sum of absolute derivative in `x` and `y`.
         case sum = 0 // FUNC_SUM
         /// Derivative in `x` using local differencing.
@@ -32,9 +44,20 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         case y = 2 // FUNC_Y
         /// Represents the size of the ``VisualShaderNodeDerivativeFunc/Function`` enum.
         case max = 3 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sum: return ".sum"
+                case .x: return ".x"
+                case .y: return ".y"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Precision: Int64 {
+    public enum Precision: Int64, CustomDebugStringConvertible {
         /// No precision is specified, the GPU driver is allowed to use whatever level of precision it chooses. This is the default option and is equivalent to using `dFdx()` or `dFdy()` in text shaders.
         case none = 0 // PRECISION_NONE
         /// The derivative will be calculated using the current fragment's neighbors (which may not include the current fragment). This tends to be faster than using .fine, but may not be suitable when more precision is needed. This is equivalent to using `dFdxCoarse()` or `dFdyCoarse()` in text shaders.
@@ -43,6 +66,17 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         case fine = 2 // PRECISION_FINE
         /// Represents the size of the ``VisualShaderNodeDerivativeFunc/Precision`` enum.
         case max = 3 // PRECISION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .coarse: return ".coarse"
+                case .fine: return ".fine"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

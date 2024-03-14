@@ -27,7 +27,7 @@ open class Time: Object {
     }()
     
     override open class var godotClassName: StringName { "Time" }
-    public enum Month: Int64 {
+    public enum Month: Int64, CustomDebugStringConvertible {
         /// The month of January, represented numerically as `01`.
         case january = 1 // MONTH_JANUARY
         /// The month of February, represented numerically as `02`.
@@ -52,9 +52,28 @@ open class Time: Object {
         case november = 11 // MONTH_NOVEMBER
         /// The month of December, represented numerically as `12`.
         case december = 12 // MONTH_DECEMBER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .january: return ".january"
+                case .february: return ".february"
+                case .march: return ".march"
+                case .april: return ".april"
+                case .may: return ".may"
+                case .june: return ".june"
+                case .july: return ".july"
+                case .august: return ".august"
+                case .september: return ".september"
+                case .october: return ".october"
+                case .november: return ".november"
+                case .december: return ".december"
+            }
+            
+        }
+        
     }
     
-    public enum Weekday: Int64 {
+    public enum Weekday: Int64, CustomDebugStringConvertible {
         /// The day of the week Sunday, represented numerically as `0`.
         case sunday = 0 // WEEKDAY_SUNDAY
         /// The day of the week Monday, represented numerically as `1`.
@@ -69,6 +88,20 @@ open class Time: Object {
         case friday = 5 // WEEKDAY_FRIDAY
         /// The day of the week Saturday, represented numerically as `6`.
         case saturday = 6 // WEEKDAY_SATURDAY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sunday: return ".sunday"
+                case .monday: return ".monday"
+                case .tuesday: return ".tuesday"
+                case .wednesday: return ".wednesday"
+                case .thursday: return ".thursday"
+                case .friday: return ".friday"
+                case .saturday: return ".saturday"
+            }
+            
+        }
+        
     }
     
     /* Methods */

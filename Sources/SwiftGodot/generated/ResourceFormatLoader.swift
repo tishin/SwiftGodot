@@ -15,13 +15,23 @@
 /// 
 open class ResourceFormatLoader: RefCounted {
     override open class var godotClassName: StringName { "ResourceFormatLoader" }
-    public enum CacheMode: Int64 {
+    public enum CacheMode: Int64, CustomDebugStringConvertible {
         /// 
         case ignore = 0 // CACHE_MODE_IGNORE
         /// 
         case reuse = 1 // CACHE_MODE_REUSE
         /// 
         case replace = 2 // CACHE_MODE_REPLACE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ignore: return ".ignore"
+                case .reuse: return ".reuse"
+                case .replace: return ".replace"
+            }
+            
+        }
+        
     }
     
     /* Methods */

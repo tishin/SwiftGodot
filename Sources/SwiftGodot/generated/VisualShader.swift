@@ -10,7 +10,7 @@
 /// This class provides a graph-like visual editor for creating a ``Shader``. Although ``VisualShader``s do not require coding, they share the same logic with script shaders. They use ``VisualShaderNode``s that can be connected to each other to control the flow of the shader. The visual shader graph is converted to a script shader behind the scenes.
 open class VisualShader: Shader {
     override open class var godotClassName: StringName { "VisualShader" }
-    public enum GType: Int64 {
+    public enum GType: Int64, CustomDebugStringConvertible {
         /// A vertex shader, operating on vertices.
         case vertex = 0 // TYPE_VERTEX
         /// A fragment shader, operating on fragments (pixels).
@@ -33,18 +33,46 @@ open class VisualShader: Shader {
         case fog = 9 // TYPE_FOG
         /// Represents the size of the ``VisualShader/Type`` enum.
         case max = 10 // TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertex: return ".vertex"
+                case .fragment: return ".fragment"
+                case .light: return ".light"
+                case .start: return ".start"
+                case .process: return ".process"
+                case .collide: return ".collide"
+                case .startCustom: return ".startCustom"
+                case .processCustom: return ".processCustom"
+                case .sky: return ".sky"
+                case .fog: return ".fog"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VaryingMode: Int64 {
+    public enum VaryingMode: Int64, CustomDebugStringConvertible {
         /// Varying is passed from `Vertex` function to `Fragment` and `Light` functions.
         case vertexToFragLight = 0 // VARYING_MODE_VERTEX_TO_FRAG_LIGHT
         /// Varying is passed from `Fragment` function to `Light` function.
         case fragToLight = 1 // VARYING_MODE_FRAG_TO_LIGHT
         /// Represents the size of the ``VisualShader/VaryingMode`` enum.
         case max = 2 // VARYING_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertexToFragLight: return ".vertexToFragLight"
+                case .fragToLight: return ".fragToLight"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VaryingType: Int64 {
+    public enum VaryingType: Int64, CustomDebugStringConvertible {
         /// Varying is of type float.
         case float = 0 // VARYING_TYPE_FLOAT
         /// Varying is of type integer.
@@ -63,6 +91,22 @@ open class VisualShader: Shader {
         case transform = 7 // VARYING_TYPE_TRANSFORM
         /// Represents the size of the ``VisualShader/VaryingType`` enum.
         case max = 8 // VARYING_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .float: return ".float"
+                case .int: return ".int"
+                case .uint: return ".uint"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .boolean: return ".boolean"
+                case .transform: return ".transform"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Constants */

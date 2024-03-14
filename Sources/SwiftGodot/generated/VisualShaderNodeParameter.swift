@@ -10,7 +10,7 @@
 /// A parameter represents a variable in the shader which is set externally, i.e. from the ``ShaderMaterial``. Parameters are exposed as properties in the ``ShaderMaterial`` and can be assigned from the Inspector or from a script.
 open class VisualShaderNodeParameter: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeParameter" }
-    public enum Qualifier: Int64 {
+    public enum Qualifier: Int64, CustomDebugStringConvertible {
         /// The parameter will be tied to the ``ShaderMaterial`` using this shader.
         case none = 0 // QUAL_NONE
         /// The parameter will use a global value, defined in Project Settings.
@@ -19,6 +19,17 @@ open class VisualShaderNodeParameter: VisualShaderNode {
         case instance = 2 // QUAL_INSTANCE
         /// Represents the size of the ``VisualShaderNodeParameter/Qualifier`` enum.
         case max = 3 // QUAL_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .global: return ".global"
+                case .instance: return ".instance"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

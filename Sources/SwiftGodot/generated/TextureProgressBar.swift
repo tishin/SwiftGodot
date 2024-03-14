@@ -10,7 +10,7 @@
 /// TextureProgressBar works like ``ProgressBar``, but uses up to 3 textures instead of Godot's ``Theme`` resource. It can be used to create horizontal, vertical and radial progress bars.
 open class TextureProgressBar: Range {
     override open class var godotClassName: StringName { "TextureProgressBar" }
-    public enum FillMode: Int64 {
+    public enum FillMode: Int64, CustomDebugStringConvertible {
         /// The ``textureProgress`` fills from left to right.
         case leftToRight = 0 // FILL_LEFT_TO_RIGHT
         /// The ``textureProgress`` fills from right to left.
@@ -29,6 +29,22 @@ open class TextureProgressBar: Range {
         case bilinearTopAndBottom = 7 // FILL_BILINEAR_TOP_AND_BOTTOM
         /// Turns the node into a radial bar. The ``textureProgress`` fills radially from the center, expanding both clockwise and counterclockwise. See ``radialCenterOffset``, ``radialInitialAngle`` and ``radialFillDegrees`` to control the way the bar fills up.
         case clockwiseAndCounterClockwise = 8 // FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .leftToRight: return ".leftToRight"
+                case .rightToLeft: return ".rightToLeft"
+                case .topToBottom: return ".topToBottom"
+                case .bottomToTop: return ".bottomToTop"
+                case .clockwise: return ".clockwise"
+                case .counterClockwise: return ".counterClockwise"
+                case .bilinearLeftAndRight: return ".bilinearLeftAndRight"
+                case .bilinearTopAndBottom: return ".bilinearTopAndBottom"
+                case .clockwiseAndCounterClockwise: return ".clockwiseAndCounterClockwise"
+            }
+            
+        }
+        
     }
     
     

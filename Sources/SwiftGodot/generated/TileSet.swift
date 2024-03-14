@@ -21,7 +21,7 @@
 /// 
 open class TileSet: Resource {
     override open class var godotClassName: StringName { "TileSet" }
-    public enum TileShape: Int64 {
+    public enum TileShape: Int64, CustomDebugStringConvertible {
         /// Rectangular tile shape.
         case square = 0 // TILE_SHAPE_SQUARE
         /// Diamond tile shape (for isometric look).
@@ -33,9 +33,20 @@ open class TileSet: Resource {
         case halfOffsetSquare = 2 // TILE_SHAPE_HALF_OFFSET_SQUARE
         /// Hexagonal tile shape.
         case hexagon = 3 // TILE_SHAPE_HEXAGON
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .square: return ".square"
+                case .isometric: return ".isometric"
+                case .halfOffsetSquare: return ".halfOffsetSquare"
+                case .hexagon: return ".hexagon"
+            }
+            
+        }
+        
     }
     
-    public enum TileLayout: Int64 {
+    public enum TileLayout: Int64, CustomDebugStringConvertible {
         /// Tile coordinates layout where both axis stay consistent with their respective local horizontal and vertical axis.
         case stacked = 0 // TILE_LAYOUT_STACKED
         /// Same as .stacked, but the first half-offset is negative instead of positive.
@@ -48,16 +59,38 @@ open class TileSet: Resource {
         case diamondRight = 4 // TILE_LAYOUT_DIAMOND_RIGHT
         /// Tile coordinates layout where the horizontal axis goes down-right, and the vertical one goes down-left.
         case diamondDown = 5 // TILE_LAYOUT_DIAMOND_DOWN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stacked: return ".stacked"
+                case .stackedOffset: return ".stackedOffset"
+                case .stairsRight: return ".stairsRight"
+                case .stairsDown: return ".stairsDown"
+                case .diamondRight: return ".diamondRight"
+                case .diamondDown: return ".diamondDown"
+            }
+            
+        }
+        
     }
     
-    public enum TileOffsetAxis: Int64 {
+    public enum TileOffsetAxis: Int64, CustomDebugStringConvertible {
         /// Horizontal half-offset.
         case horizontal = 0 // TILE_OFFSET_AXIS_HORIZONTAL
         /// Vertical half-offset.
         case vertical = 1 // TILE_OFFSET_AXIS_VERTICAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .horizontal: return ".horizontal"
+                case .vertical: return ".vertical"
+            }
+            
+        }
+        
     }
     
-    public enum CellNeighbor: Int64 {
+    public enum CellNeighbor: Int64, CustomDebugStringConvertible {
         /// Neighbor on the right side.
         case rightSide = 0 // CELL_NEIGHBOR_RIGHT_SIDE
         /// Neighbor in the right corner.
@@ -90,15 +123,48 @@ open class TileSet: Resource {
         case topRightSide = 14 // CELL_NEIGHBOR_TOP_RIGHT_SIDE
         /// Neighbor in the top right corner.
         case topRightCorner = 15 // CELL_NEIGHBOR_TOP_RIGHT_CORNER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rightSide: return ".rightSide"
+                case .rightCorner: return ".rightCorner"
+                case .bottomRightSide: return ".bottomRightSide"
+                case .bottomRightCorner: return ".bottomRightCorner"
+                case .bottomSide: return ".bottomSide"
+                case .bottomCorner: return ".bottomCorner"
+                case .bottomLeftSide: return ".bottomLeftSide"
+                case .bottomLeftCorner: return ".bottomLeftCorner"
+                case .leftSide: return ".leftSide"
+                case .leftCorner: return ".leftCorner"
+                case .topLeftSide: return ".topLeftSide"
+                case .topLeftCorner: return ".topLeftCorner"
+                case .topSide: return ".topSide"
+                case .topCorner: return ".topCorner"
+                case .topRightSide: return ".topRightSide"
+                case .topRightCorner: return ".topRightCorner"
+            }
+            
+        }
+        
     }
     
-    public enum TerrainMode: Int64 {
+    public enum TerrainMode: Int64, CustomDebugStringConvertible {
         /// Requires both corners and side to match with neighboring tiles' terrains.
         case cornersAndSides = 0 // TERRAIN_MODE_MATCH_CORNERS_AND_SIDES
         /// Requires corners to match with neighboring tiles' terrains.
         case corners = 1 // TERRAIN_MODE_MATCH_CORNERS
         /// Requires sides to match with neighboring tiles' terrains.
         case sides = 2 // TERRAIN_MODE_MATCH_SIDES
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .cornersAndSides: return ".cornersAndSides"
+                case .corners: return ".corners"
+                case .sides: return ".sides"
+            }
+            
+        }
+        
     }
     
     

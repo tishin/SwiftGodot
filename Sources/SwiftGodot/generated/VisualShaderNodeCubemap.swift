@@ -10,16 +10,26 @@
 /// Translated to `texture(cubemap, vec3)` in the shader language. Returns a color vector and alpha channel as scalar.
 open class VisualShaderNodeCubemap: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeCubemap" }
-    public enum Source: Int64 {
+    public enum Source: Int64, CustomDebugStringConvertible {
         /// Use the ``Cubemap`` set via ``cubeMap``. If this is set to ``source``, the `samplerCube` port is ignored.
         case texture = 0 // SOURCE_TEXTURE
         /// Use the ``Cubemap`` sampler reference passed via the `samplerCube` port. If this is set to ``source``, the ``cubeMap`` texture is ignored.
         case port = 1 // SOURCE_PORT
         /// Represents the size of the ``VisualShaderNodeCubemap/Source`` enum.
         case max = 2 // SOURCE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .texture: return ".texture"
+                case .port: return ".port"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureType: Int64 {
+    public enum TextureType: Int64, CustomDebugStringConvertible {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA
         /// Adds `hint_albedo` as hint to the uniform declaration for proper sRGB to linear conversion.
@@ -28,6 +38,17 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
         case normalMap = 2 // TYPE_NORMAL_MAP
         /// Represents the size of the ``VisualShaderNodeCubemap/TextureType`` enum.
         case max = 3 // TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .data: return ".data"
+                case .color: return ".color"
+                case .normalMap: return ".normalMap"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

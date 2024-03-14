@@ -10,14 +10,23 @@
 /// The ``PhysicalBone3D`` node is a physics body that can be used to make bones in a ``Skeleton3D`` react to physics.
 open class PhysicalBone3D: PhysicsBody3D {
     override open class var godotClassName: StringName { "PhysicalBone3D" }
-    public enum DampMode: Int64 {
+    public enum DampMode: Int64, CustomDebugStringConvertible {
         /// In this mode, the body's damping value is added to any value set in areas or the default value.
         case combine = 0 // DAMP_MODE_COMBINE
         /// In this mode, the body's damping value replaces any value set in areas or the default value.
         case replace = 1 // DAMP_MODE_REPLACE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .combine: return ".combine"
+                case .replace: return ".replace"
+            }
+            
+        }
+        
     }
     
-    public enum JointType: Int64 {
+    public enum JointType: Int64, CustomDebugStringConvertible {
         /// 
         case none = 0 // JOINT_TYPE_NONE
         /// 
@@ -30,6 +39,19 @@ open class PhysicalBone3D: PhysicsBody3D {
         case slider = 4 // JOINT_TYPE_SLIDER
         /// 
         case jointType6dof = 5 // JOINT_TYPE_6DOF
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .pin: return ".pin"
+                case .cone: return ".cone"
+                case .hinge: return ".hinge"
+                case .slider: return ".slider"
+                case .jointType6dof: return ".jointType6dof"
+            }
+            
+        }
+        
     }
     
     

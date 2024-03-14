@@ -20,7 +20,7 @@ open class GDExtensionManager: Object {
     }()
     
     override open class var godotClassName: StringName { "GDExtensionManager" }
-    public enum LoadStatus: Int64 {
+    public enum LoadStatus: Int64, CustomDebugStringConvertible {
         /// 
         case ok = 0 // LOAD_STATUS_OK
         /// 
@@ -31,6 +31,18 @@ open class GDExtensionManager: Object {
         case notLoaded = 3 // LOAD_STATUS_NOT_LOADED
         /// 
         case needsRestart = 4 // LOAD_STATUS_NEEDS_RESTART
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ok: return ".ok"
+                case .failed: return ".failed"
+                case .alreadyLoaded: return ".alreadyLoaded"
+                case .notLoaded: return ".notLoaded"
+                case .needsRestart: return ".needsRestart"
+            }
+            
+        }
+        
     }
     
     /* Methods */

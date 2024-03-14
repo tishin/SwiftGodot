@@ -21,7 +21,7 @@ public struct Vector4: Equatable, Hashable {
     public var z: Float
     /// The vector's W component. Also accessible by using the index position `[3]`.
     public var w: Float
-    public enum Axis: Int64 {
+    public enum Axis: Int64, CustomDebugStringConvertible {
         /// Enumerated value for the X axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
         case x = 0 // AXIS_X
         /// Enumerated value for the Y axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
@@ -30,6 +30,17 @@ public struct Vector4: Equatable, Hashable {
         case z = 2 // AXIS_Z
         /// Enumerated value for the W axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
         case w = 3 // AXIS_W
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .x: return ".x"
+                case .y: return ".y"
+                case .z: return ".z"
+                case .w: return ".w"
+            }
+            
+        }
+        
     }
     
     static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_VECTOR4, 0)!

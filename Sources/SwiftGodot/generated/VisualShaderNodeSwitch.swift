@@ -10,7 +10,7 @@
 /// Returns an associated value of the ``opType`` type if the provided boolean value is `true` or `false`.
 open class VisualShaderNodeSwitch: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeSwitch" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT
         /// An integer scalar.
@@ -29,6 +29,22 @@ open class VisualShaderNodeSwitch: VisualShaderNode {
         case transform = 7 // OP_TYPE_TRANSFORM
         /// Represents the size of the ``VisualShaderNodeSwitch/OpType`` enum.
         case max = 8 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .float: return ".float"
+                case .int: return ".int"
+                case .uint: return ".uint"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .boolean: return ".boolean"
+                case .transform: return ".transform"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

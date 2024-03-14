@@ -13,7 +13,7 @@
 /// 
 open class PathFollow3D: Node3D {
     override open class var godotClassName: StringName { "PathFollow3D" }
-    public enum RotationMode: Int64 {
+    public enum RotationMode: Int64, CustomDebugStringConvertible {
         /// Forbids the PathFollow3D to rotate.
         case none = 0 // ROTATION_NONE
         /// Allows the PathFollow3D to rotate in the Y axis only.
@@ -24,6 +24,18 @@ open class PathFollow3D: Node3D {
         case xyz = 3 // ROTATION_XYZ
         /// Uses the up vector information in a ``Curve3D`` to enforce orientation. This rotation mode requires the ``Path3D``'s ``Curve3D/upVectorEnabled`` property to be set to `true`.
         case oriented = 4 // ROTATION_ORIENTED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .y: return ".y"
+                case .xy: return ".xy"
+                case .xyz: return ".xyz"
+                case .oriented: return ".oriented"
+            }
+            
+        }
+        
     }
     
     

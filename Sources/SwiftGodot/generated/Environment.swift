@@ -19,7 +19,7 @@
 /// 
 open class Environment: Resource {
     override open class var godotClassName: StringName { "Environment" }
-    public enum BGMode: Int64 {
+    public enum BGMode: Int64, CustomDebugStringConvertible {
         /// Clears the background using the clear color defined in ``ProjectSettings/rendering/environment/defaults/defaultClearColor``.
         case clearColor = 0 // BG_CLEAR_COLOR
         /// Clears the background using a custom clear color.
@@ -34,9 +34,23 @@ open class Environment: Resource {
         case cameraFeed = 5 // BG_CAMERA_FEED
         /// Represents the size of the ``Environment/BGMode`` enum.
         case max = 6 // BG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clearColor: return ".clearColor"
+                case .color: return ".color"
+                case .sky: return ".sky"
+                case .canvas: return ".canvas"
+                case .keep: return ".keep"
+                case .cameraFeed: return ".cameraFeed"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum AmbientSource: Int64 {
+    public enum AmbientSource: Int64, CustomDebugStringConvertible {
         /// Gather ambient light from whichever source is specified as the background.
         case bg = 0 // AMBIENT_SOURCE_BG
         /// Disable ambient light. This provides a slight performance boost over .sky.
@@ -45,18 +59,39 @@ open class Environment: Resource {
         case color = 2 // AMBIENT_SOURCE_COLOR
         /// Gather ambient light from the ``Sky`` regardless of what the background is.
         case sky = 3 // AMBIENT_SOURCE_SKY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bg: return ".bg"
+                case .disabled: return ".disabled"
+                case .color: return ".color"
+                case .sky: return ".sky"
+            }
+            
+        }
+        
     }
     
-    public enum ReflectionSource: Int64 {
+    public enum ReflectionSource: Int64, CustomDebugStringConvertible {
         /// Use the background for reflections.
         case bg = 0 // REFLECTION_SOURCE_BG
         /// Disable reflections. This provides a slight performance boost over other options.
         case disabled = 1 // REFLECTION_SOURCE_DISABLED
         /// Use the ``Sky`` for reflections regardless of what the background is.
         case sky = 2 // REFLECTION_SOURCE_SKY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bg: return ".bg"
+                case .disabled: return ".disabled"
+                case .sky: return ".sky"
+            }
+            
+        }
+        
     }
     
-    public enum ToneMapper: Int64 {
+    public enum ToneMapper: Int64, CustomDebugStringConvertible {
         /// Linear tonemapper operator. Reads the linear data and passes it on unmodified. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
         case linear = 0 // TONE_MAPPER_LINEAR
         /// Reinhardt tonemapper operator. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
@@ -68,9 +103,20 @@ open class Environment: Resource {
         /// > Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
         /// 
         case aces = 3 // TONE_MAPPER_ACES
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linear: return ".linear"
+                case .reinhardt: return ".reinhardt"
+                case .filmic: return ".filmic"
+                case .aces: return ".aces"
+            }
+            
+        }
+        
     }
     
-    public enum GlowBlendMode: Int64 {
+    public enum GlowBlendMode: Int64, CustomDebugStringConvertible {
         /// Additive glow blending mode. Mostly used for particles, glows (bloom), lens flare, bright sources.
         case additive = 0 // GLOW_BLEND_MODE_ADDITIVE
         /// Screen glow blending mode. Increases brightness, used frequently with bloom.
@@ -81,15 +127,37 @@ open class Environment: Resource {
         case replace = 3 // GLOW_BLEND_MODE_REPLACE
         /// Mixes the glow with the underlying color to avoid increasing brightness as much while still maintaining a glow effect.
         case mix = 4 // GLOW_BLEND_MODE_MIX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .additive: return ".additive"
+                case .screen: return ".screen"
+                case .softlight: return ".softlight"
+                case .replace: return ".replace"
+                case .mix: return ".mix"
+            }
+            
+        }
+        
     }
     
-    public enum SDFGIYScale: Int64 {
+    public enum SDFGIYScale: Int64, CustomDebugStringConvertible {
         /// Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
         case sdfgiYScale50Percent = 0 // SDFGI_Y_SCALE_50_PERCENT
         /// Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.
         case sdfgiYScale75Percent = 1 // SDFGI_Y_SCALE_75_PERCENT
         /// Use 100% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be as tall as they are wide. This is usually the best choice for highly vertical scenes. The downside is that light leaking may become more noticeable with thin floors and ceilings.
         case sdfgiYScale100Percent = 2 // SDFGI_Y_SCALE_100_PERCENT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sdfgiYScale50Percent: return ".sdfgiYScale50Percent"
+                case .sdfgiYScale75Percent: return ".sdfgiYScale75Percent"
+                case .sdfgiYScale100Percent: return ".sdfgiYScale100Percent"
+            }
+            
+        }
+        
     }
     
     

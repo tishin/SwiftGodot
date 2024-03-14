@@ -27,7 +27,7 @@
 /// - ``physicsFrame``
 open class SceneTree: MainLoop {
     override open class var godotClassName: StringName { "SceneTree" }
-    public enum GroupCallFlags: Int64 {
+    public enum GroupCallFlags: Int64, CustomDebugStringConvertible {
         /// Call a group with no flags (default).
         case `default` = 0 // GROUP_CALL_DEFAULT
         /// Call a group in reverse scene order.
@@ -39,6 +39,17 @@ open class SceneTree: MainLoop {
         /// > Note: Arguments are not taken into account when deciding whether the call is unique or not. Therefore when the same method is called with different arguments, only the first call will be performed.
         /// 
         case unique = 4 // GROUP_CALL_UNIQUE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .reverse: return ".reverse"
+                case .deferred: return ".deferred"
+                case .unique: return ".unique"
+            }
+            
+        }
+        
     }
     
     

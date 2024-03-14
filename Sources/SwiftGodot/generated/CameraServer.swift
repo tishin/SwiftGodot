@@ -29,7 +29,7 @@ open class CameraServer: Object {
     }()
     
     override open class var godotClassName: StringName { "CameraServer" }
-    public enum FeedImage: Int64 {
+    public enum FeedImage: Int64, CustomDebugStringConvertible {
         /// The RGBA camera image.
         case rgbaImage = 0 // FEED_RGBA_IMAGE
         /// The [url=https://en.wikipedia.org/wiki/YCbCr]YCbCr[/url] camera image.
@@ -38,6 +38,15 @@ open class CameraServer: Object {
         // case yImage = 0 // FEED_Y_IMAGE
         /// The CbCr component camera image.
         case cbcrImage = 1 // FEED_CBCR_IMAGE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgbaImage: return ".rgbaImage"
+                case .cbcrImage: return ".cbcrImage"
+            }
+            
+        }
+        
     }
     
     /* Methods */

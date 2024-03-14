@@ -15,11 +15,20 @@
 /// 
 open class OmniLight3D: Light3D {
     override open class var godotClassName: StringName { "OmniLight3D" }
-    public enum ShadowMode: Int64 {
+    public enum ShadowMode: Int64, CustomDebugStringConvertible {
         /// Shadows are rendered to a dual-paraboloid texture. Faster than .shadowCube, but lower-quality.
         case dualParaboloid = 0 // SHADOW_DUAL_PARABOLOID
         /// Shadows are rendered to a cubemap. Slower than .shadowDualParaboloid, but higher-quality.
         case cube = 1 // SHADOW_CUBE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .dualParaboloid: return ".dualParaboloid"
+                case .cube: return ".cube"
+            }
+            
+        }
+        
     }
     
     

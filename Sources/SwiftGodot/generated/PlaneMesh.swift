@@ -13,13 +13,23 @@
 /// 
 open class PlaneMesh: PrimitiveMesh {
     override open class var godotClassName: StringName { "PlaneMesh" }
-    public enum Orientation: Int64 {
+    public enum Orientation: Int64, CustomDebugStringConvertible {
         /// ``PlaneMesh`` will face the positive X-axis.
         case x = 0 // FACE_X
         /// ``PlaneMesh`` will face the positive Y-axis. This matches the behavior of the ``PlaneMesh`` in Godot 3.x.
         case y = 1 // FACE_Y
         /// ``PlaneMesh`` will face the positive Z-axis. This matches the behavior of the QuadMesh in Godot 3.x.
         case z = 2 // FACE_Z
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .x: return ".x"
+                case .y: return ".y"
+                case .z: return ".z"
+            }
+            
+        }
+        
     }
     
     

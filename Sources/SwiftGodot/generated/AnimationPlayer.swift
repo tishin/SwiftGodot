@@ -23,20 +23,39 @@
 /// - ``animationChanged``
 open class AnimationPlayer: AnimationMixer {
     override open class var godotClassName: StringName { "AnimationPlayer" }
-    public enum AnimationProcessCallback: Int64 {
+    public enum AnimationProcessCallback: Int64, CustomDebugStringConvertible {
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/physics``.
         case physics = 0 // ANIMATION_PROCESS_PHYSICS
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/idle``.
         case idle = 1 // ANIMATION_PROCESS_IDLE
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/manual``.
         case manual = 2 // ANIMATION_PROCESS_MANUAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .physics: return ".physics"
+                case .idle: return ".idle"
+                case .manual: return ".manual"
+            }
+            
+        }
+        
     }
     
-    public enum AnimationMethodCallMode: Int64 {
+    public enum AnimationMethodCallMode: Int64, CustomDebugStringConvertible {
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeMethod/deferred``.
         case deferred = 0 // ANIMATION_METHOD_CALL_DEFERRED
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeMethod/immediate``.
         case immediate = 1 // ANIMATION_METHOD_CALL_IMMEDIATE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .deferred: return ".deferred"
+                case .immediate: return ".immediate"
+            }
+            
+        }
+        
     }
     
     

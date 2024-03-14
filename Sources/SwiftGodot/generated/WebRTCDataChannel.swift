@@ -7,14 +7,23 @@
 
 open class WebRTCDataChannel: PacketPeer {
     override open class var godotClassName: StringName { "WebRTCDataChannel" }
-    public enum WriteMode: Int64 {
+    public enum WriteMode: Int64, CustomDebugStringConvertible {
         /// Tells the channel to send data over this channel as text. An external peer (non-Godot) would receive this as a string.
         case text = 0 // WRITE_MODE_TEXT
         /// Tells the channel to send data over this channel as binary. An external peer (non-Godot) would receive this as array buffer or blob.
         case binary = 1 // WRITE_MODE_BINARY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .text: return ".text"
+                case .binary: return ".binary"
+            }
+            
+        }
+        
     }
     
-    public enum ChannelState: Int64 {
+    public enum ChannelState: Int64, CustomDebugStringConvertible {
         /// The channel was created, but it's still trying to connect.
         case connecting = 0 // STATE_CONNECTING
         /// The channel is currently open, and data can flow over it.
@@ -23,6 +32,17 @@ open class WebRTCDataChannel: PacketPeer {
         case closing = 2 // STATE_CLOSING
         /// The channel was closed, or connection failed.
         case closed = 3 // STATE_CLOSED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .connecting: return ".connecting"
+                case .open: return ".open"
+                case .closing: return ".closing"
+                case .closed: return ".closed"
+            }
+            
+        }
+        
     }
     
     

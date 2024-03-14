@@ -10,13 +10,23 @@
 /// A container that arranges its child controls horizontally or vertically, rearranging them automatically when their minimum size changes.
 open class BoxContainer: Container {
     override open class var godotClassName: StringName { "BoxContainer" }
-    public enum AlignmentMode: Int64 {
+    public enum AlignmentMode: Int64, CustomDebugStringConvertible {
         /// The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
         case begin = 0 // ALIGNMENT_BEGIN
         /// The child controls will be centered in the container.
         case center = 1 // ALIGNMENT_CENTER
         /// The child controls will be arranged at the end of the container, i.e. bottom if orientation is vertical, right if orientation is horizontal (left for RTL layout).
         case end = 2 // ALIGNMENT_END
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .begin: return ".begin"
+                case .center: return ".center"
+                case .end: return ".end"
+            }
+            
+        }
+        
     }
     
     

@@ -21,22 +21,42 @@
 /// - ``peerDisconnected``
 open class MultiplayerPeer: PacketPeer {
     override open class var godotClassName: StringName { "MultiplayerPeer" }
-    public enum ConnectionStatus: Int64 {
+    public enum ConnectionStatus: Int64, CustomDebugStringConvertible {
         /// The MultiplayerPeer is disconnected.
         case disconnected = 0 // CONNECTION_DISCONNECTED
         /// The MultiplayerPeer is currently connecting to a server.
         case connecting = 1 // CONNECTION_CONNECTING
         /// This MultiplayerPeer is connected.
         case connected = 2 // CONNECTION_CONNECTED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disconnected: return ".disconnected"
+                case .connecting: return ".connecting"
+                case .connected: return ".connected"
+            }
+            
+        }
+        
     }
     
-    public enum TransferMode: Int64 {
+    public enum TransferMode: Int64, CustomDebugStringConvertible {
         /// Packets are not acknowledged, no resend attempts are made for lost packets. Packets may arrive in any order. Potentially faster than .unreliableOrdered. Use for non-critical data, and always consider whether the order matters.
         case unreliable = 0 // TRANSFER_MODE_UNRELIABLE
         /// Packets are not acknowledged, no resend attempts are made for lost packets. Packets are received in the order they were sent in. Potentially faster than .reliable. Use for non-critical data or data that would be outdated if received late due to resend attempt(s) anyway, for example movement and positional data.
         case unreliableOrdered = 1 // TRANSFER_MODE_UNRELIABLE_ORDERED
         /// Packets must be received and resend attempts should be made until the packets are acknowledged. Packets must be received in the order they were sent in. Most reliable transfer mode, but potentially the slowest due to the overhead. Use for critical data that must be transmitted and arrive in order, for example an ability being triggered or a chat message. Consider carefully if the information really is critical, and use sparingly.
         case reliable = 2 // TRANSFER_MODE_RELIABLE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .unreliable: return ".unreliable"
+                case .unreliableOrdered: return ".unreliableOrdered"
+                case .reliable: return ".reliable"
+            }
+            
+        }
+        
     }
     
     /* Constants */

@@ -13,13 +13,23 @@
 /// 
 open class BackBufferCopy: Node2D {
     override open class var godotClassName: StringName { "BackBufferCopy" }
-    public enum CopyMode: Int64 {
+    public enum CopyMode: Int64, CustomDebugStringConvertible {
         /// Disables the buffering mode. This means the ``BackBufferCopy`` node will directly use the portion of screen it covers.
         case disabled = 0 // COPY_MODE_DISABLED
         /// ``BackBufferCopy`` buffers a rectangular region.
         case rect = 1 // COPY_MODE_RECT
         /// ``BackBufferCopy`` buffers the entire screen.
         case viewport = 2 // COPY_MODE_VIEWPORT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .rect: return ".rect"
+                case .viewport: return ".viewport"
+            }
+            
+        }
+        
     }
     
     

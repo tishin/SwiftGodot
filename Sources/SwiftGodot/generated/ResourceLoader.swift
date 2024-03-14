@@ -23,7 +23,7 @@ open class ResourceLoader: Object {
     }()
     
     override open class var godotClassName: StringName { "ResourceLoader" }
-    public enum ThreadLoadStatus: Int64 {
+    public enum ThreadLoadStatus: Int64, CustomDebugStringConvertible {
         /// The resource is invalid, or has not been loaded with ``loadThreadedRequest(path:typeHint:useSubThreads:cacheMode:)``.
         case invalidResource = 0 // THREAD_LOAD_INVALID_RESOURCE
         /// The resource is still being loaded.
@@ -32,15 +32,36 @@ open class ResourceLoader: Object {
         case failed = 2 // THREAD_LOAD_FAILED
         /// The resource was loaded successfully and can be accessed via ``loadThreadedGet(path:)``.
         case loaded = 3 // THREAD_LOAD_LOADED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .invalidResource: return ".invalidResource"
+                case .inProgress: return ".inProgress"
+                case .failed: return ".failed"
+                case .loaded: return ".loaded"
+            }
+            
+        }
+        
     }
     
-    public enum CacheMode: Int64 {
+    public enum CacheMode: Int64, CustomDebugStringConvertible {
         /// 
         case ignore = 0 // CACHE_MODE_IGNORE
         /// 
         case reuse = 1 // CACHE_MODE_REUSE
         /// 
         case replace = 2 // CACHE_MODE_REPLACE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ignore: return ".ignore"
+                case .reuse: return ".reuse"
+                case .replace: return ".replace"
+            }
+            
+        }
+        
     }
     
     /* Methods */

@@ -10,7 +10,7 @@
 /// Visual shader graphs consist of various nodes. Each node in the graph is a separate object and they are represented as a rectangular boxes with title and a set of properties. Each node also has connection ports that allow to connect it to another nodes and control the flow of the shader.
 open class VisualShaderNode: Resource {
     override open class var godotClassName: StringName { "VisualShaderNode" }
-    public enum PortType: Int64 {
+    public enum PortType: Int64, CustomDebugStringConvertible {
         /// Floating-point scalar. Translated to [code skip-lint]float` type in shader code.
         case scalar = 0 // PORT_TYPE_SCALAR
         /// Integer scalar. Translated to [code skip-lint]int` type in shader code.
@@ -31,6 +31,23 @@ open class VisualShaderNode: Resource {
         case sampler = 8 // PORT_TYPE_SAMPLER
         /// Represents the size of the ``VisualShaderNode/PortType`` enum.
         case max = 9 // PORT_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .scalarInt: return ".scalarInt"
+                case .scalarUint: return ".scalarUint"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .boolean: return ".boolean"
+                case .transform: return ".transform"
+                case .sampler: return ".sampler"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

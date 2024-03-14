@@ -41,16 +41,26 @@ open class RenderingServer: Object {
     }()
     
     override open class var godotClassName: StringName { "RenderingServer" }
-    public enum TextureLayeredType: Int64 {
+    public enum TextureLayeredType: Int64, CustomDebugStringConvertible {
         /// Array of 2-dimensional textures (see ``Texture2DArray``).
         case textureLayered2dArray = 0 // TEXTURE_LAYERED_2D_ARRAY
         /// Cubemap texture (see ``Cubemap``).
         case cubemap = 1 // TEXTURE_LAYERED_CUBEMAP
         /// Array of cubemap textures (see ``CubemapArray``).
         case cubemapArray = 2 // TEXTURE_LAYERED_CUBEMAP_ARRAY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .textureLayered2dArray: return ".textureLayered2dArray"
+                case .cubemap: return ".cubemap"
+                case .cubemapArray: return ".cubemapArray"
+            }
+            
+        }
+        
     }
     
-    public enum CubeMapLayer: Int64 {
+    public enum CubeMapLayer: Int64, CustomDebugStringConvertible {
         /// Left face of a ``Cubemap``.
         case left = 0 // CUBEMAP_LAYER_LEFT
         /// Right face of a ``Cubemap``.
@@ -63,9 +73,22 @@ open class RenderingServer: Object {
         case front = 4 // CUBEMAP_LAYER_FRONT
         /// Back face of a ``Cubemap``.
         case back = 5 // CUBEMAP_LAYER_BACK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .left: return ".left"
+                case .right: return ".right"
+                case .bottom: return ".bottom"
+                case .top: return ".top"
+                case .front: return ".front"
+                case .back: return ".back"
+            }
+            
+        }
+        
     }
     
-    public enum ShaderMode: Int64 {
+    public enum ShaderMode: Int64, CustomDebugStringConvertible {
         /// Shader is a 3D shader.
         case spatial = 0 // SHADER_SPATIAL
         /// Shader is a 2D shader.
@@ -78,9 +101,22 @@ open class RenderingServer: Object {
         case fog = 4 // SHADER_FOG
         /// Represents the size of the ``RenderingServer/ShaderMode`` enum.
         case max = 5 // SHADER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .spatial: return ".spatial"
+                case .canvasItem: return ".canvasItem"
+                case .particles: return ".particles"
+                case .sky: return ".sky"
+                case .fog: return ".fog"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ArrayType: Int64 {
+    public enum ArrayType: Int64, CustomDebugStringConvertible {
         /// Array is a vertex position array.
         case vertex = 0 // ARRAY_VERTEX
         /// Array is a normal array.
@@ -109,9 +145,30 @@ open class RenderingServer: Object {
         case index = 12 // ARRAY_INDEX
         /// Represents the size of the ``RenderingServer/ArrayType`` enum.
         case max = 13 // ARRAY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertex: return ".vertex"
+                case .normal: return ".normal"
+                case .tangent: return ".tangent"
+                case .color: return ".color"
+                case .texUv: return ".texUv"
+                case .texUv2: return ".texUv2"
+                case .custom0: return ".custom0"
+                case .custom1: return ".custom1"
+                case .custom2: return ".custom2"
+                case .custom3: return ".custom3"
+                case .bones: return ".bones"
+                case .weights: return ".weights"
+                case .index: return ".index"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ArrayCustomFormat: Int64 {
+    public enum ArrayCustomFormat: Int64, CustomDebugStringConvertible {
         /// Custom data array contains 8-bit-per-channel red/green/blue/alpha color data. Values are normalized, unsigned floating-point in the `[0.0, 1.0]` range.
         case rgba8Unorm = 0 // ARRAY_CUSTOM_RGBA8_UNORM
         /// Custom data array contains 8-bit-per-channel red/green/blue/alpha color data. Values are normalized, signed floating-point in the `[-1.0, 1.0]` range.
@@ -130,6 +187,22 @@ open class RenderingServer: Object {
         case rgbaFloat = 7 // ARRAY_CUSTOM_RGBA_FLOAT
         /// Represents the size of the ``RenderingServer/ArrayCustomFormat`` enum.
         case max = 8 // ARRAY_CUSTOM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgba8Unorm: return ".rgba8Unorm"
+                case .rgba8Snorm: return ".rgba8Snorm"
+                case .rgHalf: return ".rgHalf"
+                case .rgbaHalf: return ".rgbaHalf"
+                case .rFloat: return ".rFloat"
+                case .rgFloat: return ".rgFloat"
+                case .rgbFloat: return ".rgbFloat"
+                case .rgbaFloat: return ".rgbaFloat"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct ArrayFormat: OptionSet, CustomDebugStringConvertible {
@@ -243,7 +316,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum PrimitiveType: Int64 {
+    public enum PrimitiveType: Int64, CustomDebugStringConvertible {
         /// Primitive to draw consists of points.
         case points = 0 // PRIMITIVE_POINTS
         /// Primitive to draw consists of lines.
@@ -256,23 +329,54 @@ open class RenderingServer: Object {
         case triangleStrip = 4 // PRIMITIVE_TRIANGLE_STRIP
         /// Represents the size of the ``RenderingServer/PrimitiveType`` enum.
         case max = 5 // PRIMITIVE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .points: return ".points"
+                case .lines: return ".lines"
+                case .lineStrip: return ".lineStrip"
+                case .triangles: return ".triangles"
+                case .triangleStrip: return ".triangleStrip"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum BlendShapeMode: Int64 {
+    public enum BlendShapeMode: Int64, CustomDebugStringConvertible {
         /// Blend shapes are normalized.
         case normalized = 0 // BLEND_SHAPE_MODE_NORMALIZED
         /// Blend shapes are relative to base weight.
         case relative = 1 // BLEND_SHAPE_MODE_RELATIVE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .normalized: return ".normalized"
+                case .relative: return ".relative"
+            }
+            
+        }
+        
     }
     
-    public enum MultimeshTransformFormat: Int64 {
+    public enum MultimeshTransformFormat: Int64, CustomDebugStringConvertible {
         /// Use ``Transform2D`` to store MultiMesh transform.
         case multimeshTransform2d = 0 // MULTIMESH_TRANSFORM_2D
         /// Use ``Transform3D`` to store MultiMesh transform.
         case multimeshTransform3d = 1 // MULTIMESH_TRANSFORM_3D
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .multimeshTransform2d: return ".multimeshTransform2d"
+                case .multimeshTransform3d: return ".multimeshTransform3d"
+            }
+            
+        }
+        
     }
     
-    public enum LightProjectorFilter: Int64 {
+    public enum LightProjectorFilter: Int64, CustomDebugStringConvertible {
         /// Nearest-neighbor filter for light projectors (use for pixel art light projectors). No mipmaps are used for rendering, which means light projectors at a distance will look sharp but grainy. This has roughly the same performance cost as using mipmaps.
         case nearest = 0 // LIGHT_PROJECTOR_FILTER_NEAREST
         /// Linear filter for light projectors (use for non-pixel art light projectors). No mipmaps are used for rendering, which means light projectors at a distance will look smooth but blurry. This has roughly the same performance cost as using mipmaps.
@@ -285,18 +389,41 @@ open class RenderingServer: Object {
         case nearestMipmapsAnisotropic = 4 // LIGHT_PROJECTOR_FILTER_NEAREST_MIPMAPS_ANISOTROPIC
         /// Linear filter for light projectors (use for non-pixel art light projectors). Anisotropic mipmaps are used for rendering, which means light projectors at a distance will look smooth and sharp when viewed from oblique angles. This looks better compared to isotropic mipmaps, but is slower. The level of anisotropic filtering is defined by ``ProjectSettings/rendering/textures/defaultFilters/anisotropicFilteringLevel``.
         case linearMipmapsAnisotropic = 5 // LIGHT_PROJECTOR_FILTER_LINEAR_MIPMAPS_ANISOTROPIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .nearestMipmaps: return ".nearestMipmaps"
+                case .linearMipmaps: return ".linearMipmaps"
+                case .nearestMipmapsAnisotropic: return ".nearestMipmapsAnisotropic"
+                case .linearMipmapsAnisotropic: return ".linearMipmapsAnisotropic"
+            }
+            
+        }
+        
     }
     
-    public enum LightType: Int64 {
+    public enum LightType: Int64, CustomDebugStringConvertible {
         /// Directional (sun/moon) light (see ``DirectionalLight3D``).
         case directional = 0 // LIGHT_DIRECTIONAL
         /// Omni light (see ``OmniLight3D``).
         case omni = 1 // LIGHT_OMNI
         /// Spot light (see ``SpotLight3D``).
         case spot = 2 // LIGHT_SPOT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .directional: return ".directional"
+                case .omni: return ".omni"
+                case .spot: return ".spot"
+            }
+            
+        }
+        
     }
     
-    public enum LightParam: Int64 {
+    public enum LightParam: Int64, CustomDebugStringConvertible {
         /// The light's energy multiplier.
         case energy = 0 // LIGHT_PARAM_ENERGY
         /// The light's indirect energy multiplier (final indirect energy is .energy * .indirectEnergy).
@@ -341,43 +468,111 @@ open class RenderingServer: Object {
         case intensity = 20 // LIGHT_PARAM_INTENSITY
         /// Represents the size of the ``RenderingServer/LightParam`` enum.
         case max = 21 // LIGHT_PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .energy: return ".energy"
+                case .indirectEnergy: return ".indirectEnergy"
+                case .volumetricFogEnergy: return ".volumetricFogEnergy"
+                case .specular: return ".specular"
+                case .range: return ".range"
+                case .size: return ".size"
+                case .attenuation: return ".attenuation"
+                case .spotAngle: return ".spotAngle"
+                case .spotAttenuation: return ".spotAttenuation"
+                case .shadowMaxDistance: return ".shadowMaxDistance"
+                case .shadowSplit1Offset: return ".shadowSplit1Offset"
+                case .shadowSplit2Offset: return ".shadowSplit2Offset"
+                case .shadowSplit3Offset: return ".shadowSplit3Offset"
+                case .shadowFadeStart: return ".shadowFadeStart"
+                case .shadowNormalBias: return ".shadowNormalBias"
+                case .shadowBias: return ".shadowBias"
+                case .shadowPancakeSize: return ".shadowPancakeSize"
+                case .shadowOpacity: return ".shadowOpacity"
+                case .shadowBlur: return ".shadowBlur"
+                case .transmittanceBias: return ".transmittanceBias"
+                case .intensity: return ".intensity"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum LightBakeMode: Int64 {
+    public enum LightBakeMode: Int64, CustomDebugStringConvertible {
         /// Light is ignored when baking. This is the fastest mode, but the light will be taken into account when baking global illumination. This mode should generally be used for dynamic lights that change quickly, as the effect of global illumination is less noticeable on those lights.
         case disabled = 0 // LIGHT_BAKE_DISABLED
         /// Light is taken into account in static baking (``VoxelGI``, ``LightmapGI``, SDFGI (``Environment/sdfgiEnabled``)). The light can be moved around or modified, but its global illumination will not update in real-time. This is suitable for subtle changes (such as flickering torches), but generally not large changes such as toggling a light on and off.
         case `static` = 1 // LIGHT_BAKE_STATIC
         /// Light is taken into account in dynamic baking (``VoxelGI`` and SDFGI (``Environment/sdfgiEnabled``) only). The light can be moved around or modified with global illumination updating in real-time. The light's global illumination appearance will be slightly different compared to .lightBakeStatic. This has a greater performance cost compared to .lightBakeStatic. When using SDFGI, the update speed of dynamic lights is affected by ``ProjectSettings/rendering/globalIllumination/sdfgi/framesToUpdateLights``.
         case dynamic = 2 // LIGHT_BAKE_DYNAMIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .`static`: return ".`static`"
+                case .dynamic: return ".dynamic"
+            }
+            
+        }
+        
     }
     
-    public enum LightOmniShadowMode: Int64 {
+    public enum LightOmniShadowMode: Int64, CustomDebugStringConvertible {
         /// Use a dual paraboloid shadow map for omni lights.
         case dualParaboloid = 0 // LIGHT_OMNI_SHADOW_DUAL_PARABOLOID
         /// Use a cubemap shadow map for omni lights. Slower but better quality than dual paraboloid.
         case cube = 1 // LIGHT_OMNI_SHADOW_CUBE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .dualParaboloid: return ".dualParaboloid"
+                case .cube: return ".cube"
+            }
+            
+        }
+        
     }
     
-    public enum LightDirectionalShadowMode: Int64 {
+    public enum LightDirectionalShadowMode: Int64, CustomDebugStringConvertible {
         /// Use orthogonal shadow projection for directional light.
         case orthogonal = 0 // LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL
         /// Use 2 splits for shadow projection when using directional light.
         case parallel2Splits = 1 // LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS
         /// Use 4 splits for shadow projection when using directional light.
         case parallel4Splits = 2 // LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .orthogonal: return ".orthogonal"
+                case .parallel2Splits: return ".parallel2Splits"
+                case .parallel4Splits: return ".parallel4Splits"
+            }
+            
+        }
+        
     }
     
-    public enum LightDirectionalSkyMode: Int64 {
+    public enum LightDirectionalSkyMode: Int64, CustomDebugStringConvertible {
         /// Use DirectionalLight3D in both sky rendering and scene lighting.
         case lightAndSky = 0 // LIGHT_DIRECTIONAL_SKY_MODE_LIGHT_AND_SKY
         /// Only use DirectionalLight3D in scene lighting.
         case lightOnly = 1 // LIGHT_DIRECTIONAL_SKY_MODE_LIGHT_ONLY
         /// Only use DirectionalLight3D in sky rendering.
         case skyOnly = 2 // LIGHT_DIRECTIONAL_SKY_MODE_SKY_ONLY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .lightAndSky: return ".lightAndSky"
+                case .lightOnly: return ".lightOnly"
+                case .skyOnly: return ".skyOnly"
+            }
+            
+        }
+        
     }
     
-    public enum ShadowQuality: Int64 {
+    public enum ShadowQuality: Int64, CustomDebugStringConvertible {
         /// Lowest shadow filtering quality (fastest). Soft shadows are not available with this quality setting, which means the ``Light3D/shadowBlur`` property is ignored if ``Light3D/lightSize`` and ``Light3D/lightAngularDistance`` is `0.0`.
         /// 
         /// > Note: The variable shadow blur performed by ``Light3D/lightSize`` and ``Light3D/lightAngularDistance`` is still effective when using hard shadow filtering. In this case, ``Light3D/shadowBlur`` _is_ taken into account. However, the results will not be blurred, instead the blur amount is treated as a maximum radius for the penumbra.
@@ -395,25 +590,58 @@ open class RenderingServer: Object {
         case softUltra = 5 // SHADOW_QUALITY_SOFT_ULTRA
         /// Represents the size of the ``RenderingServer/ShadowQuality`` enum.
         case max = 6 // SHADOW_QUALITY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .hard: return ".hard"
+                case .softVeryLow: return ".softVeryLow"
+                case .softLow: return ".softLow"
+                case .softMedium: return ".softMedium"
+                case .softHigh: return ".softHigh"
+                case .softUltra: return ".softUltra"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ReflectionProbeUpdateMode: Int64 {
+    public enum ReflectionProbeUpdateMode: Int64, CustomDebugStringConvertible {
         /// Reflection probe will update reflections once and then stop.
         case once = 0 // REFLECTION_PROBE_UPDATE_ONCE
         /// Reflection probe will update each frame. This mode is necessary to capture moving objects.
         case always = 1 // REFLECTION_PROBE_UPDATE_ALWAYS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .once: return ".once"
+                case .always: return ".always"
+            }
+            
+        }
+        
     }
     
-    public enum ReflectionProbeAmbientMode: Int64 {
+    public enum ReflectionProbeAmbientMode: Int64, CustomDebugStringConvertible {
         /// Do not apply any ambient lighting inside the reflection probe's box defined by its size.
         case disabled = 0 // REFLECTION_PROBE_AMBIENT_DISABLED
         /// Apply automatically-sourced environment lighting inside the reflection probe's box defined by its size.
         case environment = 1 // REFLECTION_PROBE_AMBIENT_ENVIRONMENT
         /// Apply custom ambient lighting inside the reflection probe's box defined by its size. See ``reflectionProbeSetAmbientColor(probe:color:)`` and ``reflectionProbeSetAmbientEnergy(probe:energy:)``.
         case color = 2 // REFLECTION_PROBE_AMBIENT_COLOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .environment: return ".environment"
+                case .color: return ".color"
+            }
+            
+        }
+        
     }
     
-    public enum DecalTexture: Int64 {
+    public enum DecalTexture: Int64, CustomDebugStringConvertible {
         /// Albedo texture slot in a decal (``Decal/textureAlbedo``).
         case albedo = 0 // DECAL_TEXTURE_ALBEDO
         /// Normal map texture slot in a decal (``Decal/textureNormal``).
@@ -424,9 +652,21 @@ open class RenderingServer: Object {
         case emission = 3 // DECAL_TEXTURE_EMISSION
         /// Represents the size of the ``RenderingServer/DecalTexture`` enum.
         case max = 4 // DECAL_TEXTURE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .albedo: return ".albedo"
+                case .normal: return ".normal"
+                case .orm: return ".orm"
+                case .emission: return ".emission"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum DecalFilter: Int64 {
+    public enum DecalFilter: Int64, CustomDebugStringConvertible {
         /// Nearest-neighbor filter for decals (use for pixel art decals). No mipmaps are used for rendering, which means decals at a distance will look sharp but grainy. This has roughly the same performance cost as using mipmaps.
         case nearest = 0 // DECAL_FILTER_NEAREST
         /// Linear filter for decals (use for non-pixel art decals). No mipmaps are used for rendering, which means decals at a distance will look smooth but blurry. This has roughly the same performance cost as using mipmaps.
@@ -439,23 +679,54 @@ open class RenderingServer: Object {
         case nearestMipmapsAnisotropic = 4 // DECAL_FILTER_NEAREST_MIPMAPS_ANISOTROPIC
         /// Linear filter for decals (use for non-pixel art decals). Anisotropic mipmaps are used for rendering, which means decals at a distance will look smooth and sharp when viewed from oblique angles. This looks better compared to isotropic mipmaps, but is slower. The level of anisotropic filtering is defined by ``ProjectSettings/rendering/textures/defaultFilters/anisotropicFilteringLevel``.
         case linearMipmapsAnisotropic = 5 // DECAL_FILTER_LINEAR_MIPMAPS_ANISOTROPIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .nearestMipmaps: return ".nearestMipmaps"
+                case .linearMipmaps: return ".linearMipmaps"
+                case .nearestMipmapsAnisotropic: return ".nearestMipmapsAnisotropic"
+                case .linearMipmapsAnisotropic: return ".linearMipmapsAnisotropic"
+            }
+            
+        }
+        
     }
     
-    public enum VoxelGIQuality: Int64 {
+    public enum VoxelGIQuality: Int64, CustomDebugStringConvertible {
         /// Low ``VoxelGI`` rendering quality using 4 cones.
         case low = 0 // VOXEL_GI_QUALITY_LOW
         /// High ``VoxelGI`` rendering quality using 6 cones.
         case high = 1 // VOXEL_GI_QUALITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .low: return ".low"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
-    public enum ParticlesMode: Int64 {
+    public enum ParticlesMode: Int64, CustomDebugStringConvertible {
         /// 2D particles.
         case particlesMode2d = 0 // PARTICLES_MODE_2D
         /// 3D particles.
         case particlesMode3d = 1 // PARTICLES_MODE_3D
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .particlesMode2d: return ".particlesMode2d"
+                case .particlesMode3d: return ".particlesMode3d"
+            }
+            
+        }
+        
     }
     
-    public enum ParticlesTransformAlign: Int64 {
+    public enum ParticlesTransformAlign: Int64, CustomDebugStringConvertible {
         /// 
         case disabled = 0 // PARTICLES_TRANSFORM_ALIGN_DISABLED
         /// 
@@ -464,9 +735,20 @@ open class RenderingServer: Object {
         case yToVelocity = 2 // PARTICLES_TRANSFORM_ALIGN_Y_TO_VELOCITY
         /// 
         case zBillboardYToVelocity = 3 // PARTICLES_TRANSFORM_ALIGN_Z_BILLBOARD_Y_TO_VELOCITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .zBillboard: return ".zBillboard"
+                case .yToVelocity: return ".yToVelocity"
+                case .zBillboardYToVelocity: return ".zBillboardYToVelocity"
+            }
+            
+        }
+        
     }
     
-    public enum ParticlesDrawOrder: Int64 {
+    public enum ParticlesDrawOrder: Int64, CustomDebugStringConvertible {
         /// Draw particles in the order that they appear in the particles array.
         case index = 0 // PARTICLES_DRAW_ORDER_INDEX
         /// Sort particles based on their lifetime. In other words, the particle with the highest lifetime is drawn at the front.
@@ -475,9 +757,20 @@ open class RenderingServer: Object {
         case reverseLifetime = 2 // PARTICLES_DRAW_ORDER_REVERSE_LIFETIME
         /// Sort particles based on their distance to the camera.
         case viewDepth = 3 // PARTICLES_DRAW_ORDER_VIEW_DEPTH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .index: return ".index"
+                case .lifetime: return ".lifetime"
+                case .reverseLifetime: return ".reverseLifetime"
+                case .viewDepth: return ".viewDepth"
+            }
+            
+        }
+        
     }
     
-    public enum ParticlesCollisionType: Int64 {
+    public enum ParticlesCollisionType: Int64, CustomDebugStringConvertible {
         /// 
         case sphereAttract = 0 // PARTICLES_COLLISION_TYPE_SPHERE_ATTRACT
         /// 
@@ -492,9 +785,23 @@ open class RenderingServer: Object {
         case sdfCollide = 5 // PARTICLES_COLLISION_TYPE_SDF_COLLIDE
         /// 
         case heightfieldCollide = 6 // PARTICLES_COLLISION_TYPE_HEIGHTFIELD_COLLIDE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sphereAttract: return ".sphereAttract"
+                case .boxAttract: return ".boxAttract"
+                case .vectorFieldAttract: return ".vectorFieldAttract"
+                case .sphereCollide: return ".sphereCollide"
+                case .boxCollide: return ".boxCollide"
+                case .sdfCollide: return ".sdfCollide"
+                case .heightfieldCollide: return ".heightfieldCollide"
+            }
+            
+        }
+        
     }
     
-    public enum ParticlesCollisionHeightfieldResolution: Int64 {
+    public enum ParticlesCollisionHeightfieldResolution: Int64, CustomDebugStringConvertible {
         /// 
         case particlesCollisionHeightfieldResolution256 = 0 // PARTICLES_COLLISION_HEIGHTFIELD_RESOLUTION_256
         /// 
@@ -509,9 +816,23 @@ open class RenderingServer: Object {
         case particlesCollisionHeightfieldResolution8192 = 5 // PARTICLES_COLLISION_HEIGHTFIELD_RESOLUTION_8192
         /// Represents the size of the ``RenderingServer/ParticlesCollisionHeightfieldResolution`` enum.
         case max = 6 // PARTICLES_COLLISION_HEIGHTFIELD_RESOLUTION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .particlesCollisionHeightfieldResolution256: return ".particlesCollisionHeightfieldResolution256"
+                case .particlesCollisionHeightfieldResolution512: return ".particlesCollisionHeightfieldResolution512"
+                case .particlesCollisionHeightfieldResolution1024: return ".particlesCollisionHeightfieldResolution1024"
+                case .particlesCollisionHeightfieldResolution2048: return ".particlesCollisionHeightfieldResolution2048"
+                case .particlesCollisionHeightfieldResolution4096: return ".particlesCollisionHeightfieldResolution4096"
+                case .particlesCollisionHeightfieldResolution8192: return ".particlesCollisionHeightfieldResolution8192"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum FogVolumeShape: Int64 {
+    public enum FogVolumeShape: Int64, CustomDebugStringConvertible {
         /// ``FogVolume`` will be shaped like an ellipsoid (stretched sphere).
         case ellipsoid = 0 // FOG_VOLUME_SHAPE_ELLIPSOID
         /// ``FogVolume`` will be shaped like a cone pointing upwards (in local coordinates). The cone's angle is set automatically to fill the size. The cone will be adjusted to fit within the size. Rotate the ``FogVolume`` node to reorient the cone. Non-uniform scaling via size is not supported (scale the ``FogVolume`` node instead).
@@ -524,9 +845,22 @@ open class RenderingServer: Object {
         case world = 4 // FOG_VOLUME_SHAPE_WORLD
         /// Represents the size of the ``RenderingServer/FogVolumeShape`` enum.
         case max = 5 // FOG_VOLUME_SHAPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ellipsoid: return ".ellipsoid"
+                case .cone: return ".cone"
+                case .cylinder: return ".cylinder"
+                case .box: return ".box"
+                case .world: return ".world"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportScaling3DMode: Int64 {
+    public enum ViewportScaling3DMode: Int64, CustomDebugStringConvertible {
         /// Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will result in undersampling while values greater than `1.0` will result in supersampling. A value of `1.0` disables scaling.
         case bilinear = 0 // VIEWPORT_SCALING_3D_MODE_BILINEAR
         /// Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
@@ -535,9 +869,20 @@ open class RenderingServer: Object {
         case fsr2 = 2 // VIEWPORT_SCALING_3D_MODE_FSR2
         /// Represents the size of the ``RenderingServer/ViewportScaling3DMode`` enum.
         case max = 3 // VIEWPORT_SCALING_3D_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bilinear: return ".bilinear"
+                case .fsr: return ".fsr"
+                case .fsr2: return ".fsr2"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportUpdateMode: Int64 {
+    public enum ViewportUpdateMode: Int64, CustomDebugStringConvertible {
         /// Do not update the viewport's render target.
         case disabled = 0 // VIEWPORT_UPDATE_DISABLED
         /// Update the viewport's render target once, then switch to .viewportUpdateDisabled.
@@ -548,18 +893,40 @@ open class RenderingServer: Object {
         case whenParentVisible = 3 // VIEWPORT_UPDATE_WHEN_PARENT_VISIBLE
         /// Always update the viewport's render target.
         case always = 4 // VIEWPORT_UPDATE_ALWAYS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .once: return ".once"
+                case .whenVisible: return ".whenVisible"
+                case .whenParentVisible: return ".whenParentVisible"
+                case .always: return ".always"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportClearMode: Int64 {
+    public enum ViewportClearMode: Int64, CustomDebugStringConvertible {
         /// Always clear the viewport's render target before drawing.
         case always = 0 // VIEWPORT_CLEAR_ALWAYS
         /// Never clear the viewport's render target.
         case never = 1 // VIEWPORT_CLEAR_NEVER
         /// Clear the viewport's render target on the next frame, then switch to .viewportClearNever.
         case onlyNextFrame = 2 // VIEWPORT_CLEAR_ONLY_NEXT_FRAME
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .always: return ".always"
+                case .never: return ".never"
+                case .onlyNextFrame: return ".onlyNextFrame"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportEnvironmentMode: Int64 {
+    public enum ViewportEnvironmentMode: Int64, CustomDebugStringConvertible {
         /// Disable rendering of 3D environment over 2D canvas.
         case disabled = 0 // VIEWPORT_ENVIRONMENT_DISABLED
         /// Enable rendering of 3D environment over 2D canvas.
@@ -568,9 +935,20 @@ open class RenderingServer: Object {
         case inherit = 2 // VIEWPORT_ENVIRONMENT_INHERIT
         /// Represents the size of the ``RenderingServer/ViewportEnvironmentMode`` enum.
         case max = 3 // VIEWPORT_ENVIRONMENT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .inherit: return ".inherit"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportSDFOversize: Int64 {
+    public enum ViewportSDFOversize: Int64, CustomDebugStringConvertible {
         /// Do not oversize the 2D signed distance field. Occluders may disappear when touching the viewport's edges, and ``GPUParticles3D`` collision may stop working earlier than intended. This has the lowest GPU requirements.
         case viewportSdfOversize100Percent = 0 // VIEWPORT_SDF_OVERSIZE_100_PERCENT
         /// 2D signed distance field covers 20% of the viewport's size outside the viewport on each side (top, right, bottom, left).
@@ -581,9 +959,21 @@ open class RenderingServer: Object {
         case viewportSdfOversize200Percent = 3 // VIEWPORT_SDF_OVERSIZE_200_PERCENT
         /// Represents the size of the ``RenderingServer/ViewportSDFOversize`` enum.
         case max = 4 // VIEWPORT_SDF_OVERSIZE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .viewportSdfOversize100Percent: return ".viewportSdfOversize100Percent"
+                case .viewportSdfOversize120Percent: return ".viewportSdfOversize120Percent"
+                case .viewportSdfOversize150Percent: return ".viewportSdfOversize150Percent"
+                case .viewportSdfOversize200Percent: return ".viewportSdfOversize200Percent"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportSDFScale: Int64 {
+    public enum ViewportSDFScale: Int64, CustomDebugStringConvertible {
         /// Full resolution 2D signed distance field scale. This has the highest GPU requirements.
         case viewportSdfScale100Percent = 0 // VIEWPORT_SDF_SCALE_100_PERCENT
         /// Half resolution 2D signed distance field scale on each axis (25% of the viewport pixel count).
@@ -592,9 +982,20 @@ open class RenderingServer: Object {
         case viewportSdfScale25Percent = 2 // VIEWPORT_SDF_SCALE_25_PERCENT
         /// Represents the size of the ``RenderingServer/ViewportSDFScale`` enum.
         case max = 3 // VIEWPORT_SDF_SCALE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .viewportSdfScale100Percent: return ".viewportSdfScale100Percent"
+                case .viewportSdfScale50Percent: return ".viewportSdfScale50Percent"
+                case .viewportSdfScale25Percent: return ".viewportSdfScale25Percent"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportMSAA: Int64 {
+    public enum ViewportMSAA: Int64, CustomDebugStringConvertible {
         /// Multisample antialiasing for 3D is disabled. This is the default value, and also the fastest setting.
         case disabled = 0 // VIEWPORT_MSAA_DISABLED
         /// Multisample antialiasing uses 2 samples per pixel for 3D. This has a moderate impact on performance.
@@ -605,27 +1006,59 @@ open class RenderingServer: Object {
         case viewportMsaa8x = 3 // VIEWPORT_MSAA_8X
         /// Represents the size of the ``RenderingServer/ViewportMSAA`` enum.
         case max = 4 // VIEWPORT_MSAA_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .viewportMsaa2x: return ".viewportMsaa2x"
+                case .viewportMsaa4x: return ".viewportMsaa4x"
+                case .viewportMsaa8x: return ".viewportMsaa8x"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportScreenSpaceAA: Int64 {
+    public enum ViewportScreenSpaceAA: Int64, CustomDebugStringConvertible {
         /// Do not perform any antialiasing in the full screen post-process.
         case disabled = 0 // VIEWPORT_SCREEN_SPACE_AA_DISABLED
         /// Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
         case fxaa = 1 // VIEWPORT_SCREEN_SPACE_AA_FXAA
         /// Represents the size of the ``RenderingServer/ViewportScreenSpaceAA`` enum.
         case max = 2 // VIEWPORT_SCREEN_SPACE_AA_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .fxaa: return ".fxaa"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportOcclusionCullingBuildQuality: Int64 {
+    public enum ViewportOcclusionCullingBuildQuality: Int64, CustomDebugStringConvertible {
         /// Low occlusion culling BVH build quality (as defined by Embree). Results in the lowest CPU usage, but least effective culling.
         case low = 0 // VIEWPORT_OCCLUSION_BUILD_QUALITY_LOW
         /// Medium occlusion culling BVH build quality (as defined by Embree).
         case medium = 1 // VIEWPORT_OCCLUSION_BUILD_QUALITY_MEDIUM
         /// High occlusion culling BVH build quality (as defined by Embree). Results in the highest CPU usage, but most effective culling.
         case high = 2 // VIEWPORT_OCCLUSION_BUILD_QUALITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportRenderInfo: Int64 {
+    public enum ViewportRenderInfo: Int64, CustomDebugStringConvertible {
         /// Number of objects drawn in a single frame.
         case objectsInFrame = 0 // VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME
         /// Number of points, lines, or triangles drawn in a single frame.
@@ -634,18 +1067,39 @@ open class RenderingServer: Object {
         case drawCallsInFrame = 2 // VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME
         /// Represents the size of the ``RenderingServer/ViewportRenderInfo`` enum.
         case max = 3 // VIEWPORT_RENDER_INFO_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .objectsInFrame: return ".objectsInFrame"
+                case .primitivesInFrame: return ".primitivesInFrame"
+                case .drawCallsInFrame: return ".drawCallsInFrame"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportRenderInfoType: Int64 {
+    public enum ViewportRenderInfoType: Int64, CustomDebugStringConvertible {
         /// Visible render pass (excluding shadows).
         case visible = 0 // VIEWPORT_RENDER_INFO_TYPE_VISIBLE
         /// Shadow render pass. Objects will be rendered several times depending on the number of amounts of lights with shadows and the number of directional shadow splits.
         case shadow = 1 // VIEWPORT_RENDER_INFO_TYPE_SHADOW
         /// Represents the size of the ``RenderingServer/ViewportRenderInfoType`` enum.
         case max = 2 // VIEWPORT_RENDER_INFO_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .visible: return ".visible"
+                case .shadow: return ".shadow"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportDebugDraw: Int64 {
+    public enum ViewportDebugDraw: Int64, CustomDebugStringConvertible {
         /// Debug draw is disabled. Default setting.
         case disabled = 0 // VIEWPORT_DEBUG_DRAW_DISABLED
         /// Objects are displayed without light information.
@@ -708,9 +1162,43 @@ open class RenderingServer: Object {
         case motionVectors = 25 // VIEWPORT_DEBUG_DRAW_MOTION_VECTORS
         /// Internal buffer is drawn instead of regular scene so you can see the per-pixel output that will be used by post-processing effects.
         case internalBuffer = 26 // VIEWPORT_DEBUG_DRAW_INTERNAL_BUFFER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .unshaded: return ".unshaded"
+                case .lighting: return ".lighting"
+                case .overdraw: return ".overdraw"
+                case .wireframe: return ".wireframe"
+                case .normalBuffer: return ".normalBuffer"
+                case .voxelGiAlbedo: return ".voxelGiAlbedo"
+                case .voxelGiLighting: return ".voxelGiLighting"
+                case .voxelGiEmission: return ".voxelGiEmission"
+                case .shadowAtlas: return ".shadowAtlas"
+                case .directionalShadowAtlas: return ".directionalShadowAtlas"
+                case .sceneLuminance: return ".sceneLuminance"
+                case .ssao: return ".ssao"
+                case .ssil: return ".ssil"
+                case .pssmSplits: return ".pssmSplits"
+                case .decalAtlas: return ".decalAtlas"
+                case .sdfgi: return ".sdfgi"
+                case .sdfgiProbes: return ".sdfgiProbes"
+                case .giBuffer: return ".giBuffer"
+                case .disableLod: return ".disableLod"
+                case .clusterOmniLights: return ".clusterOmniLights"
+                case .clusterSpotLights: return ".clusterSpotLights"
+                case .clusterDecals: return ".clusterDecals"
+                case .clusterReflectionProbes: return ".clusterReflectionProbes"
+                case .occluders: return ".occluders"
+                case .motionVectors: return ".motionVectors"
+                case .internalBuffer: return ".internalBuffer"
+            }
+            
+        }
+        
     }
     
-    public enum ViewportVRSMode: Int64 {
+    public enum ViewportVRSMode: Int64, CustomDebugStringConvertible {
         /// Variable rate shading is disabled.
         case disabled = 0 // VIEWPORT_VRS_DISABLED
         /// Variable rate shading uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.
@@ -719,9 +1207,20 @@ open class RenderingServer: Object {
         case xr = 2 // VIEWPORT_VRS_XR
         /// Represents the size of the ``RenderingServer/ViewportVRSMode`` enum.
         case max = 3 // VIEWPORT_VRS_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .texture: return ".texture"
+                case .xr: return ".xr"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SkyMode: Int64 {
+    public enum SkyMode: Int64, CustomDebugStringConvertible {
         /// Automatically selects the appropriate process mode based on your sky shader. If your shader uses `TIME` or `POSITION`, this will use .realtime. If your shader uses any of the `LIGHT_*` variables or any custom uniforms, this uses .incremental. Otherwise, this defaults to .quality.
         case automatic = 0 // SKY_MODE_AUTOMATIC
         /// Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than .realtime but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ``ProjectSettings/rendering/reflections/skyReflections/ggxSamples``.
@@ -733,9 +1232,20 @@ open class RenderingServer: Object {
         /// > Note: The fast filtering algorithm is limited to 256×256 cubemaps, so ``skySetRadianceSize(sky:radianceSize:)`` must be set to `256`. Otherwise, a warning is printed and the overridden radiance size is ignored.
         /// 
         case realtime = 3 // SKY_MODE_REALTIME
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .automatic: return ".automatic"
+                case .quality: return ".quality"
+                case .incremental: return ".incremental"
+                case .realtime: return ".realtime"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentBG: Int64 {
+    public enum EnvironmentBG: Int64, CustomDebugStringConvertible {
         /// Use the clear color as background.
         case clearColor = 0 // ENV_BG_CLEAR_COLOR
         /// Use a specified color as the background.
@@ -750,9 +1260,23 @@ open class RenderingServer: Object {
         case cameraFeed = 5 // ENV_BG_CAMERA_FEED
         /// Represents the size of the ``RenderingServer/EnvironmentBG`` enum.
         case max = 6 // ENV_BG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clearColor: return ".clearColor"
+                case .color: return ".color"
+                case .sky: return ".sky"
+                case .canvas: return ".canvas"
+                case .keep: return ".keep"
+                case .cameraFeed: return ".cameraFeed"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentAmbientSource: Int64 {
+    public enum EnvironmentAmbientSource: Int64, CustomDebugStringConvertible {
         /// Gather ambient light from whichever source is specified as the background.
         case bg = 0 // ENV_AMBIENT_SOURCE_BG
         /// Disable ambient light.
@@ -761,18 +1285,39 @@ open class RenderingServer: Object {
         case color = 2 // ENV_AMBIENT_SOURCE_COLOR
         /// Gather ambient light from the ``Sky`` regardless of what the background is.
         case sky = 3 // ENV_AMBIENT_SOURCE_SKY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bg: return ".bg"
+                case .disabled: return ".disabled"
+                case .color: return ".color"
+                case .sky: return ".sky"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentReflectionSource: Int64 {
+    public enum EnvironmentReflectionSource: Int64, CustomDebugStringConvertible {
         /// Use the background for reflections.
         case bg = 0 // ENV_REFLECTION_SOURCE_BG
         /// Disable reflections.
         case disabled = 1 // ENV_REFLECTION_SOURCE_DISABLED
         /// Use the ``Sky`` for reflections regardless of what the background is.
         case sky = 2 // ENV_REFLECTION_SOURCE_SKY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bg: return ".bg"
+                case .disabled: return ".disabled"
+                case .sky: return ".sky"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentGlowBlendMode: Int64 {
+    public enum EnvironmentGlowBlendMode: Int64, CustomDebugStringConvertible {
         /// Additive glow blending mode. Mostly used for particles, glows (bloom), lens flare, bright sources.
         case additive = 0 // ENV_GLOW_BLEND_MODE_ADDITIVE
         /// Screen glow blending mode. Increases brightness, used frequently with bloom.
@@ -783,9 +1328,21 @@ open class RenderingServer: Object {
         case replace = 3 // ENV_GLOW_BLEND_MODE_REPLACE
         /// Mixes the glow with the underlying color to avoid increasing brightness as much while still maintaining a glow effect.
         case mix = 4 // ENV_GLOW_BLEND_MODE_MIX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .additive: return ".additive"
+                case .screen: return ".screen"
+                case .softlight: return ".softlight"
+                case .replace: return ".replace"
+                case .mix: return ".mix"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentToneMapper: Int64 {
+    public enum EnvironmentToneMapper: Int64, CustomDebugStringConvertible {
         /// Output color as they came in. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
         case linear = 0 // ENV_TONE_MAPPER_LINEAR
         /// Use the Reinhard tonemapper. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
@@ -797,9 +1354,20 @@ open class RenderingServer: Object {
         /// > Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
         /// 
         case aces = 3 // ENV_TONE_MAPPER_ACES
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linear: return ".linear"
+                case .reinhard: return ".reinhard"
+                case .filmic: return ".filmic"
+                case .aces: return ".aces"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSSRRoughnessQuality: Int64 {
+    public enum EnvironmentSSRRoughnessQuality: Int64, CustomDebugStringConvertible {
         /// Lowest quality of roughness filter for screen-space reflections. Rough materials will not have blurrier screen-space reflections compared to smooth (non-rough) materials. This is the fastest option.
         case disabled = 0 // ENV_SSR_ROUGHNESS_QUALITY_DISABLED
         /// Low quality of roughness filter for screen-space reflections.
@@ -808,9 +1376,20 @@ open class RenderingServer: Object {
         case medium = 2 // ENV_SSR_ROUGHNESS_QUALITY_MEDIUM
         /// High quality of roughness filter for screen-space reflections. This is the slowest option.
         case high = 3 // ENV_SSR_ROUGHNESS_QUALITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSSAOQuality: Int64 {
+    public enum EnvironmentSSAOQuality: Int64, CustomDebugStringConvertible {
         /// Lowest quality of screen-space ambient occlusion.
         case veryLow = 0 // ENV_SSAO_QUALITY_VERY_LOW
         /// Low quality screen-space ambient occlusion.
@@ -821,9 +1400,21 @@ open class RenderingServer: Object {
         case high = 3 // ENV_SSAO_QUALITY_HIGH
         /// Highest quality screen-space ambient occlusion. Uses the adaptive target setting which can be dynamically adjusted to smoothly balance performance and visual quality.
         case ultra = 4 // ENV_SSAO_QUALITY_ULTRA
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .veryLow: return ".veryLow"
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+                case .ultra: return ".ultra"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSSILQuality: Int64 {
+    public enum EnvironmentSSILQuality: Int64, CustomDebugStringConvertible {
         /// Lowest quality of screen-space indirect lighting.
         case veryLow = 0 // ENV_SSIL_QUALITY_VERY_LOW
         /// Low quality screen-space indirect lighting.
@@ -834,18 +1425,40 @@ open class RenderingServer: Object {
         case high = 3 // ENV_SSIL_QUALITY_HIGH
         /// Highest quality screen-space indirect lighting. Uses the adaptive target setting which can be dynamically adjusted to smoothly balance performance and visual quality.
         case ultra = 4 // ENV_SSIL_QUALITY_ULTRA
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .veryLow: return ".veryLow"
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+                case .ultra: return ".ultra"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSDFGIYScale: Int64 {
+    public enum EnvironmentSDFGIYScale: Int64, CustomDebugStringConvertible {
         /// Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
         case envSdfgiYScale50Percent = 0 // ENV_SDFGI_Y_SCALE_50_PERCENT
         /// Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.
         case envSdfgiYScale75Percent = 1 // ENV_SDFGI_Y_SCALE_75_PERCENT
         /// Use 100% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be as tall as they are wide. This is usually the best choice for highly vertical scenes. The downside is that light leaking may become more noticeable with thin floors and ceilings.
         case envSdfgiYScale100Percent = 2 // ENV_SDFGI_Y_SCALE_100_PERCENT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .envSdfgiYScale50Percent: return ".envSdfgiYScale50Percent"
+                case .envSdfgiYScale75Percent: return ".envSdfgiYScale75Percent"
+                case .envSdfgiYScale100Percent: return ".envSdfgiYScale100Percent"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSDFGIRayCount: Int64 {
+    public enum EnvironmentSDFGIRayCount: Int64, CustomDebugStringConvertible {
         /// Throw 4 rays per frame when converging SDFGI. This has the lowest GPU requirements, but creates the most noisy result.
         case envSdfgiRayCount4 = 0 // ENV_SDFGI_RAY_COUNT_4
         /// Throw 8 rays per frame when converging SDFGI.
@@ -862,9 +1475,24 @@ open class RenderingServer: Object {
         case envSdfgiRayCount128 = 6 // ENV_SDFGI_RAY_COUNT_128
         /// Represents the size of the ``RenderingServer/EnvironmentSDFGIRayCount`` enum.
         case max = 7 // ENV_SDFGI_RAY_COUNT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .envSdfgiRayCount4: return ".envSdfgiRayCount4"
+                case .envSdfgiRayCount8: return ".envSdfgiRayCount8"
+                case .envSdfgiRayCount16: return ".envSdfgiRayCount16"
+                case .envSdfgiRayCount32: return ".envSdfgiRayCount32"
+                case .envSdfgiRayCount64: return ".envSdfgiRayCount64"
+                case .envSdfgiRayCount96: return ".envSdfgiRayCount96"
+                case .envSdfgiRayCount128: return ".envSdfgiRayCount128"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSDFGIFramesToConverge: Int64 {
+    public enum EnvironmentSDFGIFramesToConverge: Int64, CustomDebugStringConvertible {
         /// Converge SDFGI over 5 frames. This is the most responsive, but creates the most noisy result with a given ray count.
         case in5Frames = 0 // ENV_SDFGI_CONVERGE_IN_5_FRAMES
         /// Configure SDFGI to fully converge over 10 frames.
@@ -879,9 +1507,23 @@ open class RenderingServer: Object {
         case in30Frames = 5 // ENV_SDFGI_CONVERGE_IN_30_FRAMES
         /// Represents the size of the ``RenderingServer/EnvironmentSDFGIFramesToConverge`` enum.
         case max = 6 // ENV_SDFGI_CONVERGE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .in5Frames: return ".in5Frames"
+                case .in10Frames: return ".in10Frames"
+                case .in15Frames: return ".in15Frames"
+                case .in20Frames: return ".in20Frames"
+                case .in25Frames: return ".in25Frames"
+                case .in30Frames: return ".in30Frames"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentSDFGIFramesToUpdateLight: Int64 {
+    public enum EnvironmentSDFGIFramesToUpdateLight: Int64, CustomDebugStringConvertible {
         /// Update indirect light from dynamic lights in SDFGI over 1 frame. This is the most responsive, but has the highest GPU requirements.
         case in1Frame = 0 // ENV_SDFGI_UPDATE_LIGHT_IN_1_FRAME
         /// Update indirect light from dynamic lights in SDFGI over 2 frames.
@@ -894,9 +1536,22 @@ open class RenderingServer: Object {
         case in16Frames = 4 // ENV_SDFGI_UPDATE_LIGHT_IN_16_FRAMES
         /// Represents the size of the ``RenderingServer/EnvironmentSDFGIFramesToUpdateLight`` enum.
         case max = 5 // ENV_SDFGI_UPDATE_LIGHT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .in1Frame: return ".in1Frame"
+                case .in2Frames: return ".in2Frames"
+                case .in4Frames: return ".in4Frames"
+                case .in8Frames: return ".in8Frames"
+                case .in16Frames: return ".in16Frames"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SubSurfaceScatteringQuality: Int64 {
+    public enum SubSurfaceScatteringQuality: Int64, CustomDebugStringConvertible {
         /// Disables subsurface scattering entirely, even on materials that have ``BaseMaterial3D/subsurfScatterEnabled`` set to `true`. This has the lowest GPU requirements.
         case disabled = 0 // SUB_SURFACE_SCATTERING_QUALITY_DISABLED
         /// Low subsurface scattering quality.
@@ -905,18 +1560,39 @@ open class RenderingServer: Object {
         case medium = 2 // SUB_SURFACE_SCATTERING_QUALITY_MEDIUM
         /// High subsurface scattering quality. This has the highest GPU requirements.
         case high = 3 // SUB_SURFACE_SCATTERING_QUALITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
-    public enum DOFBokehShape: Int64 {
+    public enum DOFBokehShape: Int64, CustomDebugStringConvertible {
         /// Calculate the DOF blur using a box filter. The fastest option, but results in obvious lines in blur pattern.
         case box = 0 // DOF_BOKEH_BOX
         /// Calculates DOF blur using a hexagon shaped filter.
         case hexagon = 1 // DOF_BOKEH_HEXAGON
         /// Calculates DOF blur using a circle shaped filter. Best quality and most realistic, but slowest. Use only for areas where a lot of performance can be dedicated to post-processing (e.g. cutscenes).
         case circle = 2 // DOF_BOKEH_CIRCLE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .box: return ".box"
+                case .hexagon: return ".hexagon"
+                case .circle: return ".circle"
+            }
+            
+        }
+        
     }
     
-    public enum DOFBlurQuality: Int64 {
+    public enum DOFBlurQuality: Int64, CustomDebugStringConvertible {
         /// Lowest quality DOF blur. This is the fastest setting, but you may be able to see filtering artifacts.
         case veryLow = 0 // DOF_BLUR_QUALITY_VERY_LOW
         /// Low quality DOF blur.
@@ -925,9 +1601,20 @@ open class RenderingServer: Object {
         case medium = 2 // DOF_BLUR_QUALITY_MEDIUM
         /// Highest quality DOF blur. Results in the smoothest looking blur by taking the most samples, but is also significantly slower.
         case high = 3 // DOF_BLUR_QUALITY_HIGH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .veryLow: return ".veryLow"
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+            }
+            
+        }
+        
     }
     
-    public enum InstanceType: Int64 {
+    public enum InstanceType: Int64, CustomDebugStringConvertible {
         /// The instance does not have a type.
         case none = 0 // INSTANCE_NONE
         /// The instance is a mesh.
@@ -958,9 +1645,31 @@ open class RenderingServer: Object {
         case max = 13 // INSTANCE_MAX
         /// A combination of the flags of geometry instances (mesh, multimesh, immediate and particles).
         case geometryMask = 14 // INSTANCE_GEOMETRY_MASK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .mesh: return ".mesh"
+                case .multimesh: return ".multimesh"
+                case .particles: return ".particles"
+                case .particlesCollision: return ".particlesCollision"
+                case .light: return ".light"
+                case .reflectionProbe: return ".reflectionProbe"
+                case .decal: return ".decal"
+                case .voxelGi: return ".voxelGi"
+                case .lightmap: return ".lightmap"
+                case .occluder: return ".occluder"
+                case .visiblityNotifier: return ".visiblityNotifier"
+                case .fogVolume: return ".fogVolume"
+                case .max: return ".max"
+                case .geometryMask: return ".geometryMask"
+            }
+            
+        }
+        
     }
     
-    public enum InstanceFlags: Int64 {
+    public enum InstanceFlags: Int64, CustomDebugStringConvertible {
         /// Allows the instance to be used in baked lighting.
         case useBakedLight = 0 // INSTANCE_FLAG_USE_BAKED_LIGHT
         /// Allows the instance to be used with dynamic global illumination.
@@ -971,9 +1680,21 @@ open class RenderingServer: Object {
         case ignoreOcclusionCulling = 3 // INSTANCE_FLAG_IGNORE_OCCLUSION_CULLING
         /// Represents the size of the ``RenderingServer/InstanceFlags`` enum.
         case max = 4 // INSTANCE_FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .useBakedLight: return ".useBakedLight"
+                case .useDynamicGi: return ".useDynamicGi"
+                case .drawNextFrameIfVisible: return ".drawNextFrameIfVisible"
+                case .ignoreOcclusionCulling: return ".ignoreOcclusionCulling"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ShadowCastingSetting: Int64 {
+    public enum ShadowCastingSetting: Int64, CustomDebugStringConvertible {
         /// Disable shadows from this instance.
         case off = 0 // SHADOW_CASTING_SETTING_OFF
         /// Cast shadows from this instance.
@@ -982,18 +1703,39 @@ open class RenderingServer: Object {
         case doubleSided = 2 // SHADOW_CASTING_SETTING_DOUBLE_SIDED
         /// Only render the shadows from the object. The object itself will not be drawn.
         case shadowsOnly = 3 // SHADOW_CASTING_SETTING_SHADOWS_ONLY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .off: return ".off"
+                case .on: return ".on"
+                case .doubleSided: return ".doubleSided"
+                case .shadowsOnly: return ".shadowsOnly"
+            }
+            
+        }
+        
     }
     
-    public enum VisibilityRangeFadeMode: Int64 {
+    public enum VisibilityRangeFadeMode: Int64, CustomDebugStringConvertible {
         /// Disable visibility range fading for the given instance.
         case disabled = 0 // VISIBILITY_RANGE_FADE_DISABLED
         /// Fade-out the given instance when it approaches its visibility range limits.
         case `self` = 1 // VISIBILITY_RANGE_FADE_SELF
         /// Fade-in the given instance's dependencies when reaching its visibility range limits.
         case dependencies = 2 // VISIBILITY_RANGE_FADE_DEPENDENCIES
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .`self`: return ".`self`"
+                case .dependencies: return ".dependencies"
+            }
+            
+        }
+        
     }
     
-    public enum BakeChannels: Int64 {
+    public enum BakeChannels: Int64, CustomDebugStringConvertible {
         /// Index of ``Image`` in array of ``Image``s returned by ``bakeRenderUv2(base:materialOverrides:imageSize:)``. Image uses ``Image/Format/rgba8`` and contains albedo color in the `.rgb` channels and alpha in the `.a` channel.
         case albedoAlpha = 0 // BAKE_CHANNEL_ALBEDO_ALPHA
         /// Index of ``Image`` in array of ``Image``s returned by ``bakeRenderUv2(base:materialOverrides:imageSize:)``. Image uses ``Image/Format/rgba8`` and contains the per-pixel normal of the object in the `.rgb` channels and nothing in the `.a` channel. The per-pixel normal is encoded as `normal * 0.5 + 0.5`.
@@ -1002,27 +1744,58 @@ open class RenderingServer: Object {
         case orm = 2 // BAKE_CHANNEL_ORM
         /// Index of ``Image`` in array of ``Image``s returned by ``bakeRenderUv2(base:materialOverrides:imageSize:)``. Image uses ``Image/Format/rgbah`` and contains emission color in the `.rgb` channels and nothing in the `.a` channel.
         case emission = 3 // BAKE_CHANNEL_EMISSION
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .albedoAlpha: return ".albedoAlpha"
+                case .normal: return ".normal"
+                case .orm: return ".orm"
+                case .emission: return ".emission"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasTextureChannel: Int64 {
+    public enum CanvasTextureChannel: Int64, CustomDebugStringConvertible {
         /// Diffuse canvas texture (``CanvasTexture/diffuseTexture``).
         case diffuse = 0 // CANVAS_TEXTURE_CHANNEL_DIFFUSE
         /// Normal map canvas texture (``CanvasTexture/normalTexture``).
         case normal = 1 // CANVAS_TEXTURE_CHANNEL_NORMAL
         /// Specular map canvas texture (``CanvasTexture/specularTexture``).
         case specular = 2 // CANVAS_TEXTURE_CHANNEL_SPECULAR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .diffuse: return ".diffuse"
+                case .normal: return ".normal"
+                case .specular: return ".specular"
+            }
+            
+        }
+        
     }
     
-    public enum NinePatchAxisMode: Int64 {
+    public enum NinePatchAxisMode: Int64, CustomDebugStringConvertible {
         /// The nine patch gets stretched where needed.
         case stretch = 0 // NINE_PATCH_STRETCH
         /// The nine patch gets filled with tiles where needed.
         case tile = 1 // NINE_PATCH_TILE
         /// The nine patch gets filled with tiles where needed and stretches them a bit if needed.
         case tileFit = 2 // NINE_PATCH_TILE_FIT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stretch: return ".stretch"
+                case .tile: return ".tile"
+                case .tileFit: return ".tileFit"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasItemTextureFilter: Int64 {
+    public enum CanvasItemTextureFilter: Int64, CustomDebugStringConvertible {
         /// Uses the default filter mode for this ``Viewport``.
         case `default` = 0 // CANVAS_ITEM_TEXTURE_FILTER_DEFAULT
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
@@ -1039,9 +1812,24 @@ open class RenderingServer: Object {
         case linearWithMipmapsAnisotropic = 6 // CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
         /// Max value for ``RenderingServer/CanvasItemTextureFilter`` enum.
         case max = 7 // CANVAS_ITEM_TEXTURE_FILTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .nearestWithMipmaps: return ".nearestWithMipmaps"
+                case .linearWithMipmaps: return ".linearWithMipmaps"
+                case .nearestWithMipmapsAnisotropic: return ".nearestWithMipmapsAnisotropic"
+                case .linearWithMipmapsAnisotropic: return ".linearWithMipmapsAnisotropic"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasItemTextureRepeat: Int64 {
+    public enum CanvasItemTextureRepeat: Int64, CustomDebugStringConvertible {
         /// Uses the default repeat mode for this ``Viewport``.
         case `default` = 0 // CANVAS_ITEM_TEXTURE_REPEAT_DEFAULT
         /// Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
@@ -1052,9 +1840,21 @@ open class RenderingServer: Object {
         case mirror = 3 // CANVAS_ITEM_TEXTURE_REPEAT_MIRROR
         /// Max value for ``RenderingServer/CanvasItemTextureRepeat`` enum.
         case max = 4 // CANVAS_ITEM_TEXTURE_REPEAT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .mirror: return ".mirror"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasGroupMode: Int64 {
+    public enum CanvasGroupMode: Int64, CustomDebugStringConvertible {
         /// Child draws over parent and is not clipped.
         case disabled = 0 // CANVAS_GROUP_MODE_DISABLED
         /// Parent is used for the purposes of clipping only. Child is clipped to the parent's visible area, parent is not drawn.
@@ -1063,25 +1863,55 @@ open class RenderingServer: Object {
         case clipAndDraw = 2 // CANVAS_GROUP_MODE_CLIP_AND_DRAW
         /// 
         case transparent = 3 // CANVAS_GROUP_MODE_TRANSPARENT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .clipOnly: return ".clipOnly"
+                case .clipAndDraw: return ".clipAndDraw"
+                case .transparent: return ".transparent"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasLightMode: Int64 {
+    public enum CanvasLightMode: Int64, CustomDebugStringConvertible {
         /// 2D point light (see ``PointLight2D``).
         case point = 0 // CANVAS_LIGHT_MODE_POINT
         /// 2D directional (sun/moon) light (see ``DirectionalLight2D``).
         case directional = 1 // CANVAS_LIGHT_MODE_DIRECTIONAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .point: return ".point"
+                case .directional: return ".directional"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasLightBlendMode: Int64 {
+    public enum CanvasLightBlendMode: Int64, CustomDebugStringConvertible {
         /// Adds light color additive to the canvas.
         case add = 0 // CANVAS_LIGHT_BLEND_MODE_ADD
         /// Adds light color subtractive to the canvas.
         case sub = 1 // CANVAS_LIGHT_BLEND_MODE_SUB
         /// The light adds color depending on transparency.
         case mix = 2 // CANVAS_LIGHT_BLEND_MODE_MIX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mix: return ".mix"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasLightShadowFilter: Int64 {
+    public enum CanvasLightShadowFilter: Int64, CustomDebugStringConvertible {
         /// Do not apply a filter to canvas light shadows.
         case none = 0 // CANVAS_LIGHT_FILTER_NONE
         /// Use PCF5 filtering to filter canvas light shadows.
@@ -1090,18 +1920,39 @@ open class RenderingServer: Object {
         case pcf13 = 2 // CANVAS_LIGHT_FILTER_PCF13
         /// Max value of the ``RenderingServer/CanvasLightShadowFilter`` enum.
         case max = 3 // CANVAS_LIGHT_FILTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .pcf5: return ".pcf5"
+                case .pcf13: return ".pcf13"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum CanvasOccluderPolygonCullMode: Int64 {
+    public enum CanvasOccluderPolygonCullMode: Int64, CustomDebugStringConvertible {
         /// Culling of the canvas occluder is disabled.
         case disabled = 0 // CANVAS_OCCLUDER_POLYGON_CULL_DISABLED
         /// Culling of the canvas occluder is clockwise.
         case clockwise = 1 // CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE
         /// Culling of the canvas occluder is counterclockwise.
         case counterClockwise = 2 // CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .clockwise: return ".clockwise"
+                case .counterClockwise: return ".counterClockwise"
+            }
+            
+        }
+        
     }
     
-    public enum GlobalShaderParameterType: Int64 {
+    public enum GlobalShaderParameterType: Int64, CustomDebugStringConvertible {
         /// Boolean global shader parameter (`global uniform bool ...`).
         case bool = 0 // GLOBAL_VAR_TYPE_BOOL
         /// 2-dimensional boolean vector global shader parameter (`global uniform bvec2 ...`).
@@ -1160,9 +2011,45 @@ open class RenderingServer: Object {
         case samplercube = 27 // GLOBAL_VAR_TYPE_SAMPLERCUBE
         /// Represents the size of the ``RenderingServer/GlobalShaderParameterType`` enum.
         case max = 28 // GLOBAL_VAR_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bool: return ".bool"
+                case .bvec2: return ".bvec2"
+                case .bvec3: return ".bvec3"
+                case .bvec4: return ".bvec4"
+                case .int: return ".int"
+                case .ivec2: return ".ivec2"
+                case .ivec3: return ".ivec3"
+                case .ivec4: return ".ivec4"
+                case .rect2i: return ".rect2i"
+                case .uint: return ".uint"
+                case .uvec2: return ".uvec2"
+                case .uvec3: return ".uvec3"
+                case .uvec4: return ".uvec4"
+                case .float: return ".float"
+                case .vec2: return ".vec2"
+                case .vec3: return ".vec3"
+                case .vec4: return ".vec4"
+                case .color: return ".color"
+                case .rect2: return ".rect2"
+                case .mat2: return ".mat2"
+                case .mat3: return ".mat3"
+                case .mat4: return ".mat4"
+                case .transform2d: return ".transform2d"
+                case .transform: return ".transform"
+                case .sampler2d: return ".sampler2d"
+                case .sampler2darray: return ".sampler2darray"
+                case .sampler3d: return ".sampler3d"
+                case .samplercube: return ".samplercube"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum RenderingInfo: Int64 {
+    public enum RenderingInfo: Int64, CustomDebugStringConvertible {
         /// Number of objects rendered in the current 3D scene. This varies depending on camera position and rotation.
         case totalObjectsInFrame = 0 // RENDERING_INFO_TOTAL_OBJECTS_IN_FRAME
         /// Number of points, lines, or triangles rendered in the current 3D scene. This varies depending on camera position and rotation.
@@ -1175,13 +2062,35 @@ open class RenderingServer: Object {
         case bufferMemUsed = 4 // RENDERING_INFO_BUFFER_MEM_USED
         /// Video memory used (in bytes). When using the Forward+ or mobile rendering backends, this is always greater than the sum of .textureMemUsed and .bufferMemUsed, since there is miscellaneous data not accounted for by those two metrics. When using the GL Compatibility backend, this is equal to the sum of .textureMemUsed and .bufferMemUsed.
         case videoMemUsed = 5 // RENDERING_INFO_VIDEO_MEM_USED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .totalObjectsInFrame: return ".totalObjectsInFrame"
+                case .totalPrimitivesInFrame: return ".totalPrimitivesInFrame"
+                case .totalDrawCallsInFrame: return ".totalDrawCallsInFrame"
+                case .textureMemUsed: return ".textureMemUsed"
+                case .bufferMemUsed: return ".bufferMemUsed"
+                case .videoMemUsed: return ".videoMemUsed"
+            }
+            
+        }
+        
     }
     
-    public enum Features: Int64 {
+    public enum Features: Int64, CustomDebugStringConvertible {
         /// Hardware supports shaders. This enum is currently unused in Godot 3.x.
         case shaders = 0 // FEATURE_SHADERS
         /// Hardware supports multithreading. This enum is currently unused in Godot 3.x.
         case multithreaded = 1 // FEATURE_MULTITHREADED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .shaders: return ".shaders"
+                case .multithreaded: return ".multithreaded"
+            }
+            
+        }
+        
     }
     
     /* Constants */

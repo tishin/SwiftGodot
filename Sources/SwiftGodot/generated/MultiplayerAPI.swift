@@ -26,13 +26,23 @@
 /// - ``serverDisconnected``
 open class MultiplayerAPI: RefCounted {
     override open class var godotClassName: StringName { "MultiplayerAPI" }
-    public enum RPCMode: Int64 {
+    public enum RPCMode: Int64, CustomDebugStringConvertible {
         /// Used with ``Node/rpcConfig(method:config:)`` to disable a method or property for all RPC calls, making it unavailable. Default for all methods.
         case disabled = 0 // RPC_MODE_DISABLED
         /// Used with ``Node/rpcConfig(method:config:)`` to set a method to be callable remotely by any peer. Analogous to the `@rpc("any_peer")` annotation. Calls are accepted from all remote peers, no matter if they are node's authority or not.
         case anyPeer = 1 // RPC_MODE_ANY_PEER
         /// Used with ``Node/rpcConfig(method:config:)`` to set a method to be callable remotely only by the current multiplayer authority (which is the server by default). Analogous to the `@rpc("authority")` annotation. See ``Node/setMultiplayerAuthority(id:recursive:)``.
         case authority = 2 // RPC_MODE_AUTHORITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .anyPeer: return ".anyPeer"
+                case .authority: return ".authority"
+            }
+            
+        }
+        
     }
     
     

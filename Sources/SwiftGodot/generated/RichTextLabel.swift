@@ -27,7 +27,7 @@
 /// - ``finished``
 open class RichTextLabel: Control {
     override open class var godotClassName: StringName { "RichTextLabel" }
-    public enum ListType: Int64 {
+    public enum ListType: Int64, CustomDebugStringConvertible {
         /// Each list item has a number marker.
         case numbers = 0 // LIST_NUMBERS
         /// Each list item has a letter marker.
@@ -36,15 +36,36 @@ open class RichTextLabel: Control {
         case roman = 2 // LIST_ROMAN
         /// Each list item has a filled circle marker.
         case dots = 3 // LIST_DOTS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .numbers: return ".numbers"
+                case .letters: return ".letters"
+                case .roman: return ".roman"
+                case .dots: return ".dots"
+            }
+            
+        }
+        
     }
     
-    public enum MenuItems: Int64 {
+    public enum MenuItems: Int64, CustomDebugStringConvertible {
         /// Copies the selected text.
         case copy = 0 // MENU_COPY
         /// Selects the whole ``RichTextLabel`` text.
         case selectAll = 1 // MENU_SELECT_ALL
         /// Represents the size of the ``RichTextLabel/MenuItems`` enum.
         case max = 2 // MENU_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .copy: return ".copy"
+                case .selectAll: return ".selectAll"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct ImageUpdateMask: OptionSet, CustomDebugStringConvertible {

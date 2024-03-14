@@ -13,7 +13,7 @@
 /// 
 open class Generic6DOFJoint3D: Joint3D {
     override open class var godotClassName: StringName { "Generic6DOFJoint3D" }
-    public enum Param: Int64 {
+    public enum Param: Int64, CustomDebugStringConvertible {
         /// The minimum difference between the pivot points' axes.
         case linearLowerLimit = 0 // PARAM_LINEAR_LOWER_LIMIT
         /// The maximum difference between the pivot points' axes.
@@ -60,9 +60,39 @@ open class Generic6DOFJoint3D: Joint3D {
         case angularSpringEquilibriumPoint = 21 // PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT
         /// Represents the size of the ``Generic6DOFJoint3D/Param`` enum.
         case max = 22 // PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearLowerLimit: return ".linearLowerLimit"
+                case .linearUpperLimit: return ".linearUpperLimit"
+                case .linearLimitSoftness: return ".linearLimitSoftness"
+                case .linearRestitution: return ".linearRestitution"
+                case .linearDamping: return ".linearDamping"
+                case .linearMotorTargetVelocity: return ".linearMotorTargetVelocity"
+                case .linearMotorForceLimit: return ".linearMotorForceLimit"
+                case .linearSpringStiffness: return ".linearSpringStiffness"
+                case .linearSpringDamping: return ".linearSpringDamping"
+                case .linearSpringEquilibriumPoint: return ".linearSpringEquilibriumPoint"
+                case .angularLowerLimit: return ".angularLowerLimit"
+                case .angularUpperLimit: return ".angularUpperLimit"
+                case .angularLimitSoftness: return ".angularLimitSoftness"
+                case .angularDamping: return ".angularDamping"
+                case .angularRestitution: return ".angularRestitution"
+                case .angularForceLimit: return ".angularForceLimit"
+                case .angularErp: return ".angularErp"
+                case .angularMotorTargetVelocity: return ".angularMotorTargetVelocity"
+                case .angularMotorForceLimit: return ".angularMotorForceLimit"
+                case .angularSpringStiffness: return ".angularSpringStiffness"
+                case .angularSpringDamping: return ".angularSpringDamping"
+                case .angularSpringEquilibriumPoint: return ".angularSpringEquilibriumPoint"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Flag: Int64 {
+    public enum Flag: Int64, CustomDebugStringConvertible {
         /// If enabled, linear motion is possible within the given limits.
         case enableLinearLimit = 0 // FLAG_ENABLE_LINEAR_LIMIT
         /// If enabled, rotational motion is possible within the given limits.
@@ -77,6 +107,20 @@ open class Generic6DOFJoint3D: Joint3D {
         case enableLinearMotor = 5 // FLAG_ENABLE_LINEAR_MOTOR
         /// Represents the size of the ``Generic6DOFJoint3D/Flag`` enum.
         case max = 6 // FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .enableLinearLimit: return ".enableLinearLimit"
+                case .enableAngularLimit: return ".enableAngularLimit"
+                case .enableLinearSpring: return ".enableLinearSpring"
+                case .enableAngularSpring: return ".enableAngularSpring"
+                case .enableMotor: return ".enableMotor"
+                case .enableLinearMotor: return ".enableLinearMotor"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

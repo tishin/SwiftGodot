@@ -21,7 +21,7 @@
 /// - ``symbolValidate``
 open class CodeEdit: TextEdit {
     override open class var godotClassName: StringName { "CodeEdit" }
-    public enum CodeCompletionKind: Int64 {
+    public enum CodeCompletionKind: Int64, CustomDebugStringConvertible {
         /// Marks the option as a class.
         case `class` = 0 // KIND_CLASS
         /// Marks the option as a function.
@@ -42,9 +42,26 @@ open class CodeEdit: TextEdit {
         case filePath = 8 // KIND_FILE_PATH
         /// Marks the option as unclassified or plain text.
         case plainText = 9 // KIND_PLAIN_TEXT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`class`: return ".`class`"
+                case .function: return ".function"
+                case .signal: return ".signal"
+                case .variable: return ".variable"
+                case .member: return ".member"
+                case .`enum`: return ".`enum`"
+                case .constant: return ".constant"
+                case .nodePath: return ".nodePath"
+                case .filePath: return ".filePath"
+                case .plainText: return ".plainText"
+            }
+            
+        }
+        
     }
     
-    public enum CodeCompletionLocation: Int64 {
+    public enum CodeCompletionLocation: Int64, CustomDebugStringConvertible {
         /// The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
         case local = 0 // LOCATION_LOCAL
         /// The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc) to store the depth of an option in the class or a parent class.
@@ -53,6 +70,17 @@ open class CodeEdit: TextEdit {
         case otherUserCode = 512 // LOCATION_OTHER_USER_CODE
         /// The option is from other engine code, not covered by the other enum constants - e.g. built-in classes.
         case other = 1024 // LOCATION_OTHER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .local: return ".local"
+                case .parentMask: return ".parentMask"
+                case .otherUserCode: return ".otherUserCode"
+                case .other: return ".other"
+            }
+            
+        }
+        
     }
     
     

@@ -7,7 +7,7 @@
 
 open class GDExtension: Resource {
     override open class var godotClassName: StringName { "GDExtension" }
-    public enum InitializationLevel: Int64 {
+    public enum InitializationLevel: Int64, CustomDebugStringConvertible {
         /// 
         case core = 0 // INITIALIZATION_LEVEL_CORE
         /// 
@@ -16,6 +16,17 @@ open class GDExtension: Resource {
         case scene = 2 // INITIALIZATION_LEVEL_SCENE
         /// 
         case editor = 3 // INITIALIZATION_LEVEL_EDITOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .core: return ".core"
+                case .servers: return ".servers"
+                case .scene: return ".scene"
+                case .editor: return ".editor"
+            }
+            
+        }
+        
     }
     
     /* Methods */

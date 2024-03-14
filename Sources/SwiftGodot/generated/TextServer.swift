@@ -10,7 +10,7 @@
 /// ``TextServer`` is the API backend for managing fonts and rendering text.
 open class TextServer: RefCounted {
     override open class var godotClassName: StringName { "TextServer" }
-    public enum FontAntialiasing: Int64 {
+    public enum FontAntialiasing: Int64, CustomDebugStringConvertible {
         /// Font glyphs are rasterized as 1-bit bitmaps.
         case none = 0 // FONT_ANTIALIASING_NONE
         /// Font glyphs are rasterized as 8-bit grayscale anti-aliased bitmaps.
@@ -22,9 +22,19 @@ open class TextServer: RefCounted {
         /// LCD subpixel anti-aliasing mode is suitable only for rendering horizontal, unscaled text in 2D.
         /// 
         case lcd = 2 // FONT_ANTIALIASING_LCD
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .gray: return ".gray"
+                case .lcd: return ".lcd"
+            }
+            
+        }
+        
     }
     
-    public enum FontLCDSubpixelLayout: Int64 {
+    public enum FontLCDSubpixelLayout: Int64, CustomDebugStringConvertible {
         /// Unknown or unsupported subpixel layout, LCD subpixel antialiasing is disabled.
         case none = 0 // FONT_LCD_SUBPIXEL_LAYOUT_NONE
         /// Horizontal RGB subpixel layout.
@@ -37,9 +47,22 @@ open class TextServer: RefCounted {
         case vbgr = 4 // FONT_LCD_SUBPIXEL_LAYOUT_VBGR
         /// 
         case max = 5 // FONT_LCD_SUBPIXEL_LAYOUT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .hrgb: return ".hrgb"
+                case .hbgr: return ".hbgr"
+                case .vrgb: return ".vrgb"
+                case .vbgr: return ".vbgr"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Direction: Int64 {
+    public enum Direction: Int64, CustomDebugStringConvertible {
         /// Text direction is determined based on contents and current locale.
         case auto = 0 // DIRECTION_AUTO
         /// Text is written from left to right.
@@ -48,9 +71,20 @@ open class TextServer: RefCounted {
         case rtl = 2 // DIRECTION_RTL
         /// Text writing direction is the same as base string writing direction. Used for BiDi override only.
         case inherited = 3 // DIRECTION_INHERITED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .auto: return ".auto"
+                case .ltr: return ".ltr"
+                case .rtl: return ".rtl"
+                case .inherited: return ".inherited"
+            }
+            
+        }
+        
     }
     
-    public enum Orientation: Int64 {
+    public enum Orientation: Int64, CustomDebugStringConvertible {
         /// Text is written horizontally.
         case horizontal = 0 // ORIENTATION_HORIZONTAL
         /// Left to right text is written vertically from top to bottom.
@@ -58,6 +92,15 @@ open class TextServer: RefCounted {
         /// Right to left text is written vertically from bottom to top.
         /// 
         case vertical = 1 // ORIENTATION_VERTICAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .horizontal: return ".horizontal"
+                case .vertical: return ".vertical"
+            }
+            
+        }
+        
     }
     
     public struct JustificationFlag: OptionSet, CustomDebugStringConvertible {
@@ -99,7 +142,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum AutowrapMode: Int64 {
+    public enum AutowrapMode: Int64, CustomDebugStringConvertible {
         /// Autowrap is disabled.
         case off = 0 // AUTOWRAP_OFF
         /// Wraps the text inside the node's bounding rectangle by allowing to break lines at arbitrary positions, which is useful when very limited space is available.
@@ -108,6 +151,17 @@ open class TextServer: RefCounted {
         case word = 2 // AUTOWRAP_WORD
         /// Behaves similarly to .autowrapWord, but force-breaks a word if that single word does not fit in one line.
         case wordSmart = 3 // AUTOWRAP_WORD_SMART
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .off: return ".off"
+                case .arbitrary: return ".arbitrary"
+                case .word: return ".word"
+                case .wordSmart: return ".wordSmart"
+            }
+            
+        }
+        
     }
     
     public struct LineBreakFlag: OptionSet, CustomDebugStringConvertible {
@@ -140,7 +194,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum VisibleCharactersBehavior: Int64 {
+    public enum VisibleCharactersBehavior: Int64, CustomDebugStringConvertible {
         /// Trims text before the shaping. e.g, increasing ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` value is visually identical to typing the text.
         case charsBeforeShaping = 0 // VC_CHARS_BEFORE_SHAPING
         /// Displays glyphs that are mapped to the first ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` characters from the beginning of the text.
@@ -151,9 +205,21 @@ open class TextServer: RefCounted {
         case glyphsLtr = 3 // VC_GLYPHS_LTR
         /// Displays ``Label/visibleRatio`` or ``RichTextLabel/visibleRatio`` glyphs, starting from the right.
         case glyphsRtl = 4 // VC_GLYPHS_RTL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .charsBeforeShaping: return ".charsBeforeShaping"
+                case .charsAfterShaping: return ".charsAfterShaping"
+                case .glyphsAuto: return ".glyphsAuto"
+                case .glyphsLtr: return ".glyphsLtr"
+                case .glyphsRtl: return ".glyphsRtl"
+            }
+            
+        }
+        
     }
     
-    public enum OverrunBehavior: Int64 {
+    public enum OverrunBehavior: Int64, CustomDebugStringConvertible {
         /// No text trimming is performed.
         case noTrimming = 0 // OVERRUN_NO_TRIMMING
         /// Trims the text per character.
@@ -164,6 +230,18 @@ open class TextServer: RefCounted {
         case trimEllipsis = 3 // OVERRUN_TRIM_ELLIPSIS
         /// Trims the text per word and adds an ellipsis to indicate that parts are hidden.
         case trimWordEllipsis = 4 // OVERRUN_TRIM_WORD_ELLIPSIS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .noTrimming: return ".noTrimming"
+                case .trimChar: return ".trimChar"
+                case .trimWord: return ".trimWord"
+                case .trimEllipsis: return ".trimEllipsis"
+                case .trimWordEllipsis: return ".trimWordEllipsis"
+            }
+            
+        }
+        
     }
     
     public struct TextOverrunFlag: OptionSet, CustomDebugStringConvertible {
@@ -250,7 +328,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum Hinting: Int64 {
+    public enum Hinting: Int64, CustomDebugStringConvertible {
         /// Disables font hinting (smoother but less crisp).
         case none = 0 // HINTING_NONE
         /// Use the light font hinting mode.
@@ -260,9 +338,19 @@ open class TextServer: RefCounted {
         /// > Note: This hinting mode changes both horizontal and vertical glyph metrics. If applied to monospace font, some glyphs might have different width.
         /// 
         case normal = 2 // HINTING_NORMAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .light: return ".light"
+                case .normal: return ".normal"
+            }
+            
+        }
+        
     }
     
-    public enum SubpixelPositioning: Int64 {
+    public enum SubpixelPositioning: Int64, CustomDebugStringConvertible {
         /// Glyph horizontal position is rounded to the whole pixel size, each glyph is rasterized once.
         case disabled = 0 // SUBPIXEL_POSITIONING_DISABLED
         /// Glyph horizontal position is rounded based on font size.
@@ -282,9 +370,22 @@ open class TextServer: RefCounted {
         case oneHalfMaxSize = 20 // SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE
         /// Maximum font size which will use one quarter of the pixel subpixel positioning in .auto mode.
         case oneQuarterMaxSize = 16 // SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .auto: return ".auto"
+                case .oneHalf: return ".oneHalf"
+                case .oneQuarter: return ".oneQuarter"
+                case .oneHalfMaxSize: return ".oneHalfMaxSize"
+                case .oneQuarterMaxSize: return ".oneQuarterMaxSize"
+            }
+            
+        }
+        
     }
     
-    public enum Feature: Int64 {
+    public enum Feature: Int64, CustomDebugStringConvertible {
         /// TextServer supports simple text layouts.
         case simpleLayout = 1 // FEATURE_SIMPLE_LAYOUT
         /// TextServer supports bidirectional text layouts.
@@ -315,18 +416,50 @@ open class TextServer: RefCounted {
         case unicodeIdentifiers = 8192 // FEATURE_UNICODE_IDENTIFIERS
         /// TextServer supports [url=https://unicode.org/reports/tr36/]Unicode Technical Report #36[/url] and [url=https://unicode.org/reports/tr39/]Unicode Technical Standard #39[/url] based spoof detection features.
         case unicodeSecurity = 16384 // FEATURE_UNICODE_SECURITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .simpleLayout: return ".simpleLayout"
+                case .bidiLayout: return ".bidiLayout"
+                case .verticalLayout: return ".verticalLayout"
+                case .shaping: return ".shaping"
+                case .kashidaJustification: return ".kashidaJustification"
+                case .breakIterators: return ".breakIterators"
+                case .fontBitmap: return ".fontBitmap"
+                case .fontDynamic: return ".fontDynamic"
+                case .fontMsdf: return ".fontMsdf"
+                case .fontSystem: return ".fontSystem"
+                case .fontVariable: return ".fontVariable"
+                case .contextSensitiveCaseConversion: return ".contextSensitiveCaseConversion"
+                case .useSupportData: return ".useSupportData"
+                case .unicodeIdentifiers: return ".unicodeIdentifiers"
+                case .unicodeSecurity: return ".unicodeSecurity"
+            }
+            
+        }
+        
     }
     
-    public enum ContourPointTag: Int64 {
+    public enum ContourPointTag: Int64, CustomDebugStringConvertible {
         /// Contour point is on the curve.
         case on = 1 // CONTOUR_CURVE_TAG_ON
         /// Contour point isn't on the curve, but serves as a control point for a conic (quadratic) Bézier arc.
         case offConic = 0 // CONTOUR_CURVE_TAG_OFF_CONIC
         /// Contour point isn't on the curve, but serves as a control point for a cubic Bézier arc.
         case offCubic = 2 // CONTOUR_CURVE_TAG_OFF_CUBIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .on: return ".on"
+                case .offConic: return ".offConic"
+                case .offCubic: return ".offCubic"
+            }
+            
+        }
+        
     }
     
-    public enum SpacingType: Int64 {
+    public enum SpacingType: Int64, CustomDebugStringConvertible {
         /// Spacing for each glyph.
         case glyph = 0 // SPACING_GLYPH
         /// Spacing for the space character.
@@ -337,6 +470,18 @@ open class TextServer: RefCounted {
         case bottom = 3 // SPACING_BOTTOM
         /// 
         case max = 4 // SPACING_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .glyph: return ".glyph"
+                case .space: return ".space"
+                case .top: return ".top"
+                case .bottom: return ".bottom"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct FontStyle: OptionSet, CustomDebugStringConvertible {
@@ -363,7 +508,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum StructuredTextParser: Int64 {
+    public enum StructuredTextParser: Int64, CustomDebugStringConvertible {
         /// Use default Unicode BiDi algorithm.
         case `default` = 0 // STRUCTURED_TEXT_DEFAULT
         /// BiDi override for URI.
@@ -378,15 +523,39 @@ open class TextServer: RefCounted {
         case gdscript = 5 // STRUCTURED_TEXT_GDSCRIPT
         /// User defined structured text BiDi override function.
         case custom = 6 // STRUCTURED_TEXT_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .uri: return ".uri"
+                case .file: return ".file"
+                case .email: return ".email"
+                case .list: return ".list"
+                case .gdscript: return ".gdscript"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
-    public enum FixedSizeScaleMode: Int64 {
+    public enum FixedSizeScaleMode: Int64, CustomDebugStringConvertible {
         /// Bitmap font is not scaled.
         case disable = 0 // FIXED_SIZE_SCALE_DISABLE
         /// Bitmap font is scaled to the closest integer multiple of the font's fixed size. This is the recommended option for pixel art fonts.
         case integerOnly = 1 // FIXED_SIZE_SCALE_INTEGER_ONLY
         /// Bitmap font is scaled to an arbitrary (fractional) size. This is the recommended option for non-pixel art fonts.
         case enabled = 2 // FIXED_SIZE_SCALE_ENABLED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disable: return ".disable"
+                case .integerOnly: return ".integerOnly"
+                case .enabled: return ".enabled"
+            }
+            
+        }
+        
     }
     
     /* Methods */

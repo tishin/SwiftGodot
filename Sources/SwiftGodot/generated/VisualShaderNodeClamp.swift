@@ -10,7 +10,7 @@
 /// Constrains a value to lie between `min` and `max` values.
 open class VisualShaderNodeClamp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeClamp" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT
         /// An integer scalar.
@@ -25,6 +25,20 @@ open class VisualShaderNodeClamp: VisualShaderNode {
         case vector4d = 5 // OP_TYPE_VECTOR_4D
         /// Represents the size of the ``VisualShaderNodeClamp/OpType`` enum.
         case max = 6 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .float: return ".float"
+                case .int: return ".int"
+                case .uint: return ".uint"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

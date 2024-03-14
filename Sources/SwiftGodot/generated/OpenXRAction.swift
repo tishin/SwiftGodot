@@ -17,7 +17,7 @@
 /// 
 open class OpenXRAction: Resource {
     override open class var godotClassName: StringName { "OpenXRAction" }
-    public enum ActionType: Int64 {
+    public enum ActionType: Int64, CustomDebugStringConvertible {
         /// This action provides a boolean value.
         case bool = 0 // OPENXR_ACTION_BOOL
         /// This action provides a float value between `0.0` and `1.0` for any analog input such as triggers.
@@ -26,6 +26,17 @@ open class OpenXRAction: Resource {
         case vector2 = 2 // OPENXR_ACTION_VECTOR2
         /// 
         case pose = 3 // OPENXR_ACTION_POSE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bool: return ".bool"
+                case .float: return ".float"
+                case .vector2: return ".vector2"
+                case .pose: return ".pose"
+            }
+            
+        }
+        
     }
     
     

@@ -25,7 +25,7 @@
 /// - ``areaExited``
 open class Area2D: CollisionObject2D {
     override open class var godotClassName: StringName { "Area2D" }
-    public enum SpaceOverride: Int64 {
+    public enum SpaceOverride: Int64, CustomDebugStringConvertible {
         /// This area does not affect gravity/damping.
         case disabled = 0 // SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damping values to whatever has been calculated so far (in ``priority`` order).
@@ -36,6 +36,18 @@ open class Area2D: CollisionObject2D {
         case replace = 3 // SPACE_OVERRIDE_REPLACE
         /// This area replaces any gravity/damping calculated so far (in ``priority`` order), but keeps calculating the rest of the areas.
         case replaceCombine = 4 // SPACE_OVERRIDE_REPLACE_COMBINE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .combine: return ".combine"
+                case .combineReplace: return ".combineReplace"
+                case .replace: return ".replace"
+                case .replaceCombine: return ".replaceCombine"
+            }
+            
+        }
+        
     }
     
     

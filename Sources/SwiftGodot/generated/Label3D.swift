@@ -10,7 +10,7 @@
 /// A node for displaying plain text in 3D space. By adjusting various properties of this node, you can configure things such as the text's appearance and whether it always faces the camera.
 open class Label3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "Label3D" }
-    public enum DrawFlags: Int64 {
+    public enum DrawFlags: Int64, CustomDebugStringConvertible {
         /// If set, lights in the environment affect the label.
         case shaded = 0 // FLAG_SHADED
         /// If set, text can be seen from the back as well. If not, the text is invisible when looking at it from behind.
@@ -21,9 +21,21 @@ open class Label3D: GeometryInstance3D {
         case fixedSize = 3 // FLAG_FIXED_SIZE
         /// Represents the size of the ``Label3D/DrawFlags`` enum.
         case max = 4 // FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .shaded: return ".shaded"
+                case .doubleSided: return ".doubleSided"
+                case .disableDepthTest: return ".disableDepthTest"
+                case .fixedSize: return ".fixedSize"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum AlphaCutMode: Int64 {
+    public enum AlphaCutMode: Int64, CustomDebugStringConvertible {
         /// This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping. ``GeometryInstance3D/castShadow`` has no effect when this transparency mode is used; the ``Label3D`` will never cast shadows.
         case disabled = 0 // ALPHA_CUT_DISABLED
         /// This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ``ProjectSettings/rendering/antiAliasing/quality/screenSpaceAa``). This mode is also known as _alpha testing_ or _1-bit transparency_.
@@ -40,6 +52,17 @@ open class Label3D: GeometryInstance3D {
         case opaquePrepass = 2 // ALPHA_CUT_OPAQUE_PREPASS
         /// This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
         case hash = 3 // ALPHA_CUT_HASH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .discard: return ".discard"
+                case .opaquePrepass: return ".opaquePrepass"
+                case .hash: return ".hash"
+            }
+            
+        }
+        
     }
     
     

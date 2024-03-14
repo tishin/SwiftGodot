@@ -27,7 +27,7 @@ open class Performance: Object {
     }()
     
     override open class var godotClassName: StringName { "Performance" }
-    public enum Monitor: Int64 {
+    public enum Monitor: Int64, CustomDebugStringConvertible {
         /// The number of frames rendered in the last second. This metric is only updated once per second, even if queried more often. _Higher is better._
         case timeFps = 0 // TIME_FPS
         /// Time it took to complete one frame, in seconds. _Lower is better._
@@ -96,6 +96,47 @@ open class Performance: Object {
         case navigationEdgeFreeCount = 32 // NAVIGATION_EDGE_FREE_COUNT
         /// Represents the size of the ``Performance/Monitor`` enum.
         case monitorMax = 33 // MONITOR_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .timeFps: return ".timeFps"
+                case .timeProcess: return ".timeProcess"
+                case .timePhysicsProcess: return ".timePhysicsProcess"
+                case .timeNavigationProcess: return ".timeNavigationProcess"
+                case .memoryStatic: return ".memoryStatic"
+                case .memoryStaticMax: return ".memoryStaticMax"
+                case .memoryMessageBufferMax: return ".memoryMessageBufferMax"
+                case .objectCount: return ".objectCount"
+                case .objectResourceCount: return ".objectResourceCount"
+                case .objectNodeCount: return ".objectNodeCount"
+                case .objectOrphanNodeCount: return ".objectOrphanNodeCount"
+                case .renderTotalObjectsInFrame: return ".renderTotalObjectsInFrame"
+                case .renderTotalPrimitivesInFrame: return ".renderTotalPrimitivesInFrame"
+                case .renderTotalDrawCallsInFrame: return ".renderTotalDrawCallsInFrame"
+                case .renderVideoMemUsed: return ".renderVideoMemUsed"
+                case .renderTextureMemUsed: return ".renderTextureMemUsed"
+                case .renderBufferMemUsed: return ".renderBufferMemUsed"
+                case .physics2dActiveObjects: return ".physics2dActiveObjects"
+                case .physics2dCollisionPairs: return ".physics2dCollisionPairs"
+                case .physics2dIslandCount: return ".physics2dIslandCount"
+                case .physics3dActiveObjects: return ".physics3dActiveObjects"
+                case .physics3dCollisionPairs: return ".physics3dCollisionPairs"
+                case .physics3dIslandCount: return ".physics3dIslandCount"
+                case .audioOutputLatency: return ".audioOutputLatency"
+                case .navigationActiveMaps: return ".navigationActiveMaps"
+                case .navigationRegionCount: return ".navigationRegionCount"
+                case .navigationAgentCount: return ".navigationAgentCount"
+                case .navigationLinkCount: return ".navigationLinkCount"
+                case .navigationPolygonCount: return ".navigationPolygonCount"
+                case .navigationEdgeCount: return ".navigationEdgeCount"
+                case .navigationEdgeMergeCount: return ".navigationEdgeMergeCount"
+                case .navigationEdgeConnectionCount: return ".navigationEdgeConnectionCount"
+                case .navigationEdgeFreeCount: return ".navigationEdgeFreeCount"
+                case .monitorMax: return ".monitorMax"
+            }
+            
+        }
+        
     }
     
     /* Methods */

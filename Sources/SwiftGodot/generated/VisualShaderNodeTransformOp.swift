@@ -10,7 +10,7 @@
 /// Applies ```operator``` to two transform (4x4 matrices) inputs.
 open class VisualShaderNodeTransformOp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeTransformOp" }
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Multiplies transform `a` by the transform `b`.
         case axb = 0 // OP_AxB
         /// Multiplies transform `b` by the transform `a`.
@@ -31,6 +31,23 @@ open class VisualShaderNodeTransformOp: VisualShaderNode {
         case bDivA = 8 // OP_B_DIV_A
         /// Represents the size of the ``VisualShaderNodeTransformOp/Operator`` enum.
         case max = 9 // OP_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .axb: return ".axb"
+                case .bxa: return ".bxa"
+                case .axbComp: return ".axbComp"
+                case .bxaComp: return ".bxaComp"
+                case .add: return ".add"
+                case .aMinusB: return ".aMinusB"
+                case .bMinusA: return ".bMinusA"
+                case .aDivB: return ".aDivB"
+                case .bDivA: return ".bDivA"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

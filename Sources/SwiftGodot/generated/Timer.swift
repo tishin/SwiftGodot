@@ -20,11 +20,20 @@
 /// - ``timeout``
 open class Timer: Node {
     override open class var godotClassName: StringName { "Timer" }
-    public enum TimerProcessCallback: Int64 {
+    public enum TimerProcessCallback: Int64, CustomDebugStringConvertible {
         /// Update the timer during physics frames (see ``Node/``notificationInternalPhysicsProcess````).
         case physics = 0 // TIMER_PROCESS_PHYSICS
         /// Update the timer during process frames (see ``Node/``notificationInternalProcess````).
         case idle = 1 // TIMER_PROCESS_IDLE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .physics: return ".physics"
+                case .idle: return ".idle"
+            }
+            
+        }
+        
     }
     
     

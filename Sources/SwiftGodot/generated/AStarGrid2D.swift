@@ -15,7 +15,7 @@
 /// 
 open class AStarGrid2D: RefCounted {
     override open class var godotClassName: StringName { "AStarGrid2D" }
-    public enum Heuristic: Int64 {
+    public enum Heuristic: Int64, CustomDebugStringConvertible {
         /// The [url=https://en.wikipedia.org/wiki/Euclidean_distance]Euclidean heuristic[/url] to be used for the pathfinding using the following formula:
         /// 
         /// > Note: This is also the internal heuristic used in ``AStar3D`` and ``AStar2D`` by default (with the inclusion of possible z-axis coordinate).
@@ -34,9 +34,21 @@ open class AStarGrid2D: RefCounted {
         case chebyshev = 3 // HEURISTIC_CHEBYSHEV
         /// Represents the size of the ``AStarGrid2D/Heuristic`` enum.
         case max = 4 // HEURISTIC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .euclidean: return ".euclidean"
+                case .manhattan: return ".manhattan"
+                case .octile: return ".octile"
+                case .chebyshev: return ".chebyshev"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum DiagonalMode: Int64 {
+    public enum DiagonalMode: Int64, CustomDebugStringConvertible {
         /// The pathfinding algorithm will ignore solid neighbors around the target cell and allow passing using diagonals.
         case always = 0 // DIAGONAL_MODE_ALWAYS
         /// The pathfinding algorithm will ignore all diagonals and the way will be always orthogonal.
@@ -47,6 +59,18 @@ open class AStarGrid2D: RefCounted {
         case onlyIfNoObstacles = 3 // DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
         /// Represents the size of the ``AStarGrid2D/DiagonalMode`` enum.
         case max = 4 // DIAGONAL_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .always: return ".always"
+                case .never: return ".never"
+                case .atLeastOneWalkable: return ".atLeastOneWalkable"
+                case .onlyIfNoObstacles: return ".onlyIfNoObstacles"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

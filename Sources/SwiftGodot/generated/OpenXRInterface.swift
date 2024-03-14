@@ -22,25 +22,45 @@
 /// - ``poseRecentered``
 open class OpenXRInterface: XRInterface {
     override open class var godotClassName: StringName { "OpenXRInterface" }
-    public enum Hand: Int64 {
+    public enum Hand: Int64, CustomDebugStringConvertible {
         /// Left hand.
         case left = 0 // HAND_LEFT
         /// Right hand.
         case right = 1 // HAND_RIGHT
         /// Maximum value for the hand enum.
         case max = 2 // HAND_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .left: return ".left"
+                case .right: return ".right"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum HandMotionRange: Int64 {
+    public enum HandMotionRange: Int64, CustomDebugStringConvertible {
         /// 
         case unobstructed = 0 // HAND_MOTION_RANGE_UNOBSTRUCTED
         /// 
         case conformToController = 1 // HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER
         /// 
         case max = 2 // HAND_MOTION_RANGE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .unobstructed: return ".unobstructed"
+                case .conformToController: return ".conformToController"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum HandJoints: Int64 {
+    public enum HandJoints: Int64, CustomDebugStringConvertible {
         /// Palm joint.
         case palm = 0 // HAND_JOINT_PALM
         /// Wrist joint.
@@ -95,6 +115,40 @@ open class OpenXRInterface: XRInterface {
         case littleTip = 25 // HAND_JOINT_LITTLE_TIP
         /// Maximum value for the hand joint enum.
         case max = 26 // HAND_JOINT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .palm: return ".palm"
+                case .wrist: return ".wrist"
+                case .thumbMetacarpal: return ".thumbMetacarpal"
+                case .thumbProximal: return ".thumbProximal"
+                case .thumbDistal: return ".thumbDistal"
+                case .thumbTip: return ".thumbTip"
+                case .indexMetacarpal: return ".indexMetacarpal"
+                case .indexProximal: return ".indexProximal"
+                case .indexIntermediate: return ".indexIntermediate"
+                case .indexDistal: return ".indexDistal"
+                case .indexTip: return ".indexTip"
+                case .middleMetacarpal: return ".middleMetacarpal"
+                case .middleProximal: return ".middleProximal"
+                case .middleIntermediate: return ".middleIntermediate"
+                case .middleDistal: return ".middleDistal"
+                case .middleTip: return ".middleTip"
+                case .ringMetacarpal: return ".ringMetacarpal"
+                case .ringProximal: return ".ringProximal"
+                case .ringIntermediate: return ".ringIntermediate"
+                case .ringDistal: return ".ringDistal"
+                case .ringTip: return ".ringTip"
+                case .littleMetacarpal: return ".littleMetacarpal"
+                case .littleProximal: return ".littleProximal"
+                case .littleIntermediate: return ".littleIntermediate"
+                case .littleDistal: return ".littleDistal"
+                case .littleTip: return ".littleTip"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct HandJointFlags: OptionSet, CustomDebugStringConvertible {

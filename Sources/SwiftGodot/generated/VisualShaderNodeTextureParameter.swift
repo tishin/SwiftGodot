@@ -10,7 +10,7 @@
 /// Performs a lookup operation on the texture provided as a uniform for the shader.
 open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     override open class var godotClassName: StringName { "VisualShaderNodeTextureParameter" }
-    public enum TextureType: Int64 {
+    public enum TextureType: Int64, CustomDebugStringConvertible {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA
         /// Adds `source_color` as hint to the uniform declaration for proper sRGB to linear conversion.
@@ -21,9 +21,21 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         case anisotropy = 3 // TYPE_ANISOTROPY
         /// Represents the size of the ``VisualShaderNodeTextureParameter/TextureType`` enum.
         case max = 4 // TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .data: return ".data"
+                case .color: return ".color"
+                case .normalMap: return ".normalMap"
+                case .anisotropy: return ".anisotropy"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ColorDefault: Int64 {
+    public enum ColorDefault: Int64, CustomDebugStringConvertible {
         /// Defaults to fully opaque white color.
         case white = 0 // COLOR_DEFAULT_WHITE
         /// Defaults to fully opaque black color.
@@ -32,9 +44,20 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         case transparent = 2 // COLOR_DEFAULT_TRANSPARENT
         /// Represents the size of the ``VisualShaderNodeTextureParameter/ColorDefault`` enum.
         case max = 3 // COLOR_DEFAULT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .white: return ".white"
+                case .black: return ".black"
+                case .transparent: return ".transparent"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureFilter: Int64 {
+    public enum TextureFilter: Int64, CustomDebugStringConvertible {
         /// Sample the texture using the filter determined by the node this shader is attached to.
         case `default` = 0 // FILTER_DEFAULT
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
@@ -57,9 +80,24 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         case linearMipmapAnisotropic = 6 // FILTER_LINEAR_MIPMAP_ANISOTROPIC
         /// Represents the size of the ``VisualShaderNodeTextureParameter/TextureFilter`` enum.
         case max = 7 // FILTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .nearestMipmap: return ".nearestMipmap"
+                case .linearMipmap: return ".linearMipmap"
+                case .nearestMipmapAnisotropic: return ".nearestMipmapAnisotropic"
+                case .linearMipmapAnisotropic: return ".linearMipmapAnisotropic"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureRepeat: Int64 {
+    public enum TextureRepeat: Int64, CustomDebugStringConvertible {
         /// Sample the texture using the repeat mode determined by the node this shader is attached to.
         case `default` = 0 // REPEAT_DEFAULT
         /// Texture will repeat normally.
@@ -68,9 +106,20 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         case disabled = 2 // REPEAT_DISABLED
         /// Represents the size of the ``VisualShaderNodeTextureParameter/TextureRepeat`` enum.
         case max = 3 // REPEAT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .enabled: return ".enabled"
+                case .disabled: return ".disabled"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureSource: Int64 {
+    public enum TextureSource: Int64, CustomDebugStringConvertible {
         /// The texture source is not specified in the shader.
         case none = 0 // SOURCE_NONE
         /// The texture source is the screen texture which captures all opaque objects drawn this frame.
@@ -81,6 +130,18 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         case normalRoughness = 3 // SOURCE_NORMAL_ROUGHNESS
         /// Represents the size of the ``VisualShaderNodeTextureParameter/TextureSource`` enum.
         case max = 4 // SOURCE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .screen: return ".screen"
+                case .depth: return ".depth"
+                case .normalRoughness: return ".normalRoughness"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

@@ -15,13 +15,23 @@
 /// - ``textureChanged``
 open class NinePatchRect: Control {
     override open class var godotClassName: StringName { "NinePatchRect" }
-    public enum AxisStretchMode: Int64 {
+    public enum AxisStretchMode: Int64, CustomDebugStringConvertible {
         /// Stretches the center texture across the NinePatchRect. This may cause the texture to be distorted.
         case stretch = 0 // AXIS_STRETCH_MODE_STRETCH
         /// Repeats the center texture across the NinePatchRect. This won't cause any visible distortion. The texture must be seamless for this to work without displaying artifacts between edges.
         case tile = 1 // AXIS_STRETCH_MODE_TILE
         /// Repeats the center texture across the NinePatchRect, but will also stretch the texture to make sure each tile is visible in full. This may cause the texture to be distorted, but less than .stretch. The texture must be seamless for this to work without displaying artifacts between edges.
         case tileFit = 2 // AXIS_STRETCH_MODE_TILE_FIT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stretch: return ".stretch"
+                case .tile: return ".tile"
+                case .tileFit: return ".tileFit"
+            }
+            
+        }
+        
     }
     
     

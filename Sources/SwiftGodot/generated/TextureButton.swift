@@ -15,7 +15,7 @@
 /// 
 open class TextureButton: BaseButton {
     override open class var godotClassName: StringName { "TextureButton" }
-    public enum StretchMode: Int64 {
+    public enum StretchMode: Int64, CustomDebugStringConvertible {
         /// Scale to fit the node's bounding rectangle.
         case scale = 0 // STRETCH_SCALE
         /// Tile inside the node's bounding rectangle.
@@ -30,6 +30,20 @@ open class TextureButton: BaseButton {
         case keepAspectCentered = 5 // STRETCH_KEEP_ASPECT_CENTERED
         /// Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
         case keepAspectCovered = 6 // STRETCH_KEEP_ASPECT_COVERED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scale: return ".scale"
+                case .tile: return ".tile"
+                case .keep: return ".keep"
+                case .keepCentered: return ".keepCentered"
+                case .keepAspect: return ".keepAspect"
+                case .keepAspectCentered: return ".keepAspectCentered"
+                case .keepAspectCovered: return ".keepAspectCovered"
+            }
+            
+        }
+        
     }
     
     

@@ -19,7 +19,7 @@
 /// 
 open class PackedScene: Resource {
     override open class var godotClassName: StringName { "PackedScene" }
-    public enum GenEditState: Int64 {
+    public enum GenEditState: Int64, CustomDebugStringConvertible {
         /// If passed to ``instantiate(editState:)``, blocks edits to the scene state.
         case disabled = 0 // GEN_EDIT_STATE_DISABLED
         /// If passed to ``instantiate(editState:)``, provides local scene resources to the local scene.
@@ -37,6 +37,17 @@ open class PackedScene: Resource {
         /// > Note: Only available in editor builds.
         /// 
         case mainInherited = 3 // GEN_EDIT_STATE_MAIN_INHERITED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .instance: return ".instance"
+                case .main: return ".main"
+                case .mainInherited: return ".mainInherited"
+            }
+            
+        }
+        
     }
     
     /* Methods */

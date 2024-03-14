@@ -20,7 +20,7 @@
 /// - ``animationNodeRemoved``
 open class AnimationNode: Resource {
     override open class var godotClassName: StringName { "AnimationNode" }
-    public enum FilterAction: Int64 {
+    public enum FilterAction: Int64, CustomDebugStringConvertible {
         /// Do not use filtering.
         case ignore = 0 // FILTER_IGNORE
         /// Paths matching the filter will be allowed to pass.
@@ -29,6 +29,17 @@ open class AnimationNode: Resource {
         case stop = 2 // FILTER_STOP
         /// Paths matching the filter will be blended (by the blend value).
         case blend = 3 // FILTER_BLEND
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ignore: return ".ignore"
+                case .pass: return ".pass"
+                case .stop: return ".stop"
+                case .blend: return ".blend"
+            }
+            
+        }
+        
     }
     
     

@@ -10,7 +10,7 @@
 /// A physics joint that restricts the rotation of a 3D physics body around an axis relative to another physics body. For example, Body A can be a ``StaticBody3D`` representing a door hinge that a ``RigidBody3D`` rotates around.
 open class HingeJoint3D: Joint3D {
     override open class var godotClassName: StringName { "HingeJoint3D" }
-    public enum Param: Int64 {
+    public enum Param: Int64, CustomDebugStringConvertible {
         /// The speed with which the two bodies get pulled together when they move in different directions.
         case bias = 0 // PARAM_BIAS
         /// The maximum rotation. Only active if ``angularLimit/enable`` is `true`.
@@ -29,15 +29,41 @@ open class HingeJoint3D: Joint3D {
         case motorMaxImpulse = 7 // PARAM_MOTOR_MAX_IMPULSE
         /// Represents the size of the ``HingeJoint3D/Param`` enum.
         case max = 8 // PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bias: return ".bias"
+                case .limitUpper: return ".limitUpper"
+                case .limitLower: return ".limitLower"
+                case .limitBias: return ".limitBias"
+                case .limitSoftness: return ".limitSoftness"
+                case .limitRelaxation: return ".limitRelaxation"
+                case .motorTargetVelocity: return ".motorTargetVelocity"
+                case .motorMaxImpulse: return ".motorMaxImpulse"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Flag: Int64 {
+    public enum Flag: Int64, CustomDebugStringConvertible {
         /// If `true`, the hinges maximum and minimum rotation, defined by ``angularLimit/lower`` and ``angularLimit/upper`` has effects.
         case useLimit = 0 // FLAG_USE_LIMIT
         /// When activated, a motor turns the hinge.
         case enableMotor = 1 // FLAG_ENABLE_MOTOR
         /// Represents the size of the ``HingeJoint3D/Flag`` enum.
         case max = 2 // FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .useLimit: return ".useLimit"
+                case .enableMotor: return ".enableMotor"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

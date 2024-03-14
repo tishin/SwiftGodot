@@ -10,7 +10,7 @@
 /// Uses three operands to compute `(a * b + c)` expression.
 open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeMultiplyAdd" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar type.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.
@@ -21,6 +21,18 @@ open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
         case vector4d = 3 // OP_TYPE_VECTOR_4D
         /// Represents the size of the ``VisualShaderNodeMultiplyAdd/OpType`` enum.
         case max = 4 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

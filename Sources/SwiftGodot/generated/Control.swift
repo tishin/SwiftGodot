@@ -42,16 +42,26 @@
 /// - ``themeChanged``
 open class Control: CanvasItem {
     override open class var godotClassName: StringName { "Control" }
-    public enum FocusMode: Int64 {
+    public enum FocusMode: Int64, CustomDebugStringConvertible {
         /// The node cannot grab focus. Use with ``focusMode``.
         case none = 0 // FOCUS_NONE
         /// The node can only grab focus on mouse clicks. Use with ``focusMode``.
         case click = 1 // FOCUS_CLICK
         /// The node can grab focus on mouse click, using the arrows and the Tab keys on the keyboard, or using the D-pad buttons on a gamepad. Use with ``focusMode``.
         case all = 2 // FOCUS_ALL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .click: return ".click"
+                case .all: return ".all"
+            }
+            
+        }
+        
     }
     
-    public enum CursorShape: Int64 {
+    public enum CursorShape: Int64, CustomDebugStringConvertible {
         /// Show the system's arrow mouse cursor when the user hovers the node. Use with ``mouseDefaultCursorShape``.
         case arrow = 0 // CURSOR_ARROW
         /// Show the system's I-beam mouse cursor when the user hovers the node. The I-beam pointer has a shape similar to "I". It tells the user they can highlight or insert text.
@@ -86,9 +96,33 @@ open class Control: CanvasItem {
         case hsplit = 15 // CURSOR_HSPLIT
         /// Show the system's help mouse cursor when the user hovers the node, a question mark.
         case help = 16 // CURSOR_HELP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .arrow: return ".arrow"
+                case .ibeam: return ".ibeam"
+                case .pointingHand: return ".pointingHand"
+                case .cross: return ".cross"
+                case .wait: return ".wait"
+                case .busy: return ".busy"
+                case .drag: return ".drag"
+                case .canDrop: return ".canDrop"
+                case .forbidden: return ".forbidden"
+                case .vsize: return ".vsize"
+                case .hsize: return ".hsize"
+                case .bdiagsize: return ".bdiagsize"
+                case .fdiagsize: return ".fdiagsize"
+                case .move: return ".move"
+                case .vsplit: return ".vsplit"
+                case .hsplit: return ".hsplit"
+                case .help: return ".help"
+            }
+            
+        }
+        
     }
     
-    public enum LayoutPreset: Int64 {
+    public enum LayoutPreset: Int64, CustomDebugStringConvertible {
         /// Snap all 4 anchors to the top-left of the parent control's bounds. Use with ``setAnchorsPreset(_:keepOffsets:)``.
         case topLeft = 0 // PRESET_TOP_LEFT
         /// Snap all 4 anchors to the top-right of the parent control's bounds. Use with ``setAnchorsPreset(_:keepOffsets:)``.
@@ -121,9 +155,32 @@ open class Control: CanvasItem {
         case hcenterWide = 14 // PRESET_HCENTER_WIDE
         /// Snap all 4 anchors to the respective corners of the parent control. Set all 4 offsets to 0 after you applied this preset and the ``Control`` will fit its parent control. Use with ``setAnchorsPreset(_:keepOffsets:)``.
         case fullRect = 15 // PRESET_FULL_RECT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .topLeft: return ".topLeft"
+                case .topRight: return ".topRight"
+                case .bottomLeft: return ".bottomLeft"
+                case .bottomRight: return ".bottomRight"
+                case .centerLeft: return ".centerLeft"
+                case .centerTop: return ".centerTop"
+                case .centerRight: return ".centerRight"
+                case .centerBottom: return ".centerBottom"
+                case .center: return ".center"
+                case .leftWide: return ".leftWide"
+                case .topWide: return ".topWide"
+                case .rightWide: return ".rightWide"
+                case .bottomWide: return ".bottomWide"
+                case .vcenterWide: return ".vcenterWide"
+                case .hcenterWide: return ".hcenterWide"
+                case .fullRect: return ".fullRect"
+            }
+            
+        }
+        
     }
     
-    public enum LayoutPresetMode: Int64 {
+    public enum LayoutPresetMode: Int64, CustomDebugStringConvertible {
         /// The control will be resized to its minimum size.
         case minsize = 0 // PRESET_MODE_MINSIZE
         /// The control's width will not change.
@@ -132,6 +189,17 @@ open class Control: CanvasItem {
         case keepHeight = 2 // PRESET_MODE_KEEP_HEIGHT
         /// The control's size will not change.
         case keepSize = 3 // PRESET_MODE_KEEP_SIZE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .minsize: return ".minsize"
+                case .keepWidth: return ".keepWidth"
+                case .keepHeight: return ".keepHeight"
+                case .keepSize: return ".keepSize"
+            }
+            
+        }
+        
     }
     
     public struct SizeFlags: OptionSet, CustomDebugStringConvertible {
@@ -164,7 +232,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum MouseFilter: Int64 {
+    public enum MouseFilter: Int64, CustomDebugStringConvertible {
         /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
         case stop = 0 // MOUSE_FILTER_STOP
         /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. If this control does not handle the event, the parent control (if any) will be considered, and so on until there is no more parent control to potentially handle it. This also allows signals to fire in other controls. If no control handled it, the event will be passed to ``Node/_shortcutInput(event:)`` for further processing.
@@ -174,25 +242,54 @@ open class Control: CanvasItem {
         /// > Note: If the control has received [signal mouse_entered] but not [signal mouse_exited], changing the ``mouseFilter`` to .ignore will cause [signal mouse_exited] to be emitted.
         /// 
         case ignore = 2 // MOUSE_FILTER_IGNORE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stop: return ".stop"
+                case .pass: return ".pass"
+                case .ignore: return ".ignore"
+            }
+            
+        }
+        
     }
     
-    public enum GrowDirection: Int64 {
+    public enum GrowDirection: Int64, CustomDebugStringConvertible {
         /// The control will grow to the left or top to make up if its minimum size is changed to be greater than its current size on the respective axis.
         case begin = 0 // GROW_DIRECTION_BEGIN
         /// The control will grow to the right or bottom to make up if its minimum size is changed to be greater than its current size on the respective axis.
         case end = 1 // GROW_DIRECTION_END
         /// The control will grow in both directions equally to make up if its minimum size is changed to be greater than its current size.
         case both = 2 // GROW_DIRECTION_BOTH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .begin: return ".begin"
+                case .end: return ".end"
+                case .both: return ".both"
+            }
+            
+        }
+        
     }
     
-    public enum Anchor: Int64 {
+    public enum Anchor: Int64, CustomDebugStringConvertible {
         /// Snaps one of the 4 anchor's sides to the origin of the node's `Rect`, in the top left. Use it with one of the `anchor_*` member variables, like ``anchorLeft``. To change all 4 anchors at once, use ``setAnchorsPreset(_:keepOffsets:)``.
         case begin = 0 // ANCHOR_BEGIN
         /// Snaps one of the 4 anchor's sides to the end of the node's `Rect`, in the bottom right. Use it with one of the `anchor_*` member variables, like ``anchorLeft``. To change all 4 anchors at once, use ``setAnchorsPreset(_:keepOffsets:)``.
         case end = 1 // ANCHOR_END
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .begin: return ".begin"
+                case .end: return ".end"
+            }
+            
+        }
+        
     }
     
-    public enum LayoutDirection: Int64 {
+    public enum LayoutDirection: Int64, CustomDebugStringConvertible {
         /// Automatic layout direction, determined from the parent control layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
         /// Automatic layout direction, determined from the current locale.
@@ -201,9 +298,20 @@ open class Control: CanvasItem {
         case ltr = 2 // LAYOUT_DIRECTION_LTR
         /// Right-to-left layout direction.
         case rtl = 3 // LAYOUT_DIRECTION_RTL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherited: return ".inherited"
+                case .locale: return ".locale"
+                case .ltr: return ".ltr"
+                case .rtl: return ".rtl"
+            }
+            
+        }
+        
     }
     
-    public enum TextDirection: Int64 {
+    public enum TextDirection: Int64, CustomDebugStringConvertible {
         /// Text writing direction is the same as layout direction.
         case inherited = 3 // TEXT_DIRECTION_INHERITED
         /// Automatic text writing direction, determined from the current locale and text content.
@@ -212,6 +320,17 @@ open class Control: CanvasItem {
         case ltr = 1 // TEXT_DIRECTION_LTR
         /// Right-to-left text writing direction.
         case rtl = 2 // TEXT_DIRECTION_RTL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherited: return ".inherited"
+                case .auto: return ".auto"
+                case .ltr: return ".ltr"
+                case .rtl: return ".rtl"
+            }
+            
+        }
+        
     }
     
     /* Constants */

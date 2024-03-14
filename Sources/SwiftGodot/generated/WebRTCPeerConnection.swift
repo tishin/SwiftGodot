@@ -28,7 +28,7 @@
 /// - ``dataChannelReceived``
 open class WebRTCPeerConnection: RefCounted {
     override open class var godotClassName: StringName { "WebRTCPeerConnection" }
-    public enum ConnectionState: Int64 {
+    public enum ConnectionState: Int64, CustomDebugStringConvertible {
         /// The connection is new, data channels and an offer can be created in this state.
         case new = 0 // STATE_NEW
         /// The peer is connecting, ICE is in progress, none of the transports has failed.
@@ -41,18 +41,41 @@ open class WebRTCPeerConnection: RefCounted {
         case failed = 4 // STATE_FAILED
         /// The peer connection is closed (after calling ``close()`` for example).
         case closed = 5 // STATE_CLOSED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .new: return ".new"
+                case .connecting: return ".connecting"
+                case .connected: return ".connected"
+                case .disconnected: return ".disconnected"
+                case .failed: return ".failed"
+                case .closed: return ".closed"
+            }
+            
+        }
+        
     }
     
-    public enum GatheringState: Int64 {
+    public enum GatheringState: Int64, CustomDebugStringConvertible {
         /// The peer connection was just created and hasn't done any networking yet.
         case new = 0 // GATHERING_STATE_NEW
         /// The ICE agent is in the process of gathering candidates for the connection.
         case gathering = 1 // GATHERING_STATE_GATHERING
         /// The ICE agent has finished gathering candidates. If something happens that requires collecting new candidates, such as a new interface being added or the addition of a new ICE server, the state will revert to gathering to gather those candidates.
         case complete = 2 // GATHERING_STATE_COMPLETE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .new: return ".new"
+                case .gathering: return ".gathering"
+                case .complete: return ".complete"
+            }
+            
+        }
+        
     }
     
-    public enum SignalingState: Int64 {
+    public enum SignalingState: Int64, CustomDebugStringConvertible {
         /// There is no ongoing exchange of offer and answer underway. This may mean that the ``WebRTCPeerConnection`` is new (.stateNew) or that negotiation is complete and a connection has been established (.stateConnected).
         case stable = 0 // SIGNALING_STATE_STABLE
         /// The local peer has called ``setLocalDescription(type:sdp:)``, passing in SDP representing an offer (usually created by calling ``createOffer()``), and the offer has been applied successfully.
@@ -65,6 +88,19 @@ open class WebRTCPeerConnection: RefCounted {
         case haveRemotePranswer = 4 // SIGNALING_STATE_HAVE_REMOTE_PRANSWER
         /// The ``WebRTCPeerConnection`` has been closed.
         case closed = 5 // SIGNALING_STATE_CLOSED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stable: return ".stable"
+                case .haveLocalOffer: return ".haveLocalOffer"
+                case .haveRemoteOffer: return ".haveRemoteOffer"
+                case .haveLocalPranswer: return ".haveLocalPranswer"
+                case .haveRemotePranswer: return ".haveRemotePranswer"
+                case .closed: return ".closed"
+            }
+            
+        }
+        
     }
     
     /* Methods */

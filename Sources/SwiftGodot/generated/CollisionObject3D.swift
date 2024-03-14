@@ -20,7 +20,7 @@
 /// - ``mouseExited``
 open class CollisionObject3D: Node3D {
     override open class var godotClassName: StringName { "CollisionObject3D" }
-    public enum DisableMode: Int64 {
+    public enum DisableMode: Int64, CustomDebugStringConvertible {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``CollisionObject3D``.
         /// 
         /// Automatically re-added to the physics simulation when the ``Node`` is processed again.
@@ -33,6 +33,16 @@ open class CollisionObject3D: Node3D {
         case makeStatic = 1 // DISABLE_MODE_MAKE_STATIC
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, do not affect the physics simulation.
         case keepActive = 2 // DISABLE_MODE_KEEP_ACTIVE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .remove: return ".remove"
+                case .makeStatic: return ".makeStatic"
+                case .keepActive: return ".keepActive"
+            }
+            
+        }
+        
     }
     
     

@@ -15,7 +15,7 @@
 /// 
 open class Theme: Resource {
     override open class var godotClassName: StringName { "Theme" }
-    public enum DataType: Int64 {
+    public enum DataType: Int64, CustomDebugStringConvertible {
         /// Theme's ``Color`` item type.
         case color = 0 // DATA_TYPE_COLOR
         /// Theme's constant item type.
@@ -30,6 +30,20 @@ open class Theme: Resource {
         case stylebox = 5 // DATA_TYPE_STYLEBOX
         /// Maximum value for the DataType enum.
         case max = 6 // DATA_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .color: return ".color"
+                case .constant: return ".constant"
+                case .font: return ".font"
+                case .fontSize: return ".fontSize"
+                case .icon: return ".icon"
+                case .stylebox: return ".stylebox"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

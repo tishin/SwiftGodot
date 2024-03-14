@@ -20,13 +20,23 @@
 /// - ``trianglesUpdated``
 open class AnimationNodeBlendSpace2D: AnimationRootNode {
     override open class var godotClassName: StringName { "AnimationNodeBlendSpace2D" }
-    public enum BlendMode: Int64 {
+    public enum BlendMode: Int64, CustomDebugStringConvertible {
         /// The interpolation between animations is linear.
         case interpolated = 0 // BLEND_MODE_INTERPOLATED
         /// The blend space plays the animation of the animation node which blending position is closest to. Useful for frame-by-frame 2D animations.
         case discrete = 1 // BLEND_MODE_DISCRETE
         /// Similar to .discrete, but starts the new animation at the last animation's playback position.
         case discreteCarry = 2 // BLEND_MODE_DISCRETE_CARRY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .interpolated: return ".interpolated"
+                case .discrete: return ".discrete"
+                case .discreteCarry: return ".discreteCarry"
+            }
+            
+        }
+        
     }
     
     

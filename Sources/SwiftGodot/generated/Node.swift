@@ -46,7 +46,7 @@
 /// - ``replacingBy``
 open class Node: Object {
     override open class var godotClassName: StringName { "Node" }
-    public enum ProcessMode: Int64 {
+    public enum ProcessMode: Int64, CustomDebugStringConvertible {
         /// Inherits process mode from the node's parent. For the root node, it is equivalent to .pausable. Default.
         case inherit = 0 // PROCESS_MODE_INHERIT
         /// Stops processing when the ``SceneTree`` is paused (process when unpaused). This is the inverse of .whenPaused.
@@ -57,15 +57,37 @@ open class Node: Object {
         case always = 3 // PROCESS_MODE_ALWAYS
         /// Never process. Completely disables processing, ignoring the ``SceneTree``'s paused property. This is the inverse of .always.
         case disabled = 4 // PROCESS_MODE_DISABLED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherit: return ".inherit"
+                case .pausable: return ".pausable"
+                case .whenPaused: return ".whenPaused"
+                case .always: return ".always"
+                case .disabled: return ".disabled"
+            }
+            
+        }
+        
     }
     
-    public enum ProcessThreadGroup: Int64 {
+    public enum ProcessThreadGroup: Int64, CustomDebugStringConvertible {
         /// If the ``processThreadGroup`` property is sent to this, the node will belong to any parent (or grandparent) node that has a thread group mode that is not inherit. See ``processThreadGroup`` for more information.
         case inherit = 0 // PROCESS_THREAD_GROUP_INHERIT
         /// Process this node (and children nodes set to inherit) on the main thread. See ``processThreadGroup`` for more information.
         case mainThread = 1 // PROCESS_THREAD_GROUP_MAIN_THREAD
         /// Process this node (and children nodes set to inherit) on a sub-thread. See ``processThreadGroup`` for more information.
         case subThread = 2 // PROCESS_THREAD_GROUP_SUB_THREAD
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherit: return ".inherit"
+                case .mainThread: return ".mainThread"
+                case .subThread: return ".subThread"
+            }
+            
+        }
+        
     }
     
     public struct ProcessThreadMessages: OptionSet, CustomDebugStringConvertible {
@@ -92,7 +114,7 @@ open class Node: Object {
         
     }
     
-    public enum DuplicateFlags: Int64 {
+    public enum DuplicateFlags: Int64, CustomDebugStringConvertible {
         /// Duplicate the node's signals.
         case signals = 1 // DUPLICATE_SIGNALS
         /// Duplicate the node's groups.
@@ -104,15 +126,36 @@ open class Node: Object {
         /// An instance stays linked to the original so when the original changes, the instance changes too.
         /// 
         case useInstantiation = 8 // DUPLICATE_USE_INSTANTIATION
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .signals: return ".signals"
+                case .groups: return ".groups"
+                case .scripts: return ".scripts"
+                case .useInstantiation: return ".useInstantiation"
+            }
+            
+        }
+        
     }
     
-    public enum InternalMode: Int64 {
+    public enum InternalMode: Int64, CustomDebugStringConvertible {
         /// Node will not be internal.
         case disabled = 0 // INTERNAL_MODE_DISABLED
         /// Node will be placed at the front of parent's node list, before any non-internal sibling.
         case front = 1 // INTERNAL_MODE_FRONT
         /// Node will be placed at the back of parent's node list, after any non-internal sibling.
         case back = 2 // INTERNAL_MODE_BACK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .front: return ".front"
+                case .back: return ".back"
+            }
+            
+        }
+        
     }
     
     /* Constants */

@@ -19,7 +19,7 @@
 /// 
 open class VoxelGI: VisualInstance3D {
     override open class var godotClassName: StringName { "VoxelGI" }
-    public enum Subdiv: Int64 {
+    public enum Subdiv: Int64, CustomDebugStringConvertible {
         /// Use 64 subdivisions. This is the lowest quality setting, but the fastest. Use it if you can, but especially use it on lower-end hardware.
         case subdiv64 = 0 // SUBDIV_64
         /// Use 128 subdivisions. This is the default quality setting.
@@ -30,6 +30,18 @@ open class VoxelGI: VisualInstance3D {
         case subdiv512 = 3 // SUBDIV_512
         /// Represents the size of the ``VoxelGI/Subdiv`` enum.
         case max = 4 // SUBDIV_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .subdiv64: return ".subdiv64"
+                case .subdiv128: return ".subdiv128"
+                case .subdiv256: return ".subdiv256"
+                case .subdiv512: return ".subdiv512"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

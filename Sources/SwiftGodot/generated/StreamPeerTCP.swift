@@ -13,7 +13,7 @@
 /// 
 open class StreamPeerTCP: StreamPeer {
     override open class var godotClassName: StringName { "StreamPeerTCP" }
-    public enum Status: Int64 {
+    public enum Status: Int64, CustomDebugStringConvertible {
         /// The initial status of the ``StreamPeerTCP``. This is also the status after disconnecting.
         case none = 0 // STATUS_NONE
         /// A status representing a ``StreamPeerTCP`` that is connecting to a host.
@@ -22,6 +22,17 @@ open class StreamPeerTCP: StreamPeer {
         case connected = 2 // STATUS_CONNECTED
         /// A status representing a ``StreamPeerTCP`` in error state.
         case error = 3 // STATUS_ERROR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .connecting: return ".connecting"
+                case .connected: return ".connected"
+                case .error: return ".error"
+            }
+            
+        }
+        
     }
     
     /* Methods */

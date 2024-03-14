@@ -15,7 +15,7 @@
 /// 
 open class PacketPeerDTLS: PacketPeer {
     override open class var godotClassName: StringName { "PacketPeerDTLS" }
-    public enum Status: Int64 {
+    public enum Status: Int64, CustomDebugStringConvertible {
         /// A status representing a ``PacketPeerDTLS`` that is disconnected.
         case disconnected = 0 // STATUS_DISCONNECTED
         /// A status representing a ``PacketPeerDTLS`` that is currently performing the handshake with a remote peer.
@@ -26,6 +26,18 @@ open class PacketPeerDTLS: PacketPeer {
         case error = 3 // STATUS_ERROR
         /// An error status that shows a mismatch in the DTLS certificate domain presented by the host and the domain requested for validation.
         case errorHostnameMismatch = 4 // STATUS_ERROR_HOSTNAME_MISMATCH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disconnected: return ".disconnected"
+                case .handshaking: return ".handshaking"
+                case .connected: return ".connected"
+                case .error: return ".error"
+                case .errorHostnameMismatch: return ".errorHostnameMismatch"
+            }
+            
+        }
+        
     }
     
     /* Methods */

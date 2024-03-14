@@ -10,7 +10,7 @@
 /// Accept a floating-point scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeFloatFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeFloatFunc" }
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Returns the sine of the parameter. Translates to `sin(x)` in the Godot Shader Language.
         case sin = 0 // FUNC_SIN
         /// Returns the cosine of the parameter. Translates to `cos(x)` in the Godot Shader Language.
@@ -77,6 +77,46 @@ open class VisualShaderNodeFloatFunc: VisualShaderNode {
         case oneminus = 31 // FUNC_ONEMINUS
         /// Represents the size of the ``VisualShaderNodeFloatFunc/Function`` enum.
         case max = 32 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sin: return ".sin"
+                case .cos: return ".cos"
+                case .tan: return ".tan"
+                case .asin: return ".asin"
+                case .acos: return ".acos"
+                case .atan: return ".atan"
+                case .sinh: return ".sinh"
+                case .cosh: return ".cosh"
+                case .tanh: return ".tanh"
+                case .log: return ".log"
+                case .exp: return ".exp"
+                case .sqrt: return ".sqrt"
+                case .abs: return ".abs"
+                case .sign: return ".sign"
+                case .floor: return ".floor"
+                case .round: return ".round"
+                case .ceil: return ".ceil"
+                case .fract: return ".fract"
+                case .saturate: return ".saturate"
+                case .negate: return ".negate"
+                case .acosh: return ".acosh"
+                case .asinh: return ".asinh"
+                case .atanh: return ".atanh"
+                case .degrees: return ".degrees"
+                case .exp2: return ".exp2"
+                case .inverseSqrt: return ".inverseSqrt"
+                case .log2: return ".log2"
+                case .radians: return ".radians"
+                case .reciprocal: return ".reciprocal"
+                case .roundeven: return ".roundeven"
+                case .trunc: return ".trunc"
+                case .oneminus: return ".oneminus"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

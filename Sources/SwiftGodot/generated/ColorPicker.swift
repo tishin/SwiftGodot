@@ -20,7 +20,7 @@
 /// - ``presetRemoved``
 open class ColorPicker: VBoxContainer {
     override open class var godotClassName: StringName { "ColorPicker" }
-    public enum ColorModeType: Int64 {
+    public enum ColorModeType: Int64, CustomDebugStringConvertible {
         /// Allows editing the color with Red/Green/Blue sliders.
         case rgb = 0 // MODE_RGB
         /// Allows editing the color with Hue/Saturation/Value sliders.
@@ -34,9 +34,20 @@ open class ColorPicker: VBoxContainer {
         /// [url=https://bottosson.github.io/posts/colorpicker/]Okhsv and Okhsl color spaces[/url]
         /// 
         case okhsl = 3 // MODE_OKHSL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgb: return ".rgb"
+                case .hsv: return ".hsv"
+                case .raw: return ".raw"
+                case .okhsl: return ".okhsl"
+            }
+            
+        }
+        
     }
     
-    public enum PickerShapeType: Int64 {
+    public enum PickerShapeType: Int64, CustomDebugStringConvertible {
         /// HSV Color Model rectangle color space.
         case hsvRectangle = 0 // SHAPE_HSV_RECTANGLE
         /// HSV Color Model rectangle color space with a wheel.
@@ -47,6 +58,18 @@ open class ColorPicker: VBoxContainer {
         case okhslCircle = 3 // SHAPE_OKHSL_CIRCLE
         /// The color space shape and the shape select button are hidden. Can't be selected from the shapes popup.
         case none = 4 // SHAPE_NONE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .hsvRectangle: return ".hsvRectangle"
+                case .hsvWheel: return ".hsvWheel"
+                case .vhsCircle: return ".vhsCircle"
+                case .okhslCircle: return ".okhslCircle"
+                case .none: return ".none"
+            }
+            
+        }
+        
     }
     
     

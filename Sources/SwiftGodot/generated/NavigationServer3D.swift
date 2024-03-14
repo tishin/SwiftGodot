@@ -40,7 +40,7 @@ open class NavigationServer3D: Object {
     }()
     
     override open class var godotClassName: StringName { "NavigationServer3D" }
-    public enum ProcessInfo: Int64 {
+    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
         /// Constant to get the number of active navigation maps.
         case activeMaps = 0 // INFO_ACTIVE_MAPS
         /// Constant to get the number of active navigation regions.
@@ -59,6 +59,22 @@ open class NavigationServer3D: Object {
         case edgeConnectionCount = 7 // INFO_EDGE_CONNECTION_COUNT
         /// Constant to get the number of navigation mesh polygon edges that could not be merged but may be still connected by edge proximity or with links.
         case edgeFreeCount = 8 // INFO_EDGE_FREE_COUNT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .activeMaps: return ".activeMaps"
+                case .regionCount: return ".regionCount"
+                case .agentCount: return ".agentCount"
+                case .linkCount: return ".linkCount"
+                case .polygonCount: return ".polygonCount"
+                case .edgeCount: return ".edgeCount"
+                case .edgeMergeCount: return ".edgeMergeCount"
+                case .edgeConnectionCount: return ".edgeConnectionCount"
+                case .edgeFreeCount: return ".edgeFreeCount"
+            }
+            
+        }
+        
     }
     
     /* Methods */

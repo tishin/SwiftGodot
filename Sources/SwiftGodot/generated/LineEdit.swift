@@ -60,7 +60,7 @@
 /// - ``textSubmitted``
 open class LineEdit: Control {
     override open class var godotClassName: StringName { "LineEdit" }
-    public enum MenuItems: Int64 {
+    public enum MenuItems: Int64, CustomDebugStringConvertible {
         /// Cuts (copies and clears) the selected text.
         case cut = 0 // MENU_CUT
         /// Copies the selected text.
@@ -126,9 +126,47 @@ open class LineEdit: Control {
         case insertShy = 29 // MENU_INSERT_SHY
         /// Represents the size of the ``LineEdit/MenuItems`` enum.
         case max = 30 // MENU_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .cut: return ".cut"
+                case .copy: return ".copy"
+                case .paste: return ".paste"
+                case .clear: return ".clear"
+                case .selectAll: return ".selectAll"
+                case .undo: return ".undo"
+                case .redo: return ".redo"
+                case .submenuTextDir: return ".submenuTextDir"
+                case .dirInherited: return ".dirInherited"
+                case .dirAuto: return ".dirAuto"
+                case .dirLtr: return ".dirLtr"
+                case .dirRtl: return ".dirRtl"
+                case .displayUcc: return ".displayUcc"
+                case .submenuInsertUcc: return ".submenuInsertUcc"
+                case .insertLrm: return ".insertLrm"
+                case .insertRlm: return ".insertRlm"
+                case .insertLre: return ".insertLre"
+                case .insertRle: return ".insertRle"
+                case .insertLro: return ".insertLro"
+                case .insertRlo: return ".insertRlo"
+                case .insertPdf: return ".insertPdf"
+                case .insertAlm: return ".insertAlm"
+                case .insertLri: return ".insertLri"
+                case .insertRli: return ".insertRli"
+                case .insertFsi: return ".insertFsi"
+                case .insertPdi: return ".insertPdi"
+                case .insertZwj: return ".insertZwj"
+                case .insertZwnj: return ".insertZwnj"
+                case .insertWj: return ".insertWj"
+                case .insertShy: return ".insertShy"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VirtualKeyboardType: Int64 {
+    public enum VirtualKeyboardType: Int64, CustomDebugStringConvertible {
         /// Default text virtual keyboard.
         case `default` = 0 // KEYBOARD_TYPE_DEFAULT
         /// Multiline virtual keyboard.
@@ -148,6 +186,21 @@ open class LineEdit: Control {
         case password = 6 // KEYBOARD_TYPE_PASSWORD
         /// Virtual keyboard with additional keys to assist with typing URLs.
         case url = 7 // KEYBOARD_TYPE_URL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .multiline: return ".multiline"
+                case .number: return ".number"
+                case .numberDecimal: return ".numberDecimal"
+                case .phone: return ".phone"
+                case .emailAddress: return ".emailAddress"
+                case .password: return ".password"
+                case .url: return ".url"
+            }
+            
+        }
+        
     }
     
     

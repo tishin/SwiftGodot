@@ -11,13 +11,23 @@
 /// 
 open class ZIPPacker: RefCounted {
     override open class var godotClassName: StringName { "ZIPPacker" }
-    public enum ZipAppend: Int64 {
+    public enum ZipAppend: Int64, CustomDebugStringConvertible {
         /// Create a new zip archive at the given path.
         case create = 0 // APPEND_CREATE
         /// Append a new zip archive to the end of the already existing file at the given path.
         case createafter = 1 // APPEND_CREATEAFTER
         /// Add new files to the existing zip archive at the given path.
         case addinzip = 2 // APPEND_ADDINZIP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .create: return ".create"
+                case .createafter: return ".createafter"
+                case .addinzip: return ".addinzip"
+            }
+            
+        }
+        
     }
     
     /* Methods */

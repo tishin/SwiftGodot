@@ -13,7 +13,7 @@
 /// 
 open class AnimationNodeOneShot: AnimationNodeSync {
     override open class var godotClassName: StringName { "AnimationNodeOneShot" }
-    public enum OneShotRequest: Int64 {
+    public enum OneShotRequest: Int64, CustomDebugStringConvertible {
         /// The default state of the request. Nothing is done.
         case none = 0 // ONE_SHOT_REQUEST_NONE
         /// The request to play the animation connected to "shot" port.
@@ -22,13 +22,33 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         case abort = 2 // ONE_SHOT_REQUEST_ABORT
         /// The request to fade out the animation connected to "shot" port.
         case fadeOut = 3 // ONE_SHOT_REQUEST_FADE_OUT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .fire: return ".fire"
+                case .abort: return ".abort"
+                case .fadeOut: return ".fadeOut"
+            }
+            
+        }
+        
     }
     
-    public enum MixMode: Int64 {
+    public enum MixMode: Int64, CustomDebugStringConvertible {
         /// Blends two animations. See also ``AnimationNodeBlend2``.
         case blend = 0 // MIX_MODE_BLEND
         /// Blends two animations additively. See also ``AnimationNodeAdd2``.
         case add = 1 // MIX_MODE_ADD
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .blend: return ".blend"
+                case .add: return ".add"
+            }
+            
+        }
+        
     }
     
     

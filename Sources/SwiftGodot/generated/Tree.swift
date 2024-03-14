@@ -36,7 +36,7 @@
 /// - ``nothingSelected``
 open class Tree: Control {
     override open class var godotClassName: StringName { "Tree" }
-    public enum SelectMode: Int64 {
+    public enum SelectMode: Int64, CustomDebugStringConvertible {
         /// Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
         /// 
         /// The focus cursor is always hidden in this mode, but it is positioned at the current selection, making the currently selected item the currently focused item.
@@ -52,9 +52,19 @@ open class Tree: Control {
         /// The focus cursor is visible in this mode, the item or column under the cursor is not necessarily selected.
         /// 
         case multi = 2 // SELECT_MULTI
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .single: return ".single"
+                case .row: return ".row"
+                case .multi: return ".multi"
+            }
+            
+        }
+        
     }
     
-    public enum DropModeFlags: Int64 {
+    public enum DropModeFlags: Int64, CustomDebugStringConvertible {
         /// Disables all drop sections, but still allows to detect the "on item" drop section by ``getDropSectionAtPosition(_:)``.
         /// 
         /// > Note: This is the default flag, it has no effect when combined with other flags.
@@ -70,6 +80,16 @@ open class Tree: Control {
         /// When combined with .dropModeOnItem, these drop sections halves the height and stays on top / bottom accordingly.
         /// 
         case inbetween = 2 // DROP_MODE_INBETWEEN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .onItem: return ".onItem"
+                case .inbetween: return ".inbetween"
+            }
+            
+        }
+        
     }
     
     

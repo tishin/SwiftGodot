@@ -33,7 +33,7 @@ open class PhysicsServer3D: Object {
     }()
     
     override open class var godotClassName: StringName { "PhysicsServer3D" }
-    public enum JointType: Int64 {
+    public enum JointType: Int64, CustomDebugStringConvertible {
         /// The ``Joint3D`` is a ``PinJoint3D``.
         case pin = 0 // JOINT_TYPE_PIN
         /// The ``Joint3D`` is a ``HingeJoint3D``.
@@ -46,9 +46,22 @@ open class PhysicsServer3D: Object {
         case jointType6dof = 4 // JOINT_TYPE_6DOF
         /// Represents the size of the ``PhysicsServer3D/JointType`` enum.
         case max = 5 // JOINT_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .pin: return ".pin"
+                case .hinge: return ".hinge"
+                case .slider: return ".slider"
+                case .coneTwist: return ".coneTwist"
+                case .jointType6dof: return ".jointType6dof"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum PinJointParam: Int64 {
+    public enum PinJointParam: Int64, CustomDebugStringConvertible {
         /// The strength with which the pinned objects try to stay in positional relation to each other.
         /// 
         /// The higher, the stronger.
@@ -61,9 +74,19 @@ open class PhysicsServer3D: Object {
         case damping = 1 // PIN_JOINT_DAMPING
         /// If above 0, this value is the maximum value for an impulse that this Joint3D puts on its ends.
         case impulseClamp = 2 // PIN_JOINT_IMPULSE_CLAMP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bias: return ".bias"
+                case .damping: return ".damping"
+                case .impulseClamp: return ".impulseClamp"
+            }
+            
+        }
+        
     }
     
-    public enum HingeJointParam: Int64 {
+    public enum HingeJointParam: Int64, CustomDebugStringConvertible {
         /// The speed with which the two bodies get pulled together when they move in different directions.
         case bias = 0 // HINGE_JOINT_BIAS
         /// The maximum rotation across the Hinge.
@@ -80,16 +103,40 @@ open class PhysicsServer3D: Object {
         case motorTargetVelocity = 6 // HINGE_JOINT_MOTOR_TARGET_VELOCITY
         /// Maximum acceleration for the motor.
         case motorMaxImpulse = 7 // HINGE_JOINT_MOTOR_MAX_IMPULSE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bias: return ".bias"
+                case .limitUpper: return ".limitUpper"
+                case .limitLower: return ".limitLower"
+                case .limitBias: return ".limitBias"
+                case .limitSoftness: return ".limitSoftness"
+                case .limitRelaxation: return ".limitRelaxation"
+                case .motorTargetVelocity: return ".motorTargetVelocity"
+                case .motorMaxImpulse: return ".motorMaxImpulse"
+            }
+            
+        }
+        
     }
     
-    public enum HingeJointFlag: Int64 {
+    public enum HingeJointFlag: Int64, CustomDebugStringConvertible {
         /// If `true`, the Hinge has a maximum and a minimum rotation.
         case useLimit = 0 // HINGE_JOINT_FLAG_USE_LIMIT
         /// If `true`, a motor turns the Hinge.
         case enableMotor = 1 // HINGE_JOINT_FLAG_ENABLE_MOTOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .useLimit: return ".useLimit"
+                case .enableMotor: return ".enableMotor"
+            }
+            
+        }
+        
     }
     
-    public enum SliderJointParam: Int64 {
+    public enum SliderJointParam: Int64, CustomDebugStringConvertible {
         /// The maximum difference between the pivot points on their X axis before damping happens.
         case linearLimitUpper = 0 // SLIDER_JOINT_LINEAR_LIMIT_UPPER
         /// The minimum difference between the pivot points on their X axis before damping happens.
@@ -136,9 +183,39 @@ open class PhysicsServer3D: Object {
         case angularOrthogonalDamping = 21 // SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING
         /// Represents the size of the ``PhysicsServer3D/SliderJointParam`` enum.
         case max = 22 // SLIDER_JOINT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearLimitUpper: return ".linearLimitUpper"
+                case .linearLimitLower: return ".linearLimitLower"
+                case .linearLimitSoftness: return ".linearLimitSoftness"
+                case .linearLimitRestitution: return ".linearLimitRestitution"
+                case .linearLimitDamping: return ".linearLimitDamping"
+                case .linearMotionSoftness: return ".linearMotionSoftness"
+                case .linearMotionRestitution: return ".linearMotionRestitution"
+                case .linearMotionDamping: return ".linearMotionDamping"
+                case .linearOrthogonalSoftness: return ".linearOrthogonalSoftness"
+                case .linearOrthogonalRestitution: return ".linearOrthogonalRestitution"
+                case .linearOrthogonalDamping: return ".linearOrthogonalDamping"
+                case .angularLimitUpper: return ".angularLimitUpper"
+                case .angularLimitLower: return ".angularLimitLower"
+                case .angularLimitSoftness: return ".angularLimitSoftness"
+                case .angularLimitRestitution: return ".angularLimitRestitution"
+                case .angularLimitDamping: return ".angularLimitDamping"
+                case .angularMotionSoftness: return ".angularMotionSoftness"
+                case .angularMotionRestitution: return ".angularMotionRestitution"
+                case .angularMotionDamping: return ".angularMotionDamping"
+                case .angularOrthogonalSoftness: return ".angularOrthogonalSoftness"
+                case .angularOrthogonalRestitution: return ".angularOrthogonalRestitution"
+                case .angularOrthogonalDamping: return ".angularOrthogonalDamping"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ConeTwistJointParam: Int64 {
+    public enum ConeTwistJointParam: Int64, CustomDebugStringConvertible {
         /// Swing is rotation from side to side, around the axis perpendicular to the twist axis.
         /// 
         /// The swing span defines, how much rotation will not get corrected along the swing axis.
@@ -162,9 +239,21 @@ open class PhysicsServer3D: Object {
         case softness = 3 // CONE_TWIST_JOINT_SOFTNESS
         /// Defines, how fast the swing- and twist-speed-difference on both sides gets synced.
         case relaxation = 4 // CONE_TWIST_JOINT_RELAXATION
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .swingSpan: return ".swingSpan"
+                case .twistSpan: return ".twistSpan"
+                case .bias: return ".bias"
+                case .softness: return ".softness"
+                case .relaxation: return ".relaxation"
+            }
+            
+        }
+        
     }
     
-    public enum G6DOFJointAxisParam: Int64 {
+    public enum G6DOFJointAxisParam: Int64, CustomDebugStringConvertible {
         /// The minimum difference between the pivot points' axes.
         case linearLowerLimit = 0 // G6DOF_JOINT_LINEAR_LOWER_LIMIT
         /// The maximum difference between the pivot points' axes.
@@ -197,9 +286,32 @@ open class PhysicsServer3D: Object {
         case angularMotorTargetVelocity = 17 // G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY
         /// Maximum acceleration for the motor at the axes.
         case angularMotorForceLimit = 18 // G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearLowerLimit: return ".linearLowerLimit"
+                case .linearUpperLimit: return ".linearUpperLimit"
+                case .linearLimitSoftness: return ".linearLimitSoftness"
+                case .linearRestitution: return ".linearRestitution"
+                case .linearDamping: return ".linearDamping"
+                case .linearMotorTargetVelocity: return ".linearMotorTargetVelocity"
+                case .linearMotorForceLimit: return ".linearMotorForceLimit"
+                case .angularLowerLimit: return ".angularLowerLimit"
+                case .angularUpperLimit: return ".angularUpperLimit"
+                case .angularLimitSoftness: return ".angularLimitSoftness"
+                case .angularDamping: return ".angularDamping"
+                case .angularRestitution: return ".angularRestitution"
+                case .angularForceLimit: return ".angularForceLimit"
+                case .angularErp: return ".angularErp"
+                case .angularMotorTargetVelocity: return ".angularMotorTargetVelocity"
+                case .angularMotorForceLimit: return ".angularMotorForceLimit"
+            }
+            
+        }
+        
     }
     
-    public enum G6DOFJointAxisFlag: Int64 {
+    public enum G6DOFJointAxisFlag: Int64, CustomDebugStringConvertible {
         /// If set, linear motion is possible within the given limits.
         case linearLimit = 0 // G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT
         /// If set, rotational motion is possible.
@@ -208,9 +320,20 @@ open class PhysicsServer3D: Object {
         case motor = 4 // G6DOF_JOINT_FLAG_ENABLE_MOTOR
         /// If set, there is a linear motor on this axis that targets a specific velocity.
         case linearMotor = 5 // G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearLimit: return ".linearLimit"
+                case .angularLimit: return ".angularLimit"
+                case .motor: return ".motor"
+                case .linearMotor: return ".linearMotor"
+            }
+            
+        }
+        
     }
     
-    public enum ShapeType: Int64 {
+    public enum ShapeType: Int64, CustomDebugStringConvertible {
         /// The ``Shape3D`` is a ``WorldBoundaryShape3D``.
         case worldBoundary = 0 // SHAPE_WORLD_BOUNDARY
         /// The ``Shape3D`` is a ``SeparationRayShape3D``.
@@ -233,9 +356,27 @@ open class PhysicsServer3D: Object {
         case softBody = 9 // SHAPE_SOFT_BODY
         /// This constant is used internally by the engine. Any attempt to create this kind of shape results in an error.
         case custom = 10 // SHAPE_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .worldBoundary: return ".worldBoundary"
+                case .separationRay: return ".separationRay"
+                case .sphere: return ".sphere"
+                case .box: return ".box"
+                case .capsule: return ".capsule"
+                case .cylinder: return ".cylinder"
+                case .convexPolygon: return ".convexPolygon"
+                case .concavePolygon: return ".concavePolygon"
+                case .heightmap: return ".heightmap"
+                case .softBody: return ".softBody"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
-    public enum AreaParameter: Int64 {
+    public enum AreaParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get gravity override mode in an area. See ``PhysicsServer3D/AreaSpaceOverrideMode`` for possible values.
         case gravityOverrideMode = 0 // AREA_PARAM_GRAVITY_OVERRIDE_MODE
         /// Constant to set/get gravity strength in an area.
@@ -267,9 +408,30 @@ open class PhysicsServer3D: Object {
         case windDirection = 12 // AREA_PARAM_WIND_DIRECTION
         /// Constant to set/get the exponential rate at which wind force decreases with distance from its origin.
         case windAttenuationFactor = 13 // AREA_PARAM_WIND_ATTENUATION_FACTOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .gravityOverrideMode: return ".gravityOverrideMode"
+                case .gravity: return ".gravity"
+                case .gravityVector: return ".gravityVector"
+                case .gravityIsPoint: return ".gravityIsPoint"
+                case .gravityPointUnitDistance: return ".gravityPointUnitDistance"
+                case .linearDampOverrideMode: return ".linearDampOverrideMode"
+                case .linearDamp: return ".linearDamp"
+                case .angularDampOverrideMode: return ".angularDampOverrideMode"
+                case .angularDamp: return ".angularDamp"
+                case .priority: return ".priority"
+                case .windForceMagnitude: return ".windForceMagnitude"
+                case .windSource: return ".windSource"
+                case .windDirection: return ".windDirection"
+                case .windAttenuationFactor: return ".windAttenuationFactor"
+            }
+            
+        }
+        
     }
     
-    public enum AreaSpaceOverrideMode: Int64 {
+    public enum AreaSpaceOverrideMode: Int64, CustomDebugStringConvertible {
         /// This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
         case disabled = 0 // AREA_SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
@@ -280,9 +442,21 @@ open class PhysicsServer3D: Object {
         case replace = 3 // AREA_SPACE_OVERRIDE_REPLACE
         /// This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
         case replaceCombine = 4 // AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .combine: return ".combine"
+                case .combineReplace: return ".combineReplace"
+                case .replace: return ".replace"
+                case .replaceCombine: return ".replaceCombine"
+            }
+            
+        }
+        
     }
     
-    public enum BodyMode: Int64 {
+    public enum BodyMode: Int64, CustomDebugStringConvertible {
         /// Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
         case `static` = 0 // BODY_MODE_STATIC
         /// Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
@@ -291,9 +465,20 @@ open class PhysicsServer3D: Object {
         case rigid = 2 // BODY_MODE_RIGID
         /// Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
         case rigidLinear = 3 // BODY_MODE_RIGID_LINEAR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`static`: return ".`static`"
+                case .kinematic: return ".kinematic"
+                case .rigid: return ".rigid"
+                case .rigidLinear: return ".rigidLinear"
+            }
+            
+        }
+        
     }
     
-    public enum BodyParameter: Int64 {
+    public enum BodyParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get a body's bounce factor.
         case bounce = 0 // BODY_PARAM_BOUNCE
         /// Constant to set/get a body's friction.
@@ -316,16 +501,43 @@ open class PhysicsServer3D: Object {
         case angularDamp = 9 // BODY_PARAM_ANGULAR_DAMP
         /// Represents the size of the ``PhysicsServer3D/BodyParameter`` enum.
         case max = 10 // BODY_PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bounce: return ".bounce"
+                case .friction: return ".friction"
+                case .mass: return ".mass"
+                case .inertia: return ".inertia"
+                case .centerOfMass: return ".centerOfMass"
+                case .gravityScale: return ".gravityScale"
+                case .linearDampMode: return ".linearDampMode"
+                case .angularDampMode: return ".angularDampMode"
+                case .linearDamp: return ".linearDamp"
+                case .angularDamp: return ".angularDamp"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum BodyDampMode: Int64 {
+    public enum BodyDampMode: Int64, CustomDebugStringConvertible {
         /// The body's damping value is added to any value set in areas or the default value.
         case combine = 0 // BODY_DAMP_MODE_COMBINE
         /// The body's damping value replaces any value set in areas or the default value.
         case replace = 1 // BODY_DAMP_MODE_REPLACE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .combine: return ".combine"
+                case .replace: return ".replace"
+            }
+            
+        }
+        
     }
     
-    public enum BodyState: Int64 {
+    public enum BodyState: Int64, CustomDebugStringConvertible {
         /// Constant to set/get the current transform matrix of the body.
         case transform = 0 // BODY_STATE_TRANSFORM
         /// Constant to set/get the current linear velocity of the body.
@@ -336,25 +548,56 @@ open class PhysicsServer3D: Object {
         case sleeping = 3 // BODY_STATE_SLEEPING
         /// Constant to set/get whether the body can sleep.
         case canSleep = 4 // BODY_STATE_CAN_SLEEP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .transform: return ".transform"
+                case .linearVelocity: return ".linearVelocity"
+                case .angularVelocity: return ".angularVelocity"
+                case .sleeping: return ".sleeping"
+                case .canSleep: return ".canSleep"
+            }
+            
+        }
+        
     }
     
-    public enum AreaBodyStatus: Int64 {
+    public enum AreaBodyStatus: Int64, CustomDebugStringConvertible {
         /// The value of the first parameter and area callback function receives, when an object enters one of its shapes.
         case added = 0 // AREA_BODY_ADDED
         /// The value of the first parameter and area callback function receives, when an object exits one of its shapes.
         case removed = 1 // AREA_BODY_REMOVED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .added: return ".added"
+                case .removed: return ".removed"
+            }
+            
+        }
+        
     }
     
-    public enum ProcessInfo: Int64 {
+    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
         /// Constant to get the number of objects that are not sleeping.
         case activeObjects = 0 // INFO_ACTIVE_OBJECTS
         /// Constant to get the number of possible collisions.
         case collisionPairs = 1 // INFO_COLLISION_PAIRS
         /// Constant to get the number of space regions where a collision could occur.
         case islandCount = 2 // INFO_ISLAND_COUNT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .activeObjects: return ".activeObjects"
+                case .collisionPairs: return ".collisionPairs"
+                case .islandCount: return ".islandCount"
+            }
+            
+        }
+        
     }
     
-    public enum SpaceParameter: Int64 {
+    public enum SpaceParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
         case contactRecycleRadius = 0 // SPACE_PARAM_CONTACT_RECYCLE_RADIUS
         /// Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded.
@@ -371,9 +614,24 @@ open class PhysicsServer3D: Object {
         case bodyTimeToSleep = 6 // SPACE_PARAM_BODY_TIME_TO_SLEEP
         /// Constant to set/get the number of solver iterations for contacts and constraints. The greater the number of iterations, the more accurate the collisions and constraints will be. However, a greater number of iterations requires more CPU power, which can decrease performance.
         case solverIterations = 7 // SPACE_PARAM_SOLVER_ITERATIONS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .contactRecycleRadius: return ".contactRecycleRadius"
+                case .contactMaxSeparation: return ".contactMaxSeparation"
+                case .contactMaxAllowedPenetration: return ".contactMaxAllowedPenetration"
+                case .contactDefaultBias: return ".contactDefaultBias"
+                case .bodyLinearVelocitySleepThreshold: return ".bodyLinearVelocitySleepThreshold"
+                case .bodyAngularVelocitySleepThreshold: return ".bodyAngularVelocitySleepThreshold"
+                case .bodyTimeToSleep: return ".bodyTimeToSleep"
+                case .solverIterations: return ".solverIterations"
+            }
+            
+        }
+        
     }
     
-    public enum BodyAxis: Int64 {
+    public enum BodyAxis: Int64, CustomDebugStringConvertible {
         /// 
         case linearX = 1 // BODY_AXIS_LINEAR_X
         /// 
@@ -386,6 +644,19 @@ open class PhysicsServer3D: Object {
         case angularY = 16 // BODY_AXIS_ANGULAR_Y
         /// 
         case angularZ = 32 // BODY_AXIS_ANGULAR_Z
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linearX: return ".linearX"
+                case .linearY: return ".linearY"
+                case .linearZ: return ".linearZ"
+                case .angularX: return ".angularX"
+                case .angularY: return ".angularY"
+                case .angularZ: return ".angularZ"
+            }
+            
+        }
+        
     }
     
     /* Methods */

@@ -10,7 +10,7 @@
 /// Mesh is a type of ``Resource`` that contains vertex array-based geometry, divided in _surfaces_. Each surface contains a completely separate array and a material used to draw it. Design wise, a mesh with multiple surfaces is preferred to a single surface, because objects created in 3D editing software commonly contain multiple materials.
 open class Mesh: Resource {
     override open class var godotClassName: StringName { "Mesh" }
-    public enum PrimitiveType: Int64 {
+    public enum PrimitiveType: Int64, CustomDebugStringConvertible {
         /// Render array as points (one vertex equals one point).
         case points = 0 // PRIMITIVE_POINTS
         /// Render array as lines (every two vertices a line is created).
@@ -21,9 +21,21 @@ open class Mesh: Resource {
         case triangles = 3 // PRIMITIVE_TRIANGLES
         /// Render array as triangle strips.
         case triangleStrip = 4 // PRIMITIVE_TRIANGLE_STRIP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .points: return ".points"
+                case .lines: return ".lines"
+                case .lineStrip: return ".lineStrip"
+                case .triangles: return ".triangles"
+                case .triangleStrip: return ".triangleStrip"
+            }
+            
+        }
+        
     }
     
-    public enum ArrayType: Int64 {
+    public enum ArrayType: Int64, CustomDebugStringConvertible {
         /// ``PackedVector3Array``, ``PackedVector2Array``, or ``GArray`` of vertex positions.
         case vertex = 0 // ARRAY_VERTEX
         /// ``PackedVector3Array`` of vertex normals.
@@ -55,9 +67,30 @@ open class Mesh: Resource {
         case index = 12 // ARRAY_INDEX
         /// Represents the size of the ``Mesh/ArrayType`` enum.
         case max = 13 // ARRAY_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vertex: return ".vertex"
+                case .normal: return ".normal"
+                case .tangent: return ".tangent"
+                case .color: return ".color"
+                case .texUv: return ".texUv"
+                case .texUv2: return ".texUv2"
+                case .custom0: return ".custom0"
+                case .custom1: return ".custom1"
+                case .custom2: return ".custom2"
+                case .custom3: return ".custom3"
+                case .bones: return ".bones"
+                case .weights: return ".weights"
+                case .index: return ".index"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ArrayCustomFormat: Int64 {
+    public enum ArrayCustomFormat: Int64, CustomDebugStringConvertible {
         /// Indicates this custom channel contains unsigned normalized byte colors from 0 to 1, encoded as ``PackedByteArray``.
         case rgba8Unorm = 0 // ARRAY_CUSTOM_RGBA8_UNORM
         /// Indicates this custom channel contains signed normalized byte colors from -1 to 1, encoded as ``PackedByteArray``.
@@ -76,6 +109,22 @@ open class Mesh: Resource {
         case rgbaFloat = 7 // ARRAY_CUSTOM_RGBA_FLOAT
         /// Represents the size of the ``Mesh/ArrayCustomFormat`` enum.
         case max = 8 // ARRAY_CUSTOM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgba8Unorm: return ".rgba8Unorm"
+                case .rgba8Snorm: return ".rgba8Snorm"
+                case .rgHalf: return ".rgHalf"
+                case .rgbaHalf: return ".rgbaHalf"
+                case .rFloat: return ".rFloat"
+                case .rgFloat: return ".rgFloat"
+                case .rgbFloat: return ".rgbFloat"
+                case .rgbaFloat: return ".rgbaFloat"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     public struct ArrayFormat: OptionSet, CustomDebugStringConvertible {
@@ -174,11 +223,20 @@ open class Mesh: Resource {
         
     }
     
-    public enum BlendShapeMode: Int64 {
+    public enum BlendShapeMode: Int64, CustomDebugStringConvertible {
         /// Blend shapes are normalized.
         case normalized = 0 // BLEND_SHAPE_MODE_NORMALIZED
         /// Blend shapes are relative to base weight.
         case relative = 1 // BLEND_SHAPE_MODE_RELATIVE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .normalized: return ".normalized"
+                case .relative: return ".relative"
+            }
+            
+        }
+        
     }
     
     

@@ -13,7 +13,7 @@
 /// 
 open class AudioEffectSpectrumAnalyzer: AudioEffect {
     override open class var godotClassName: StringName { "AudioEffectSpectrumAnalyzer" }
-    public enum FFTSize: Int64 {
+    public enum FFTSize: Int64, CustomDebugStringConvertible {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
         case fftSize256 = 0 // FFT_SIZE_256
         /// Use a buffer of 512 samples for the Fast Fourier transform. Low latency, but less stable over time.
@@ -26,6 +26,19 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         case fftSize4096 = 4 // FFT_SIZE_4096
         /// Represents the size of the ``AudioEffectSpectrumAnalyzer/FFTSize`` enum.
         case max = 5 // FFT_SIZE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .fftSize256: return ".fftSize256"
+                case .fftSize512: return ".fftSize512"
+                case .fftSize1024: return ".fftSize1024"
+                case .fftSize2048: return ".fftSize2048"
+                case .fftSize4096: return ".fftSize4096"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

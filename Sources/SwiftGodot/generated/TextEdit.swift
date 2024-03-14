@@ -26,7 +26,7 @@
 /// - ``gutterRemoved``
 open class TextEdit: Control {
     override open class var godotClassName: StringName { "TextEdit" }
-    public enum MenuItems: Int64 {
+    public enum MenuItems: Int64, CustomDebugStringConvertible {
         /// Cuts (copies and clears) the selected text.
         case cut = 0 // MENU_CUT
         /// Copies the selected text.
@@ -89,9 +89,47 @@ open class TextEdit: Control {
         case insertShy = 29 // MENU_INSERT_SHY
         /// Represents the size of the ``TextEdit/MenuItems`` enum.
         case max = 30 // MENU_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .cut: return ".cut"
+                case .copy: return ".copy"
+                case .paste: return ".paste"
+                case .clear: return ".clear"
+                case .selectAll: return ".selectAll"
+                case .undo: return ".undo"
+                case .redo: return ".redo"
+                case .submenuTextDir: return ".submenuTextDir"
+                case .dirInherited: return ".dirInherited"
+                case .dirAuto: return ".dirAuto"
+                case .dirLtr: return ".dirLtr"
+                case .dirRtl: return ".dirRtl"
+                case .displayUcc: return ".displayUcc"
+                case .submenuInsertUcc: return ".submenuInsertUcc"
+                case .insertLrm: return ".insertLrm"
+                case .insertRlm: return ".insertRlm"
+                case .insertLre: return ".insertLre"
+                case .insertRle: return ".insertRle"
+                case .insertLro: return ".insertLro"
+                case .insertRlo: return ".insertRlo"
+                case .insertPdf: return ".insertPdf"
+                case .insertAlm: return ".insertAlm"
+                case .insertLri: return ".insertLri"
+                case .insertRli: return ".insertRli"
+                case .insertFsi: return ".insertFsi"
+                case .insertPdi: return ".insertPdi"
+                case .insertZwj: return ".insertZwj"
+                case .insertZwnj: return ".insertZwnj"
+                case .insertWj: return ".insertWj"
+                case .insertShy: return ".insertShy"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EditAction: Int64 {
+    public enum EditAction: Int64, CustomDebugStringConvertible {
         /// No current action.
         case none = 0 // ACTION_NONE
         /// A typing action.
@@ -100,25 +138,55 @@ open class TextEdit: Control {
         case backspace = 2 // ACTION_BACKSPACE
         /// A forward delete action.
         case delete = 3 // ACTION_DELETE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .typing: return ".typing"
+                case .backspace: return ".backspace"
+                case .delete: return ".delete"
+            }
+            
+        }
+        
     }
     
-    public enum SearchFlags: Int64 {
+    public enum SearchFlags: Int64, CustomDebugStringConvertible {
         /// Match case when searching.
         case matchCase = 1 // SEARCH_MATCH_CASE
         /// Match whole words when searching.
         case wholeWords = 2 // SEARCH_WHOLE_WORDS
         /// Search from end to beginning.
         case backwards = 4 // SEARCH_BACKWARDS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .matchCase: return ".matchCase"
+                case .wholeWords: return ".wholeWords"
+                case .backwards: return ".backwards"
+            }
+            
+        }
+        
     }
     
-    public enum CaretType: Int64 {
+    public enum CaretType: Int64, CustomDebugStringConvertible {
         /// Vertical line caret.
         case line = 0 // CARET_TYPE_LINE
         /// Block caret.
         case block = 1 // CARET_TYPE_BLOCK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .line: return ".line"
+                case .block: return ".block"
+            }
+            
+        }
+        
     }
     
-    public enum SelectionMode: Int64 {
+    public enum SelectionMode: Int64, CustomDebugStringConvertible {
         /// Not selecting.
         case none = 0 // SELECTION_MODE_NONE
         /// Select as if `shift` is pressed.
@@ -129,22 +197,53 @@ open class TextEdit: Control {
         case word = 3 // SELECTION_MODE_WORD
         /// Select whole lines as if the user triple clicked.
         case line = 4 // SELECTION_MODE_LINE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .shift: return ".shift"
+                case .pointer: return ".pointer"
+                case .word: return ".word"
+                case .line: return ".line"
+            }
+            
+        }
+        
     }
     
-    public enum LineWrappingMode: Int64 {
+    public enum LineWrappingMode: Int64, CustomDebugStringConvertible {
         /// Line wrapping is disabled.
         case none = 0 // LINE_WRAPPING_NONE
         /// Line wrapping occurs at the control boundary, beyond what would normally be visible.
         case boundary = 1 // LINE_WRAPPING_BOUNDARY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .boundary: return ".boundary"
+            }
+            
+        }
+        
     }
     
-    public enum GutterType: Int64 {
+    public enum GutterType: Int64, CustomDebugStringConvertible {
         /// Draw a string.
         case string = 0 // GUTTER_TYPE_STRING
         /// Draw an icon.
         case icon = 1 // GUTTER_TYPE_ICON
         /// Custom draw.
         case custom = 2 // GUTTER_TYPE_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .string: return ".string"
+                case .icon: return ".icon"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
     

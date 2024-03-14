@@ -21,7 +21,7 @@
 /// 
 open class Decal: VisualInstance3D {
     override open class var godotClassName: StringName { "Decal" }
-    public enum DecalTexture: Int64 {
+    public enum DecalTexture: Int64, CustomDebugStringConvertible {
         /// ``Texture2D`` corresponding to ``textureAlbedo``.
         case albedo = 0 // TEXTURE_ALBEDO
         /// ``Texture2D`` corresponding to ``textureNormal``.
@@ -32,6 +32,18 @@ open class Decal: VisualInstance3D {
         case emission = 3 // TEXTURE_EMISSION
         /// Max size of ``Decal/DecalTexture`` enum.
         case max = 4 // TEXTURE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .albedo: return ".albedo"
+                case .normal: return ".normal"
+                case .orm: return ".orm"
+                case .emission: return ".emission"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

@@ -10,7 +10,7 @@
 /// ENet's purpose is to provide a relatively thin, simple and robust network communication layer on top of UDP (User Datagram Protocol).
 open class ENetConnection: RefCounted {
     override open class var godotClassName: StringName { "ENetConnection" }
-    public enum CompressionMode: Int64 {
+    public enum CompressionMode: Int64, CustomDebugStringConvertible {
         /// No compression. This uses the most bandwidth, but has the upside of requiring the fewest CPU resources. This option may also be used to make network debugging using tools like Wireshark easier.
         case none = 0 // COMPRESS_NONE
         /// ENet's built-in range encoding. Works well on small packets, but is not the most efficient algorithm on packets larger than 4 KB.
@@ -21,9 +21,21 @@ open class ENetConnection: RefCounted {
         case zlib = 3 // COMPRESS_ZLIB
         /// [url=https://facebook.github.io/zstd/]Zstandard[/url] compression. Note that this algorithm is not very efficient on packets smaller than 4 KB. Therefore, it's recommended to use other compression algorithms in most cases.
         case zstd = 4 // COMPRESS_ZSTD
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .rangeCoder: return ".rangeCoder"
+                case .fastlz: return ".fastlz"
+                case .zlib: return ".zlib"
+                case .zstd: return ".zstd"
+            }
+            
+        }
+        
     }
     
-    public enum EventType: Int64 {
+    public enum EventType: Int64, CustomDebugStringConvertible {
         /// An error occurred during ``service(timeout:)``. You will likely need to ``destroy()`` the host and recreate it.
         case error = -1 // EVENT_ERROR
         /// No event occurred within the specified time limit.
@@ -34,9 +46,21 @@ open class ENetConnection: RefCounted {
         case disconnect = 2 // EVENT_DISCONNECT
         /// A packet has been received from a peer. The array will contain the peer which sent the packet and the channel number upon which the packet was received. The received packet will be queued to the associated ``ENetPacketPeer``.
         case receive = 3 // EVENT_RECEIVE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .error: return ".error"
+                case .none: return ".none"
+                case .connect: return ".connect"
+                case .disconnect: return ".disconnect"
+                case .receive: return ".receive"
+            }
+            
+        }
+        
     }
     
-    public enum HostStatistic: Int64 {
+    public enum HostStatistic: Int64, CustomDebugStringConvertible {
         /// Total data sent.
         case sentData = 0 // HOST_TOTAL_SENT_DATA
         /// Total UDP packets sent.
@@ -45,6 +69,17 @@ open class ENetConnection: RefCounted {
         case receivedData = 2 // HOST_TOTAL_RECEIVED_DATA
         /// Total UDP packets received.
         case receivedPackets = 3 // HOST_TOTAL_RECEIVED_PACKETS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .sentData: return ".sentData"
+                case .sentPackets: return ".sentPackets"
+                case .receivedData: return ".receivedData"
+                case .receivedPackets: return ".receivedPackets"
+            }
+            
+        }
+        
     }
     
     /* Methods */

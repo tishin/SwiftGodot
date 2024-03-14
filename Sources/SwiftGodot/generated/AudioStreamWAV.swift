@@ -13,16 +13,26 @@
 /// 
 open class AudioStreamWAV: AudioStream {
     override open class var godotClassName: StringName { "AudioStreamWAV" }
-    public enum Format: Int64 {
+    public enum Format: Int64, CustomDebugStringConvertible {
         /// 8-bit audio codec.
         case format8Bits = 0 // FORMAT_8_BITS
         /// 16-bit audio codec.
         case format16Bits = 1 // FORMAT_16_BITS
         /// Audio is compressed using IMA ADPCM.
         case imaAdpcm = 2 // FORMAT_IMA_ADPCM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .format8Bits: return ".format8Bits"
+                case .format16Bits: return ".format16Bits"
+                case .imaAdpcm: return ".imaAdpcm"
+            }
+            
+        }
+        
     }
     
-    public enum LoopMode: Int64 {
+    public enum LoopMode: Int64, CustomDebugStringConvertible {
         /// Audio does not loop.
         case disabled = 0 // LOOP_DISABLED
         /// Audio loops the data between ``loopBegin`` and ``loopEnd``, playing forward only.
@@ -31,6 +41,17 @@ open class AudioStreamWAV: AudioStream {
         case pingpong = 2 // LOOP_PINGPONG
         /// Audio loops the data between ``loopBegin`` and ``loopEnd``, playing backward only.
         case backward = 3 // LOOP_BACKWARD
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .forward: return ".forward"
+                case .pingpong: return ".pingpong"
+                case .backward: return ".backward"
+            }
+            
+        }
+        
     }
     
     

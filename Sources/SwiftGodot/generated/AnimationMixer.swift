@@ -23,20 +23,39 @@
 /// - ``cachesCleared``
 open class AnimationMixer: Node {
     override open class var godotClassName: StringName { "AnimationMixer" }
-    public enum AnimationCallbackModeProcess: Int64 {
+    public enum AnimationCallbackModeProcess: Int64, CustomDebugStringConvertible {
         /// Process animation during physics frames (see ``Node/``notificationInternalPhysicsProcess````). This is especially useful when animating physics bodies.
         case physics = 0 // ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
         /// Process animation during process frames (see ``Node/``notificationInternalProcess````).
         case idle = 1 // ANIMATION_CALLBACK_MODE_PROCESS_IDLE
         /// Do not process animation. Use ``advance(delta:)`` to process the animation manually.
         case manual = 2 // ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .physics: return ".physics"
+                case .idle: return ".idle"
+                case .manual: return ".manual"
+            }
+            
+        }
+        
     }
     
-    public enum AnimationCallbackModeMethod: Int64 {
+    public enum AnimationCallbackModeMethod: Int64, CustomDebugStringConvertible {
         /// Batch method calls during the animation process, then do the calls after events are processed. This avoids bugs involving deleting nodes or modifying the AnimationPlayer while playing.
         case deferred = 0 // ANIMATION_CALLBACK_MODE_METHOD_DEFERRED
         /// Make method calls immediately when reached in the animation.
         case immediate = 1 // ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .deferred: return ".deferred"
+                case .immediate: return ".immediate"
+            }
+            
+        }
+        
     }
     
     

@@ -13,11 +13,20 @@
 /// 
 open class CurveTexture: Texture2D {
     override open class var godotClassName: StringName { "CurveTexture" }
-    public enum TextureMode: Int64 {
+    public enum TextureMode: Int64, CustomDebugStringConvertible {
         /// Store the curve equally across the red, green and blue channels. This uses more video memory, but is more compatible with shaders that only read the green and blue values.
         case rgb = 0 // TEXTURE_MODE_RGB
         /// Store the curve only in the red channel. This saves video memory, but some custom shaders may not be able to work with this.
         case red = 1 // TEXTURE_MODE_RED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .rgb: return ".rgb"
+                case .red: return ".red"
+            }
+            
+        }
+        
     }
     
     

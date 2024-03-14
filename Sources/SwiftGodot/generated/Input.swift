@@ -26,7 +26,7 @@ open class Input: Object {
     }()
     
     override open class var godotClassName: StringName { "Input" }
-    public enum MouseMode: Int64 {
+    public enum MouseMode: Int64, CustomDebugStringConvertible {
         /// Makes the mouse cursor visible if it is hidden.
         case visible = 0 // MOUSE_MODE_VISIBLE
         /// Makes the mouse cursor hidden if it is visible.
@@ -40,9 +40,21 @@ open class Input: Object {
         case confined = 3 // MOUSE_MODE_CONFINED
         /// Confines the mouse cursor to the game window, and make it hidden.
         case confinedHidden = 4 // MOUSE_MODE_CONFINED_HIDDEN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .visible: return ".visible"
+                case .hidden: return ".hidden"
+                case .captured: return ".captured"
+                case .confined: return ".confined"
+                case .confinedHidden: return ".confinedHidden"
+            }
+            
+        }
+        
     }
     
-    public enum CursorShape: Int64 {
+    public enum CursorShape: Int64, CustomDebugStringConvertible {
         /// Arrow cursor. Standard, default pointing cursor.
         case arrow = 0 // CURSOR_ARROW
         /// I-beam cursor. Usually used to show where the text cursor will appear when the mouse is clicked.
@@ -80,6 +92,30 @@ open class Input: Object {
         case hsplit = 15 // CURSOR_HSPLIT
         /// Help cursor. Usually a question mark.
         case help = 16 // CURSOR_HELP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .arrow: return ".arrow"
+                case .ibeam: return ".ibeam"
+                case .pointingHand: return ".pointingHand"
+                case .cross: return ".cross"
+                case .wait: return ".wait"
+                case .busy: return ".busy"
+                case .drag: return ".drag"
+                case .canDrop: return ".canDrop"
+                case .forbidden: return ".forbidden"
+                case .vsize: return ".vsize"
+                case .hsize: return ".hsize"
+                case .bdiagsize: return ".bdiagsize"
+                case .fdiagsize: return ".fdiagsize"
+                case .move: return ".move"
+                case .vsplit: return ".vsplit"
+                case .hsplit: return ".hsplit"
+                case .help: return ".help"
+            }
+            
+        }
+        
     }
     
     

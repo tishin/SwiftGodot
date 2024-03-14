@@ -19,13 +19,23 @@
 /// 
 open class TileSetAtlasSource: TileSetSource {
     override open class var godotClassName: StringName { "TileSetAtlasSource" }
-    public enum TileAnimationMode: Int64 {
+    public enum TileAnimationMode: Int64, CustomDebugStringConvertible {
         /// Tile animations start at same time, looking identical.
         case `default` = 0 // TILE_ANIMATION_MODE_DEFAULT
         /// Tile animations start at random times, looking varied.
         case randomStartTimes = 1 // TILE_ANIMATION_MODE_RANDOM_START_TIMES
         /// Represents the size of the ``TileSetAtlasSource/TileAnimationMode`` enum.
         case max = 2 // TILE_ANIMATION_MODE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`default`: return ".`default`"
+                case .randomStartTimes: return ".randomStartTimes"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Constants */

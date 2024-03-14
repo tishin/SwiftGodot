@@ -13,16 +13,26 @@
 /// 
 open class SubViewport: Viewport {
     override open class var godotClassName: StringName { "SubViewport" }
-    public enum ClearMode: Int64 {
+    public enum ClearMode: Int64, CustomDebugStringConvertible {
         /// Always clear the render target before drawing.
         case always = 0 // CLEAR_MODE_ALWAYS
         /// Never clear the render target.
         case never = 1 // CLEAR_MODE_NEVER
         /// Clear the render target on the next frame, then switch to .never.
         case once = 2 // CLEAR_MODE_ONCE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .always: return ".always"
+                case .never: return ".never"
+                case .once: return ".once"
+            }
+            
+        }
+        
     }
     
-    public enum UpdateMode: Int64 {
+    public enum UpdateMode: Int64, CustomDebugStringConvertible {
         /// Do not update the render target.
         case disabled = 0 // UPDATE_DISABLED
         /// Update the render target once, then switch to .updateDisabled.
@@ -33,6 +43,18 @@ open class SubViewport: Viewport {
         case whenParentVisible = 3 // UPDATE_WHEN_PARENT_VISIBLE
         /// Always update the render target.
         case always = 4 // UPDATE_ALWAYS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .once: return ".once"
+                case .whenVisible: return ".whenVisible"
+                case .whenParentVisible: return ".whenParentVisible"
+                case .always: return ".always"
+            }
+            
+        }
+        
     }
     
     

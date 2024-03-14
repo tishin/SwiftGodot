@@ -10,7 +10,7 @@
 /// Applies ```operator``` to two floating-point inputs: `a` and `b`.
 open class VisualShaderNodeFloatOp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeFloatOp" }
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Sums two numbers using `a + b`.
         case add = 0 // OP_ADD
         /// Subtracts two numbers using `a - b`.
@@ -33,6 +33,24 @@ open class VisualShaderNodeFloatOp: VisualShaderNode {
         case step = 9 // OP_STEP
         /// Represents the size of the ``VisualShaderNodeFloatOp/Operator`` enum.
         case enumSize = 10 // OP_ENUM_SIZE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mul: return ".mul"
+                case .div: return ".div"
+                case .mod: return ".mod"
+                case .pow: return ".pow"
+                case .max: return ".max"
+                case .min: return ".min"
+                case .atan2: return ".atan2"
+                case .step: return ".step"
+                case .enumSize: return ".enumSize"
+            }
+            
+        }
+        
     }
     
     

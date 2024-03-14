@@ -18,16 +18,26 @@
 /// - ``finished``
 open class CPUParticles3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "CPUParticles3D" }
-    public enum DrawOrder: Int64 {
+    public enum DrawOrder: Int64, CustomDebugStringConvertible {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX
         /// Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
         case lifetime = 1 // DRAW_ORDER_LIFETIME
         /// Particles are drawn in order of depth.
         case viewDepth = 2 // DRAW_ORDER_VIEW_DEPTH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .index: return ".index"
+                case .lifetime: return ".lifetime"
+                case .viewDepth: return ".viewDepth"
+            }
+            
+        }
+        
     }
     
-    public enum Parameter: Int64 {
+    public enum Parameter: Int64, CustomDebugStringConvertible {
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamCurve(param:curve:)`` to set initial velocity properties.
         case initialLinearVelocity = 0 // PARAM_INITIAL_LINEAR_VELOCITY
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamCurve(param:curve:)`` to set angular velocity properties.
@@ -54,9 +64,29 @@ open class CPUParticles3D: GeometryInstance3D {
         case animOffset = 11 // PARAM_ANIM_OFFSET
         /// Represents the size of the ``CPUParticles3D/Parameter`` enum.
         case max = 12 // PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .initialLinearVelocity: return ".initialLinearVelocity"
+                case .angularVelocity: return ".angularVelocity"
+                case .orbitVelocity: return ".orbitVelocity"
+                case .linearAccel: return ".linearAccel"
+                case .radialAccel: return ".radialAccel"
+                case .tangentialAccel: return ".tangentialAccel"
+                case .damping: return ".damping"
+                case .angle: return ".angle"
+                case .scale: return ".scale"
+                case .hueVariation: return ".hueVariation"
+                case .animSpeed: return ".animSpeed"
+                case .animOffset: return ".animOffset"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ParticleFlags: Int64 {
+    public enum ParticleFlags: Int64, CustomDebugStringConvertible {
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagAlignY``.
         case alignYToVelocity = 0 // PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagRotateY``.
@@ -65,9 +95,20 @@ open class CPUParticles3D: GeometryInstance3D {
         case disableZ = 2 // PARTICLE_FLAG_DISABLE_Z
         /// Represents the size of the ``CPUParticles3D/ParticleFlags`` enum.
         case max = 3 // PARTICLE_FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .alignYToVelocity: return ".alignYToVelocity"
+                case .rotateY: return ".rotateY"
+                case .disableZ: return ".disableZ"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EmissionShape: Int64 {
+    public enum EmissionShape: Int64, CustomDebugStringConvertible {
         /// All particles will be emitted from a single point.
         case point = 0 // EMISSION_SHAPE_POINT
         /// Particles will be emitted in the volume of a sphere.
@@ -84,6 +125,21 @@ open class CPUParticles3D: GeometryInstance3D {
         case ring = 6 // EMISSION_SHAPE_RING
         /// Represents the size of the ``CPUParticles3D/EmissionShape`` enum.
         case max = 7 // EMISSION_SHAPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .point: return ".point"
+                case .sphere: return ".sphere"
+                case .sphereSurface: return ".sphereSurface"
+                case .box: return ".box"
+                case .points: return ".points"
+                case .directedPoints: return ".directedPoints"
+                case .ring: return ".ring"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

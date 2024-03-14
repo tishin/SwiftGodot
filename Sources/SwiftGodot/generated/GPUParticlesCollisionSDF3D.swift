@@ -21,7 +21,7 @@
 /// 
 open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
     override open class var godotClassName: StringName { "GPUParticlesCollisionSDF3D" }
-    public enum Resolution: Int64 {
+    public enum Resolution: Int64, CustomDebugStringConvertible {
         /// Bake a 16×16×16 signed distance field. This is the fastest option, but also the least precise.
         case resolution16 = 0 // RESOLUTION_16
         /// Bake a 32×32×32 signed distance field.
@@ -36,6 +36,20 @@ open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
         case resolution512 = 5 // RESOLUTION_512
         /// Represents the size of the ``GPUParticlesCollisionSDF3D/Resolution`` enum.
         case max = 6 // RESOLUTION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .resolution16: return ".resolution16"
+                case .resolution32: return ".resolution32"
+                case .resolution64: return ".resolution64"
+                case .resolution128: return ".resolution128"
+                case .resolution256: return ".resolution256"
+                case .resolution512: return ".resolution512"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

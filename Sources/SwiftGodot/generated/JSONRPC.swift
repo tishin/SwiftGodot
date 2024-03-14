@@ -10,7 +10,7 @@
 /// [url=https://www.jsonrpc.org/]JSON-RPC[/url] is a standard which wraps a method call in a ``JSON`` object. The object has a particular structure and identifies which method is called, the parameters to that function, and carries an ID to keep track of responses. This class implements that standard on top of ``GDictionary``; you will have to convert between a ``GDictionary`` and ``JSON`` with other functions.
 open class JSONRPC: Object {
     override open class var godotClassName: StringName { "JSONRPC" }
-    public enum ErrorCode: Int64 {
+    public enum ErrorCode: Int64, CustomDebugStringConvertible {
         /// 
         case parseError = -32700 // PARSE_ERROR
         /// 
@@ -21,6 +21,18 @@ open class JSONRPC: Object {
         case invalidParams = -32602 // INVALID_PARAMS
         /// 
         case internalError = -32603 // INTERNAL_ERROR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .parseError: return ".parseError"
+                case .invalidRequest: return ".invalidRequest"
+                case .methodNotFound: return ".methodNotFound"
+                case .invalidParams: return ".invalidParams"
+                case .internalError: return ".internalError"
+            }
+            
+        }
+        
     }
     
     /* Methods */

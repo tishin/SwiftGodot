@@ -15,13 +15,23 @@
 /// 
 open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     override open class var godotClassName: StringName { "VisibleOnScreenEnabler2D" }
-    public enum EnableMode: Int64 {
+    public enum EnableMode: Int64, CustomDebugStringConvertible {
         /// Corresponds to ``Node/ProcessMode/inherit``.
         case inherit = 0 // ENABLE_MODE_INHERIT
         /// Corresponds to ``Node/ProcessMode/always``.
         case always = 1 // ENABLE_MODE_ALWAYS
         /// Corresponds to ``Node/ProcessMode/whenPaused``.
         case whenPaused = 2 // ENABLE_MODE_WHEN_PAUSED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .inherit: return ".inherit"
+                case .always: return ".always"
+                case .whenPaused: return ".whenPaused"
+            }
+            
+        }
+        
     }
     
     

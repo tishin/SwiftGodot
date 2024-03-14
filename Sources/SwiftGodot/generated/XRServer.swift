@@ -27,7 +27,7 @@ open class XRServer: Object {
     }()
     
     override open class var godotClassName: StringName { "XRServer" }
-    public enum TrackerType: Int64 {
+    public enum TrackerType: Int64, CustomDebugStringConvertible {
         /// The tracker tracks the location of the players head. This is usually a location centered between the players eyes. Note that for handheld AR devices this can be the current location of the device.
         case head = 1 // TRACKER_HEAD
         /// The tracker tracks the location of a controller.
@@ -42,15 +42,39 @@ open class XRServer: Object {
         case unknown = 128 // TRACKER_UNKNOWN
         /// Used internally to select all trackers.
         case any = 255 // TRACKER_ANY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .head: return ".head"
+                case .controller: return ".controller"
+                case .basestation: return ".basestation"
+                case .anchor: return ".anchor"
+                case .anyKnown: return ".anyKnown"
+                case .unknown: return ".unknown"
+                case .any: return ".any"
+            }
+            
+        }
+        
     }
     
-    public enum RotationMode: Int64 {
+    public enum RotationMode: Int64, CustomDebugStringConvertible {
         /// Fully reset the orientation of the HMD. Regardless of what direction the user is looking to in the real world. The user will look dead ahead in the virtual world.
         case resetFullRotation = 0 // RESET_FULL_ROTATION
         /// Resets the orientation but keeps the tilt of the device. So if we're looking down, we keep looking down but heading will be reset.
         case resetButKeepTilt = 1 // RESET_BUT_KEEP_TILT
         /// Does not reset the orientation of the HMD, only the position of the player gets centered.
         case dontResetRotation = 2 // DONT_RESET_ROTATION
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .resetFullRotation: return ".resetFullRotation"
+                case .resetButKeepTilt: return ".resetButKeepTilt"
+                case .dontResetRotation: return ".dontResetRotation"
+            }
+            
+        }
+        
     }
     
     

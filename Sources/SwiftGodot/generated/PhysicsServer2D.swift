@@ -33,7 +33,7 @@ open class PhysicsServer2D: Object {
     }()
     
     override open class var godotClassName: StringName { "PhysicsServer2D" }
-    public enum SpaceParameter: Int64 {
+    public enum SpaceParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated. The default value of this parameter is ``ProjectSettings/physics/2d/solver/contactRecycleRadius``.
         case contactRecycleRadius = 0 // SPACE_PARAM_CONTACT_RECYCLE_RADIUS
         /// Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded. The default value of this parameter is ``ProjectSettings/physics/2d/solver/contactMaxSeparation``.
@@ -52,9 +52,25 @@ open class PhysicsServer2D: Object {
         case constraintDefaultBias = 7 // SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS
         /// Constant to set/get the number of solver iterations for all contacts and constraints. The greater the number of iterations, the more accurate the collisions will be. However, a greater number of iterations requires more CPU power, which can decrease performance. The default value of this parameter is ``ProjectSettings/physics/2d/solver/solverIterations``.
         case solverIterations = 8 // SPACE_PARAM_SOLVER_ITERATIONS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .contactRecycleRadius: return ".contactRecycleRadius"
+                case .contactMaxSeparation: return ".contactMaxSeparation"
+                case .contactMaxAllowedPenetration: return ".contactMaxAllowedPenetration"
+                case .contactDefaultBias: return ".contactDefaultBias"
+                case .bodyLinearVelocitySleepThreshold: return ".bodyLinearVelocitySleepThreshold"
+                case .bodyAngularVelocitySleepThreshold: return ".bodyAngularVelocitySleepThreshold"
+                case .bodyTimeToSleep: return ".bodyTimeToSleep"
+                case .constraintDefaultBias: return ".constraintDefaultBias"
+                case .solverIterations: return ".solverIterations"
+            }
+            
+        }
+        
     }
     
-    public enum ShapeType: Int64 {
+    public enum ShapeType: Int64, CustomDebugStringConvertible {
         /// This is the constant for creating world boundary shapes. A world boundary shape is an _infinite_ line with an origin point, and a normal. Thus, it can be used for front/behind checks.
         case worldBoundary = 0 // SHAPE_WORLD_BOUNDARY
         /// This is the constant for creating separation ray shapes. A separation ray is defined by a length and separates itself from what is touching its far endpoint. Useful for character controllers.
@@ -73,9 +89,25 @@ open class PhysicsServer2D: Object {
         case concavePolygon = 7 // SHAPE_CONCAVE_POLYGON
         /// This constant is used internally by the engine. Any attempt to create this kind of shape results in an error.
         case custom = 8 // SHAPE_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .worldBoundary: return ".worldBoundary"
+                case .separationRay: return ".separationRay"
+                case .segment: return ".segment"
+                case .circle: return ".circle"
+                case .rectangle: return ".rectangle"
+                case .capsule: return ".capsule"
+                case .convexPolygon: return ".convexPolygon"
+                case .concavePolygon: return ".concavePolygon"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
-    public enum AreaParameter: Int64 {
+    public enum AreaParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get gravity override mode in an area. See ``PhysicsServer2D/AreaSpaceOverrideMode`` for possible values. The default value of this parameter is .areaSpaceOverrideDisabled.
         case gravityOverrideMode = 0 // AREA_PARAM_GRAVITY_OVERRIDE_MODE
         /// Constant to set/get gravity strength in an area. The default value of this parameter is `9.80665`.
@@ -99,9 +131,26 @@ open class PhysicsServer2D: Object {
         case angularDamp = 8 // AREA_PARAM_ANGULAR_DAMP
         /// Constant to set/get the priority (order of processing) of an area. The default value of this parameter is `0`.
         case priority = 9 // AREA_PARAM_PRIORITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .gravityOverrideMode: return ".gravityOverrideMode"
+                case .gravity: return ".gravity"
+                case .gravityVector: return ".gravityVector"
+                case .gravityIsPoint: return ".gravityIsPoint"
+                case .gravityPointUnitDistance: return ".gravityPointUnitDistance"
+                case .linearDampOverrideMode: return ".linearDampOverrideMode"
+                case .linearDamp: return ".linearDamp"
+                case .angularDampOverrideMode: return ".angularDampOverrideMode"
+                case .angularDamp: return ".angularDamp"
+                case .priority: return ".priority"
+            }
+            
+        }
+        
     }
     
-    public enum AreaSpaceOverrideMode: Int64 {
+    public enum AreaSpaceOverrideMode: Int64, CustomDebugStringConvertible {
         /// This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
         case disabled = 0 // AREA_SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
@@ -112,9 +161,21 @@ open class PhysicsServer2D: Object {
         case replace = 3 // AREA_SPACE_OVERRIDE_REPLACE
         /// This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
         case replaceCombine = 4 // AREA_SPACE_OVERRIDE_REPLACE_COMBINE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .combine: return ".combine"
+                case .combineReplace: return ".combineReplace"
+                case .replace: return ".replace"
+                case .replaceCombine: return ".replaceCombine"
+            }
+            
+        }
+        
     }
     
-    public enum BodyMode: Int64 {
+    public enum BodyMode: Int64, CustomDebugStringConvertible {
         /// Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
         case `static` = 0 // BODY_MODE_STATIC
         /// Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
@@ -123,9 +184,20 @@ open class PhysicsServer2D: Object {
         case rigid = 2 // BODY_MODE_RIGID
         /// Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
         case rigidLinear = 3 // BODY_MODE_RIGID_LINEAR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .`static`: return ".`static`"
+                case .kinematic: return ".kinematic"
+                case .rigid: return ".rigid"
+                case .rigidLinear: return ".rigidLinear"
+            }
+            
+        }
+        
     }
     
-    public enum BodyParameter: Int64 {
+    public enum BodyParameter: Int64, CustomDebugStringConvertible {
         /// Constant to set/get a body's bounce factor. The default value of this parameter is `0.0`.
         case bounce = 0 // BODY_PARAM_BOUNCE
         /// Constant to set/get a body's friction. The default value of this parameter is `1.0`.
@@ -153,16 +225,43 @@ open class PhysicsServer2D: Object {
         case angularDamp = 9 // BODY_PARAM_ANGULAR_DAMP
         /// Represents the size of the ``PhysicsServer2D/BodyParameter`` enum.
         case max = 10 // BODY_PARAM_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bounce: return ".bounce"
+                case .friction: return ".friction"
+                case .mass: return ".mass"
+                case .inertia: return ".inertia"
+                case .centerOfMass: return ".centerOfMass"
+                case .gravityScale: return ".gravityScale"
+                case .linearDampMode: return ".linearDampMode"
+                case .angularDampMode: return ".angularDampMode"
+                case .linearDamp: return ".linearDamp"
+                case .angularDamp: return ".angularDamp"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum BodyDampMode: Int64 {
+    public enum BodyDampMode: Int64, CustomDebugStringConvertible {
         /// The body's damping value is added to any value set in areas or the default value.
         case combine = 0 // BODY_DAMP_MODE_COMBINE
         /// The body's damping value replaces any value set in areas or the default value.
         case replace = 1 // BODY_DAMP_MODE_REPLACE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .combine: return ".combine"
+                case .replace: return ".replace"
+            }
+            
+        }
+        
     }
     
-    public enum BodyState: Int64 {
+    public enum BodyState: Int64, CustomDebugStringConvertible {
         /// Constant to set/get the current transform matrix of the body.
         case transform = 0 // BODY_STATE_TRANSFORM
         /// Constant to set/get the current linear velocity of the body.
@@ -173,9 +272,21 @@ open class PhysicsServer2D: Object {
         case sleeping = 3 // BODY_STATE_SLEEPING
         /// Constant to set/get whether the body can sleep.
         case canSleep = 4 // BODY_STATE_CAN_SLEEP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .transform: return ".transform"
+                case .linearVelocity: return ".linearVelocity"
+                case .angularVelocity: return ".angularVelocity"
+                case .sleeping: return ".sleeping"
+                case .canSleep: return ".canSleep"
+            }
+            
+        }
+        
     }
     
-    public enum JointType: Int64 {
+    public enum JointType: Int64, CustomDebugStringConvertible {
         /// Constant to create pin joints.
         case pin = 0 // JOINT_TYPE_PIN
         /// Constant to create groove joints.
@@ -184,9 +295,20 @@ open class PhysicsServer2D: Object {
         case dampedSpring = 2 // JOINT_TYPE_DAMPED_SPRING
         /// Represents the size of the ``PhysicsServer2D/JointType`` enum.
         case max = 3 // JOINT_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .pin: return ".pin"
+                case .groove: return ".groove"
+                case .dampedSpring: return ".dampedSpring"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum JointParam: Int64 {
+    public enum JointParam: Int64, CustomDebugStringConvertible {
         /// Constant to set/get how fast the joint pulls the bodies back to satisfy the joint constraint. The lower the value, the more the two bodies can pull on the joint. The default value of this parameter is `0.0`.
         /// 
         /// > Note: In Godot Physics, this parameter is only used for pin joints and groove joints.
@@ -202,9 +324,19 @@ open class PhysicsServer2D: Object {
         /// > Note: In Godot Physics, this parameter is only used for groove joints.
         /// 
         case maxForce = 2 // JOINT_PARAM_MAX_FORCE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bias: return ".bias"
+                case .maxBias: return ".maxBias"
+                case .maxForce: return ".maxForce"
+            }
+            
+        }
+        
     }
     
-    public enum PinJointParam: Int64 {
+    public enum PinJointParam: Int64, CustomDebugStringConvertible {
         /// Constant to set/get a how much the bond of the pin joint can flex. The default value of this parameter is `0.0`.
         case softness = 0 // PIN_JOINT_SOFTNESS
         /// The maximum rotation around the pin.
@@ -213,47 +345,106 @@ open class PhysicsServer2D: Object {
         case limitLower = 2 // PIN_JOINT_LIMIT_LOWER
         /// Target speed for the motor. In radians per second.
         case motorTargetVelocity = 3 // PIN_JOINT_MOTOR_TARGET_VELOCITY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .softness: return ".softness"
+                case .limitUpper: return ".limitUpper"
+                case .limitLower: return ".limitLower"
+                case .motorTargetVelocity: return ".motorTargetVelocity"
+            }
+            
+        }
+        
     }
     
-    public enum PinJointFlag: Int64 {
+    public enum PinJointFlag: Int64, CustomDebugStringConvertible {
         /// If `true`, the pin has a maximum and a minimum rotation.
         case angularLimitEnabled = 0 // PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED
         /// If `true`, a motor turns the pin.
         case motorEnabled = 1 // PIN_JOINT_FLAG_MOTOR_ENABLED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .angularLimitEnabled: return ".angularLimitEnabled"
+                case .motorEnabled: return ".motorEnabled"
+            }
+            
+        }
+        
     }
     
-    public enum DampedSpringParam: Int64 {
+    public enum DampedSpringParam: Int64, CustomDebugStringConvertible {
         /// Sets the resting length of the spring joint. The joint will always try to go to back this length when pulled apart. The default value of this parameter is the distance between the joint's anchor points.
         case restLength = 0 // DAMPED_SPRING_REST_LENGTH
         /// Sets the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length. The default value of this parameter is `20.0`.
         case stiffness = 1 // DAMPED_SPRING_STIFFNESS
         /// Sets the damping ratio of the spring joint. A value of 0 indicates an undamped spring, while 1 causes the system to reach equilibrium as fast as possible (critical damping). The default value of this parameter is `1.5`.
         case damping = 2 // DAMPED_SPRING_DAMPING
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .restLength: return ".restLength"
+                case .stiffness: return ".stiffness"
+                case .damping: return ".damping"
+            }
+            
+        }
+        
     }
     
-    public enum CCDMode: Int64 {
+    public enum CCDMode: Int64, CustomDebugStringConvertible {
         /// Disables continuous collision detection. This is the fastest way to detect body collisions, but it can miss small and/or fast-moving objects.
         case disabled = 0 // CCD_MODE_DISABLED
         /// Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
         case castRay = 1 // CCD_MODE_CAST_RAY
         /// Enables continuous collision detection by shapecasting. It is the slowest CCD method, and the most precise.
         case castShape = 2 // CCD_MODE_CAST_SHAPE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .castRay: return ".castRay"
+                case .castShape: return ".castShape"
+            }
+            
+        }
+        
     }
     
-    public enum AreaBodyStatus: Int64 {
+    public enum AreaBodyStatus: Int64, CustomDebugStringConvertible {
         /// The value of the first parameter and area callback function receives, when an object enters one of its shapes.
         case added = 0 // AREA_BODY_ADDED
         /// The value of the first parameter and area callback function receives, when an object exits one of its shapes.
         case removed = 1 // AREA_BODY_REMOVED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .added: return ".added"
+                case .removed: return ".removed"
+            }
+            
+        }
+        
     }
     
-    public enum ProcessInfo: Int64 {
+    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
         /// Constant to get the number of objects that are not sleeping.
         case activeObjects = 0 // INFO_ACTIVE_OBJECTS
         /// Constant to get the number of possible collisions.
         case collisionPairs = 1 // INFO_COLLISION_PAIRS
         /// Constant to get the number of space regions where a collision could occur.
         case islandCount = 2 // INFO_ISLAND_COUNT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .activeObjects: return ".activeObjects"
+                case .collisionPairs: return ".collisionPairs"
+                case .islandCount: return ".islandCount"
+            }
+            
+        }
+        
     }
     
     /* Methods */

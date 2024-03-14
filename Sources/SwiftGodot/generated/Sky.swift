@@ -10,7 +10,7 @@
 /// The ``Sky`` class uses a ``Material`` to render a 3D environment's background and the light it emits by updating the reflection/radiance cubemaps.
 open class Sky: Resource {
     override open class var godotClassName: StringName { "Sky" }
-    public enum RadianceSize: Int64 {
+    public enum RadianceSize: Int64, CustomDebugStringConvertible {
         /// Radiance texture size is 32×32 pixels.
         case radianceSize32 = 0 // RADIANCE_SIZE_32
         /// Radiance texture size is 64×64 pixels.
@@ -27,9 +27,24 @@ open class Sky: Resource {
         case radianceSize2048 = 6 // RADIANCE_SIZE_2048
         /// Represents the size of the ``Sky/RadianceSize`` enum.
         case max = 7 // RADIANCE_SIZE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .radianceSize32: return ".radianceSize32"
+                case .radianceSize64: return ".radianceSize64"
+                case .radianceSize128: return ".radianceSize128"
+                case .radianceSize256: return ".radianceSize256"
+                case .radianceSize512: return ".radianceSize512"
+                case .radianceSize1024: return ".radianceSize1024"
+                case .radianceSize2048: return ".radianceSize2048"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ProcessMode: Int64 {
+    public enum ProcessMode: Int64, CustomDebugStringConvertible {
         /// Automatically selects the appropriate process mode based on your sky shader. If your shader uses `TIME` or `POSITION`, this will use .realtime. If your shader uses any of the `LIGHT_*` variables or any custom uniforms, this uses .incremental. Otherwise, this defaults to .quality.
         case automatic = 0 // PROCESS_MODE_AUTOMATIC
         /// Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than .realtime but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ``ProjectSettings/rendering/reflections/skyReflections/ggxSamples``.
@@ -41,6 +56,17 @@ open class Sky: Resource {
         /// > Note: The fast filtering algorithm is limited to 256×256 cubemaps, so ``radianceSize`` must be set to .radianceSize256. Otherwise, a warning is printed and the overridden radiance size is ignored.
         /// 
         case realtime = 3 // PROCESS_MODE_REALTIME
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .automatic: return ".automatic"
+                case .quality: return ".quality"
+                case .incremental: return ".incremental"
+                case .realtime: return ".realtime"
+            }
+            
+        }
+        
     }
     
     

@@ -19,7 +19,7 @@
 /// 
 open class PortableCompressedTexture2D: Texture2D {
     override open class var godotClassName: StringName { "PortableCompressedTexture2D" }
-    public enum CompressionMode: Int64 {
+    public enum CompressionMode: Int64, CustomDebugStringConvertible {
         /// 
         case lossless = 0 // COMPRESSION_MODE_LOSSLESS
         /// 
@@ -32,6 +32,19 @@ open class PortableCompressedTexture2D: Texture2D {
         case etc2 = 4 // COMPRESSION_MODE_ETC2
         /// 
         case bptc = 5 // COMPRESSION_MODE_BPTC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .lossless: return ".lossless"
+                case .lossy: return ".lossy"
+                case .basisUniversal: return ".basisUniversal"
+                case .s3tc: return ".s3tc"
+                case .etc2: return ".etc2"
+                case .bptc: return ".bptc"
+            }
+            
+        }
+        
     }
     
     

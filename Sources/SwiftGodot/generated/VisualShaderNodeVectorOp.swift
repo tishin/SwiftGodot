@@ -10,7 +10,7 @@
 /// A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
 open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorOp" }
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Adds two vectors.
         case add = 0 // OP_ADD
         /// Subtracts a vector from a vector.
@@ -37,6 +37,26 @@ open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
         case step = 11 // OP_STEP
         /// Represents the size of the ``VisualShaderNodeVectorOp/Operator`` enum.
         case enumSize = 12 // OP_ENUM_SIZE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mul: return ".mul"
+                case .div: return ".div"
+                case .mod: return ".mod"
+                case .pow: return ".pow"
+                case .max: return ".max"
+                case .min: return ".min"
+                case .cross: return ".cross"
+                case .atan2: return ".atan2"
+                case .reflect: return ".reflect"
+                case .step: return ".step"
+                case .enumSize: return ".enumSize"
+            }
+            
+        }
+        
     }
     
     

@@ -10,7 +10,7 @@
 /// Base node for geometry-based visual instances. Shares some common functionality like visibility and custom materials.
 open class GeometryInstance3D: VisualInstance3D {
     override open class var godotClassName: StringName { "GeometryInstance3D" }
-    public enum ShadowCastingSetting: Int64 {
+    public enum ShadowCastingSetting: Int64, CustomDebugStringConvertible {
         /// Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
         case off = 0 // SHADOW_CASTING_SETTING_OFF
         /// Will cast shadows from all visible faces in the GeometryInstance3D.
@@ -28,18 +28,39 @@ open class GeometryInstance3D: VisualInstance3D {
         /// In other words, the actual mesh will not be visible, only the shadows casted from the mesh will be.
         /// 
         case shadowsOnly = 3 // SHADOW_CASTING_SETTING_SHADOWS_ONLY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .off: return ".off"
+                case .on: return ".on"
+                case .doubleSided: return ".doubleSided"
+                case .shadowsOnly: return ".shadowsOnly"
+            }
+            
+        }
+        
     }
     
-    public enum GIMode: Int64 {
+    public enum GIMode: Int64, CustomDebugStringConvertible {
         /// Disabled global illumination mode. Use for dynamic objects that do not contribute to global illumination (such as characters). When using ``VoxelGI`` and SDFGI, the geometry will _receive_ indirect lighting and reflections but the geometry will not be considered in GI baking. When using ``LightmapGI``, the object will receive indirect lighting using lightmap probes instead of using the baked lightmap texture.
         case disabled = 0 // GI_MODE_DISABLED
         /// Baked global illumination mode. Use for static objects that contribute to global illumination (such as level geometry). This GI mode is effective when using ``VoxelGI``, SDFGI and ``LightmapGI``.
         case `static` = 1 // GI_MODE_STATIC
         /// Dynamic global illumination mode. Use for dynamic objects that contribute to global illumination. This GI mode is only effective when using ``VoxelGI``, but it has a higher performance impact than .`static`. When using other GI methods, this will act the same as .disabled.
         case dynamic = 2 // GI_MODE_DYNAMIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .`static`: return ".`static`"
+                case .dynamic: return ".dynamic"
+            }
+            
+        }
+        
     }
     
-    public enum LightmapScale: Int64 {
+    public enum LightmapScale: Int64, CustomDebugStringConvertible {
         /// The standard texel density for lightmapping with ``LightmapGI``.
         case lightmapScale1x = 0 // LIGHTMAP_SCALE_1X
         /// Multiplies texel density by 2× for lightmapping with ``LightmapGI``. To ensure consistency in texel density, use this when scaling a mesh by a factor between 1.5 and 3.0.
@@ -50,15 +71,37 @@ open class GeometryInstance3D: VisualInstance3D {
         case lightmapScale8x = 3 // LIGHTMAP_SCALE_8X
         /// Represents the size of the ``GeometryInstance3D/LightmapScale`` enum.
         case max = 4 // LIGHTMAP_SCALE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .lightmapScale1x: return ".lightmapScale1x"
+                case .lightmapScale2x: return ".lightmapScale2x"
+                case .lightmapScale4x: return ".lightmapScale4x"
+                case .lightmapScale8x: return ".lightmapScale8x"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum VisibilityRangeFadeMode: Int64 {
+    public enum VisibilityRangeFadeMode: Int64, CustomDebugStringConvertible {
         /// Will not fade itself nor its visibility dependencies, hysteresis will be used instead. This is the fastest approach to manual LOD, but it can result in noticeable LOD transitions depending on how the LOD meshes are authored. See ``visibilityRangeBegin`` and ``Node3D/visibilityParent`` for more information.
         case disabled = 0 // VISIBILITY_RANGE_FADE_DISABLED
         /// Will fade-out itself when reaching the limits of its own visibility range. This is slower than .visibilityRangeFadeDisabled, but it can provide smoother transitions. The fading range is determined by ``visibilityRangeBeginMargin`` and ``visibilityRangeEndMargin``.
         case `self` = 1 // VISIBILITY_RANGE_FADE_SELF
         /// Will fade-in its visibility dependencies (see ``Node3D/visibilityParent``) when reaching the limits of its own visibility range. This is slower than .visibilityRangeFadeDisabled, but it can provide smoother transitions. The fading range is determined by ``visibilityRangeBeginMargin`` and ``visibilityRangeEndMargin``.
         case dependencies = 2 // VISIBILITY_RANGE_FADE_DEPENDENCIES
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .`self`: return ".`self`"
+                case .dependencies: return ".dependencies"
+            }
+            
+        }
+        
     }
     
     

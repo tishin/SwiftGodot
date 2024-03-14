@@ -25,7 +25,7 @@
 /// - ``itemRectChanged``
 open class CanvasItem: Node {
     override open class var godotClassName: StringName { "CanvasItem" }
-    public enum TextureFilter: Int64 {
+    public enum TextureFilter: Int64, CustomDebugStringConvertible {
         /// The ``CanvasItem`` will inherit the filter from its parent.
         case parentNode = 0 // TEXTURE_FILTER_PARENT_NODE
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering. Useful for pixel art.
@@ -48,9 +48,24 @@ open class CanvasItem: Node {
         case linearWithMipmapsAnisotropic = 6 // TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
         /// Represents the size of the ``CanvasItem/TextureFilter`` enum.
         case max = 7 // TEXTURE_FILTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .parentNode: return ".parentNode"
+                case .nearest: return ".nearest"
+                case .linear: return ".linear"
+                case .nearestWithMipmaps: return ".nearestWithMipmaps"
+                case .linearWithMipmaps: return ".linearWithMipmaps"
+                case .nearestWithMipmapsAnisotropic: return ".nearestWithMipmapsAnisotropic"
+                case .linearWithMipmapsAnisotropic: return ".linearWithMipmapsAnisotropic"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum TextureRepeat: Int64 {
+    public enum TextureRepeat: Int64, CustomDebugStringConvertible {
         /// The ``CanvasItem`` will inherit the filter from its parent.
         case parentNode = 0 // TEXTURE_REPEAT_PARENT_NODE
         /// Texture will not repeat.
@@ -61,9 +76,21 @@ open class CanvasItem: Node {
         case mirror = 3 // TEXTURE_REPEAT_MIRROR
         /// Represents the size of the ``CanvasItem/TextureRepeat`` enum.
         case max = 4 // TEXTURE_REPEAT_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .parentNode: return ".parentNode"
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .mirror: return ".mirror"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum ClipChildrenMode: Int64 {
+    public enum ClipChildrenMode: Int64, CustomDebugStringConvertible {
         /// Child draws over parent and is not clipped.
         case disabled = 0 // CLIP_CHILDREN_DISABLED
         /// Parent is used for the purposes of clipping only. Child is clipped to the parent's visible area, parent is not drawn.
@@ -72,6 +99,17 @@ open class CanvasItem: Node {
         case andDraw = 2 // CLIP_CHILDREN_AND_DRAW
         /// Represents the size of the ``CanvasItem/ClipChildrenMode`` enum.
         case max = 3 // CLIP_CHILDREN_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .only: return ".only"
+                case .andDraw: return ".andDraw"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Constants */

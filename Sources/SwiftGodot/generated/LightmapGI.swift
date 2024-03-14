@@ -21,7 +21,7 @@
 /// 
 open class LightmapGI: VisualInstance3D {
     override open class var godotClassName: StringName { "LightmapGI" }
-    public enum BakeQuality: Int64 {
+    public enum BakeQuality: Int64, CustomDebugStringConvertible {
         /// Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityProbeRayCount``.
         case low = 0 // BAKE_QUALITY_LOW
         /// Medium bake quality (fast bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/mediumQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/mediumQualityProbeRayCount``.
@@ -30,9 +30,20 @@ open class LightmapGI: VisualInstance3D {
         case high = 2 // BAKE_QUALITY_HIGH
         /// Highest bake quality (slowest bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/ultraQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/ultraQualityProbeRayCount``.
         case ultra = 3 // BAKE_QUALITY_ULTRA
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .low: return ".low"
+                case .medium: return ".medium"
+                case .high: return ".high"
+                case .ultra: return ".ultra"
+            }
+            
+        }
+        
     }
     
-    public enum GenerateProbes: Int64 {
+    public enum GenerateProbes: Int64, CustomDebugStringConvertible {
         /// Don't generate lightmap probes for lighting dynamic objects.
         case disabled = 0 // GENERATE_PROBES_DISABLED
         /// Lowest level of subdivision (fastest bake times, smallest file sizes).
@@ -43,9 +54,21 @@ open class LightmapGI: VisualInstance3D {
         case subdiv16 = 3 // GENERATE_PROBES_SUBDIV_16
         /// Highest level of subdivision (slowest bake times, largest file sizes).
         case subdiv32 = 4 // GENERATE_PROBES_SUBDIV_32
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .subdiv4: return ".subdiv4"
+                case .subdiv8: return ".subdiv8"
+                case .subdiv16: return ".subdiv16"
+                case .subdiv32: return ".subdiv32"
+            }
+            
+        }
+        
     }
     
-    public enum BakeError: Int64 {
+    public enum BakeError: Int64, CustomDebugStringConvertible {
         /// Lightmap baking was successful.
         case ok = 0 // BAKE_ERROR_OK
         /// Lightmap baking failed because the root node for the edited scene could not be accessed.
@@ -66,9 +89,26 @@ open class LightmapGI: VisualInstance3D {
         case userAborted = 8 // BAKE_ERROR_USER_ABORTED
         /// Lightmap baking failed as the maximum texture size is too small to fit some of the meshes marked for baking.
         case textureSizeTooSmall = 9 // BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .ok: return ".ok"
+                case .noSceneRoot: return ".noSceneRoot"
+                case .foreignData: return ".foreignData"
+                case .noLightmapper: return ".noLightmapper"
+                case .noSavePath: return ".noSavePath"
+                case .noMeshes: return ".noMeshes"
+                case .meshesInvalid: return ".meshesInvalid"
+                case .cantCreateImage: return ".cantCreateImage"
+                case .userAborted: return ".userAborted"
+                case .textureSizeTooSmall: return ".textureSizeTooSmall"
+            }
+            
+        }
+        
     }
     
-    public enum EnvironmentMode: Int64 {
+    public enum EnvironmentMode: Int64, CustomDebugStringConvertible {
         /// Ignore environment lighting when baking lightmaps.
         case disabled = 0 // ENVIRONMENT_MODE_DISABLED
         /// Use the scene's environment lighting when baking lightmaps.
@@ -80,6 +120,17 @@ open class LightmapGI: VisualInstance3D {
         case customSky = 2 // ENVIRONMENT_MODE_CUSTOM_SKY
         /// Use ``environmentCustomColor`` multiplied by ``environmentCustomEnergy`` as a constant source of environment lighting when baking lightmaps.
         case customColor = 3 // ENVIRONMENT_MODE_CUSTOM_COLOR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .scene: return ".scene"
+                case .customSky: return ".customSky"
+                case .customColor: return ".customColor"
+            }
+            
+        }
+        
     }
     
     

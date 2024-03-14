@@ -28,18 +28,36 @@
 /// - ``itemActivated``
 open class ItemList: Control {
     override open class var godotClassName: StringName { "ItemList" }
-    public enum IconMode: Int64 {
+    public enum IconMode: Int64, CustomDebugStringConvertible {
         /// Icon is drawn above the text.
         case top = 0 // ICON_MODE_TOP
         /// Icon is drawn to the left of the text.
         case left = 1 // ICON_MODE_LEFT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .top: return ".top"
+                case .left: return ".left"
+            }
+            
+        }
+        
     }
     
-    public enum SelectMode: Int64 {
+    public enum SelectMode: Int64, CustomDebugStringConvertible {
         /// Only allow selecting a single item.
         case single = 0 // SELECT_SINGLE
         /// Allows selecting multiple items by holding [kbd]Ctrl[/kbd] or [kbd]Shift[/kbd].
         case multi = 1 // SELECT_MULTI
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .single: return ".single"
+                case .multi: return ".multi"
+            }
+            
+        }
+        
     }
     
     

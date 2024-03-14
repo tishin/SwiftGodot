@@ -22,13 +22,23 @@
 /// - ``visibilityChanged``
 open class Node3D: Node {
     override open class var godotClassName: StringName { "Node3D" }
-    public enum RotationEditMode: Int64 {
+    public enum RotationEditMode: Int64, CustomDebugStringConvertible {
         /// The rotation is edited using ``Vector3`` Euler angles.
         case euler = 0 // ROTATION_EDIT_MODE_EULER
         /// The rotation is edited using a ``Quaternion``.
         case quaternion = 1 // ROTATION_EDIT_MODE_QUATERNION
         /// The rotation is edited using a ``Basis``. In this mode, ``scale`` can't be edited separately.
         case basis = 2 // ROTATION_EDIT_MODE_BASIS
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .euler: return ".euler"
+                case .quaternion: return ".quaternion"
+                case .basis: return ".basis"
+            }
+            
+        }
+        
     }
     
     /* Constants */

@@ -13,7 +13,7 @@
 /// 
 open class CameraFeed: RefCounted {
     override open class var godotClassName: StringName { "CameraFeed" }
-    public enum FeedDataType: Int64 {
+    public enum FeedDataType: Int64, CustomDebugStringConvertible {
         /// No image set for the feed.
         case noimage = 0 // FEED_NOIMAGE
         /// Feed supplies RGB images.
@@ -22,15 +22,36 @@ open class CameraFeed: RefCounted {
         case ycbcr = 2 // FEED_YCBCR
         /// Feed supplies separate Y and CbCr images that need to be combined and converted to RGB.
         case ycbcrSep = 3 // FEED_YCBCR_SEP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .noimage: return ".noimage"
+                case .rgb: return ".rgb"
+                case .ycbcr: return ".ycbcr"
+                case .ycbcrSep: return ".ycbcrSep"
+            }
+            
+        }
+        
     }
     
-    public enum FeedPosition: Int64 {
+    public enum FeedPosition: Int64, CustomDebugStringConvertible {
         /// Unspecified position.
         case unspecified = 0 // FEED_UNSPECIFIED
         /// Camera is mounted at the front of the device.
         case front = 1 // FEED_FRONT
         /// Camera is mounted at the back of the device.
         case back = 2 // FEED_BACK
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .unspecified: return ".unspecified"
+                case .front: return ".front"
+                case .back: return ".back"
+            }
+            
+        }
+        
     }
     
     

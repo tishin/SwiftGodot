@@ -13,7 +13,7 @@
 /// 
 open class EditorFeatureProfile: RefCounted {
     override open class var godotClassName: StringName { "EditorFeatureProfile" }
-    public enum Feature: Int64 {
+    public enum Feature: Int64, CustomDebugStringConvertible {
         /// The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
         case feature3d = 0 // FEATURE_3D
         /// The Script tab, which contains the script editor and class reference browser. If this feature is disabled, the Script tab won't display.
@@ -32,6 +32,22 @@ open class EditorFeatureProfile: RefCounted {
         case historyDock = 7 // FEATURE_HISTORY_DOCK
         /// Represents the size of the ``EditorFeatureProfile/Feature`` enum.
         case max = 8 // FEATURE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .feature3d: return ".feature3d"
+                case .script: return ".script"
+                case .assetLib: return ".assetLib"
+                case .sceneTree: return ".sceneTree"
+                case .nodeDock: return ".nodeDock"
+                case .filesystemDock: return ".filesystemDock"
+                case .importDock: return ".importDock"
+                case .historyDock: return ".historyDock"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

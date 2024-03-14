@@ -19,13 +19,23 @@
 /// 
 open class TextureLayered: Texture {
     override open class var godotClassName: StringName { "TextureLayered" }
-    public enum LayeredType: Int64 {
+    public enum LayeredType: Int64, CustomDebugStringConvertible {
         /// Texture is a generic ``Texture2DArray``.
         case layeredType2dArray = 0 // LAYERED_TYPE_2D_ARRAY
         /// Texture is a ``Cubemap``, with each side in its own layer (6 in total).
         case cubemap = 1 // LAYERED_TYPE_CUBEMAP
         /// Texture is a ``CubemapArray``, with each cubemap being made of 6 layers.
         case cubemapArray = 2 // LAYERED_TYPE_CUBEMAP_ARRAY
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .layeredType2dArray: return ".layeredType2dArray"
+                case .cubemap: return ".cubemap"
+                case .cubemapArray: return ".cubemapArray"
+            }
+            
+        }
+        
     }
     
     /* Methods */

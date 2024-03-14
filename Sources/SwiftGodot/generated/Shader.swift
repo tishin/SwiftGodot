@@ -13,7 +13,7 @@
 /// 
 open class Shader: Resource {
     override open class var godotClassName: StringName { "Shader" }
-    public enum Mode: Int64 {
+    public enum Mode: Int64, CustomDebugStringConvertible {
         /// Mode used to draw all 3D objects.
         case spatial = 0 // MODE_SPATIAL
         /// Mode used to draw all 2D objects.
@@ -24,6 +24,18 @@ open class Shader: Resource {
         case sky = 3 // MODE_SKY
         /// Mode used for setting the color and density of volumetric fog effect.
         case fog = 4 // MODE_FOG
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .spatial: return ".spatial"
+                case .canvasItem: return ".canvasItem"
+                case .particles: return ".particles"
+                case .sky: return ".sky"
+                case .fog: return ".fog"
+            }
+            
+        }
+        
     }
     
     

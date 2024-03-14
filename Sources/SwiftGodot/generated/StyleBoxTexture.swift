@@ -10,13 +10,23 @@
 /// A texture-based nine-patch ``StyleBox``, in a way similar to ``NinePatchRect``. This stylebox performs a 3×3 scaling of a texture, where only the center cell is fully stretched. This makes it possible to design bordered styles regardless of the stylebox's size.
 open class StyleBoxTexture: StyleBox {
     override open class var godotClassName: StringName { "StyleBoxTexture" }
-    public enum AxisStretchMode: Int64 {
+    public enum AxisStretchMode: Int64, CustomDebugStringConvertible {
         /// Stretch the stylebox's texture. This results in visible distortion unless the texture size matches the stylebox's size perfectly.
         case stretch = 0 // AXIS_STRETCH_MODE_STRETCH
         /// Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system.
         case tile = 1 // AXIS_STRETCH_MODE_TILE
         /// Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system. Unlike .tile, the texture may be slightly stretched to make the nine-patch texture tile seamlessly.
         case tileFit = 2 // AXIS_STRETCH_MODE_TILE_FIT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .stretch: return ".stretch"
+                case .tile: return ".tile"
+                case .tileFit: return ".tileFit"
+            }
+            
+        }
+        
     }
     
     

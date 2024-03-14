@@ -10,16 +10,33 @@
 /// By changing various properties of this object, such as the start and target position, you can configure path queries to the ``NavigationServer3D``.
 open class NavigationPathQueryParameters3D: RefCounted {
     override open class var godotClassName: StringName { "NavigationPathQueryParameters3D" }
-    public enum PathfindingAlgorithm: Int64 {
+    public enum PathfindingAlgorithm: Int64, CustomDebugStringConvertible {
         /// The path query uses the default A* pathfinding algorithm.
         case pathfindingAlgorithmAstar = 0 // PATHFINDING_ALGORITHM_ASTAR
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .pathfindingAlgorithmAstar: return ".pathfindingAlgorithmAstar"
+            }
+            
+        }
+        
     }
     
-    public enum PathPostProcessing: Int64 {
+    public enum PathPostProcessing: Int64, CustomDebugStringConvertible {
         /// Applies a funnel algorithm to the raw path corridor found by the pathfinding algorithm. This will result in the shortest path possible inside the path corridor. This postprocessing very much depends on the navigation mesh polygon layout and the created corridor. Especially tile- or gridbased layouts can face artificial corners with diagonal movement due to a jagged path corridor imposed by the cell shapes.
         case corridorfunnel = 0 // PATH_POSTPROCESSING_CORRIDORFUNNEL
         /// Centers every path position in the middle of the traveled navigation mesh polygon edge. This creates better paths for tile- or gridbased layouts that restrict the movement to the cells center.
         case edgecentered = 1 // PATH_POSTPROCESSING_EDGECENTERED
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .corridorfunnel: return ".corridorfunnel"
+                case .edgecentered: return ".edgecentered"
+            }
+            
+        }
+        
     }
     
     public struct PathMetadataFlags: OptionSet, CustomDebugStringConvertible {

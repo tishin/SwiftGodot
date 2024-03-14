@@ -18,13 +18,23 @@
 /// - ``rangeChanged``
 open class Curve: Resource {
     override open class var godotClassName: StringName { "Curve" }
-    public enum TangentMode: Int64 {
+    public enum TangentMode: Int64, CustomDebugStringConvertible {
         /// The tangent on this side of the point is user-defined.
         case free = 0 // TANGENT_FREE
         /// The curve calculates the tangent on this side of the point as the slope halfway towards the adjacent point.
         case linear = 1 // TANGENT_LINEAR
         /// The total number of available tangent modes.
         case modeCount = 2 // TANGENT_MODE_COUNT
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .free: return ".free"
+                case .linear: return ".linear"
+                case .modeCount: return ".modeCount"
+            }
+            
+        }
+        
     }
     
     

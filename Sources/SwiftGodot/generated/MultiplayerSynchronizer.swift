@@ -26,13 +26,23 @@
 /// - ``visibilityChanged``
 open class MultiplayerSynchronizer: Node {
     override open class var godotClassName: StringName { "MultiplayerSynchronizer" }
-    public enum VisibilityUpdateMode: Int64 {
+    public enum VisibilityUpdateMode: Int64, CustomDebugStringConvertible {
         /// Visibility filters are updated during process frames (see ``Node/``notificationInternalProcess````).
         case idle = 0 // VISIBILITY_PROCESS_IDLE
         /// Visibility filters are updated during physics frames (see ``Node/``notificationInternalPhysicsProcess````).
         case physics = 1 // VISIBILITY_PROCESS_PHYSICS
         /// Visibility filters are not updated automatically, and must be updated manually by calling ``updateVisibility(forPeer:)``.
         case none = 2 // VISIBILITY_PROCESS_NONE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .idle: return ".idle"
+                case .physics: return ".physics"
+                case .none: return ".none"
+            }
+            
+        }
+        
     }
     
     

@@ -18,22 +18,42 @@
 /// - ``advanceConditionChanged``
 open class AnimationNodeStateMachineTransition: Resource {
     override open class var godotClassName: StringName { "AnimationNodeStateMachineTransition" }
-    public enum SwitchMode: Int64 {
+    public enum SwitchMode: Int64, CustomDebugStringConvertible {
         /// Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
         case immediate = 0 // SWITCH_MODE_IMMEDIATE
         /// Switch to the next state immediately, but will seek the new state to the playback position of the old state.
         case sync = 1 // SWITCH_MODE_SYNC
         /// Wait for the current state playback to end, then switch to the beginning of the next state animation.
         case atEnd = 2 // SWITCH_MODE_AT_END
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .immediate: return ".immediate"
+                case .sync: return ".sync"
+                case .atEnd: return ".atEnd"
+            }
+            
+        }
+        
     }
     
-    public enum AdvanceMode: Int64 {
+    public enum AdvanceMode: Int64, CustomDebugStringConvertible {
         /// Don't use this transition.
         case disabled = 0 // ADVANCE_MODE_DISABLED
         /// Only use this transition during ``AnimationNodeStateMachinePlayback/travel(toNode:resetOnTeleport:)``.
         case enabled = 1 // ADVANCE_MODE_ENABLED
         /// Automatically use this transition if the ``advanceCondition`` and ``advanceExpression`` checks are true (if assigned).
         case auto = 2 // ADVANCE_MODE_AUTO
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .auto: return ".auto"
+            }
+            
+        }
+        
     }
     
     

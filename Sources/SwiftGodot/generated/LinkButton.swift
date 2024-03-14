@@ -13,13 +13,23 @@
 /// 
 open class LinkButton: BaseButton {
     override open class var godotClassName: StringName { "LinkButton" }
-    public enum UnderlineMode: Int64 {
+    public enum UnderlineMode: Int64, CustomDebugStringConvertible {
         /// The LinkButton will always show an underline at the bottom of its text.
         case always = 0 // UNDERLINE_MODE_ALWAYS
         /// The LinkButton will show an underline at the bottom of its text when the mouse cursor is over it.
         case onHover = 1 // UNDERLINE_MODE_ON_HOVER
         /// The LinkButton will never show an underline at the bottom of its text.
         case never = 2 // UNDERLINE_MODE_NEVER
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .always: return ".always"
+                case .onHover: return ".onHover"
+                case .never: return ".never"
+            }
+            
+        }
+        
     }
     
     

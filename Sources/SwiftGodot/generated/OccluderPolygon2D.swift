@@ -10,13 +10,23 @@
 /// Editor facility that helps you draw a 2D polygon used as resource for ``LightOccluder2D``.
 open class OccluderPolygon2D: Resource {
     override open class var godotClassName: StringName { "OccluderPolygon2D" }
-    public enum CullMode: Int64 {
+    public enum CullMode: Int64, CustomDebugStringConvertible {
         /// Culling is disabled. See ``cullMode``.
         case disabled = 0 // CULL_DISABLED
         /// Culling is performed in the clockwise direction. See ``cullMode``.
         case clockwise = 1 // CULL_CLOCKWISE
         /// Culling is performed in the counterclockwise direction. See ``cullMode``.
         case counterClockwise = 2 // CULL_COUNTER_CLOCKWISE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .clockwise: return ".clockwise"
+                case .counterClockwise: return ".counterClockwise"
+            }
+            
+        }
+        
     }
     
     

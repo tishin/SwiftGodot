@@ -7,11 +7,20 @@
 
 open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
     override open class var godotClassName: StringName { "AudioEffectSpectrumAnalyzerInstance" }
-    public enum MagnitudeMode: Int64 {
+    public enum MagnitudeMode: Int64, CustomDebugStringConvertible {
         /// Use the average value as magnitude.
         case average = 0 // MAGNITUDE_AVERAGE
         /// Use the maximum value as magnitude.
         case max = 1 // MAGNITUDE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .average: return ".average"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     /* Methods */

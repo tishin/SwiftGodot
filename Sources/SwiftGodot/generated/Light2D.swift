@@ -10,22 +10,42 @@
 /// Casts light in a 2D environment. A light is defined as a color, an energy value, a mode (see constants), and various other parameters (range and shadows-related).
 open class Light2D: Node2D {
     override open class var godotClassName: StringName { "Light2D" }
-    public enum ShadowFilter: Int64 {
+    public enum ShadowFilter: Int64, CustomDebugStringConvertible {
         /// No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See ``shadowFilter``.
         case none = 0 // SHADOW_FILTER_NONE
         /// Percentage closer filtering (5 samples) applies to the shadow map. This is slower compared to hard shadow rendering. See ``shadowFilter``.
         case pcf5 = 1 // SHADOW_FILTER_PCF5
         /// Percentage closer filtering (13 samples) applies to the shadow map. This is the slowest shadow filtering mode, and should be used sparingly. See ``shadowFilter``.
         case pcf13 = 2 // SHADOW_FILTER_PCF13
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .none: return ".none"
+                case .pcf5: return ".pcf5"
+                case .pcf13: return ".pcf13"
+            }
+            
+        }
+        
     }
     
-    public enum BlendMode: Int64 {
+    public enum BlendMode: Int64, CustomDebugStringConvertible {
         /// Adds the value of pixels corresponding to the Light2D to the values of pixels under it. This is the common behavior of a light.
         case add = 0 // BLEND_MODE_ADD
         /// Subtracts the value of pixels corresponding to the Light2D to the values of pixels under it, resulting in inversed light effect.
         case sub = 1 // BLEND_MODE_SUB
         /// Mix the value of pixels corresponding to the Light2D to the values of pixels under it by linear interpolation.
         case mix = 2 // BLEND_MODE_MIX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mix: return ".mix"
+            }
+            
+        }
+        
     }
     
     

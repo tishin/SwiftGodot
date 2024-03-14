@@ -16,7 +16,7 @@
 /// 
 open class AudioEffectDistortion: AudioEffect {
     override open class var godotClassName: StringName { "AudioEffectDistortion" }
-    public enum Mode: Int64 {
+    public enum Mode: Int64, CustomDebugStringConvertible {
         /// Digital distortion effect which cuts off peaks at the top and bottom of the waveform.
         case clip = 0 // MODE_CLIP
         /// 
@@ -27,6 +27,18 @@ open class AudioEffectDistortion: AudioEffect {
         case overdrive = 3 // MODE_OVERDRIVE
         /// Waveshaper distortions are used mainly by electronic musicians to achieve an extra-abrasive sound.
         case waveshape = 4 // MODE_WAVESHAPE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .clip: return ".clip"
+                case .atan: return ".atan"
+                case .lofi: return ".lofi"
+                case .overdrive: return ".overdrive"
+                case .waveshape: return ".waveshape"
+            }
+            
+        }
+        
     }
     
     

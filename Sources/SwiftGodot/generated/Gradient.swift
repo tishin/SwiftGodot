@@ -13,22 +13,42 @@
 /// 
 open class Gradient: Resource {
     override open class var godotClassName: StringName { "Gradient" }
-    public enum InterpolationMode: Int64 {
+    public enum InterpolationMode: Int64, CustomDebugStringConvertible {
         /// Linear interpolation.
         case linear = 0 // GRADIENT_INTERPOLATE_LINEAR
         /// Constant interpolation, color changes abruptly at each point and stays uniform between. This might cause visible aliasing when used for a gradient texture in some cases.
         case constant = 1 // GRADIENT_INTERPOLATE_CONSTANT
         /// Cubic interpolation.
         case cubic = 2 // GRADIENT_INTERPOLATE_CUBIC
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .linear: return ".linear"
+                case .constant: return ".constant"
+                case .cubic: return ".cubic"
+            }
+            
+        }
+        
     }
     
-    public enum ColorSpace: Int64 {
+    public enum ColorSpace: Int64, CustomDebugStringConvertible {
         /// sRGB color space.
         case srgb = 0 // GRADIENT_COLOR_SPACE_SRGB
         /// Linear sRGB color space.
         case linearSrgb = 1 // GRADIENT_COLOR_SPACE_LINEAR_SRGB
         /// [url=https://bottosson.github.io/posts/oklab/]Oklab[/url] color space. This color space provides a smooth and uniform-looking transition between colors.
         case oklab = 2 // GRADIENT_COLOR_SPACE_OKLAB
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .srgb: return ".srgb"
+                case .linearSrgb: return ".linearSrgb"
+                case .oklab: return ".oklab"
+            }
+            
+        }
+        
     }
     
     

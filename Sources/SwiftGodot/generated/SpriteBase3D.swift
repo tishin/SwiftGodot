@@ -10,7 +10,7 @@
 /// A node that displays 2D texture information in a 3D environment. See also ``Sprite3D`` where many other properties are defined.
 open class SpriteBase3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "SpriteBase3D" }
-    public enum DrawFlags: Int64 {
+    public enum DrawFlags: Int64, CustomDebugStringConvertible {
         /// If set, the texture's transparency and the opacity are used to make those parts of the sprite invisible.
         case transparent = 0 // FLAG_TRANSPARENT
         /// If set, lights in the environment affect the sprite.
@@ -23,9 +23,22 @@ open class SpriteBase3D: GeometryInstance3D {
         case fixedSize = 4 // FLAG_FIXED_SIZE
         /// Represents the size of the ``SpriteBase3D/DrawFlags`` enum.
         case max = 5 // FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .transparent: return ".transparent"
+                case .shaded: return ".shaded"
+                case .doubleSided: return ".doubleSided"
+                case .disableDepthTest: return ".disableDepthTest"
+                case .fixedSize: return ".fixedSize"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum AlphaCutMode: Int64 {
+    public enum AlphaCutMode: Int64, CustomDebugStringConvertible {
         /// This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping.
         case disabled = 0 // ALPHA_CUT_DISABLED
         /// This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ``ProjectSettings/rendering/antiAliasing/quality/screenSpaceAa``). On the bright side, this mode doesn't suffer from transparency sorting issues when multiple transparent materials are overlapping. This mode is also known as _alpha testing_ or _1-bit transparency_.
@@ -34,6 +47,17 @@ open class SpriteBase3D: GeometryInstance3D {
         case opaquePrepass = 2 // ALPHA_CUT_OPAQUE_PREPASS
         /// This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
         case hash = 3 // ALPHA_CUT_HASH
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .discard: return ".discard"
+                case .opaquePrepass: return ".opaquePrepass"
+                case .hash: return ".hash"
+            }
+            
+        }
+        
     }
     
     

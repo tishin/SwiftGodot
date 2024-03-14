@@ -10,7 +10,7 @@
 /// This is an abstract class. See the derived types for descriptions of the possible operations.
 open class VisualShaderNodeVectorBase: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorBase" }
-    public enum OpType: Int64 {
+    public enum OpType: Int64, CustomDebugStringConvertible {
         /// A 2D vector type.
         case vector2d = 0 // OP_TYPE_VECTOR_2D
         /// A 3D vector type.
@@ -19,6 +19,17 @@ open class VisualShaderNodeVectorBase: VisualShaderNode {
         case vector4d = 2 // OP_TYPE_VECTOR_4D
         /// Represents the size of the ``VisualShaderNodeVectorBase/OpType`` enum.
         case max = 3 // OP_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

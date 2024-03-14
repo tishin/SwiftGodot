@@ -10,7 +10,7 @@
 /// ``ParticleProcessMaterial`` defines particle properties and behavior. It is used in the `process_material` of the ``GPUParticles2D`` and ``GPUParticles3D`` nodes. Some of this material's properties are applied to each particle when emitted, while others can have a ``CurveTexture`` or a ``GradientTexture1D`` applied to vary numerical or color values over the lifetime of the particle.
 open class ParticleProcessMaterial: Material {
     override open class var godotClassName: StringName { "ParticleProcessMaterial" }
-    public enum Parameter: Int64 {
+    public enum Parameter: Int64, CustomDebugStringConvertible {
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamTexture(param:texture:)`` to set initial velocity properties.
         case initialLinearVelocity = 0 // PARAM_INITIAL_LINEAR_VELOCITY
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamTexture(param:texture:)`` to set angular velocity properties.
@@ -49,9 +49,35 @@ open class ParticleProcessMaterial: Material {
         case turbInitDisplacement = 14 // PARAM_TURB_INIT_DISPLACEMENT
         /// Use with ``setParamTexture(param:texture:)`` to set the turbulence influence over the particles life time.
         case turbInfluenceOverLife = 12 // PARAM_TURB_INFLUENCE_OVER_LIFE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .initialLinearVelocity: return ".initialLinearVelocity"
+                case .angularVelocity: return ".angularVelocity"
+                case .orbitVelocity: return ".orbitVelocity"
+                case .linearAccel: return ".linearAccel"
+                case .radialAccel: return ".radialAccel"
+                case .tangentialAccel: return ".tangentialAccel"
+                case .damping: return ".damping"
+                case .angle: return ".angle"
+                case .scale: return ".scale"
+                case .hueVariation: return ".hueVariation"
+                case .animSpeed: return ".animSpeed"
+                case .animOffset: return ".animOffset"
+                case .radialVelocity: return ".radialVelocity"
+                case .directionalVelocity: return ".directionalVelocity"
+                case .scaleOverVelocity: return ".scaleOverVelocity"
+                case .max: return ".max"
+                case .turbVelInfluence: return ".turbVelInfluence"
+                case .turbInitDisplacement: return ".turbInitDisplacement"
+                case .turbInfluenceOverLife: return ".turbInfluenceOverLife"
+            }
+            
+        }
+        
     }
     
-    public enum ParticleFlags: Int64 {
+    public enum ParticleFlags: Int64, CustomDebugStringConvertible {
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagAlignY``.
         case alignYToVelocity = 0 // PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagRotateY``.
@@ -62,9 +88,21 @@ open class ParticleProcessMaterial: Material {
         case dampingAsFriction = 3 // PARTICLE_FLAG_DAMPING_AS_FRICTION
         /// Represents the size of the ``ParticleProcessMaterial/ParticleFlags`` enum.
         case max = 4 // PARTICLE_FLAG_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .alignYToVelocity: return ".alignYToVelocity"
+                case .rotateY: return ".rotateY"
+                case .disableZ: return ".disableZ"
+                case .dampingAsFriction: return ".dampingAsFriction"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum EmissionShape: Int64 {
+    public enum EmissionShape: Int64, CustomDebugStringConvertible {
         /// All particles will be emitted from a single point.
         case point = 0 // EMISSION_SHAPE_POINT
         /// Particles will be emitted in the volume of a sphere.
@@ -81,9 +119,24 @@ open class ParticleProcessMaterial: Material {
         case ring = 6 // EMISSION_SHAPE_RING
         /// Represents the size of the ``ParticleProcessMaterial/EmissionShape`` enum.
         case max = 7 // EMISSION_SHAPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .point: return ".point"
+                case .sphere: return ".sphere"
+                case .sphereSurface: return ".sphereSurface"
+                case .box: return ".box"
+                case .points: return ".points"
+                case .directedPoints: return ".directedPoints"
+                case .ring: return ".ring"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum SubEmitterMode: Int64 {
+    public enum SubEmitterMode: Int64, CustomDebugStringConvertible {
         /// 
         case disabled = 0 // SUB_EMITTER_DISABLED
         /// 
@@ -94,9 +147,21 @@ open class ParticleProcessMaterial: Material {
         case atCollision = 3 // SUB_EMITTER_AT_COLLISION
         /// Represents the size of the ``ParticleProcessMaterial/SubEmitterMode`` enum.
         case max = 4 // SUB_EMITTER_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .constant: return ".constant"
+                case .atEnd: return ".atEnd"
+                case .atCollision: return ".atCollision"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum CollisionMode: Int64 {
+    public enum CollisionMode: Int64, CustomDebugStringConvertible {
         /// No collision for particles. Particles will go through ``GPUParticlesCollision3D`` nodes.
         case disabled = 0 // COLLISION_DISABLED
         /// ``RigidBody3D``-style collision for particles using ``GPUParticlesCollision3D`` nodes.
@@ -105,6 +170,17 @@ open class ParticleProcessMaterial: Material {
         case hideOnContact = 2 // COLLISION_HIDE_ON_CONTACT
         /// Represents the size of the ``ParticleProcessMaterial/CollisionMode`` enum.
         case max = 3 // COLLISION_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .rigid: return ".rigid"
+                case .hideOnContact: return ".hideOnContact"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

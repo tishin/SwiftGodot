@@ -15,11 +15,20 @@ public struct Vector2i: Equatable, Hashable {
     public var x: Int32
     /// The vector's Y component. Also accessible by using the index position `[1]`.
     public var y: Int32
-    public enum Axis: Int64 {
+    public enum Axis: Int64, CustomDebugStringConvertible {
         /// Enumerated value for the X axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
         case x = 0 // AXIS_X
         /// Enumerated value for the Y axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
         case y = 1 // AXIS_Y
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .x: return ".x"
+                case .y: return ".y"
+            }
+            
+        }
+        
     }
     
     static var constructor0: GDExtensionPtrConstructor = gi.variant_get_ptr_constructor (GDEXTENSION_VARIANT_TYPE_VECTOR2I, 0)!

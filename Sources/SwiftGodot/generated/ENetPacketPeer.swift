@@ -15,7 +15,7 @@
 /// 
 open class ENetPacketPeer: PacketPeer {
     override open class var godotClassName: StringName { "ENetPacketPeer" }
-    public enum PeerState: Int64 {
+    public enum PeerState: Int64, CustomDebugStringConvertible {
         /// The peer is disconnected.
         case disconnected = 0 // STATE_DISCONNECTED
         /// The peer is currently attempting to connect.
@@ -36,9 +36,26 @@ open class ENetPacketPeer: PacketPeer {
         case acknowledgingDisconnect = 8 // STATE_ACKNOWLEDGING_DISCONNECT
         /// The peer has lost connection, but is not considered truly disconnected (as the peer didn't acknowledge the disconnection request).
         case zombie = 9 // STATE_ZOMBIE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disconnected: return ".disconnected"
+                case .connecting: return ".connecting"
+                case .acknowledgingConnect: return ".acknowledgingConnect"
+                case .connectionPending: return ".connectionPending"
+                case .connectionSucceeded: return ".connectionSucceeded"
+                case .connected: return ".connected"
+                case .disconnectLater: return ".disconnectLater"
+                case .disconnecting: return ".disconnecting"
+                case .acknowledgingDisconnect: return ".acknowledgingDisconnect"
+                case .zombie: return ".zombie"
+            }
+            
+        }
+        
     }
     
-    public enum PeerStatistic: Int64 {
+    public enum PeerStatistic: Int64, CustomDebugStringConvertible {
         /// Mean packet loss of reliable packets as a ratio with respect to the ``packetLossScale``.
         case packetLoss = 0 // PEER_PACKET_LOSS
         /// Packet loss variance.
@@ -67,6 +84,27 @@ open class ENetPacketPeer: PacketPeer {
         case packetThrottleDeceleration = 12 // PEER_PACKET_THROTTLE_DECELERATION
         /// The interval over which the lowest mean round trip time should be measured for use by the throttle mechanism (in milliseconds). The default value is `5000`.
         case packetThrottleInterval = 13 // PEER_PACKET_THROTTLE_INTERVAL
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .packetLoss: return ".packetLoss"
+                case .packetLossVariance: return ".packetLossVariance"
+                case .packetLossEpoch: return ".packetLossEpoch"
+                case .roundTripTime: return ".roundTripTime"
+                case .roundTripTimeVariance: return ".roundTripTimeVariance"
+                case .lastRoundTripTime: return ".lastRoundTripTime"
+                case .lastRoundTripTimeVariance: return ".lastRoundTripTimeVariance"
+                case .packetThrottle: return ".packetThrottle"
+                case .packetThrottleLimit: return ".packetThrottleLimit"
+                case .packetThrottleCounter: return ".packetThrottleCounter"
+                case .packetThrottleEpoch: return ".packetThrottleEpoch"
+                case .packetThrottleAcceleration: return ".packetThrottleAcceleration"
+                case .packetThrottleDeceleration: return ".packetThrottleDeceleration"
+                case .packetThrottleInterval: return ".packetThrottleInterval"
+            }
+            
+        }
+        
     }
     
     /* Constants */

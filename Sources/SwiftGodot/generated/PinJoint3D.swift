@@ -10,13 +10,23 @@
 /// A physics joint that attaches two 3D physics bodies at a single point, allowing them to freely rotate. For example, a ``RigidBody3D`` can be attached to a ``StaticBody3D`` to create a pendulum or a seesaw.
 open class PinJoint3D: Joint3D {
     override open class var godotClassName: StringName { "PinJoint3D" }
-    public enum Param: Int64 {
+    public enum Param: Int64, CustomDebugStringConvertible {
         /// The force with which the pinned objects stay in positional relation to each other. The higher, the stronger.
         case bias = 0 // PARAM_BIAS
         /// The force with which the pinned objects stay in velocity relation to each other. The higher, the stronger.
         case damping = 1 // PARAM_DAMPING
         /// If above 0, this value is the maximum value for an impulse that this Joint3D produces.
         case impulseClamp = 2 // PARAM_IMPULSE_CLAMP
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .bias: return ".bias"
+                case .damping: return ".damping"
+                case .impulseClamp: return ".impulseClamp"
+            }
+            
+        }
+        
     }
     
     /* Methods */

@@ -17,7 +17,7 @@
 /// - ``dirSelected``
 open class FileDialog: ConfirmationDialog {
     override open class var godotClassName: StringName { "FileDialog" }
-    public enum FileMode: Int64 {
+    public enum FileMode: Int64, CustomDebugStringConvertible {
         /// The dialog allows selecting one, and only one file.
         case openFile = 0 // FILE_MODE_OPEN_FILE
         /// The dialog allows selecting multiple files.
@@ -28,15 +28,37 @@ open class FileDialog: ConfirmationDialog {
         case openAny = 3 // FILE_MODE_OPEN_ANY
         /// The dialog will warn when a file exists.
         case saveFile = 4 // FILE_MODE_SAVE_FILE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .openFile: return ".openFile"
+                case .openFiles: return ".openFiles"
+                case .openDir: return ".openDir"
+                case .openAny: return ".openAny"
+                case .saveFile: return ".saveFile"
+            }
+            
+        }
+        
     }
     
-    public enum Access: Int64 {
+    public enum Access: Int64, CustomDebugStringConvertible {
         /// The dialog only allows accessing files under the ``Resource`` path (`res://`).
         case resources = 0 // ACCESS_RESOURCES
         /// The dialog only allows accessing files under user data path (`user://`).
         case userdata = 1 // ACCESS_USERDATA
         /// The dialog allows accessing files on the whole file system.
         case filesystem = 2 // ACCESS_FILESYSTEM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .resources: return ".resources"
+                case .userdata: return ".userdata"
+                case .filesystem: return ".filesystem"
+            }
+            
+        }
+        
     }
     
     

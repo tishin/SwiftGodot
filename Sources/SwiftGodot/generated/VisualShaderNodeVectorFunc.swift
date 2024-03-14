@@ -10,7 +10,7 @@
 /// A visual shader node able to perform different functions using vectors.
 open class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorFunc" }
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Normalizes the vector so that it has a length of `1` but points in the same direction.
         case normalize = 0 // FUNC_NORMALIZE
         /// Clamps the value between `0.0` and `1.0`.
@@ -79,6 +79,47 @@ open class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
         case oneminus = 32 // FUNC_ONEMINUS
         /// Represents the size of the ``VisualShaderNodeVectorFunc/Function`` enum.
         case max = 33 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .normalize: return ".normalize"
+                case .saturate: return ".saturate"
+                case .negate: return ".negate"
+                case .reciprocal: return ".reciprocal"
+                case .abs: return ".abs"
+                case .acos: return ".acos"
+                case .acosh: return ".acosh"
+                case .asin: return ".asin"
+                case .asinh: return ".asinh"
+                case .atan: return ".atan"
+                case .atanh: return ".atanh"
+                case .ceil: return ".ceil"
+                case .cos: return ".cos"
+                case .cosh: return ".cosh"
+                case .degrees: return ".degrees"
+                case .exp: return ".exp"
+                case .exp2: return ".exp2"
+                case .floor: return ".floor"
+                case .fract: return ".fract"
+                case .inverseSqrt: return ".inverseSqrt"
+                case .log: return ".log"
+                case .log2: return ".log2"
+                case .radians: return ".radians"
+                case .round: return ".round"
+                case .roundeven: return ".roundeven"
+                case .sign: return ".sign"
+                case .sin: return ".sin"
+                case .sinh: return ".sinh"
+                case .sqrt: return ".sqrt"
+                case .tan: return ".tan"
+                case .tanh: return ".tanh"
+                case .trunc: return ".trunc"
+                case .oneminus: return ".oneminus"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

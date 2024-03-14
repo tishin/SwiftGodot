@@ -10,7 +10,7 @@
 /// Applies ```operator``` to two unsigned integer inputs: `a` and `b`.
 open class VisualShaderNodeUIntOp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeUIntOp" }
-    public enum Operator: Int64 {
+    public enum Operator: Int64, CustomDebugStringConvertible {
         /// Sums two numbers using `a + b`.
         case add = 0 // OP_ADD
         /// Subtracts two numbers using `a - b`.
@@ -37,6 +37,26 @@ open class VisualShaderNodeUIntOp: VisualShaderNode {
         case bitwiseRightShift = 11 // OP_BITWISE_RIGHT_SHIFT
         /// Represents the size of the ``VisualShaderNodeUIntOp/Operator`` enum.
         case enumSize = 12 // OP_ENUM_SIZE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .add: return ".add"
+                case .sub: return ".sub"
+                case .mul: return ".mul"
+                case .div: return ".div"
+                case .mod: return ".mod"
+                case .max: return ".max"
+                case .min: return ".min"
+                case .bitwiseAnd: return ".bitwiseAnd"
+                case .bitwiseOr: return ".bitwiseOr"
+                case .bitwiseXor: return ".bitwiseXor"
+                case .bitwiseLeftShift: return ".bitwiseLeftShift"
+                case .bitwiseRightShift: return ".bitwiseRightShift"
+                case .enumSize: return ".enumSize"
+            }
+            
+        }
+        
     }
     
     

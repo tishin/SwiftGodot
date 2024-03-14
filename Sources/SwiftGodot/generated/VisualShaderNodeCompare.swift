@@ -10,7 +10,7 @@
 /// Compares `a` and `b` of ``type`` by ``function``. Returns a boolean scalar. Translates to `if` instruction in shader code.
 open class VisualShaderNodeCompare: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeCompare" }
-    public enum ComparisonType: Int64 {
+    public enum ComparisonType: Int64, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // CTYPE_SCALAR
         /// An integer scalar.
@@ -29,9 +29,25 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         case transform = 7 // CTYPE_TRANSFORM
         /// Represents the size of the ``VisualShaderNodeCompare/ComparisonType`` enum.
         case max = 8 // CTYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .scalar: return ".scalar"
+                case .scalarInt: return ".scalarInt"
+                case .scalarUint: return ".scalarUint"
+                case .vector2d: return ".vector2d"
+                case .vector3d: return ".vector3d"
+                case .vector4d: return ".vector4d"
+                case .boolean: return ".boolean"
+                case .transform: return ".transform"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Function: Int64 {
+    public enum Function: Int64, CustomDebugStringConvertible {
         /// Comparison for equality (`a == b`).
         case equal = 0 // FUNC_EQUAL
         /// Comparison for inequality (`a != b`).
@@ -46,15 +62,39 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         case lessThanEqual = 5 // FUNC_LESS_THAN_EQUAL
         /// Represents the size of the ``VisualShaderNodeCompare/Function`` enum.
         case max = 6 // FUNC_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .equal: return ".equal"
+                case .notEqual: return ".notEqual"
+                case .greaterThan: return ".greaterThan"
+                case .greaterThanEqual: return ".greaterThanEqual"
+                case .lessThan: return ".lessThan"
+                case .lessThanEqual: return ".lessThanEqual"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
-    public enum Condition: Int64 {
+    public enum Condition: Int64, CustomDebugStringConvertible {
         /// The result will be true if all of component in vector satisfy the comparison condition.
         case all = 0 // COND_ALL
         /// The result will be true if any of component in vector satisfy the comparison condition.
         case any = 1 // COND_ANY
         /// Represents the size of the ``VisualShaderNodeCompare/Condition`` enum.
         case max = 2 // COND_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .all: return ".all"
+                case .any: return ".any"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

@@ -10,7 +10,7 @@
 /// The output port of this node needs to be connected to `Model View Matrix` port of ``VisualShaderNodeOutput``.
 open class VisualShaderNodeBillboard: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeBillboard" }
-    public enum BillboardType: Int64 {
+    public enum BillboardType: Int64, CustomDebugStringConvertible {
         /// Billboarding is disabled and the node does nothing.
         case disabled = 0 // BILLBOARD_TYPE_DISABLED
         /// A standard billboarding algorithm is enabled.
@@ -21,6 +21,18 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
         case particles = 3 // BILLBOARD_TYPE_PARTICLES
         /// Represents the size of the ``VisualShaderNodeBillboard/BillboardType`` enum.
         case max = 4 // BILLBOARD_TYPE_MAX
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .disabled: return ".disabled"
+                case .enabled: return ".enabled"
+                case .fixedY: return ".fixedY"
+                case .particles: return ".particles"
+                case .max: return ".max"
+            }
+            
+        }
+        
     }
     
     

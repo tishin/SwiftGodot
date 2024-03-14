@@ -13,7 +13,7 @@
 /// 
 open class SoftBody3D: MeshInstance3D {
     override open class var godotClassName: StringName { "SoftBody3D" }
-    public enum DisableMode: Int64 {
+    public enum DisableMode: Int64, CustomDebugStringConvertible {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``SoftBody3D``.
         /// 
         /// Automatically re-added to the physics simulation when the ``Node`` is processed again.
@@ -21,6 +21,15 @@ open class SoftBody3D: MeshInstance3D {
         case remove = 0 // DISABLE_MODE_REMOVE
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, do not affect the physics simulation.
         case keepActive = 1 // DISABLE_MODE_KEEP_ACTIVE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .remove: return ".remove"
+                case .keepActive: return ".keepActive"
+            }
+            
+        }
+        
     }
     
     

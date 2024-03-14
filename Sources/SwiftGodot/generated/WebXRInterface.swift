@@ -44,7 +44,7 @@
 /// - ``displayRefreshRateChanged``
 open class WebXRInterface: XRInterface {
     override open class var godotClassName: StringName { "WebXRInterface" }
-    public enum TargetRayMode: Int64 {
+    public enum TargetRayMode: Int64, CustomDebugStringConvertible {
         /// We don't know the the target ray mode.
         case unknown = 0 // TARGET_RAY_MODE_UNKNOWN
         /// Target ray originates at the viewer's eyes and points in the direction they are looking.
@@ -53,6 +53,17 @@ open class WebXRInterface: XRInterface {
         case trackedPointer = 2 // TARGET_RAY_MODE_TRACKED_POINTER
         /// Target ray from touch screen, mouse or other tactile input device.
         case screen = 3 // TARGET_RAY_MODE_SCREEN
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .unknown: return ".unknown"
+                case .gaze: return ".gaze"
+                case .trackedPointer: return ".trackedPointer"
+                case .screen: return ".screen"
+            }
+            
+        }
+        
     }
     
     

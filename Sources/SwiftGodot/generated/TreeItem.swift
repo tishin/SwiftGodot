@@ -15,7 +15,7 @@
 /// 
 open class TreeItem: Object {
     override open class var godotClassName: StringName { "TreeItem" }
-    public enum TreeCellMode: Int64 {
+    public enum TreeCellMode: Int64, CustomDebugStringConvertible {
         /// Cell contains a string.
         case string = 0 // CELL_MODE_STRING
         /// Cell contains a checkbox.
@@ -26,6 +26,18 @@ open class TreeItem: Object {
         case icon = 3 // CELL_MODE_ICON
         /// 
         case custom = 4 // CELL_MODE_CUSTOM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .string: return ".string"
+                case .check: return ".check"
+                case .range: return ".range"
+                case .icon: return ".icon"
+                case .custom: return ".custom"
+            }
+            
+        }
+        
     }
     
     

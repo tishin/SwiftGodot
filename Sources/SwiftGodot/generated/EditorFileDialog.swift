@@ -17,7 +17,7 @@
 /// - ``dirSelected``
 open class EditorFileDialog: ConfirmationDialog {
     override open class var godotClassName: StringName { "EditorFileDialog" }
-    public enum FileMode: Int64 {
+    public enum FileMode: Int64, CustomDebugStringConvertible {
         /// The ``EditorFileDialog`` can select only one file. Accepting the window will open the file.
         case openFile = 0 // FILE_MODE_OPEN_FILE
         /// The ``EditorFileDialog`` can select multiple files. Accepting the window will open all files.
@@ -28,22 +28,53 @@ open class EditorFileDialog: ConfirmationDialog {
         case openAny = 3 // FILE_MODE_OPEN_ANY
         /// The ``EditorFileDialog`` can select only one file. Accepting the window will save the file.
         case saveFile = 4 // FILE_MODE_SAVE_FILE
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .openFile: return ".openFile"
+                case .openFiles: return ".openFiles"
+                case .openDir: return ".openDir"
+                case .openAny: return ".openAny"
+                case .saveFile: return ".saveFile"
+            }
+            
+        }
+        
     }
     
-    public enum Access: Int64 {
+    public enum Access: Int64, CustomDebugStringConvertible {
         /// The ``EditorFileDialog`` can only view `res://` directory contents.
         case resources = 0 // ACCESS_RESOURCES
         /// The ``EditorFileDialog`` can only view `user://` directory contents.
         case userdata = 1 // ACCESS_USERDATA
         /// The ``EditorFileDialog`` can view the entire local file system.
         case filesystem = 2 // ACCESS_FILESYSTEM
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .resources: return ".resources"
+                case .userdata: return ".userdata"
+                case .filesystem: return ".filesystem"
+            }
+            
+        }
+        
     }
     
-    public enum DisplayMode: Int64 {
+    public enum DisplayMode: Int64, CustomDebugStringConvertible {
         /// The ``EditorFileDialog`` displays resources as thumbnails.
         case thumbnails = 0 // DISPLAY_THUMBNAILS
         /// The ``EditorFileDialog`` displays resources as a list of filenames.
         case list = 1 // DISPLAY_LIST
+        /// A textual representation of this instance, suitable for debugging
+        public var debugDescription: String {
+            switch self {
+                case .thumbnails: return ".thumbnails"
+                case .list: return ".list"
+            }
+            
+        }
+        
     }
     
     
