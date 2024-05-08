@@ -45,7 +45,7 @@ extension PackedByteArray {
     ///
     /// You could implement a method to access your data like this:
     /// ```
-    /// let data: Data? = withUnsafeAccessToData { ptr, count in Data (ptr, count) }
+    /// let data: Data? = withUnsafeAccessToData { ptr, count in Data (bytes: ptr, count: count) }
     /// ```
     public func withUnsafeAccessToData<T> (_ method: (_ pointer: UnsafeRawPointer, _ count: Int)->T?) -> T? {
         if let ptr = gi.packed_byte_array_operator_index(&content, 0) {
@@ -70,13 +70,25 @@ extension PackedByteArray {
     }
     /// Provides a mechanism to access the underlying data for the packed byte array for mutation
     ///
-    /// - Parameter method: a callback that is invoked with a pointer to the underlying data, and
+    /// - Parameter method: a callback that is invoked with a pointer to a copy of the underlying data, and
     /// the number of bytes in that block of data.   The callback is allowed to return nil it if fails to
     /// do anything with the data.
     ///
     public func withUnsafeMutableAccessToData<T> (_ method: (_ pointer: UnsafeMutableRawPointer, _ count: Int)->T?) -> T? {
         if let ptr = gi.packed_byte_array_operator_index(&content, 0) {
             return method (ptr, Int (size ()))
+        }
+        return nil
+    }
+    
+    /// Read-only access the underlying data for this packed byte array
+    ///
+    /// - Parameter method: a callback that is invoked with a non-mutable pointer to the underlying data, and
+    /// the number of bytes in that block of data. The callback is allowed to return nil if it fails to
+    /// do anything with the data.
+    public func withUnsafeConstAccessToData<T> (_ method: (_ pointer: UnsafeRawPointer, _ count: Int) -> T?) -> T? {
+        if let ptr = gi.packed_byte_array_operator_index_const(&content, 0) {
+            return method(ptr, Int(size()))
         }
         return nil
     }

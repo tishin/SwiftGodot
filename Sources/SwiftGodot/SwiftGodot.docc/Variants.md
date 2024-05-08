@@ -10,7 +10,9 @@ Godot's way of passing around certain data types.  They are similar to Swift's
 that derive from ``GodotObject``). 
 
 ## Creating Variant values
-You can create Variants from types that conform to the VariantStorable protocol. 
+You can create Variants from types that conform to the VariantStorable 
+protocol. 
+
 This includes the following types:
 
 * Godot's native types: GString, Vector, Rect, Transform, Plane, Quaternion,
@@ -18,6 +20,7 @@ This includes the following types:
   and PackedArrays. 
 * Swift types that SwiftGodot adds convenience conformances for: Bool, Int, String and Float
 * Godot's objects: e.g. Node, Area2D
+* Your own subclasses of SwiftGodot.Object type.
 * Other types that you can manually conform to VariantStorable.
 
 You wrap your data type by calling one of the ``Variant`` constructors, and then
@@ -65,15 +68,27 @@ instead.  This is a generic method, so you would invoke it like this:
 
 ```swift
 func getNode (variant: Variant) -> Node? {
-    guard let node = variant.asObject<Node> ()) else {
+    guard let node = variant.asObject (Node.self)) else {
 	  return nil
     }
     return node
 }
 ```
 
-The reason to have a method rather than a constructor is that this method will
-make sure that only one instance of your objects is surfaced to Swift. 
+Swift type inference can also be used, so you can avoid specifying the type if
+the compiler can infer the type, like here:
+
+```swift
+func getNode (variant: Variant) -> Node? {
+    var node: Node?
+    node = variant.asObject ()
+    return node
+}
+```
+
+The reason to rely on calling the `asObject` method rather than having a
+constructor for the type that takes a variant (like the case for the non-object
+types) is that the method can ensure that only one instance of your objects is surfaced to Swift. 
 
 ## Accessing Array Elements
 
