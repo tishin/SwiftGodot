@@ -71,7 +71,7 @@ open class Engine: Object {
     /// 
     /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled` or `Adaptive`, it takes precedence and the forced FPS number cannot exceed the monitor's refresh rate.
     /// 
-    /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled`, on monitors with variable refresh rate enabled (G-Sync/FreeSync), using a FPS limit a few frames lower than the monitor's refresh rate will [url=https://blurbusters.com/howto-low-lag-vsync-on/]reduce input lag while avoiding tearing[/url].
+    /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled`, on monitors with variable refresh rate enabled (G-Sync/FreeSync), using a FPS limit a few frames lower than the monitor's refresh rate will [url=https://blurbusters.com/howto-low-lag-vsync-on/]reduce input lag while avoiding tearing</a>.
     /// 
     /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Disabled`, limiting the FPS to a high value that can be consistently reached on the system can reduce input lag compared to an uncapped framerate. Since this works by ensuring the GPU load is lower than 100%, this latency reduction is only effective in GPU-bottlenecked scenarios, not CPU-bottlenecked scenarios.
     /// 
@@ -960,7 +960,7 @@ open class Engine: Object {
     
     /// Returns `true` if the script is currently running inside the editor, `false` otherwise. This is useful for `@tool` scripts to conditionally draw editor helpers, or prevent accidentally running "game" code that would affect the scene state while in the editor:
     /// 
-    /// See [url=$DOCS_URL/tutorials/plugins/running_code_in_the_editor.html]Running code in the editor[/url] in the documentation for more information.
+    /// See <a href="https://docs.godotengine.org/en//tutorials/plugins/running_code_in_the_editor.html">Running code in the editor</a> in the documentation for more information.
     /// 
     /// > Note: To detect whether the script is run from an editor _build_ (e.g. when pressing [kbd]F5[/kbd]), use ``OS/hasFeature(tagName:)`` with the `"editor"` argument instead. `OS.has_feature("editor")` will evaluate to `true` both when the code is running in the editor and when running the project from the editor, but it will evaluate to `false` when the code is run from an exported project.
     /// 

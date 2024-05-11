@@ -9,7 +9,7 @@
 /// 
 /// Stores information about a mouse or a pen motion. This includes relative position, absolute position, and velocity. See ``Node/_input(event:)``.
 /// 
-/// > Note: By default, this event is only emitted once per frame rendered at most. If you need more precise input reporting, set ``Input/useAccumulatedInput`` to `false` to make events emitted as often as possible. If you use InputEventMouseMotion to draw lines, consider implementing [url=https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm]Bresenham's line algorithm[/url] as well to avoid visible gaps in lines if the user is moving the mouse quickly.
+/// > Note: By default, this event is only emitted once per frame rendered at most. If you need more precise input reporting, set ``Input/useAccumulatedInput`` to `false` to make events emitted as often as possible. If you use InputEventMouseMotion to draw lines, consider implementing [url=https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm]Bresenham's line algorithm</a> as well to avoid visible gaps in lines if the user is moving the mouse quickly.
 /// 
 open class InputEventMouseMotion: InputEventMouse {
     override open class var godotClassName: StringName { "InputEventMouseMotion" }

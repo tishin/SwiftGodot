@@ -545,7 +545,7 @@ open class Control: CanvasItem {
     
     /// The node's scale, relative to its ``size``. Change this property to scale the node around its ``pivotOffset``. The Control's ``tooltipText`` will also scale according to this value.
     /// 
-    /// > Note: This property is mainly intended to be used for animation purposes. To support multiple resolutions in your project, use an appropriate viewport stretch mode as described in the [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]documentation[/url] instead of scaling Controls individually.
+    /// > Note: This property is mainly intended to be used for animation purposes. To support multiple resolutions in your project, use an appropriate viewport stretch mode as described in the <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">documentation</a> instead of scaling Controls individually.
     /// 
     /// > Note: ``FontFile/oversampling`` does _not_ take ``Control`` ``scale`` into account. This means that scaling up/down will cause bitmap fonts and rasterized (non-MSDF) dynamic fonts to appear blurry or pixelated. To ensure text remains crisp regardless of scale, you can enable MSDF font rendering by enabling ``ProjectSettings/gui/theme/defaultFontMultichannelSignedDistanceField`` (applies to the default project font only), or enabling **Multichannel Signed Distance Field** in the import options of a DynamicFont for custom fonts. On system fonts, ``SystemFont/multichannelSignedDistanceField`` can be enabled in the inspector.
     /// 

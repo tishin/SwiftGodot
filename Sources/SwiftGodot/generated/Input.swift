@@ -184,7 +184,7 @@ open class Input: Object {
     /// 
     /// ``isKeyPressed(keycode:)`` is only recommended over ``isPhysicalKeyPressed(keycode:)`` in non-game applications. This ensures that shortcut keys behave as expected depending on the user's keyboard layout, as keyboard shortcuts are generally dependent on the keyboard layout in non-game applications. If in doubt, use ``isPhysicalKeyPressed(keycode:)``.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     public static func isKeyPressed (keycode: Key)-> Bool {
         var _result: Bool = false
@@ -223,7 +223,7 @@ open class Input: Object {
     /// 
     /// ``isPhysicalKeyPressed(keycode:)`` is recommended over ``isKeyPressed(keycode:)`` for in-game actions, as it will make [kbd]W[/kbd]/[kbd]A[/kbd]/[kbd]S[/kbd]/[kbd]D[/kbd] layouts work regardless of the user's keyboard layout. ``isPhysicalKeyPressed(keycode:)`` will also ensure that the top row number keys work on any keyboard layout. If in doubt, use ``isPhysicalKeyPressed(keycode:)``.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isPhysicalKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isPhysicalKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     public static func isPhysicalKeyPressed (keycode: Key)-> Bool {
         var _result: Bool = false
@@ -369,7 +369,7 @@ open class Input: Object {
     /// 
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     public static func isActionPressed (action: StringName, exactMatch: Bool = false)-> Bool {
         var _result: Bool = false
@@ -415,7 +415,7 @@ open class Input: Object {
     /// 
     /// > Note: Returning `true` does not imply that the action is _still_ pressed. An action can be pressed and released again rapidly, and `true` will still be returned so as not to miss input.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isActionJustPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isActionJustPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     /// > Note: During input handling (e.g. ``Node/_input(event:)``), use ``InputEvent/isActionPressed(action:allowEcho:exactMatch:)`` instead to query the action state of the current event.
     /// 
@@ -810,7 +810,7 @@ open class Input: Object {
         
     }()
     
-    /// Returns the name of the joypad at the specified device index, e.g. `PS4 Controller`. Godot uses the [url=https://github.com/gabomdq/SDL_GameControllerDB]SDL2 game controller database[/url] to determine gamepad names.
+    /// Returns the name of the joypad at the specified device index, e.g. `PS4 Controller`. Godot uses the <a href="https://github.com/gabomdq/SDL_GameControllerDB">SDL2 game controller database</a> to determine gamepad names.
     public static func getJoyName (device: Int32)-> String {
         let _result = GString ()
         #if true
@@ -844,7 +844,7 @@ open class Input: Object {
         
     }()
     
-    /// Returns a SDL2-compatible device GUID on platforms that use gamepad remapping, e.g. `030000004c050000c405000000010000`. Returns `"Default Gamepad"` otherwise. Godot uses the [url=https://github.com/gabomdq/SDL_GameControllerDB]SDL2 game controller database[/url] to determine gamepad names and mappings based on this GUID.
+    /// Returns a SDL2-compatible device GUID on platforms that use gamepad remapping, e.g. `030000004c050000c405000000010000`. Returns `"Default Gamepad"` otherwise. Godot uses the <a href="https://github.com/gabomdq/SDL_GameControllerDB">SDL2 game controller database</a> to determine gamepad names and mappings based on this GUID.
     public static func getJoyGuid (device: Int32)-> String {
         let _result = GString ()
         #if true
@@ -927,7 +927,7 @@ open class Input: Object {
         
     }()
     
-    /// Queries whether an input device should be ignored or not. Devices can be ignored by setting the environment variable `SDL_GAMECONTROLLER_IGNORE_DEVICES`. Read the [url=https://wiki.libsdl.org/SDL2]SDL documentation[/url] for more information.
+    /// Queries whether an input device should be ignored or not. Devices can be ignored by setting the environment variable `SDL_GAMECONTROLLER_IGNORE_DEVICES`. Read the <a href="https://wiki.libsdl.org/SDL2">SDL documentation</a> for more information.
     /// 
     /// > Note: Some 3rd party tools can contribute to the list of ignored devices. For example, _SteamInput_ creates virtual devices from physical devices for remapping purposes. To avoid handling the same input device twice, the original device is added to the ignore list.
     /// 
@@ -1662,7 +1662,7 @@ open class Input: Object {
     /// 
     /// > Note: The **Lossless**, **Lossy** or **Uncompressed** compression modes are recommended. The **Video RAM** compression mode can be used, but it will be decompressed on the CPU, which means loading times are slowed down and no memory is saved compared to lossless modes.
     /// 
-    /// > Note: On the web platform, the maximum allowed cursor image size is 128×128. Cursor images larger than 32×32 will also only be displayed if the mouse cursor image is entirely located within the page for [url=https://chromestatus.com/feature/5825971391299584]security reasons[/url].
+    /// > Note: On the web platform, the maximum allowed cursor image size is 128×128. Cursor images larger than 32×32 will also only be displayed if the mouse cursor image is entirely located within the page for <a href="https://chromestatus.com/feature/5825971391299584">security reasons</a>.
     /// 
     public static func setCustomMouseCursor (image: Resource?, shape: Input.CursorShape = .arrow, hotspot: Vector2 = Vector2 (x: 0, y: 0)) {
         #if true

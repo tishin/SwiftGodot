@@ -59,7 +59,7 @@ open class LinkButton: BaseButton {
         
     }
     
-    /// The [url=https://en.wikipedia.org/wiki/Uniform_Resource_Identifier]URI[/url] for this ``LinkButton``. If set to a valid URI, pressing the button opens the URI using the operating system's default program for the protocol (via ``OS/shellOpen(uri:)``). HTTP and HTTPS URLs open the default web browser.
+    /// The <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">URI</a> for this ``LinkButton``. If set to a valid URI, pressing the button opens the URI using the operating system's default program for the protocol (via ``OS/shellOpen(uri:)``). HTTP and HTTPS URLs open the default web browser.
     /// 
     /// **Examples:**
     /// 

@@ -25,7 +25,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns the [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrInstance.html]XrInstance[/url] created during the initialization of the OpenXR API.
+    /// Returns the <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrInstance.html">XrInstance</a> created during the initialization of the OpenXR API.
     public final func getInstance ()-> UInt {
         var _result: UInt = 0
         gi.object_method_bind_ptrcall (OpenXRAPIExtension.method_get_instance, UnsafeMutableRawPointer (mutating: handle), nil, &_result)
@@ -43,7 +43,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns the id of the system, which is a [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSystemId.html]XrSystemId[/url] cast to an integer.
+    /// Returns the id of the system, which is a <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSystemId.html">XrSystemId</a> cast to an integer.
     public final func getSystemId ()-> UInt {
         var _result: UInt = 0
         gi.object_method_bind_ptrcall (OpenXRAPIExtension.method_get_system_id, UnsafeMutableRawPointer (mutating: handle), nil, &_result)
@@ -61,7 +61,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns the OpenXR session, which is an [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSession.html]XrSession[/url] cast to an integer.
+    /// Returns the OpenXR session, which is an <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSession.html">XrSession</a> cast to an integer.
     public final func getSession ()-> UInt {
         var _result: UInt = 0
         gi.object_method_bind_ptrcall (OpenXRAPIExtension.method_get_session, UnsafeMutableRawPointer (mutating: handle), nil, &_result)
@@ -79,7 +79,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns `true` if the provided [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html]XrResult[/url] (cast to an integer) is successful. Otherwise returns `false` and prints the [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html]XrResult[/url] converted to a string, with the specified additional information.
+    /// Returns `true` if the provided <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html">XrResult</a> (cast to an integer) is successful. Otherwise returns `false` and prints the <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html">XrResult</a> converted to a string, with the specified additional information.
     public final func xrResult (_ result: UInt, format: String, args: GArray)-> Bool {
         var _result: Bool = false
         #if true
@@ -192,7 +192,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns an error string for the given [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html]XrResult[/url].
+    /// Returns an error string for the given <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrResult.html">XrResult</a>.
     public final func getErrorString (result: UInt)-> String {
         let _result = GString ()
         #if true
@@ -278,7 +278,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns `true` if OpenXR is running ([url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/xrBeginSession.html]xrBeginSession[/url] was successfully called and the swapchains were created).
+    /// Returns `true` if OpenXR is running (<a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/xrBeginSession.html">xrBeginSession</a> was successfully called and the swapchains were created).
     public final func isRunning ()-> Bool {
         var _result: Bool = false
         gi.object_method_bind_ptrcall (OpenXRAPIExtension.method_is_running, UnsafeMutableRawPointer (mutating: handle), nil, &_result)
@@ -296,7 +296,7 @@ open class OpenXRAPIExtension: RefCounted {
         
     }()
     
-    /// Returns the play space, which is an [url=https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSpace.html]XrSpace[/url] cast to an integer.
+    /// Returns the play space, which is an <a href="https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrSpace.html">XrSpace</a> cast to an integer.
     public final func getPlaySpace ()-> UInt {
         var _result: UInt = 0
         gi.object_method_bind_ptrcall (OpenXRAPIExtension.method_get_play_space, UnsafeMutableRawPointer (mutating: handle), nil, &_result)

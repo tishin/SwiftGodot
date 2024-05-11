@@ -134,7 +134,7 @@ open class InputEvent: Resource {
     /// 
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:allowEcho:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:allowEcho:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     public final func isActionPressed (action: StringName, allowEcho: Bool = false, exactMatch: Bool = false)-> Bool {
         var _result: Bool = false
@@ -277,7 +277,7 @@ open class InputEvent: Resource {
     
     /// Returns `true` if this input event is pressed. Not relevant for events of type ``InputEventMouseMotion`` or ``InputEventScreenDrag``.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isPressed()`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples[/url] in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isPressed()`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
     /// 
     public final func isPressed ()-> Bool {
         var _result: Bool = false

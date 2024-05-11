@@ -7,19 +7,19 @@
 
 /// Abstract class for non-real-time video recording encoders.
 /// 
-/// Godot can record videos with non-real-time simulation. Like the `--fixed-fps` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url], this forces the reported `delta` in ``Node/_process(delta:)`` functions to be identical across frames, regardless of how long it actually took to render the frame. This can be used to record high-quality videos with perfect frame pacing regardless of your hardware's capabilities.
+/// Godot can record videos with non-real-time simulation. Like the `--fixed-fps` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>, this forces the reported `delta` in ``Node/_process(delta:)`` functions to be identical across frames, regardless of how long it actually took to render the frame. This can be used to record high-quality videos with perfect frame pacing regardless of your hardware's capabilities.
 /// 
 /// Godot has 2 built-in ``MovieWriter``s:
 /// 
 /// - AVI container with MJPEG for video and uncompressed audio (`.avi` file extension). Lossy compression, medium file sizes, fast encoding. The lossy compression quality can be adjusted by changing ``ProjectSettings/editor/movieWriter/mjpegQuality``. The resulting file can be viewed in most video players, but it must be converted to another format for viewing on the web or by Godot with ``VideoStreamPlayer``. MJPEG does not support transparency. AVI output is currently limited to a file of 4 GB in size at most.
 /// 
-/// - PNG image sequence for video and WAV for audio (`.png` file extension). Lossless compression, large file sizes, slow encoding. Designed to be encoded to a video file with another tool such as [url=https://ffmpeg.org/]FFmpeg[/url] after recording. Transparency is currently not supported, even if the root viewport is set to be transparent.
+/// - PNG image sequence for video and WAV for audio (`.png` file extension). Lossless compression, large file sizes, slow encoding. Designed to be encoded to a video file with another tool such as <a href="https://ffmpeg.org/">FFmpeg</a> after recording. Transparency is currently not supported, even if the root viewport is set to be transparent.
 /// 
 /// If you need to encode to a different format or pipe a stream through third-party software, you can extend the ``MovieWriter`` class to create your own movie writers. This should typically be done using GDExtension for performance reasons.
 /// 
 /// **Editor usage:** A default movie file path can be specified in ``ProjectSettings/editor/movieWriter/movieFile``. Alternatively, for running single scenes, a `movie_file` metadata can be added to the root node, specifying the path to a movie file that will be used when recording that scene. Once a path is set, click the video reel icon in the top-right corner of the editor to enable Movie Maker mode, then run any scene as usual. The engine will start recording as soon as the splash screen is finished, and it will only stop recording when the engine quits. Click the video reel icon again to disable Movie Maker mode. Note that toggling Movie Maker mode does not affect project instances that are already running.
 /// 
-/// > Note: MovieWriter is available for use in both the editor and exported projects, but it is _not_ designed for use by end users to record videos while playing. Players wishing to record gameplay videos should install tools such as [url=https://obsproject.com/]OBS Studio[/url] or [url=https://www.maartenbaert.be/simplescreenrecorder/]SimpleScreenRecorder[/url] instead.
+/// > Note: MovieWriter is available for use in both the editor and exported projects, but it is _not_ designed for use by end users to record videos while playing. Players wishing to record gameplay videos should install tools such as <a href="https://obsproject.com/">OBS Studio</a> or <a href="https://www.maartenbaert.be/simplescreenrecorder/">SimpleScreenRecorder</a> instead.
 /// 
 open class MovieWriter: Object {
     override open class var godotClassName: StringName { "MovieWriter" }
@@ -43,7 +43,7 @@ open class MovieWriter: Object {
         return false
     }
     
-    /// Called once before the engine starts writing video and audio data. `movieSize` is the width and height of the video to save. `fps` is the number of frames per second specified in the project settings or using the `--fixed-fps <fps>` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url].
+    /// Called once before the engine starts writing video and audio data. `movieSize` is the width and height of the video to save. `fps` is the number of frames per second specified in the project settings or using the `--fixed-fps <fps>` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>.
     @_documentation(visibility: public)
     open func _writeBegin (movieSize: Vector2i, fps: UInt32, basePath: String)-> GodotError {
         return .ok

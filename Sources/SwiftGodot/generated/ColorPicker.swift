@@ -31,7 +31,7 @@ open class ColorPicker: VBoxContainer {
         /// 
         /// OKHSL is a new color space similar to HSL but that better match perception by leveraging the Oklab color space which is designed to be simple to use, while doing a good job at predicting perceived lightness, chroma and hue.
         /// 
-        /// [url=https://bottosson.github.io/posts/colorpicker/]Okhsv and Okhsl color spaces[/url]
+        /// <a href="https://bottosson.github.io/posts/colorpicker/">Okhsv and Okhsl color spaces</a>
         /// 
         case okhsl = 3 // MODE_OKHSL
         /// A textual representation of this instance, suitable for debugging

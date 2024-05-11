@@ -15,7 +15,7 @@
 /// 
 /// See also ``ArrayMesh``, ``ImmediateMesh`` and ``SurfaceTool`` for procedural geometry generation.
 /// 
-/// > Note: Godot uses clockwise [url=https://learnopengl.com/Advanced-OpenGL/Face-culling]winding order[/url] for front faces of triangle primitive modes.
+/// > Note: Godot uses clockwise [url=https://learnopengl.com/Advanced-OpenGL/Face-culling]winding order</a> for front faces of triangle primitive modes.
 /// 
 open class MeshDataTool: RefCounted {
     override open class var godotClassName: StringName { "MeshDataTool" }

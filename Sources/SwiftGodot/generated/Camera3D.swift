@@ -46,11 +46,11 @@ open class Camera3D: Node3D {
     }
     
     public enum DopplerTracking: Int64, CustomDebugStringConvertible {
-        /// Disables [url=https://en.wikipedia.org/wiki/Doppler_effect]Doppler effect[/url] simulation (default).
+        /// Disables <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> simulation (default).
         case disabled = 0 // DOPPLER_TRACKING_DISABLED
-        /// Simulate [url=https://en.wikipedia.org/wiki/Doppler_effect]Doppler effect[/url] by tracking positions of objects that are changed in `_process`. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's ``AudioStreamPlayer3D/pitchScale``).
+        /// Simulate <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> by tracking positions of objects that are changed in `_process`. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's ``AudioStreamPlayer3D/pitchScale``).
         case idleStep = 1 // DOPPLER_TRACKING_IDLE_STEP
-        /// Simulate [url=https://en.wikipedia.org/wiki/Doppler_effect]Doppler effect[/url] by tracking positions of objects that are changed in `_physics_process`. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's ``AudioStreamPlayer3D/pitchScale``).
+        /// Simulate <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> by tracking positions of objects that are changed in `_physics_process`. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's ``AudioStreamPlayer3D/pitchScale``).
         case physicsStep = 2 // DOPPLER_TRACKING_PHYSICS_STEP
         /// A textual representation of this instance, suitable for debugging
         public var debugDescription: String {
@@ -146,7 +146,7 @@ open class Camera3D: Node3D {
         
     }
     
-    /// If not .disabled, this camera will simulate the [url=https://en.wikipedia.org/wiki/Doppler_effect]Doppler effect[/url] for objects changed in particular `_process` methods. See ``Camera3D/DopplerTracking`` for possible values.
+    /// If not .disabled, this camera will simulate the <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> for objects changed in particular `_process` methods. See ``Camera3D/DopplerTracking`` for possible values.
     final public var dopplerTracking: Camera3D.DopplerTracking {
         get {
             return get_doppler_tracking ()
@@ -220,7 +220,7 @@ open class Camera3D: Node3D {
         
     }
     
-    /// The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as [url=https://zdoom.org/wiki/Y-shearing]Y-shearing[/url].
+    /// The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as [url=https://zdoom.org/wiki/Y-shearing]Y-shearing</a>.
     /// 
     /// > Note: Only effective if ``projection`` is .projectionFrustum.
     /// 
@@ -410,7 +410,7 @@ open class Camera3D: Node3D {
         
     }()
     
-    /// Returns `true` if the given position is behind the camera (the blue part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram[/url] for an overview of position query methods.
+    /// Returns `true` if the given position is behind the camera (the blue part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram</a> for an overview of position query methods.
     /// 
     /// > Note: A position which returns `false` may still be outside the camera's field of view.
     /// 
@@ -1417,7 +1417,7 @@ open class Camera3D: Node3D {
         
     }()
     
-    /// Returns `true` if the given position is inside the camera's frustum (the green part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram[/url] for an overview of position query methods.
+    /// Returns `true` if the given position is inside the camera's frustum (the green part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram</a> for an overview of position query methods.
     public final func isPositionInFrustum (worldPoint: Vector3)-> Bool {
         var _result: Bool = false
         #if true

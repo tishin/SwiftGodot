@@ -56,55 +56,55 @@ open class Image: Resource {
         case rgbah = 15 // FORMAT_RGBAH
         /// A special OpenGL texture format where the three color components have 9 bits of precision and all three share a single 5-bit exponent.
         case rgbe9995 = 16 // FORMAT_RGBE9995
-        /// The [url=https://en.wikipedia.org/wiki/S3_Texture_Compression]S3TC[/url] texture format that uses Block Compression 1, and is the smallest variation of S3TC, only providing 1 bit of alpha and color data being premultiplied with alpha.
+        /// The <a href="https://en.wikipedia.org/wiki/S3_Texture_Compression">S3TC</a> texture format that uses Block Compression 1, and is the smallest variation of S3TC, only providing 1 bit of alpha and color data being premultiplied with alpha.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case dxt1 = 17 // FORMAT_DXT1
-        /// The [url=https://en.wikipedia.org/wiki/S3_Texture_Compression]S3TC[/url] texture format that uses Block Compression 2, and color data is interpreted as not having been premultiplied by alpha. Well suited for images with sharp alpha transitions between translucent and opaque areas.
+        /// The <a href="https://en.wikipedia.org/wiki/S3_Texture_Compression">S3TC</a> texture format that uses Block Compression 2, and color data is interpreted as not having been premultiplied by alpha. Well suited for images with sharp alpha transitions between translucent and opaque areas.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case dxt3 = 18 // FORMAT_DXT3
-        /// The [url=https://en.wikipedia.org/wiki/S3_Texture_Compression]S3TC[/url] texture format also known as Block Compression 3 or BC3 that contains 64 bits of alpha channel data followed by 64 bits of DXT1-encoded color data. Color data is not premultiplied by alpha, same as DXT3. DXT5 generally produces superior results for transparent gradients compared to DXT3.
+        /// The <a href="https://en.wikipedia.org/wiki/S3_Texture_Compression">S3TC</a> texture format also known as Block Compression 3 or BC3 that contains 64 bits of alpha channel data followed by 64 bits of DXT1-encoded color data. Color data is not premultiplied by alpha, same as DXT3. DXT5 generally produces superior results for transparent gradients compared to DXT3.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case dxt5 = 19 // FORMAT_DXT5
-        /// Texture format that uses [url=https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression]Red Green Texture Compression[/url], normalizing the red channel data using the same compression algorithm that DXT5 uses for the alpha channel.
+        /// Texture format that uses <a href="https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression">Red Green Texture Compression</a>, normalizing the red channel data using the same compression algorithm that DXT5 uses for the alpha channel.
         case rgtcR = 20 // FORMAT_RGTC_R
-        /// Texture format that uses [url=https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression]Red Green Texture Compression[/url], normalizing the red and green channel data using the same compression algorithm that DXT5 uses for the alpha channel.
+        /// Texture format that uses <a href="https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression">Red Green Texture Compression</a>, normalizing the red and green channel data using the same compression algorithm that DXT5 uses for the alpha channel.
         case rgtcRg = 21 // FORMAT_RGTC_RG
-        /// Texture format that uses [url=https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression]BPTC[/url] compression with unsigned normalized RGBA components.
+        /// Texture format that uses <a href="https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression">BPTC</a> compression with unsigned normalized RGBA components.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case bptcRgba = 22 // FORMAT_BPTC_RGBA
-        /// Texture format that uses [url=https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression]BPTC[/url] compression with signed floating-point RGB components.
+        /// Texture format that uses <a href="https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression">BPTC</a> compression with signed floating-point RGB components.
         case bptcRgbf = 23 // FORMAT_BPTC_RGBF
-        /// Texture format that uses [url=https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression]BPTC[/url] compression with unsigned floating-point RGB components.
+        /// Texture format that uses <a href="https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression">BPTC</a> compression with unsigned floating-point RGB components.
         case bptcRgbfu = 24 // FORMAT_BPTC_RGBFU
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC1]Ericsson Texture Compression format 1[/url], also referred to as "ETC1", and is part of the OpenGL ES graphics standard. This format cannot store an alpha channel.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC1]Ericsson Texture Compression format 1</a>, also referred to as "ETC1", and is part of the OpenGL ES graphics standard. This format cannot store an alpha channel.
         case etc = 25 // FORMAT_ETC
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`R11_EAC` variant), which provides one channel of unsigned data.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`R11_EAC` variant), which provides one channel of unsigned data.
         case etc2R11 = 26 // FORMAT_ETC2_R11
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`SIGNED_R11_EAC` variant), which provides one channel of signed data.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`SIGNED_R11_EAC` variant), which provides one channel of signed data.
         case etc2R11s = 27 // FORMAT_ETC2_R11S
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`RG11_EAC` variant), which provides two channels of unsigned data.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`RG11_EAC` variant), which provides two channels of unsigned data.
         case etc2Rg11 = 28 // FORMAT_ETC2_RG11
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`SIGNED_RG11_EAC` variant), which provides two channels of signed data.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`SIGNED_RG11_EAC` variant), which provides two channels of signed data.
         case etc2Rg11s = 29 // FORMAT_ETC2_RG11S
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`RGB8` variant), which is a follow-up of ETC1 and compresses RGB888 data.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`RGB8` variant), which is a follow-up of ETC1 and compresses RGB888 data.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case etc2Rgb8 = 30 // FORMAT_ETC2_RGB8
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`RGBA8`variant), which compresses RGBA8888 data with full alpha support.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`RGBA8`variant), which compresses RGBA8888 data with full alpha support.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
         case etc2Rgba8 = 31 // FORMAT_ETC2_RGBA8
-        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2[/url] (`RGB8_PUNCHTHROUGH_ALPHA1` variant), which compresses RGBA data to make alpha either fully transparent or fully opaque.
+        /// [url=https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC]Ericsson Texture Compression format 2</a> (`RGB8_PUNCHTHROUGH_ALPHA1` variant), which compresses RGBA data to make alpha either fully transparent or fully opaque.
         /// 
         /// > Note: When creating an ``ImageTexture``, an sRGB to linear color space conversion is performed.
         /// 
@@ -113,11 +113,11 @@ open class Image: Resource {
         case etc2RaAsRg = 33 // FORMAT_ETC2_RA_AS_RG
         /// 
         case dxt5RaAsRg = 34 // FORMAT_DXT5_RA_AS_RG
-        /// [url=https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]Adaptive Scalable Texture Compression[/url]. This implements the 4x4 (high quality) mode.
+        /// <a href="https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression">Adaptive Scalable Texture Compression</a>. This implements the 4x4 (high quality) mode.
         case astc4x4 = 35 // FORMAT_ASTC_4x4
         /// Same format as .astc4x4, but with the hint to let the GPU know it is used for HDR.
         case astc4x4Hdr = 36 // FORMAT_ASTC_4x4_HDR
-        /// [url=https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]Adaptive Scalable Texture Compression[/url]. This implements the 8x8 (low quality) mode.
+        /// <a href="https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression">Adaptive Scalable Texture Compression</a>. This implements the 8x8 (low quality) mode.
         case astc8x8 = 37 // FORMAT_ASTC_8x8
         /// Same format as .astc8x8, but with the hint to let the GPU know it is used for HDR.
         case astc8x8Hdr = 38 // FORMAT_ASTC_8x8_HDR
@@ -914,7 +914,7 @@ open class Image: Resource {
         
     }()
     
-    /// Loads an image from file `path`. See [url=$DOCS_URL/tutorials/assets_pipeline/importing_images.html#supported-image-formats]Supported image formats[/url] for a list of supported image formats and limitations.
+    /// Loads an image from file `path`. See [url=$DOCS_URL/tutorials/assets_pipeline/importing_images.html#supported-image-formats]Supported image formats</a> for a list of supported image formats and limitations.
     /// 
     /// > Warning: This method should only be used in the editor or in cases when you need to load external images at run-time, such as images located at the `user://` directory, and may not work in exported projects.
     /// 
@@ -2398,7 +2398,7 @@ open class Image: Resource {
         
     }()
     
-    /// Loads an image from the binary contents of a [url=https://github.com/KhronosGroup/KTX-Software]KTX[/url] file. Unlike most image formats, KTX can store VRAM-compressed data and embed mipmaps.
+    /// Loads an image from the binary contents of a [url=https://github.com/KhronosGroup/KTX-Software]KTX</a> file. Unlike most image formats, KTX can store VRAM-compressed data and embed mipmaps.
     /// 
     /// > Note: Godot's libktx implementation only supports 2D images. Cubemaps, texture arrays, and de-padding are not supported.
     /// 

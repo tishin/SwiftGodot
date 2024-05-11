@@ -404,7 +404,7 @@ public class GD {
     
     /// Returns an "eased" value of `x` based on an easing function defined with `curve`. This easing function is based on an exponent. The `curve` can be any floating-point number, with specific values leading to the following behaviors:
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/ease_cheatsheet.png]ease() curve values cheatsheet[/url]
+    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/ease_cheatsheet.png]ease() curve values cheatsheet</a>
     /// 
     /// See also ``smoothstep()``. If you need to perform more advanced transitions, use ``Tween/interpolateValue(initialValue:deltaValue:elapsedTime:duration:transType:easeType:)``.
     /// 
@@ -727,7 +727,7 @@ public class GD {
         
     }()
     
-    /// Returns the point at the given `t` on a one-dimensional [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve[/url] defined by the given `control1`, `control2`, and `end` points.
+    /// Returns the point at the given `t` on a one-dimensional [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by the given `control1`, `control2`, and `end` points.
     public static func bezierInterpolate (start: Double, control1: Double, control2: Double, end: Double, t: Double)-> Double {
         var _result: Double = 0.0
         #if true
@@ -780,7 +780,7 @@ public class GD {
         
     }()
     
-    /// Returns the derivative at the given `t` on a one-dimensional [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve[/url] defined by the given `control1`, `control2`, and `end` points.
+    /// Returns the derivative at the given `t` on a one-dimensional [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by the given `control1`, `control2`, and `end` points.
     public static func bezierDerivative (start: Double, control1: Double, control2: Double, end: Double, t: Double)-> Double {
         var _result: Double = 0.0
         #if true
@@ -983,7 +983,7 @@ public class GD {
     /// 
     /// Compared to ``ease()`` with a curve value of `-1.6521`, ``smoothstep()`` returns the smoothest possible curve with no sudden changes in the derivative. If you need to perform more advanced transitions, use ``Tween`` or ``AnimationPlayer``.
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png]Comparison between smoothstep() and ease(x, -1.6521) return values[/url]
+    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png]Comparison between smoothstep() and ease(x, -1.6521) return values</a>
     /// 
     public static func smoothstep (from: Double, to: Double, x: Double)-> Double {
         var _result: Double = 0.0

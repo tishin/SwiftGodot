@@ -991,7 +991,7 @@ open class BaseMaterial3D: Material {
     /// 
     /// > Note: The mesh must have both normals and tangents defined in its vertex data. Otherwise, the normal map won't render correctly and will only appear to darken the whole surface. If creating geometry with ``SurfaceTool``, you can use ``SurfaceTool/generateNormals(flip:)`` and ``SurfaceTool/generateTangents()`` to automatically generate normals and tangents respectively.
     /// 
-    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page[/url] for a comparison of normal map coordinates expected by popular engines.
+    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page</a> for a comparison of normal map coordinates expected by popular engines.
     /// 
     /// > Note: If ``detailEnabled`` is `true`, the ``detailAlbedo`` texture is drawn _below_ the ``normalTexture``. To display a normal map _above_ the ``detailAlbedo`` texture, use ``detailNormal`` instead.
     /// 
@@ -1310,7 +1310,7 @@ open class BaseMaterial3D: Material {
     
     /// The texture to use as a height map. See also ``heightmapEnabled``.
     /// 
-    /// For best results, the texture should be normalized (with ``heightmapScale`` reduced to compensate). In [url=https://gimp.org]GIMP[/url], this can be done using **Colors > Auto > Equalize**. If the texture only uses a small part of its available range, the parallax effect may look strange, especially when the camera moves.
+    /// For best results, the texture should be normalized (with ``heightmapScale`` reduced to compensate). In <a href="https://gimp.org">GIMP</a>, this can be done using **Colors > Auto > Equalize**. If the texture only uses a small part of its available range, the parallax effect may look strange, especially when the camera moves.
     /// 
     /// > Note: To reduce memory usage and improve loading times, you may be able to use a lower-resolution heightmap texture as most heightmaps are only comprised of low-frequency data.
     /// 
@@ -1597,7 +1597,7 @@ open class BaseMaterial3D: Material {
     
     /// Texture that specifies the per-pixel normal of the detail overlay. The ``detailNormal`` texture only uses the red and green channels; the blue and alpha channels are ignored. The normal read from ``detailNormal`` is oriented around the surface normal provided by the ``Mesh``.
     /// 
-    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page[/url] for a comparison of normal map coordinates expected by popular engines.
+    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page</a> for a comparison of normal map coordinates expected by popular engines.
     /// 
     final public var detailNormal: Texture2D? {
         get {
@@ -1789,7 +1789,7 @@ open class BaseMaterial3D: Material {
     
     /// Controls how the object faces the camera. See ``BaseMaterial3D/BillboardMode``.
     /// 
-    /// > Note: Billboard mode is not suitable for VR because the left-right vector of the camera is not horizontal when the screen is attached to your head instead of on the table. See [url=https://github.com/godotengine/godot/issues/41567]GitHub issue #41567[/url] for details.
+    /// > Note: Billboard mode is not suitable for VR because the left-right vector of the camera is not horizontal when the screen is attached to your head instead of on the table. See <a href="https://github.com/godotengine/godot/issues/41567">GitHub issue #41567</a> for details.
     /// 
     final public var billboardMode: BaseMaterial3D.BillboardMode {
         get {
@@ -1852,7 +1852,7 @@ open class BaseMaterial3D: Material {
     
     /// If `true`, enables the vertex grow setting. This can be used to create mesh-based outlines using a second material pass and its ``cullMode`` set to .cullFront. See also ``growAmount``.
     /// 
-    /// > Note: Vertex growth cannot create new vertices, which means that visible gaps may occur in sharp corners. This can be alleviated by designing the mesh to use smooth normals exclusively using [url=https://wiki.polycount.com/wiki/Face_weighted_normals]face weighted normals[/url] in the 3D authoring software. In this case, grow will be able to join every outline together, just like in the original mesh.
+    /// > Note: Vertex growth cannot create new vertices, which means that visible gaps may occur in sharp corners. This can be alleviated by designing the mesh to use smooth normals exclusively using <a href="https://wiki.polycount.com/wiki/Face_weighted_normals">face weighted normals</a> in the 3D authoring software. In this case, grow will be able to join every outline together, just like in the original mesh.
     /// 
     final public var grow: Bool {
         get {

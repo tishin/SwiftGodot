@@ -7,7 +7,7 @@
 
 /// Imports a bitmap font in the BMFont (`.fnt`) format.
 /// 
-/// The BMFont format is a format created by the [url=https://www.angelcode.com/products/bmfont/]BMFont[/url] program. Many BMFont-compatible programs also exist, like [url=https://www.bmglyph.com/]BMGlyph[/url].
+/// The BMFont format is a format created by the <a href="https://www.angelcode.com/products/bmfont/">BMFont</a> program. Many BMFont-compatible programs also exist, like <a href="https://www.bmglyph.com/">BMGlyph</a>.
 /// 
 /// Compared to ``ResourceImporterImageFont``, ``ResourceImporterBMFont`` supports bitmap fonts with varying glyph widths/heights.
 /// 

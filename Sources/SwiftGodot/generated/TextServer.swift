@@ -414,7 +414,7 @@ open class TextServer: RefCounted {
         case useSupportData = 4096 // FEATURE_USE_SUPPORT_DATA
         /// TextServer supports UAX #31 identifier validation, see ``isValidIdentifier(string:)``.
         case unicodeIdentifiers = 8192 // FEATURE_UNICODE_IDENTIFIERS
-        /// TextServer supports [url=https://unicode.org/reports/tr36/]Unicode Technical Report #36[/url] and [url=https://unicode.org/reports/tr39/]Unicode Technical Standard #39[/url] based spoof detection features.
+        /// TextServer supports <a href="https://unicode.org/reports/tr36/">Unicode Technical Report #36</a> and <a href="https://unicode.org/reports/tr39/">Unicode Technical Standard #39</a> based spoof detection features.
         case unicodeSecurity = 16384 // FEATURE_UNICODE_SECURITY
         /// A textual representation of this instance, suitable for debugging
         public var debugDescription: String {
@@ -4590,7 +4590,7 @@ open class TextServer: RefCounted {
         
     }()
     
-    /// Returns `true`, if font supports given language ([url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639[/url] code).
+    /// Returns `true`, if font supports given language ([url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639</a> code).
     public final func fontIsLanguageSupported (fontRid: RID, language: String)-> Bool {
         var _result: Bool = false
         #if true

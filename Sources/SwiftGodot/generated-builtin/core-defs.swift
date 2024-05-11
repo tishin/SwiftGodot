@@ -1185,7 +1185,7 @@ public enum GodotError: Int64, CustomDebugStringConvertible, Error {
     case errHelp = 46 // ERR_HELP
     /// Bug error, caused by an implementation issue in the method.
     /// 
-    /// > Note: If a built-in method returns this code, please open an issue on [url=https://github.com/godotengine/godot/issues]the GitHub Issue Tracker[/url].
+    /// > Note: If a built-in method returns this code, please open an issue on <a href="https://github.com/godotengine/godot/issues">the GitHub Issue Tracker</a>.
     /// 
     case errBug = 47 // ERR_BUG
     /// Printer on fire error (This is an easter egg, no built-in methods return this error code).

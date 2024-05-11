@@ -307,7 +307,7 @@ open class Crypto: RefCounted {
         
     }()
     
-    /// Generates an [url=https://en.wikipedia.org/wiki/HMAC]HMAC[/url] digest of `msg` using `key`. The `hashType` parameter is the hashing algorithm that is used for the inner and outer hashes.
+    /// Generates an <a href="https://en.wikipedia.org/wiki/HMAC">HMAC</a> digest of `msg` using `key`. The `hashType` parameter is the hashing algorithm that is used for the inner and outer hashes.
     /// 
     /// Currently, only ``HashingContext/HashType/hashSha256`` and ``HashingContext/HashType/hashSha1`` are supported.
     /// 
@@ -352,7 +352,7 @@ open class Crypto: RefCounted {
     
     /// Compares two ``PackedByteArray``s for equality without leaking timing information in order to prevent timing attacks.
     /// 
-    /// See [url=https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy]this blog post[/url] for more information.
+    /// See [url=https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy]this blog post</a> for more information.
     /// 
     public final func constantTimeCompare (trusted: PackedByteArray, received: PackedByteArray)-> Bool {
         var _result: Bool = false

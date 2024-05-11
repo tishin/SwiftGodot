@@ -32,7 +32,7 @@ open class CameraServer: Object {
     public enum FeedImage: Int64, CustomDebugStringConvertible {
         /// The RGBA camera image.
         case rgbaImage = 0 // FEED_RGBA_IMAGE
-        /// The [url=https://en.wikipedia.org/wiki/YCbCr]YCbCr[/url] camera image.
+        /// The <a href="https://en.wikipedia.org/wiki/YCbCr">YCbCr</a> camera image.
         // case ycbcrImage = 0 // FEED_YCBCR_IMAGE
         /// The Y component camera image.
         // case yImage = 0 // FEED_Y_IMAGE

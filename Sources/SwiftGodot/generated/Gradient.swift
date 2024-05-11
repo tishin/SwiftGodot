@@ -37,7 +37,7 @@ open class Gradient: Resource {
         case srgb = 0 // GRADIENT_COLOR_SPACE_SRGB
         /// Linear sRGB color space.
         case linearSrgb = 1 // GRADIENT_COLOR_SPACE_LINEAR_SRGB
-        /// [url=https://bottosson.github.io/posts/oklab/]Oklab[/url] color space. This color space provides a smooth and uniform-looking transition between colors.
+        /// <a href="https://bottosson.github.io/posts/oklab/">Oklab</a> color space. This color space provides a smooth and uniform-looking transition between colors.
         case oklab = 2 // GRADIENT_COLOR_SPACE_OKLAB
         /// A textual representation of this instance, suitable for debugging
         public var debugDescription: String {

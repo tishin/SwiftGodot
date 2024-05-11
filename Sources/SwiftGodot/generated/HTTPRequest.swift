@@ -193,7 +193,7 @@ open class HTTPRequest: Node {
     /// 
     /// Returns ``GodotError/ok`` if request is successfully created. (Does not imply that the server has responded), ``GodotError/errUnconfigured`` if not in the tree, ``GodotError/errBusy`` if still processing previous request, ``GodotError/errInvalidParameter`` if given string is not a valid URL format, or ``GodotError/errCantConnect`` if not using thread and the ``HTTPClient`` cannot connect to host.
     /// 
-    /// > Note: When `method` is ``HTTPClient/Method/get``, the payload sent via `requestData` might be ignored by the server or even cause the server to reject the request (check [url=https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1]RFC 7231 section 4.3.1[/url] for more details). As a workaround, you can send data as a query string in the URL (see ``String/uriEncode()`` for an example).
+    /// > Note: When `method` is ``HTTPClient/Method/get``, the payload sent via `requestData` might be ignored by the server or even cause the server to reject the request (check [url=https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1]RFC 7231 section 4.3.1</a> for more details). As a workaround, you can send data as a query string in the URL (see ``String/uriEncode()`` for an example).
     /// 
     /// > Note: It's recommended to use transport encryption (TLS) and to avoid sending sensitive information (such as login credentials) in HTTP GET URL parameters. Consider using HTTP POST requests or HTTP headers for such information instead.
     /// 

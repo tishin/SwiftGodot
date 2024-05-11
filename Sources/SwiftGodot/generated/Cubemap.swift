@@ -13,7 +13,7 @@
 /// 
 /// To create such a texture file yourself, reimport your image files using the Godot Editor import presets.
 /// 
-/// > Note: Godot doesn't support using cubemaps in a ``PanoramaSkyMaterial``. You can use [url=https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html]this tool[/url] to convert a cubemap to an equirectangular sky map.
+/// > Note: Godot doesn't support using cubemaps in a ``PanoramaSkyMaterial``. You can use [url=https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html]this tool</a> to convert a cubemap to an equirectangular sky map.
 /// 
 open class Cubemap: ImageTextureLayered {
     override open class var godotClassName: StringName { "Cubemap" }

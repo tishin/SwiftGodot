@@ -23,7 +23,7 @@
 /// 
 /// **2D:** In 2D, all visible objects are some form of canvas item. In order to be visible, a canvas item needs to be the child of a canvas attached to a viewport, or it needs to be the child of another canvas item that is eventually attached to the canvas. 2D-specific RenderingServer methods generally start with `canvas_*`.
 /// 
-/// **Headless mode:** Starting the engine with the `--headless` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url] disables all rendering and window management functions. Most functions from ``RenderingServer`` will return dummy values in this case.
+/// **Headless mode:** Starting the engine with the `--headless` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a> disables all rendering and window management functions. Most functions from ``RenderingServer`` will return dummy values in this case.
 /// 
 /// 
 /// 
@@ -15555,7 +15555,7 @@ open class RenderingServer: Object {
         
     }()
     
-    /// If `enabled` is `true`, enables multichannel signed distance field rendering mode for the canvas item specified by the `item` RID. This is meant to be used for font rendering, or with specially generated images using [url=https://github.com/Chlumsky/msdfgen]msdfgen[/url].
+    /// If `enabled` is `true`, enables multichannel signed distance field rendering mode for the canvas item specified by the `item` RID. This is meant to be used for font rendering, or with specially generated images using <a href="https://github.com/Chlumsky/msdfgen">msdfgen</a>.
     public static func canvasItemSetDistanceFieldMode (item: RID, enabled: Bool) {
         #if true
         

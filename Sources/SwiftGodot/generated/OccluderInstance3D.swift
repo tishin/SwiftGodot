@@ -11,7 +11,7 @@
 /// 
 /// The occlusion culling system is mostly static. ``OccluderInstance3D``s can be moved or hidden at run-time, but doing so will trigger a background recomputation that can take several frames. It is recommended to only move ``OccluderInstance3D``s sporadically (e.g. for procedural generation purposes), rather than doing so every frame.
 /// 
-/// The occlusion culling system works by rendering the occluders on the CPU in parallel using [url=https://www.embree.org/]Embree[/url], drawing the result to a low-resolution buffer then using this to cull 3D nodes individually. In the 3D editor, you can preview the occlusion culling buffer by choosing **Perspective > Debug Advanced... > Occlusion Culling Buffer** in the top-left corner of the 3D viewport. The occlusion culling buffer quality can be adjusted in the Project Settings.
+/// The occlusion culling system works by rendering the occluders on the CPU in parallel using <a href="https://www.embree.org/">Embree</a>, drawing the result to a low-resolution buffer then using this to cull 3D nodes individually. In the 3D editor, you can preview the occlusion culling buffer by choosing **Perspective > Debug Advanced... > Occlusion Culling Buffer** in the top-left corner of the 3D viewport. The occlusion culling buffer quality can be adjusted in the Project Settings.
 /// 
 /// **Baking:** Select an ``OccluderInstance3D`` node, then use the **Bake Occluders** button at the top of the 3D editor. Only opaque materials will be taken into account; transparent materials (alpha-blended or alpha-tested) will be ignored by the occluder generation.
 /// 
@@ -62,7 +62,7 @@ open class OccluderInstance3D: Node3D {
     /// 
     /// Setting this to `0.0` disables simplification entirely, but vertices in the exact same position will still be merged. The mesh will also be re-indexed to reduce both the number of vertices and indices.
     /// 
-    /// > Note: This uses the [url=https://meshoptimizer.org/]meshoptimizer[/url] library under the hood, similar to LOD generation.
+    /// > Note: This uses the <a href="https://meshoptimizer.org/">meshoptimizer</a> library under the hood, similar to LOD generation.
     /// 
     final public var bakeSimplificationDistance: Double {
         get {

@@ -7,7 +7,7 @@
 
 /// Provides methods for generating pseudo-random numbers.
 /// 
-/// RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses [url=https://www.pcg-random.org/]PCG32[/url].
+/// RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses [url=https://www.pcg-random.org/]PCG32</a>.
 /// 
 /// > Note: The underlying algorithm is an implementation detail and should not be depended upon.
 /// 
@@ -202,7 +202,7 @@ open class RandomNumberGenerator: RefCounted {
         
     }()
     
-    /// Returns a [url=https://en.wikipedia.org/wiki/Normal_distribution]normally-distributed[/url] pseudo-random number, using Box-Muller transform with the specified `mean` and a standard `deviation`. This is also called Gaussian distribution.
+    /// Returns a <a href="https://en.wikipedia.org/wiki/Normal_distribution">normally-distributed</a> pseudo-random number, using Box-Muller transform with the specified `mean` and a standard `deviation`. This is also called Gaussian distribution.
     public final func randfn (mean: Double = 0.0, deviation: Double = 1.0)-> Double {
         var _result: Double = 0.0
         #if true

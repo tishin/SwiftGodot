@@ -23,9 +23,9 @@
 /// 
 /// **Example of splitting a string using a RegEx:**
 /// 
-/// > Note: Godot's regex implementation is based on the [url=https://www.pcre.org/]PCRE2[/url] library. You can view the full pattern reference [url=https://www.pcre.org/current/doc/html/pcre2pattern.html]here[/url].
+/// > Note: Godot's regex implementation is based on the <a href="https://www.pcre.org/">PCRE2</a> library. You can view the full pattern reference <a href="https://www.pcre.org/current/doc/html/pcre2pattern.html">here</a>.
 /// 
-/// **Tip:** You can use [url=https://regexr.com/]Regexr[/url] to test regular expressions online.
+/// **Tip:** You can use <a href="https://regexr.com/">Regexr</a> to test regular expressions online.
 /// 
 open class RegEx: RefCounted {
     override open class var godotClassName: StringName { "RegEx" }

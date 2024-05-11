@@ -823,7 +823,7 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }()
     
-    /// Set the value of a shader uniform for this instance only ([url=$DOCS_URL/tutorials/shaders/shader_reference/shading_language.html#per-instance-uniforms]per-instance uniform[/url]). See also ``ShaderMaterial/setShaderParameter(param:value:)`` to assign a uniform on all instances using the same ``ShaderMaterial``.
+    /// Set the value of a shader uniform for this instance only ([url=$DOCS_URL/tutorials/shaders/shader_reference/shading_language.html#per-instance-uniforms]per-instance uniform</a>). See also ``ShaderMaterial/setShaderParameter(param:value:)`` to assign a uniform on all instances using the same ``ShaderMaterial``.
     /// 
     /// > Note: For a shader uniform to be assignable on a per-instance basis, it _must_ be defined with `instance uniform ...` rather than `uniform ...` in the shader code.
     /// 

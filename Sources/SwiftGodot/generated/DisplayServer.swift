@@ -9,7 +9,7 @@
 /// 
 /// ``DisplayServer`` handles everything related to window management. It is separated from ``OS`` as a single operating system may support multiple display servers.
 /// 
-/// **Headless mode:** Starting the engine with the `--headless` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url] disables all rendering and window management functions. Most functions from ``DisplayServer`` will return dummy values in this case.
+/// **Headless mode:** Starting the engine with the `--headless` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a> disables all rendering and window management functions. Most functions from ``DisplayServer`` will return dummy values in this case.
 /// 
 open class DisplayServer: Object {
     /// The shared instance of this class
@@ -42,7 +42,7 @@ open class DisplayServer: Object {
         case customCursorShape = 8 // FEATURE_CUSTOM_CURSOR_SHAPE
         /// Display server supports spawning dialogs using the operating system's native look-and-feel. **macOS**
         case nativeDialog = 9 // FEATURE_NATIVE_DIALOG
-        /// Display server supports [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url], which is commonly used for inputting Chinese/Japanese/Korean text. This is handled by the operating system, rather than by Godot. **Windows, macOS, Linux (X11)**
+        /// Display server supports <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a>, which is commonly used for inputting Chinese/Japanese/Korean text. This is handled by the operating system, rather than by Godot. **Windows, macOS, Linux (X11)**
         case ime = 10 // FEATURE_IME
         /// Display server supports windows can use per-pixel transparency to make windows behind them partially or fully visible. **Windows, macOS, Linux (X11)**
         case windowTransparency = 11 // FEATURE_WINDOW_TRANSPARENCY
@@ -294,7 +294,7 @@ open class DisplayServer: Object {
         /// 
         /// **On macOS:** A new desktop is used to display the running project.
         /// 
-        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]multiple resolutions[/url] when enabling full screen mode.
+        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">multiple resolutions</a> when enabling full screen mode.
         /// 
         case fullscreen = 3 // WINDOW_MODE_FULLSCREEN
         /// A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
@@ -307,7 +307,7 @@ open class DisplayServer: Object {
         /// 
         /// **On Linux (X11):** Exclusive full screen mode bypasses compositor.
         /// 
-        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]multiple resolutions[/url] when enabling full screen mode.
+        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">multiple resolutions</a> when enabling full screen mode.
         /// 
         case exclusiveFullscreen = 4 // WINDOW_MODE_EXCLUSIVE_FULLSCREEN
         /// A textual representation of this instance, suitable for debugging
@@ -578,7 +578,7 @@ open class DisplayServer: Object {
     
     /// Returns the name of the ``DisplayServer`` currently in use. Most operating systems only have a single ``DisplayServer``, but Linux has access to more than one ``DisplayServer`` (although only X11 is currently implemented in Godot).
     /// 
-    /// The names of built-in display servers are `Windows`, `macOS`, `X11` (Linux), `Android`, `iOS`, `web` (HTML5) and `headless` (when started with the `--headless` [url=$DOCS_URL/tutorials/editor/command_line_tutorial.html]command line argument[/url]).
+    /// The names of built-in display servers are `Windows`, `macOS`, `X11` (Linux), `Android`, `iOS`, `web` (HTML5) and `headless` (when started with the `--headless` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>).
     /// 
     public static func getName ()-> String {
         let _result = GString ()
@@ -3488,7 +3488,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Sets the user's [url=https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer]primary[/url] clipboard content to the given string. This is the clipboard that is set when the user selects text in any application, rather than when pressing [kbd]Ctrl + C[/kbd]. The clipboard data can then be pasted by clicking the middle mouse button in any application that supports the primary clipboard mechanism.
+    /// Sets the user's [url=https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer]primary</a> clipboard content to the given string. This is the clipboard that is set when the user selects text in any application, rather than when pressing [kbd]Ctrl + C[/kbd]. The clipboard data can then be pasted by clicking the middle mouse button in any application that supports the primary clipboard mechanism.
     /// 
     /// > Note: This method is only implemented on Linux (X11).
     /// 
@@ -3523,7 +3523,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns the user's [url=https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer]primary[/url] clipboard as a string if possible. This is the clipboard that is set when the user selects text in any application, rather than when pressing [kbd]Ctrl + C[/kbd]. The clipboard data can then be pasted by clicking the middle mouse button in any application that supports the primary clipboard mechanism.
+    /// Returns the user's [url=https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer]primary</a> clipboard as a string if possible. This is the clipboard that is set when the user selects text in any application, rather than when pressing [kbd]Ctrl + C[/kbd]. The clipboard data can then be pasted by clicking the middle mouse button in any application that supports the primary clipboard mechanism.
     /// 
     /// > Note: This method is only implemented on Linux (X11).
     /// 
@@ -5568,7 +5568,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Sets whether [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] should be enabled for the window specified by `windowId`. See also ``windowSetImePosition(_:windowId:)``.
+    /// Sets whether <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> should be enabled for the window specified by `windowId`. See also ``windowSetImePosition(_:windowId:)``.
     public static func windowSetImeActive (_ active: Bool, windowId: Int32 = 0) {
         #if true
         
@@ -5605,7 +5605,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Sets the position of the [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] popup for the specified `windowId`. Only effective if ``windowSetImeActive(_:windowId:)`` was set to `true` for the specified `windowId`.
+    /// Sets the position of the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> popup for the specified `windowId`. Only effective if ``windowSetImeActive(_:windowId:)`` was set to `true` for the specified `windowId`.
     public static func windowSetImePosition (_ position: Vector2i, windowId: Int32 = 0) {
         #if true
         
@@ -5796,7 +5796,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns the text selection in the [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] composition string, with the ``Vector2i``'s `x` component being the caret position and `y` being the length of the selection.
+    /// Returns the text selection in the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> composition string, with the ``Vector2i``'s `x` component being the caret position and `y` being the length of the selection.
     /// 
     /// > Note: This method is implemented only on macOS.
     /// 
@@ -5817,7 +5817,7 @@ open class DisplayServer: Object {
         
     }()
     
-    /// Returns the composition string contained within the [url=https://en.wikipedia.org/wiki/Input_method]Input Method Editor[/url] window.
+    /// Returns the composition string contained within the <a href="https://en.wikipedia.org/wiki/Input_method">Input Method Editor</a> window.
     /// 
     /// > Note: This method is implemented only on macOS.
     /// 

@@ -981,7 +981,7 @@ open class Environment: Resource {
     
     /// If set above `0.0` (exclusive), blends between the fog's color and the color of the background ``Sky``. This has a small performance cost when set above `0.0`. Must have ``backgroundMode`` set to .bgSky.
     /// 
-    /// This is useful to simulate [url=https://en.wikipedia.org/wiki/Aerial_perspective]aerial perspective[/url] in large scenes with low density fog. However, it is not very useful for high-density fog, as the sky will shine through. When set to `1.0`, the fog color comes completely from the ``Sky``. If set to `0.0`, aerial perspective is disabled.
+    /// This is useful to simulate <a href="https://en.wikipedia.org/wiki/Aerial_perspective">aerial perspective</a> in large scenes with low density fog. However, it is not very useful for high-density fog, as the sky will shine through. When set to `1.0`, the fog color comes completely from the ``Sky``. If set to `0.0`, aerial perspective is disabled.
     /// 
     final public var fogAerialPerspective: Double {
         get {

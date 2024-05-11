@@ -45,7 +45,7 @@ open class Window: Viewport {
         /// 
         /// **On macOS:** A new desktop is used to display the running project.
         /// 
-        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]multiple resolutions[/url] when enabling full screen mode.
+        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">multiple resolutions</a> when enabling full screen mode.
         /// 
         case fullscreen = 3 // MODE_FULLSCREEN
         /// A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
@@ -58,7 +58,7 @@ open class Window: Viewport {
         /// 
         /// **On Linux (X11):** Exclusive full screen mode bypasses compositor.
         /// 
-        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports [url=$DOCS_URL/tutorials/rendering/multiple_resolutions.html]multiple resolutions[/url] when enabling full screen mode.
+        /// > Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports <a href="https://docs.godotengine.org/en//tutorials/rendering/multiple_resolutions.html">multiple resolutions</a> when enabling full screen mode.
         /// 
         case exclusiveFullscreen = 4 // MODE_EXCLUSIVE_FULLSCREEN
         /// A textual representation of this instance, suitable for debugging

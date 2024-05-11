@@ -1410,7 +1410,7 @@ open class Object: Wrapped, GodotObject {
     /// 
     /// If ``canTranslateMessages()`` is `false`, or no translation is available, this method returns the `message` without changes. See ``setMessageTranslation(enable:)``.
     /// 
-    /// For detailed examples, see [url=$DOCS_URL/tutorials/i18n/internationalizing_games.html]Internationalizing games[/url].
+    /// For detailed examples, see <a href="https://docs.godotengine.org/en//tutorials/i18n/internationalizing_games.html">Internationalizing games</a>.
     /// 
     public final func tr (message: StringName, context: StringName = StringName (""))-> String {
         let _result = GString ()
@@ -1452,7 +1452,7 @@ open class Object: Wrapped, GodotObject {
     /// 
     /// The `n` is the number, or amount, of the message's subject. It is used by the translation system to fetch the correct plural form for the current language.
     /// 
-    /// For detailed examples, see [url=$DOCS_URL/tutorials/i18n/localization_using_gettext.html]Localization using gettext[/url].
+    /// For detailed examples, see <a href="https://docs.godotengine.org/en//tutorials/i18n/localization_using_gettext.html">Localization using gettext</a>.
     /// 
     /// > Note: Negative and float numbers may not properly apply to some countable subjects. It's recommended handling these cases with ``tr(message:context:)``.
     /// 

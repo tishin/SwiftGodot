@@ -18,7 +18,7 @@ open class PhysicalSkyMaterial: Material {
     
     /* Properties */
     
-    /// Controls the strength of the [url=https://en.wikipedia.org/wiki/Rayleigh_scattering]Rayleigh scattering[/url]. Rayleigh scattering results from light colliding with small particles. It is responsible for the blue color of the sky.
+    /// Controls the strength of the <a href="https://en.wikipedia.org/wiki/Rayleigh_scattering">Rayleigh scattering</a>. Rayleigh scattering results from light colliding with small particles. It is responsible for the blue color of the sky.
     final public var rayleighCoefficient: Double {
         get {
             return get_rayleigh_coefficient ()
@@ -30,7 +30,7 @@ open class PhysicalSkyMaterial: Material {
         
     }
     
-    /// Controls the ``Color`` of the [url=https://en.wikipedia.org/wiki/Rayleigh_scattering]Rayleigh scattering[/url]. While not physically accurate, this allows for the creation of alien-looking planets. For example, setting this to a red ``Color`` results in a Mars-looking atmosphere with a corresponding blue sunset.
+    /// Controls the ``Color`` of the <a href="https://en.wikipedia.org/wiki/Rayleigh_scattering">Rayleigh scattering</a>. While not physically accurate, this allows for the creation of alien-looking planets. For example, setting this to a red ``Color`` results in a Mars-looking atmosphere with a corresponding blue sunset.
     final public var rayleighColor: Color {
         get {
             return get_rayleigh_color ()
@@ -42,7 +42,7 @@ open class PhysicalSkyMaterial: Material {
         
     }
     
-    /// Controls the strength of [url=https://en.wikipedia.org/wiki/Mie_scattering]Mie scattering[/url] for the sky. Mie scattering results from light colliding with larger particles (like water). On earth, Mie scattering results in a whitish color around the sun and horizon.
+    /// Controls the strength of <a href="https://en.wikipedia.org/wiki/Mie_scattering">Mie scattering</a> for the sky. Mie scattering results from light colliding with larger particles (like water). On earth, Mie scattering results in a whitish color around the sun and horizon.
     final public var mieCoefficient: Double {
         get {
             return get_mie_coefficient ()
@@ -54,7 +54,7 @@ open class PhysicalSkyMaterial: Material {
         
     }
     
-    /// Controls the direction of the [url=https://en.wikipedia.org/wiki/Mie_scattering]Mie scattering[/url]. A value of `1` means that when light hits a particle it's passing through straight forward. A value of `-1` means that all light is scatter backwards.
+    /// Controls the direction of the <a href="https://en.wikipedia.org/wiki/Mie_scattering">Mie scattering</a>. A value of `1` means that when light hits a particle it's passing through straight forward. A value of `-1` means that all light is scatter backwards.
     final public var mieEccentricity: Double {
         get {
             return get_mie_eccentricity ()
@@ -66,7 +66,7 @@ open class PhysicalSkyMaterial: Material {
         
     }
     
-    /// Controls the ``Color`` of the [url=https://en.wikipedia.org/wiki/Mie_scattering]Mie scattering[/url] effect. While not physically accurate, this allows for the creation of alien-looking planets.
+    /// Controls the ``Color`` of the <a href="https://en.wikipedia.org/wiki/Mie_scattering">Mie scattering</a> effect. While not physically accurate, this allows for the creation of alien-looking planets.
     final public var mieColor: Color {
         get {
             return get_mie_color ()

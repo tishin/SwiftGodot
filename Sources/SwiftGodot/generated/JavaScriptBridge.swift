@@ -9,7 +9,7 @@
 /// 
 /// The JavaScriptBridge singleton is implemented only in the Web export. It's used to access the browser's JavaScript context. This allows interaction with embedding pages or calling third-party JavaScript APIs.
 /// 
-/// > Note: This singleton can be disabled at build-time to improve security. By default, the JavaScriptBridge singleton is enabled. Official export templates also have the JavaScriptBridge singleton enabled. See [url=$DOCS_URL/contributing/development/compiling/compiling_for_web.html]Compiling for the Web[/url] in the documentation for more information.
+/// > Note: This singleton can be disabled at build-time to improve security. By default, the JavaScriptBridge singleton is enabled. Official export templates also have the JavaScriptBridge singleton enabled. See <a href="https://docs.godotengine.org/en//contributing/development/compiling/compiling_for_web.html">Compiling for the Web</a> in the documentation for more information.
 /// 
 /// 
 /// 
@@ -189,7 +189,7 @@ open class JavaScriptBridge: Object {
     
     /// Prompts the user to download a file containing the specified `buffer`. The file will have the given `name` and `mime` type.
     /// 
-    /// > Note: The browser may override the [url=https://en.wikipedia.org/wiki/Media_type]MIME type[/url] provided based on the file `name`'s extension.
+    /// > Note: The browser may override the <a href="https://en.wikipedia.org/wiki/Media_type">MIME type</a> provided based on the file `name`'s extension.
     /// 
     /// > Note: Browsers might block the download if ``downloadBuffer(_:name:mime:)`` is not being called from a user interaction (e.g. button click).
     /// 

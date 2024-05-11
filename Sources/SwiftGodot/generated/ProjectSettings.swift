@@ -11,9 +11,9 @@
 /// 
 /// When naming a Project Settings property, use the full path to the setting including the category. For example, `"application/config/name"` for the project name. Category and property names can be viewed in the Project Settings dialog.
 /// 
-/// **Feature tags:** Project settings can be overridden for specific platforms and configurations (debug, release, ...) using [url=$DOCS_URL/tutorials/export/feature_tags.html]feature tags[/url].
+/// **Feature tags:** Project settings can be overridden for specific platforms and configurations (debug, release, ...) using <a href="https://docs.godotengine.org/en//tutorials/export/feature_tags.html">feature tags</a>.
 /// 
-/// **Overriding:** Any project setting can be overridden by creating a file named `override.cfg` in the project's root directory. This can also be used in exported projects by placing this file in the same directory as the project binary. Overriding will still take the base project settings' [url=$DOCS_URL/tutorials/export/feature_tags.html]feature tags[/url] in account. Therefore, make sure to _also_ override the setting with the desired feature tags if you want them to override base project settings on all platforms and configurations.
+/// **Overriding:** Any project setting can be overridden by creating a file named `override.cfg` in the project's root directory. This can also be used in exported projects by placing this file in the same directory as the project binary. Overriding will still take the base project settings' <a href="https://docs.godotengine.org/en//tutorials/export/feature_tags.html">feature tags</a> in account. Therefore, make sure to _also_ override the setting with the desired feature tags if you want them to override base project settings on all platforms and configurations.
 /// 
 /// 
 /// 
@@ -553,7 +553,7 @@ open class ProjectSettings: Object {
         
     }()
     
-    /// Returns the absolute, native OS path corresponding to the localized `path` (starting with `res://` or `user://`). The returned path will vary depending on the operating system and user preferences. See [url=$DOCS_URL/tutorials/io/data_paths.html]File paths in Godot projects[/url] to see what those paths convert to. See also ``localizePath(_:)``.
+    /// Returns the absolute, native OS path corresponding to the localized `path` (starting with `res://` or `user://`). The returned path will vary depending on the operating system and user preferences. See <a href="https://docs.godotengine.org/en//tutorials/io/data_paths.html">File paths in Godot projects</a> to see what those paths convert to. See also ``localizePath(_:)``.
     /// 
     /// > Note: ``globalizePath(_:)`` with `res://` will not work in an exported project. Instead, prepend the executable's base directory to the path when running from an exported project:
     /// 

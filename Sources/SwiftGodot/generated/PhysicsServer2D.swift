@@ -27,7 +27,7 @@ open class PhysicsServer2D: Object {
     /// The shared instance of this class
     public static var shared: PhysicsServer2D = {
         return withUnsafePointer (to: &PhysicsServer2D.godotClassName.content) { ptr in
-            PhysicsServer2D (nativeHandle: gi.global_get_singleton (ptr)!)
+            lookupObject (nativeHandle: gi.global_get_singleton (ptr)!)!
         }
         
     }()

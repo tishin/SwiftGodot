@@ -87,7 +87,7 @@ open class CSGShape3D: GeometryInstance3D {
     /// 
     /// Collidable objects can exist in any of 32 different layers. These layers work like a tagging system, and are not visual. A collidable can use these layers to select with which objects it can collide, using the collision_mask property.
     /// 
-    /// A contact is detected if object A is in any of the layers that object B scans, or object B is in any layer scanned by object A. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks[/url] in the documentation for more information.
+    /// A contact is detected if object A is in any of the layers that object B scans, or object B is in any layer scanned by object A. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
     /// 
     final public var collisionLayer: UInt32 {
         get {
@@ -100,7 +100,7 @@ open class CSGShape3D: GeometryInstance3D {
         
     }
     
-    /// The physics layers this CSG shape scans for collisions. Only effective if ``useCollision`` is `true`. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks[/url] in the documentation for more information.
+    /// The physics layers this CSG shape scans for collisions. Only effective if ``useCollision`` is `true`. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
     final public var collisionMask: UInt32 {
         get {
             return get_collision_mask ()

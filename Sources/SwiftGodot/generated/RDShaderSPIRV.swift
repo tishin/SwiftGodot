@@ -7,7 +7,7 @@
 
 /// SPIR-V intermediate representation as part of a ``RDShaderFile`` (used by ``RenderingDevice``).
 /// 
-/// ``RDShaderSPIRV`` represents a ``RDShaderFile``'s [url=https://www.khronos.org/spir/]SPIR-V[/url] code for various shader stages, as well as possible compilation error messages. SPIR-V is a low-level intermediate shader representation. This intermediate representation is not used directly by GPUs for rendering, but it can be compiled into binary shaders that GPUs can understand. Unlike compiled shaders, SPIR-V is portable across GPU models and driver versions.
+/// ``RDShaderSPIRV`` represents a ``RDShaderFile``'s <a href="https://www.khronos.org/spir/">SPIR-V</a> code for various shader stages, as well as possible compilation error messages. SPIR-V is a low-level intermediate shader representation. This intermediate representation is not used directly by GPUs for rendering, but it can be compiled into binary shaders that GPUs can understand. Unlike compiled shaders, SPIR-V is portable across GPU models and driver versions.
 /// 
 /// This object is used by ``RenderingDevice``.
 /// 

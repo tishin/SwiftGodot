@@ -500,7 +500,7 @@ open class Font: Resource {
         
     }()
     
-    /// Returns a set of OpenType feature tags. More info: [url=https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags]OpenType feature tags[/url].
+    /// Returns a set of OpenType feature tags. More info: [url=https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags]OpenType feature tags</a>.
     public final func getOpentypeFeatures ()-> GDictionary {
         let _result: GDictionary = GDictionary ()
         gi.object_method_bind_ptrcall (Font.method_get_opentype_features, UnsafeMutableRawPointer (mutating: handle), nil, &_result.content)
@@ -1257,7 +1257,7 @@ open class Font: Resource {
         
     }()
     
-    /// Returns `true`, if font supports given language ([url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639[/url] code).
+    /// Returns `true`, if font supports given language ([url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639</a> code).
     public final func isLanguageSupported (language: String)-> Bool {
         var _result: Bool = false
         #if true
@@ -1291,7 +1291,7 @@ open class Font: Resource {
         
     }()
     
-    /// Returns `true`, if font supports given script ([url=https://en.wikipedia.org/wiki/ISO_15924]ISO 15924[/url] code).
+    /// Returns `true`, if font supports given script (<a href="https://en.wikipedia.org/wiki/ISO_15924">ISO 15924</a> code).
     public final func isScriptSupported (script: String)-> Bool {
         var _result: Bool = false
         #if true
@@ -1343,7 +1343,7 @@ open class Font: Resource {
         
     }()
     
-    /// Returns list of supported [url=https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg]variation coordinates[/url], each coordinate is returned as `tag: Vector3i(min_value,max_value,default_value)`.
+    /// Returns list of supported [url=https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg]variation coordinates</a>, each coordinate is returned as `tag: Vector3i(min_value,max_value,default_value)`.
     /// 
     /// Font variations allow for continuous change of glyph characteristics along some given design axis, such as weight, width or slant.
     /// 

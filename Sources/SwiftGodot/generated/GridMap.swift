@@ -148,7 +148,7 @@ open class GridMap: Node3D {
         
     }
     
-    /// The physics layers this GridMap detects collisions in. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks[/url] in the documentation for more information.
+    /// The physics layers this GridMap detects collisions in. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
     final public var collisionMask: UInt32 {
         get {
             return get_collision_mask ()

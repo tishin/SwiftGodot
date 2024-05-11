@@ -90,7 +90,7 @@ open class FileDialog: ConfirmationDialog {
     
     /// The file system access scope. See ``FileDialog/Access`` constants.
     /// 
-    /// > Warning: Currently, in sandboxed environments such as Web builds or sandboxed macOS apps, FileDialog cannot access the host file system. See [url=https://github.com/godotengine/godot-proposals/issues/1123]godot-proposals#1123[/url].
+    /// > Warning: Currently, in sandboxed environments such as Web builds or sandboxed macOS apps, FileDialog cannot access the host file system. See [url=https://github.com/godotengine/godot-proposals/issues/1123]godot-proposals#1123</a>.
     /// 
     final public var access: FileDialog.Access {
         get {

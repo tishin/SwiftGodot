@@ -16,12 +16,12 @@
 open class AStarGrid2D: RefCounted {
     override open class var godotClassName: StringName { "AStarGrid2D" }
     public enum Heuristic: Int64, CustomDebugStringConvertible {
-        /// The [url=https://en.wikipedia.org/wiki/Euclidean_distance]Euclidean heuristic[/url] to be used for the pathfinding using the following formula:
+        /// The <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean heuristic</a> to be used for the pathfinding using the following formula:
         /// 
         /// > Note: This is also the internal heuristic used in ``AStar3D`` and ``AStar2D`` by default (with the inclusion of possible z-axis coordinate).
         /// 
         case euclidean = 0 // HEURISTIC_EUCLIDEAN
-        /// The [url=https://en.wikipedia.org/wiki/Taxicab_geometry]Manhattan heuristic[/url] to be used for the pathfinding using the following formula:
+        /// The <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan heuristic</a> to be used for the pathfinding using the following formula:
         /// 
         /// > Note: This heuristic is intended to be used with 4-side orthogonal movements, provided by setting the ``diagonalMode`` to .never.
         /// 
@@ -29,7 +29,7 @@ open class AStarGrid2D: RefCounted {
         /// The Octile heuristic to be used for the pathfinding using the following formula:
         /// 
         case octile = 2 // HEURISTIC_OCTILE
-        /// The [url=https://en.wikipedia.org/wiki/Chebyshev_distance]Chebyshev heuristic[/url] to be used for the pathfinding using the following formula:
+        /// The <a href="https://en.wikipedia.org/wiki/Chebyshev_distance">Chebyshev heuristic</a> to be used for the pathfinding using the following formula:
         /// 
         case chebyshev = 3 // HEURISTIC_CHEBYSHEV
         /// Represents the size of the ``AStarGrid2D/Heuristic`` enum.

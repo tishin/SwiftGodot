@@ -338,7 +338,7 @@ open class Geometry3D: Object {
     
     /// Returns a ``Vector3`` containing weights based on how close a 3D position (`point`) is to a triangle's different vertices (`a`, `b` and `c`). This is useful for interpolating between the data of different vertices in a triangle. One example use case is using this to smoothly rotate over a mesh instead of relying solely on face normals.
     /// 
-    /// [url=https://en.wikipedia.org/wiki/Barycentric_coordinate_system]Here is a more detailed explanation of barycentric coordinates.[/url]
+    /// <a href="https://en.wikipedia.org/wiki/Barycentric_coordinate_system">Here is a more detailed explanation of barycentric coordinates.</a>
     /// 
     public static func getTriangleBarycentricCoords (point: Vector3, a: Vector3, b: Vector3, c: Vector3)-> Vector3 {
         var _result: Vector3 = Vector3 ()

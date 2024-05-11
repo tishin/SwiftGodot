@@ -9,7 +9,7 @@
 /// 
 /// A control used for playback of ``VideoStream`` resources.
 /// 
-/// Supported video formats are [url=https://www.theora.org/]Ogg Theora[/url] (`.ogv`, ``VideoStreamTheora``) and any format exposed via a GDExtension plugin.
+/// Supported video formats are <a href="https://www.theora.org/">Ogg Theora</a> (`.ogv`, ``VideoStreamTheora``) and any format exposed via a GDExtension plugin.
 /// 
 /// > Note: Due to a bug, VideoStreamPlayer does not support localization remapping yet.
 /// 

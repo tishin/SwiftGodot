@@ -6,11 +6,11 @@
 /// 
 /// A color represented in RGBA format by a red (``r``), green (``g``), blue (``b``), and alpha (``a``) component. Each component is a 16-bit floating-point value, usually ranging from `0.0` to `1.0`. Some properties (such as ``CanvasItem/modulate``) may support values greater than `1.0`, for overbright or HDR (High Dynamic Range) colors.
 /// 
-/// Colors can be created in various ways: By the various ``Color`` constructors, by static methods such as ``fromHsv(h:s:v:alpha:)``, and by using a name from the set of standardized colors based on [url=https://en.wikipedia.org/wiki/X11_color_names]X11 color names[/url] with the addition of ``TRANSPARENT``. GDScript also provides ``@GDScript.Color8``, which uses integers from `0` to `255` and doesn't support overbright colors.
+/// Colors can be created in various ways: By the various ``Color`` constructors, by static methods such as ``fromHsv(h:s:v:alpha:)``, and by using a name from the set of standardized colors based on <a href="https://en.wikipedia.org/wiki/X11_color_names">X11 color names</a> with the addition of ``TRANSPARENT``. GDScript also provides ``@GDScript.Color8``, which uses integers from `0` to `255` and doesn't support overbright colors.
 /// 
 /// > Note: In a boolean context, a Color will evaluate to `false` if it is equal to `Color(0, 0, 0, 1)` (opaque black). Otherwise, a Color will always evaluate to `true`.
 /// 
-/// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png]Color constants cheatsheet[/url]
+/// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png]Color constants cheatsheet</a>
 /// 
 public struct Color: Equatable, Hashable {
     /// The color's red component, typically on the range of 0 to 1.
@@ -421,7 +421,7 @@ public struct Color: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_COLOR, &name.content, 3334027602)!
     }()
     
-    /// Returns the color converted to the [url=https://en.wikipedia.org/wiki/SRGB]sRGB[/url] color space. This method assumes the original color is in the linear color space. See also ``srgbToLinear()`` which performs the opposite operation.
+    /// Returns the color converted to the <a href="https://en.wikipedia.org/wiki/SRGB">sRGB</a> color space. This method assumes the original color is in the linear color space. See also ``srgbToLinear()`` which performs the opposite operation.
     public func linearToSrgb ()-> Color {
         var result: Color = Color()
         withUnsafePointer (to: self) { ptr in 
@@ -559,7 +559,7 @@ public struct Color: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_COLOR, &name.content, 1573799446)!
     }()
     
-    /// Constructs a color from an [url=https://en.wikipedia.org/wiki/HSL_and_HSV]HSV profile[/url]. The hue (`h`), saturation (`s`), and value (`v`) are typically between 0.0 and 1.0.
+    /// Constructs a color from an <a href="https://en.wikipedia.org/wiki/HSL_and_HSV">HSV profile</a>. The hue (`h`), saturation (`s`), and value (`v`) are typically between 0.0 and 1.0.
     /// 
     public static func fromHsv (h: Double, s: Double, v: Double, alpha: Double = 1.0)-> Color {
         var result: Color = Color()
@@ -590,7 +590,7 @@ public struct Color: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_COLOR, &name.content, 1573799446)!
     }()
     
-    /// Constructs a color from an [url=https://bottosson.github.io/posts/colorpicker/]OK HSL profile[/url]. The hue (`h`), saturation (`s`), and lightness (`l`) are typically between 0.0 and 1.0.
+    /// Constructs a color from an <a href="https://bottosson.github.io/posts/colorpicker/">OK HSL profile</a>. The hue (`h`), saturation (`s`), and lightness (`l`) are typically between 0.0 and 1.0.
     /// 
     public static func fromOkHsl (h: Double, s: Double, l: Double, alpha: Double = 1.0)-> Color {
         var result: Color = Color()

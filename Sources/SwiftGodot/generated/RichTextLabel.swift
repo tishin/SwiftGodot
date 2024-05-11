@@ -236,7 +236,7 @@ open class RichTextLabel: Control {
         
     }
     
-    /// If `true`, the label underlines meta tags such as [code skip-lint][url]{text}[/url]`.
+    /// If `true`, the label underlines meta tags such as [code skip-lint][url]{text}</a>`.
     final public var metaUnderlined: Bool {
         get {
             return is_meta_underlined ()
@@ -1105,7 +1105,7 @@ open class RichTextLabel: Control {
         
     }()
     
-    /// Adds a meta tag to the tag stack. Similar to the BBCode [code skip-lint][url=something]{text}[/url]`, but supports non-``String`` metadata types.
+    /// Adds a meta tag to the tag stack. Similar to the BBCode [code skip-lint]<a href="something">{text}</a>`, but supports non-``String`` metadata types.
     public final func pushMeta (data: Variant) {
         #if true
         
@@ -3634,7 +3634,7 @@ open class RichTextLabel: Control {
         
     }
     
-    /// Triggered when the user clicks on content between meta tags. If the meta is defined in text, e.g. [code skip-lint][url={"data"="hi"}]hi[/url]`, then the parameter for this signal will be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:)`` method must be used to manually insert the data into the tag stack.
+    /// Triggered when the user clicks on content between meta tags. If the meta is defined in text, e.g. [code skip-lint][url={"data"="hi"}]hi</a>`, then the parameter for this signal will be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:)`` method must be used to manually insert the data into the tag stack.
     ///
     /// To connect to this signal, reference this property and call the
     /// 

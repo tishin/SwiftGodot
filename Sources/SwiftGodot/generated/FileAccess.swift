@@ -11,7 +11,7 @@
 /// 
 /// Here's a sample on how to write and read from a file:
 /// 
-/// In the example above, the file will be saved in the user data folder as specified in the [url=$DOCS_URL/tutorials/io/data_paths.html]Data paths[/url] documentation.
+/// In the example above, the file will be saved in the user data folder as specified in the <a href="https://docs.godotengine.org/en//tutorials/io/data_paths.html">Data paths</a> documentation.
 /// 
 /// ``FileAccess`` will close when it's freed, which happens when it goes out of scope or when it gets assigned with `null`. ``close()`` can be used to close it before then explicitly. In C# the reference must be disposed manually, which can be done with the `using` statement or by calling the `Dispose` method directly.
 /// 
@@ -44,15 +44,15 @@ open class FileAccess: RefCounted {
     }
     
     public enum CompressionMode: Int64, CustomDebugStringConvertible {
-        /// Uses the [url=https://fastlz.org/]FastLZ[/url] compression method.
+        /// Uses the <a href="https://fastlz.org/">FastLZ</a> compression method.
         case fastlz = 0 // COMPRESSION_FASTLZ
-        /// Uses the [url=https://en.wikipedia.org/wiki/DEFLATE]DEFLATE[/url] compression method.
+        /// Uses the <a href="https://en.wikipedia.org/wiki/DEFLATE">DEFLATE</a> compression method.
         case deflate = 1 // COMPRESSION_DEFLATE
-        /// Uses the [url=https://facebook.github.io/zstd/]Zstandard[/url] compression method.
+        /// Uses the <a href="https://facebook.github.io/zstd/">Zstandard</a> compression method.
         case zstd = 2 // COMPRESSION_ZSTD
-        /// Uses the [url=https://www.gzip.org/]gzip[/url] compression method.
+        /// Uses the <a href="https://www.gzip.org/">gzip</a> compression method.
         case gzip = 3 // COMPRESSION_GZIP
-        /// Uses the [url=https://github.com/google/brotli]brotli[/url] compression method (only decompression is supported).
+        /// Uses the <a href="https://github.com/google/brotli">brotli</a> compression method (only decompression is supported).
         case brotli = 4 // COMPRESSION_BROTLI
         /// A textual representation of this instance, suitable for debugging
         public var debugDescription: String {
@@ -122,7 +122,7 @@ open class FileAccess: RefCounted {
     
     /* Properties */
     
-    /// If `true`, the file is read with big-endian [url=https://en.wikipedia.org/wiki/Endianness]endianness[/url]. If `false`, the file is read with little-endian endianness. If in doubt, leave this to `false` as most files are written with little-endian endianness.
+    /// If `true`, the file is read with big-endian <a href="https://en.wikipedia.org/wiki/Endianness">endianness</a>. If `false`, the file is read with little-endian endianness. If in doubt, leave this to `false` as most files are written with little-endian endianness.
     /// 
     /// > Note: ``bigEndian`` is only about the file format, not the CPU type. The CPU endianness doesn't affect the default endianness for files written.
     /// 
@@ -289,7 +289,7 @@ open class FileAccess: RefCounted {
     
     /// Creates a new ``FileAccess`` object and opens a compressed file for reading or writing.
     /// 
-    /// > Note: ``openCompressed(path:modeFlags:compressionMode:)`` can only read files that were saved by Godot, not third-party compression formats. See [url=https://github.com/godotengine/godot/issues/28999]GitHub issue #28999[/url] for a workaround.
+    /// > Note: ``openCompressed(path:modeFlags:compressionMode:)`` can only read files that were saved by Godot, not third-party compression formats. See <a href="https://github.com/godotengine/godot/issues/28999">GitHub issue #28999</a> for a workaround.
     /// 
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 

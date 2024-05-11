@@ -841,7 +841,7 @@ open class OS: Object {
     /// 
     /// - `OS.shell_open("https://godotengine.org")` opens the default web browser on the official Godot website.
     /// 
-    /// - `OS.shell_open("mailto:example@example.com")` opens the default email client with the "To" field set to `example@example.com`. See [url=https://datatracker.ietf.org/doc/html/rfc2368]RFC 2368 - The `mailto` URL scheme[/url] for a list of fields that can be added.
+    /// - `OS.shell_open("mailto:example@example.com")` opens the default email client with the "To" field set to `example@example.com`. See <a href="https://datatracker.ietf.org/doc/html/rfc2368">RFC 2368 - The `mailto` URL scheme</a> for a list of fields that can be added.
     /// 
     /// Use ``ProjectSettings/globalizePath(_:)`` to convert a `res://` or `user://` path into a system path for use with this method.
     /// 
@@ -1455,11 +1455,11 @@ open class OS: Object {
     
     /// Returns the host OS locale as a string of the form `language_Script_COUNTRY_VARIANT@extra`. If you want only the language code and not the fully specified locale from the OS, you can use ``getLocaleLanguage()``.
     /// 
-    /// `language` - 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code[/url], in lower case.
+    /// `language` - 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code</a>, in lower case.
     /// 
-    /// [code skip-lint]Script` - optional, 4-letter [url=https://en.wikipedia.org/wiki/ISO_15924]script code[/url], in title case.
+    /// [code skip-lint]Script` - optional, 4-letter <a href="https://en.wikipedia.org/wiki/ISO_15924">script code</a>, in title case.
     /// 
-    /// `COUNTRY` - optional, 2 or 3-letter [url=https://en.wikipedia.org/wiki/ISO_3166-1]country code[/url], in upper case.
+    /// `COUNTRY` - optional, 2 or 3-letter [url=https://en.wikipedia.org/wiki/ISO_3166-1]country code</a>, in upper case.
     /// 
     /// `VARIANT` - optional, language variant, region and sort order. Variant can have any number of underscored keywords.
     /// 
@@ -1482,7 +1482,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns the host OS locale's 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code[/url] as a string which should be consistent on all platforms. This is equivalent to extracting the `language` part of the ``getLocale()`` string.
+    /// Returns the host OS locale's 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code</a> as a string which should be consistent on all platforms. This is equivalent to extracting the `language` part of the ``getLocale()`` string.
     /// 
     /// This can be used to narrow down fully specified locale strings to only the "common" language code, when you don't need the additional information about country code or variants. For example, for a French Canadian user with `fr_CA` locale, this would return `fr`.
     /// 
@@ -1762,7 +1762,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns the _global_ user configuration directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_CONFIG_HOME` environment variable before starting the project. See [url=$DOCS_URL/tutorials/io/data_paths.html]File paths in Godot projects[/url] in the documentation for more information. See also ``getCacheDir()`` and ``getDataDir()``.
+    /// Returns the _global_ user configuration directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_CONFIG_HOME` environment variable before starting the project. See <a href="https://docs.godotengine.org/en//tutorials/io/data_paths.html">File paths in Godot projects</a> in the documentation for more information. See also ``getCacheDir()`` and ``getDataDir()``.
     /// 
     /// Not to be confused with ``getUserDataDir()``, which returns the _project-specific_ user data path.
     /// 
@@ -1783,7 +1783,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns the _global_ user data directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_DATA_HOME` environment variable before starting the project. See [url=$DOCS_URL/tutorials/io/data_paths.html]File paths in Godot projects[/url] in the documentation for more information. See also ``getCacheDir()`` and ``getConfigDir()``.
+    /// Returns the _global_ user data directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_DATA_HOME` environment variable before starting the project. See <a href="https://docs.godotengine.org/en//tutorials/io/data_paths.html">File paths in Godot projects</a> in the documentation for more information. See also ``getCacheDir()`` and ``getConfigDir()``.
     /// 
     /// Not to be confused with ``getUserDataDir()``, which returns the _project-specific_ user data path.
     /// 
@@ -1804,7 +1804,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns the _global_ cache data directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_CACHE_HOME` environment variable before starting the project. See [url=$DOCS_URL/tutorials/io/data_paths.html]File paths in Godot projects[/url] in the documentation for more information. See also ``getConfigDir()`` and ``getDataDir()``.
+    /// Returns the _global_ cache data directory according to the operating system's standards. On the Linux/BSD platform, this path can be overridden by setting the `XDG_CACHE_HOME` environment variable before starting the project. See <a href="https://docs.godotengine.org/en//tutorials/io/data_paths.html">File paths in Godot projects</a> in the documentation for more information. See also ``getConfigDir()`` and ``getDataDir()``.
     /// 
     /// Not to be confused with ``getUserDataDir()``, which returns the _project-specific_ user data path.
     /// 
@@ -2061,7 +2061,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns `true` if the feature for the given feature tag is supported in the currently running instance, depending on the platform, build, etc. Can be used to check whether you're currently running a debug build, on a certain platform or arch, etc. Refer to the [url=$DOCS_URL/tutorials/export/feature_tags.html]Feature Tags[/url] documentation for more details.
+    /// Returns `true` if the feature for the given feature tag is supported in the currently running instance, depending on the platform, build, etc. Can be used to check whether you're currently running a debug build, on a certain platform or arch, etc. Refer to the <a href="https://docs.godotengine.org/en//tutorials/export/feature_tags.html">Feature Tags</a> documentation for more details.
     /// 
     /// > Note: Tag names are case-sensitive.
     /// 

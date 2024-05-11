@@ -9,7 +9,7 @@
 /// 
 /// A ``Material`` resource that can be used by ``FogVolume``s to draw volumetric effects.
 /// 
-/// If you need more advanced effects, use a custom [url=$DOCS_URL/tutorials/shaders/shader_reference/fog_shader.html]fog shader[/url].
+/// If you need more advanced effects, use a custom <a href="https://docs.godotengine.org/en//tutorials/shaders/shader_reference/fog_shader.html">fog shader</a>.
 /// 
 open class FogMaterial: Material {
     override open class var godotClassName: StringName { "FogMaterial" }
@@ -79,7 +79,7 @@ open class FogMaterial: Material {
         
     }
     
-    /// The 3D texture that is used to scale the ``density`` of the ``FogVolume``. This can be used to vary fog density within the ``FogVolume`` with any kind of static pattern. For animated effects, consider using a custom [url=$DOCS_URL/tutorials/shaders/shader_reference/fog_shader.html]fog shader[/url].
+    /// The 3D texture that is used to scale the ``density`` of the ``FogVolume``. This can be used to vary fog density within the ``FogVolume`` with any kind of static pattern. For animated effects, consider using a custom <a href="https://docs.godotengine.org/en//tutorials/shaders/shader_reference/fog_shader.html">fog shader</a>.
     final public var densityTexture: Texture3D? {
         get {
             return get_density_texture ()

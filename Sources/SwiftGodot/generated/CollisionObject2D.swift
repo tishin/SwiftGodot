@@ -64,7 +64,7 @@ open class CollisionObject2D: Node2D {
     
     /// The physics layers this CollisionObject2D is in. Collision objects can exist in one or more of 32 different layers. See also ``collisionMask``.
     /// 
-    /// > Note: Object A can detect a contact with object B only if object B is in any of the layers that object A scans. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks[/url] in the documentation for more information.
+    /// > Note: Object A can detect a contact with object B only if object B is in any of the layers that object A scans. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
     /// 
     final public var collisionLayer: UInt32 {
         get {
@@ -79,7 +79,7 @@ open class CollisionObject2D: Node2D {
     
     /// The physics layers this CollisionObject2D scans. Collision objects can scan one or more of 32 different layers. See also ``collisionLayer``.
     /// 
-    /// > Note: Object A can detect a contact with object B only if object B is in any of the layers that object A scans. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks[/url] in the documentation for more information.
+    /// > Note: Object A can detect a contact with object B only if object B is in any of the layers that object A scans. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
     /// 
     final public var collisionMask: UInt32 {
         get {

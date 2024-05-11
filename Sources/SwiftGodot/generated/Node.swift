@@ -349,7 +349,7 @@ open class Node: Object {
     
     /// The node owner. A node can have any ancestor node as owner (i.e. a parent, grandparent, etc. node ascending in the tree). This implies that ``addChild(node:forceReadableName:`internal`:)`` should be called before setting the owner, so that this relationship of parenting exists. When saving a node (using ``PackedScene``), all the nodes it owns will be saved with it. This allows for the creation of complex scene trees, with instancing and subinstancing.
     /// 
-    /// > Note: If you want a child to be persisted to a ``PackedScene``, you must set ``owner`` in addition to calling ``addChild(node:forceReadableName:`internal`:)``. This is typically relevant for [url=$DOCS_URL/tutorials/plugins/running_code_in_the_editor.html]tool scripts[/url] and [url=$DOCS_URL/tutorials/plugins/editor/index.html]editor plugins[/url]. If a new node is added to the tree without setting its owner as an ancestor in that tree, it will be visible in the 2D/3D view, but not in the scene tree (and not persisted when packing or saving).
+    /// > Note: If you want a child to be persisted to a ``PackedScene``, you must set ``owner`` in addition to calling ``addChild(node:forceReadableName:`internal`:)``. This is typically relevant for <a href="https://docs.godotengine.org/en//tutorials/plugins/running_code_in_the_editor.html">tool scripts</a> and <a href="https://docs.godotengine.org/en//tutorials/plugins/editor/index.html">editor plugins</a>. If a new node is added to the tree without setting its owner as an ancestor in that tree, it will be visible in the 2D/3D view, but not in the scene tree (and not persisted when packing or saving).
     /// 
     final public var owner: Node? {
         get {
@@ -719,7 +719,7 @@ open class Node: Object {
     /// 
     /// If you need the child node to be added below a specific node in the list of children, use ``addSibling(_:forceReadableName:)`` instead of this method.
     /// 
-    /// > Note: If you want a child to be persisted to a ``PackedScene``, you must set ``owner`` in addition to calling ``addChild(node:forceReadableName:`internal`:)``. This is typically relevant for [url=$DOCS_URL/tutorials/plugins/running_code_in_the_editor.html]tool scripts[/url] and [url=$DOCS_URL/tutorials/plugins/editor/index.html]editor plugins[/url]. If ``addChild(node:forceReadableName:`internal`:)`` is called without setting ``owner``, the newly added ``Node`` will not be visible in the scene tree, though it will be visible in the 2D/3D view.
+    /// > Note: If you want a child to be persisted to a ``PackedScene``, you must set ``owner`` in addition to calling ``addChild(node:forceReadableName:`internal`:)``. This is typically relevant for <a href="https://docs.godotengine.org/en//tutorials/plugins/running_code_in_the_editor.html">tool scripts</a> and <a href="https://docs.godotengine.org/en//tutorials/plugins/editor/index.html">editor plugins</a>. If ``addChild(node:forceReadableName:`internal`:)`` is called without setting ``owner``, the newly added ``Node`` will not be visible in the scene tree, though it will be visible in the 2D/3D view.
     /// 
     public final func addChild (node: Node?, forceReadableName: Bool = false, `internal`: Node.InternalMode = .disabled) {
         #if true

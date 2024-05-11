@@ -112,7 +112,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 2920860731)!
     }()
     
-    /// Performs a case-sensitive comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" and "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order.
+    /// Performs a case-sensitive comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" and "greater than" are determined by the <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode code points</a> of each string, which roughly matches the alphabetical order.
     /// 
     /// With different string lengths, returns `1` if this string is longer than the `to` string, or `-1` if shorter. Note that the length of empty strings is _always_ `0`.
     /// 
@@ -135,7 +135,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 2920860731)!
     }()
     
-    /// Performs a **case-insensitive** comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
+    /// Performs a **case-insensitive** comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode code points</a> of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
     /// 
     /// With different string lengths, returns `1` if this string is longer than the `to` string, or `-1` if shorter. Note that the length of empty strings is _always_ `0`.
     /// 
@@ -158,7 +158,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 2920860731)!
     }()
     
-    /// Performs a **case-sensitive**, _natural order_ comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order.
+    /// Performs a **case-sensitive**, _natural order_ comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode code points</a> of each string, which roughly matches the alphabetical order.
     /// 
     /// When used for sorting, natural order comparison orders sequences of numbers by the combined value of each digit as is often expected, instead of the single digit's value. A sorted sequence of numbered strings will be `["1", "2", "3", ...]`, not `["1", "10", "2", "3", ...]`.
     /// 
@@ -183,7 +183,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 2920860731)!
     }()
     
-    /// Performs a **case-insensitive**, _natural order_ comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode code points[/url] of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
+    /// Performs a **case-insensitive**, _natural order_ comparison to another string. Returns `-1` if less than, `1` if greater than, or `0` if equal. "Less than" or "greater than" are determined by the <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode code points</a> of each string, which roughly matches the alphabetical order. Internally, lowercase characters are converted to uppercase for the comparison.
     /// 
     /// When used for sorting, natural order comparison orders sequences of numbers by the combined value of each digit as is often expected, instead of the single digit's value. A sorted sequence of numbered strings will be `["1", "2", "3", ...]`, not `["1", "10", "2", "3", ...]`.
     /// 
@@ -577,7 +577,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 2697460964)!
     }()
     
-    /// Returns the similarity index ([url=https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient]Sorensen-Dice coefficient[/url]) of this string compared to another. A result of `1.0` means totally similar, while `0.0` means totally dissimilar.
+    /// Returns the similarity index ([url=https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient]Sorensen-Dice coefficient</a>) of this string compared to another. A result of `1.0` means totally similar, while `0.0` means totally dissimilar.
     /// 
     public final func similarity (text: String)-> Double {
         var result: Double = Double()
@@ -602,9 +602,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     /// 
     /// Some additional handling is performed when `values` is an ``GArray``. If `placeholder` does not contain an underscore, the elements of the `values` array will be used to replace one occurrence of the placeholder in order; If an element of `values` is another 2-element array, it'll be interpreted as a key-value pair.
     /// 
-    /// See also the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format string[/url] tutorial.
+    /// See also the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format string</a> tutorial.
     /// 
-    /// > Note: In C#, it's recommended to [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]interpolate strings with "$"[/url], instead.
+    /// > Note: In C#, it's recommended to [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]interpolate strings with "$"</a>, instead.
     /// 
     public final func format (values: Variant, placeholder: String = "{_}")-> String {
         let result = GString ()
@@ -1129,7 +1129,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 3942272618)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/MD5]MD5 hash[/url] of the string as another ``String``.
+    /// Returns the <a href="https://en.wikipedia.org/wiki/MD5">MD5 hash</a> of the string as another ``String``.
     public final func md5Text ()-> String {
         let result = GString ()
         StringName.method_md5_text (&content, nil, &result.content, 0)
@@ -1141,7 +1141,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 3942272618)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-1]SHA-1[/url] hash of the string as another ``String``.
+    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-1]SHA-1</a> hash of the string as another ``String``.
     public final func sha1Text ()-> String {
         let result = GString ()
         StringName.method_sha1_text (&content, nil, &result.content, 0)
@@ -1153,7 +1153,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 3942272618)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-2]SHA-256[/url] hash of the string as another ``String``.
+    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-2]SHA-256</a> hash of the string as another ``String``.
     public final func sha256Text ()-> String {
         let result = GString ()
         StringName.method_sha256_text (&content, nil, &result.content, 0)
@@ -1165,7 +1165,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/MD5]MD5 hash[/url] of the string as a ``PackedByteArray``.
+    /// Returns the <a href="https://en.wikipedia.org/wiki/MD5">MD5 hash</a> of the string as a ``PackedByteArray``.
     public final func md5Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_md5_buffer (&content, nil, &result.content, 0)
@@ -1177,7 +1177,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-1]SHA-1[/url] hash of the string as a ``PackedByteArray``.
+    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-1]SHA-1</a> hash of the string as a ``PackedByteArray``.
     public final func sha1Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_sha1_buffer (&content, nil, &result.content, 0)
@@ -1189,7 +1189,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-2]SHA-256[/url] hash of the string as a ``PackedByteArray``.
+    /// Returns the [url=https://en.wikipedia.org/wiki/SHA-2]SHA-256</a> hash of the string as a ``PackedByteArray``.
     public final func sha256Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_sha256_buffer (&content, nil, &result.content, 0)
@@ -1491,7 +1491,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 3918633141)!
     }()
     
-    /// Returns `true` if this string represents a well-formatted IPv4 or IPv6 address. This method considers [url=https://en.wikipedia.org/wiki/Reserved_IP_addresses]reserved IP addresses[/url] such as `"0.0.0.0"` and `"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"` as valid.
+    /// Returns `true` if this string represents a well-formatted IPv4 or IPv6 address. This method considers <a href="https://en.wikipedia.org/wiki/Reserved_IP_addresses">reserved IP addresses</a> such as `"0.0.0.0"` and `"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"` as valid.
     public final func isValidIpAddress ()-> Bool {
         var result: Bool = Bool()
         StringName.method_is_valid_ip_address (&content, nil, &result, 0)
@@ -1683,7 +1683,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Converts the string to an [url=https://en.wikipedia.org/wiki/ASCII]ASCII[/url]/Latin-1 encoded ``PackedByteArray``. This method is slightly faster than ``toUtf8Buffer()``, but replaces all unsupported characters with spaces.
+    /// Converts the string to an <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>/Latin-1 encoded ``PackedByteArray``. This method is slightly faster than ``toUtf8Buffer()``, but replaces all unsupported characters with spaces.
     public final func toAsciiBuffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_to_ascii_buffer (&content, nil, &result.content, 0)
@@ -1695,7 +1695,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-8]UTF-8[/url] encoded ``PackedByteArray``. This method is slightly slower than ``toAsciiBuffer()``, but supports all UTF-8 characters. For most cases, prefer using this method.
+    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-8]UTF-8</a> encoded ``PackedByteArray``. This method is slightly slower than ``toAsciiBuffer()``, but supports all UTF-8 characters. For most cases, prefer using this method.
     public final func toUtf8Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_to_utf8_buffer (&content, nil, &result.content, 0)
@@ -1707,7 +1707,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-16]UTF-16[/url] encoded ``PackedByteArray``.
+    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-16]UTF-16</a> encoded ``PackedByteArray``.
     public final func toUtf16Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_to_utf16_buffer (&content, nil, &result.content, 0)
@@ -1719,7 +1719,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-32]UTF-32[/url] encoded ``PackedByteArray``.
+    /// Converts the string to a [url=https://en.wikipedia.org/wiki/UTF-32]UTF-32</a> encoded ``PackedByteArray``.
     public final func toUtf32Buffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_to_utf32_buffer (&content, nil, &result.content, 0)
@@ -1744,7 +1744,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_STRING_NAME, &name.content, 247621236)!
     }()
     
-    /// Converts the string to a [url=https://en.wikipedia.org/wiki/Wide_character]wide character[/url] (`wchar_t`, UTF-16 on Windows, UTF-32 on other platforms) encoded ``PackedByteArray``.
+    /// Converts the string to a <a href="https://en.wikipedia.org/wiki/Wide_character">wide character</a> (`wchar_t`, UTF-16 on Windows, UTF-32 on other platforms) encoded ``PackedByteArray``.
     public final func toWcharBuffer ()-> PackedByteArray {
         let result: PackedByteArray = PackedByteArray()
         StringName.method_to_wchar_buffer (&content, nil, &result.content, 0)
@@ -1772,9 +1772,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Bool) -> String  {
         let result = GString ()
@@ -1790,9 +1790,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Int64) -> String  {
         let result = GString ()
@@ -1808,9 +1808,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Double) -> String  {
         let result = GString ()
@@ -1865,9 +1865,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: String) -> String  {
         let result = GString ()
@@ -1883,9 +1883,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector2) -> String  {
         let result = GString ()
@@ -1901,9 +1901,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector2i) -> String  {
         let result = GString ()
@@ -1919,9 +1919,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Rect2) -> String  {
         let result = GString ()
@@ -1937,9 +1937,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Rect2i) -> String  {
         let result = GString ()
@@ -1955,9 +1955,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector3) -> String  {
         let result = GString ()
@@ -1973,9 +1973,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector3i) -> String  {
         let result = GString ()
@@ -1991,9 +1991,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Transform2D) -> String  {
         let result = GString ()
@@ -2009,9 +2009,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector4) -> String  {
         let result = GString ()
@@ -2027,9 +2027,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Vector4i) -> String  {
         let result = GString ()
@@ -2045,9 +2045,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Plane) -> String  {
         let result = GString ()
@@ -2063,9 +2063,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Quaternion) -> String  {
         let result = GString ()
@@ -2081,9 +2081,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: AABB) -> String  {
         let result = GString ()
@@ -2099,9 +2099,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Basis) -> String  {
         let result = GString ()
@@ -2117,9 +2117,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Transform3D) -> String  {
         let result = GString ()
@@ -2135,9 +2135,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Projection) -> String  {
         let result = GString ()
@@ -2153,9 +2153,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Color) -> String  {
         let result = GString ()
@@ -2181,7 +2181,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_LESS_EQUAL, GDEXTENSION_VARIANT_TYPE_STRING_NAME, GDEXTENSION_VARIANT_TYPE_STRING_NAME)!
     }()
     
-    /// Returns `true` if the left ``StringName``'s pointer comes before `right`. Note that this will not match their [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode order[/url].
+    /// Returns `true` if the left ``StringName``'s pointer comes before `right`. Note that this will not match their <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode order</a>.
     public static func < (lhs: StringName, rhs: StringName) -> Bool  {
         var result: Bool = Bool()
         
@@ -2193,7 +2193,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_LESS, GDEXTENSION_VARIANT_TYPE_STRING_NAME, GDEXTENSION_VARIANT_TYPE_STRING_NAME)!
     }()
     
-    /// Returns `true` if the left ``StringName``'s pointer comes before `right` or if they are the same. Note that this will not match their [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode order[/url].
+    /// Returns `true` if the left ``StringName``'s pointer comes before `right` or if they are the same. Note that this will not match their <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode order</a>.
     public static func <= (lhs: StringName, rhs: StringName) -> Bool  {
         var result: Bool = Bool()
         
@@ -2205,7 +2205,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_GREATER, GDEXTENSION_VARIANT_TYPE_STRING_NAME, GDEXTENSION_VARIANT_TYPE_STRING_NAME)!
     }()
     
-    /// Returns `true` if the left ``StringName``'s pointer comes after `right`. Note that this will not match their [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode order[/url].
+    /// Returns `true` if the left ``StringName``'s pointer comes after `right`. Note that this will not match their <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode order</a>.
     public static func > (lhs: StringName, rhs: StringName) -> Bool  {
         var result: Bool = Bool()
         
@@ -2217,7 +2217,7 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
         return gi.variant_get_ptr_operator_evaluator (GDEXTENSION_VARIANT_OP_GREATER_EQUAL, GDEXTENSION_VARIANT_TYPE_STRING_NAME, GDEXTENSION_VARIANT_TYPE_STRING_NAME)!
     }()
     
-    /// Returns `true` if the left ``StringName``'s pointer comes after `right` or if they are the same. Note that this will not match their [url=https://en.wikipedia.org/wiki/List_of_Unicode_characters]Unicode order[/url].
+    /// Returns `true` if the left ``StringName``'s pointer comes after `right` or if they are the same. Note that this will not match their <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode order</a>.
     public static func >= (lhs: StringName, rhs: StringName) -> Bool  {
         var result: Bool = Bool()
         
@@ -2243,9 +2243,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: StringName) -> String  {
         let result = GString ()
@@ -2260,9 +2260,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: NodePath) -> String  {
         let result = GString ()
@@ -2277,9 +2277,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Object) -> String  {
         let result = GString ()
@@ -2294,9 +2294,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Callable) -> String  {
         let result = GString ()
@@ -2311,9 +2311,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: Signal) -> String  {
         let result = GString ()
@@ -2328,9 +2328,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: GDictionary) -> String  {
         let result = GString ()
@@ -2345,9 +2345,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: GArray) -> String  {
         let result = GString ()
@@ -2362,9 +2362,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedByteArray) -> String  {
         let result = GString ()
@@ -2379,9 +2379,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedInt32Array) -> String  {
         let result = GString ()
@@ -2396,9 +2396,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedInt64Array) -> String  {
         let result = GString ()
@@ -2413,9 +2413,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedFloat32Array) -> String  {
         let result = GString ()
@@ -2430,9 +2430,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedFloat64Array) -> String  {
         let result = GString ()
@@ -2447,9 +2447,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedStringArray) -> String  {
         let result = GString ()
@@ -2464,9 +2464,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedVector2Array) -> String  {
         let result = GString ()
@@ -2481,9 +2481,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedVector3Array) -> String  {
         let result = GString ()
@@ -2498,9 +2498,9 @@ public class StringName: Equatable, ExpressibleByStringLiteral, ExpressibleByStr
     
     /// Formats the ``StringName``, replacing the placeholders with one or more parameters, returning a ``String``. To pass multiple parameters, `right` needs to be an ``GArray``.
     /// 
-    /// For more information, see the [url=$DOCS_URL/tutorials/scripting/gdscript/gdscript_format_string.html]GDScript format strings[/url] tutorial.
+    /// For more information, see the <a href="https://docs.godotengine.org/en//tutorials/scripting/gdscript/gdscript_format_string.html">GDScript format strings</a> tutorial.
     /// 
-    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"[/url].
+    /// > Note: In C#, this operator is not available. Instead, see [url=https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated]how to interpolate strings with "$"</a>.
     /// 
     public static func % (lhs: StringName, rhs: PackedColorArray) -> String  {
         let result = GString ()

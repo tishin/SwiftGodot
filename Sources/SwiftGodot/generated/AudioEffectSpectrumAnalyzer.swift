@@ -67,7 +67,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         
     }
     
-    /// The size of the [url=https://en.wikipedia.org/wiki/Fast_Fourier_transform]Fast Fourier transform[/url] buffer. Higher values smooth out the spectrum analysis over time, but have greater latency. The effects of this higher latency are especially noticeable with sudden amplitude changes.
+    /// The size of the <a href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">Fast Fourier transform</a> buffer. Higher values smooth out the spectrum analysis over time, but have greater latency. The effects of this higher latency are especially noticeable with sudden amplitude changes.
     final public var fftSize: AudioEffectSpectrumAnalyzer.FFTSize {
         get {
             return get_fft_size ()

@@ -7,7 +7,7 @@
 
 /// Provides a low-level interface for creating parsers for XML files.
 /// 
-/// Provides a low-level interface for creating parsers for [url=https://en.wikipedia.org/wiki/XML]XML[/url] files. This class can serve as base to make custom XML parsers.
+/// Provides a low-level interface for creating parsers for <a href="https://en.wikipedia.org/wiki/XML">XML</a> files. This class can serve as base to make custom XML parsers.
 /// 
 /// To parse XML, you must open a file with the ``open(file:)`` method or a buffer with the ``openBuffer(_:)`` method. Then, the ``read()`` method must be called to parse the next nodes. Most of the methods take into consideration the currently parsed node.
 /// 

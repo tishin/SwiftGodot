@@ -11,7 +11,7 @@
 /// 
 /// > Note: This singleton is not accessible in exported projects. Attempting to access it in an exported project will result in a script error as the singleton won't be declared. To prevent script errors in exported projects, use ``Engine/hasSingleton(name:)`` to check whether the singleton is available before using it.
 /// 
-/// > Note: On the Linux/BSD platform, Godot complies with the [url=https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html]XDG Base Directory Specification[/url]. You can override environment variables following the specification to change the editor and project data paths.
+/// > Note: On the Linux/BSD platform, Godot complies with the [url=https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html]XDG Base Directory Specification</a>. You can override environment variables following the specification to change the editor and project data paths.
 /// 
 open class EditorPaths: Object {
     override open class var godotClassName: StringName { "EditorPaths" }
@@ -94,7 +94,7 @@ open class EditorPaths: Object {
     /// 
     /// Self-contained mode can be enabled by creating a file named `._sc_` or `_sc_` in the same folder as the editor binary or macOS .app bundle while the editor is not running. See also ``getSelfContainedFile()``.
     /// 
-    /// > Note: On macOS, quarantine flag should be manually removed before using self-contained mode, see [url=https://docs.godotengine.org/en/stable/tutorials/export/running_on_macos.html]Running on macOS[/url].
+    /// > Note: On macOS, quarantine flag should be manually removed before using self-contained mode, see <a href="https://docs.godotengine.org/en/stable/tutorials/export/running_on_macos.html">Running on macOS</a>.
     /// 
     /// > Note: On macOS, placing `_sc_` or any other file inside .app bundle will break digital signature and make it non-portable, consider placing it in the same folder as the .app bundle instead.
     /// 
