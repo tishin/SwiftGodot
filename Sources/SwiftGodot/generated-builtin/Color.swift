@@ -10,7 +10,7 @@
 /// 
 /// > Note: In a boolean context, a Color will evaluate to `false` if it is equal to `Color(0, 0, 0, 1)` (opaque black). Otherwise, a Color will always evaluate to `true`.
 /// 
-/// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png]Color constants cheatsheet</a>
+/// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/color_constants.png">Color constants cheatsheet</a>
 /// 
 public struct Color: Equatable, Hashable {
     /// The color's red component, typically on the range of 0 to 1.

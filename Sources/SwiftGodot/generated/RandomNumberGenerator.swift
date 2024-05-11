@@ -7,7 +7,7 @@
 
 /// Provides methods for generating pseudo-random numbers.
 /// 
-/// RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses [url=https://www.pcg-random.org/]PCG32</a>.
+/// RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses <a href="https://www.pcg-random.org/">PCG32</a>.
 /// 
 /// > Note: The underlying algorithm is an implementation detail and should not be depended upon.
 /// 

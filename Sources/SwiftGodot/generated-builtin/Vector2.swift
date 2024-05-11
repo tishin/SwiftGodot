@@ -91,7 +91,7 @@ public struct Vector2: Equatable, Hashable {
     /// 
     /// For example, `Vector2.RIGHT.angle()` will return zero, `Vector2.DOWN.angle()` will return `PI / 2` (a quarter turn, or 90 degrees), and `Vector2(1, -1).angle()` will return `-PI / 4` (a negative eighth turn, or -45 degrees).
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle.png]Illustration of the returned angle.</a>
+    /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle.png">Illustration of the returned angle.</a>
     /// 
     /// Equivalent to the result of ``@GlobalScope.atan2`` when called with the vector's ``y`` and ``x`` as parameters: `atan2(y, x)`.
     /// 
@@ -110,7 +110,7 @@ public struct Vector2: Equatable, Hashable {
     
     /// Returns the angle to the given vector, in radians.
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to.png]Illustration of the returned angle.</a>
+    /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to.png">Illustration of the returned angle.</a>
     /// 
     public func angleTo (_ to: Vector2)-> Double {
         var result: Double = Double()
@@ -135,7 +135,7 @@ public struct Vector2: Equatable, Hashable {
     /// 
     /// `a.angle_to_point(b)` is equivalent of doing `(b - a).angle()`.
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to_point.png]Illustration of the returned angle.</a>
+    /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/vector2_angle_to_point.png">Illustration of the returned angle.</a>
     /// 
     public func angleToPoint (to: Vector2)-> Double {
         var result: Double = Double()
@@ -518,7 +518,7 @@ public struct Vector2: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_VECTOR2, &name.content, 193522989)!
     }()
     
-    /// Returns the point at the given `t` on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
+    /// Returns the point at the given `t` on the <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
     public func bezierInterpolate (control1: Vector2, control2: Vector2, end: Vector2, t: Double)-> Vector2 {
         var result: Vector2 = Vector2()
         var copy_control_1 = control1
@@ -550,7 +550,7 @@ public struct Vector2: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_VECTOR2, &name.content, 193522989)!
     }()
     
-    /// Returns the derivative at the given `t` on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
+    /// Returns the derivative at the given `t` on the <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
     public func bezierDerivative (control1: Vector2, control2: Vector2, end: Vector2, t: Double)-> Vector2 {
         var result: Vector2 = Vector2()
         var copy_control_1 = control1

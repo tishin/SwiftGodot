@@ -71,7 +71,7 @@ open class Engine: Object {
     /// 
     /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled` or `Adaptive`, it takes precedence and the forced FPS number cannot exceed the monitor's refresh rate.
     /// 
-    /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled`, on monitors with variable refresh rate enabled (G-Sync/FreeSync), using a FPS limit a few frames lower than the monitor's refresh rate will [url=https://blurbusters.com/howto-low-lag-vsync-on/]reduce input lag while avoiding tearing</a>.
+    /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Enabled`, on monitors with variable refresh rate enabled (G-Sync/FreeSync), using a FPS limit a few frames lower than the monitor's refresh rate will <a href="https://blurbusters.com/howto-low-lag-vsync-on/">reduce input lag while avoiding tearing</a>.
     /// 
     /// If ``ProjectSettings/display/window/vsync/vsyncMode`` is `Disabled`, limiting the FPS to a high value that can be consistently reached on the system can reduce input lag compared to an uncapped framerate. Since this works by ensuring the GPU load is lower than 100%, this latency reduction is only effective in GPU-bottlenecked scenarios, not CPU-bottlenecked scenarios.
     /// 

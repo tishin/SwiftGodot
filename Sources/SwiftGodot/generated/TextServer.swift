@@ -4590,7 +4590,7 @@ open class TextServer: RefCounted {
         
     }()
     
-    /// Returns `true`, if font supports given language ([url=https://en.wikipedia.org/wiki/ISO_639-1]ISO 639</a> code).
+    /// Returns `true`, if font supports given language (<a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639</a> code).
     public final func fontIsLanguageSupported (fontRid: RID, language: String)-> Bool {
         var _result: Bool = false
         #if true

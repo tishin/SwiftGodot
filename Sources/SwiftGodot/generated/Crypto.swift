@@ -352,7 +352,7 @@ open class Crypto: RefCounted {
     
     /// Compares two ``PackedByteArray``s for equality without leaking timing information in order to prevent timing attacks.
     /// 
-    /// See [url=https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy]this blog post</a> for more information.
+    /// See <a href="https://paragonie.com/blog/2015/11/preventing-timing-attacks-on-string-comparison-with-double-hmac-strategy">this blog post</a> for more information.
     /// 
     public final func constantTimeCompare (trusted: PackedByteArray, received: PackedByteArray)-> Bool {
         var _result: Bool = false

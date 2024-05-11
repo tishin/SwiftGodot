@@ -131,7 +131,7 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    /// Turn on auto advance when this condition is set. The provided name will become a boolean parameter on the ``AnimationTree`` that can be controlled from code (see [url=$DOCS_URL/tutorials/animation/animation_tree.html#controlling-from-code]Using AnimationTree</a>). For example, if ``AnimationTree/treeRoot`` is an ``AnimationNodeStateMachine`` and ``advanceCondition`` is set to `"idle"`:
+    /// Turn on auto advance when this condition is set. The provided name will become a boolean parameter on the ``AnimationTree`` that can be controlled from code (see <a href="https://docs.godotengine.org/en//tutorials/animation/animation_tree.html#controlling-from-code">Using AnimationTree</a>). For example, if ``AnimationTree/treeRoot`` is an ``AnimationNodeStateMachine`` and ``advanceCondition`` is set to `"idle"`:
     /// 
     final public var advanceCondition: StringName {
         get {

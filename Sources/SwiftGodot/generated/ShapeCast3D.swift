@@ -90,7 +90,7 @@ open class ShapeCast3D: Node3D {
         
     }
     
-    /// The shape's collision mask. Only objects in at least one collision layer enabled in the mask will be detected. See [url=$DOCS_URL/tutorials/physics/physics_introduction.html#collision-layers-and-masks]Collision layers and masks</a> in the documentation for more information.
+    /// The shape's collision mask. Only objects in at least one collision layer enabled in the mask will be detected. See <a href="https://docs.godotengine.org/en//tutorials/physics/physics_introduction.html#collision-layers-and-masks">Collision layers and masks</a> in the documentation for more information.
     final public var collisionMask: UInt32 {
         get {
             return get_collision_mask ()

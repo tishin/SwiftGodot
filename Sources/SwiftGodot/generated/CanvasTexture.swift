@@ -30,7 +30,7 @@ open class CanvasTexture: Texture2D {
     
     /// The normal map texture to use. Only has a visible effect if ``Light2D``s are affecting this ``CanvasTexture``.
     /// 
-    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page</a> for a comparison of normal map coordinates expected by popular engines.
+    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See <a href="http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates">this page</a> for a comparison of normal map coordinates expected by popular engines.
     /// 
     final public var normalTexture: Texture2D? {
         get {

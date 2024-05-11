@@ -991,7 +991,7 @@ open class BaseMaterial3D: Material {
     /// 
     /// > Note: The mesh must have both normals and tangents defined in its vertex data. Otherwise, the normal map won't render correctly and will only appear to darken the whole surface. If creating geometry with ``SurfaceTool``, you can use ``SurfaceTool/generateNormals(flip:)`` and ``SurfaceTool/generateTangents()`` to automatically generate normals and tangents respectively.
     /// 
-    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page</a> for a comparison of normal map coordinates expected by popular engines.
+    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See <a href="http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates">this page</a> for a comparison of normal map coordinates expected by popular engines.
     /// 
     /// > Note: If ``detailEnabled`` is `true`, the ``detailAlbedo`` texture is drawn _below_ the ``normalTexture``. To display a normal map _above_ the ``detailAlbedo`` texture, use ``detailNormal`` instead.
     /// 
@@ -1597,7 +1597,7 @@ open class BaseMaterial3D: Material {
     
     /// Texture that specifies the per-pixel normal of the detail overlay. The ``detailNormal`` texture only uses the red and green channels; the blue and alpha channels are ignored. The normal read from ``detailNormal`` is oriented around the surface normal provided by the ``Mesh``.
     /// 
-    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See [url=http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates]this page</a> for a comparison of normal map coordinates expected by popular engines.
+    /// > Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See <a href="http://wiki.polycount.com/wiki/Normal_Map_Technical_Details#Common_Swizzle_Coordinates">this page</a> for a comparison of normal map coordinates expected by popular engines.
     /// 
     final public var detailNormal: Texture2D? {
         get {

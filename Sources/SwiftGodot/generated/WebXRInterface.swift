@@ -73,7 +73,7 @@ open class WebXRInterface: XRInterface {
     /// 
     /// This doesn't have any effect on the interface when already initialized.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRSessionMode]WebXR's XRSessionMode</a>, including: `"immersive-vr"`, `"immersive-ar"`, and `"inline"`.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRSessionMode">WebXR's XRSessionMode</a>, including: `"immersive-vr"`, `"immersive-ar"`, and `"inline"`.
     /// 
     final public var sessionMode: String {
         get {
@@ -92,7 +92,7 @@ open class WebXRInterface: XRInterface {
     /// 
     /// This doesn't have any effect on the interface when already initialized.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType]WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType">WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
     /// 
     final public var requiredFeatures: String {
         get {
@@ -111,7 +111,7 @@ open class WebXRInterface: XRInterface {
     /// 
     /// This doesn't have any effect on the interface when already initialized.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType]WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType">WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
     /// 
     final public var optionalFeatures: String {
         get {
@@ -130,7 +130,7 @@ open class WebXRInterface: XRInterface {
     /// 
     /// This doesn't have any effect on the interface when already initialized.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType]WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType">WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
     /// 
     final public var requestedReferenceSpaceTypes: String {
         get {
@@ -145,7 +145,7 @@ open class WebXRInterface: XRInterface {
     
     /// The reference space type (from the list of requested types set in the ``requestedReferenceSpaceTypes`` property), that was ultimately used by ``XRInterface/initialize()`` when setting up the WebXR session.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType]WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpaceType">WebXR's XRReferenceSpaceType</a>. If you want to use a particular reference space type, it must be listed in either ``requiredFeatures`` or ``optionalFeatures``.
     /// 
     final public var referenceSpaceType: String {
         get {
@@ -156,7 +156,7 @@ open class WebXRInterface: XRInterface {
     
     /// Indicates if the WebXR session's imagery is visible to the user.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRVisibilityState]WebXR's XRVisibilityState</a>, including `"hidden"`, `"visible"`, and `"visible-blurred"`.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRVisibilityState">WebXR's XRVisibilityState</a>, including `"hidden"`, `"visible"`, and `"visible-blurred"`.
     /// 
     final public var visibilityState: String {
         get {
@@ -179,7 +179,7 @@ open class WebXRInterface: XRInterface {
     
     /// Checks if the given `sessionMode` is supported by the user's browser.
     /// 
-    /// Possible values come from [url=https://developer.mozilla.org/en-US/docs/Web/API/XRSessionMode]WebXR's XRSessionMode</a>, including: `"immersive-vr"`, `"immersive-ar"`, and `"inline"`.
+    /// Possible values come from <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRSessionMode">WebXR's XRSessionMode</a>, including: `"immersive-vr"`, `"immersive-ar"`, and `"inline"`.
     /// 
     /// This method returns nothing, instead it emits the [signal session_supported] signal with the result.
     /// 
@@ -519,7 +519,7 @@ open class WebXRInterface: XRInterface {
     
     /// Returns the target ray mode for the given `inputSourceId`.
     /// 
-    /// This can help interpret the input coming from that input source. See [url=https://developer.mozilla.org/en-US/docs/Web/API/XRInputSource/targetRayMode]XRInputSource.targetRayMode</a> for more information.
+    /// This can help interpret the input coming from that input source. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRInputSource/targetRayMode">XRInputSource.targetRayMode</a> for more information.
     /// 
     public final func getInputSourceTargetRayMode (inputSourceId: Int32)-> WebXRInterface.TargetRayMode {
         var _result: Int64 = 0 // to avoid packed enums on the stack
@@ -1358,7 +1358,7 @@ open class WebXRInterface: XRInterface {
     /// 
     /// When (or whether) this is emitted depends on the user's browser or device, but may include when the user has changed the dimensions of their play space (which you may be able to access via ``XRInterface/getPlayArea()``) or pressed/held a button to recenter their position.
     /// 
-    /// See [url=https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpace/reset_event]WebXR's XRReferenceSpace reset event</a> for more information.
+    /// See <a href="https://developer.mozilla.org/en-US/docs/Web/API/XRReferenceSpace/reset_event">WebXR's XRReferenceSpace reset event</a> for more information.
     /// 
     ///
     /// To connect to this signal, reference this property and call the

@@ -220,7 +220,7 @@ open class Camera3D: Node3D {
         
     }
     
-    /// The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as [url=https://zdoom.org/wiki/Y-shearing]Y-shearing</a>.
+    /// The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as <a href="https://zdoom.org/wiki/Y-shearing">Y-shearing</a>.
     /// 
     /// > Note: Only effective if ``projection`` is .projectionFrustum.
     /// 
@@ -410,7 +410,7 @@ open class Camera3D: Node3D {
         
     }()
     
-    /// Returns `true` if the given position is behind the camera (the blue part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram</a> for an overview of position query methods.
+    /// Returns `true` if the given position is behind the camera (the blue part of the linked diagram). <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png">See this diagram</a> for an overview of position query methods.
     /// 
     /// > Note: A position which returns `false` may still be outside the camera's field of view.
     /// 
@@ -1417,7 +1417,7 @@ open class Camera3D: Node3D {
         
     }()
     
-    /// Returns `true` if the given position is inside the camera's frustum (the green part of the linked diagram). [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png]See this diagram</a> for an overview of position query methods.
+    /// Returns `true` if the given position is inside the camera's frustum (the green part of the linked diagram). <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/camera3d_position_frustum.png">See this diagram</a> for an overview of position query methods.
     public final func isPositionInFrustum (worldPoint: Vector3)-> Bool {
         var _result: Bool = false
         #if true

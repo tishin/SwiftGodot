@@ -139,7 +139,7 @@ open class EditorExportPlugin: RefCounted {
     
     /// Virtual method to be overridden by the user. This is called to retrieve the set of Android dependencies provided by this plugin. Each returned Android dependency should have the format of an Android remote binary dependency: `org.godot.example:my-plugin:0.0.0`
     /// 
-    /// For more information see [url=https://developer.android.com/build/dependencies?agpversion=4.1#dependency-types]Android documentation on dependencies</a>.
+    /// For more information see <a href="https://developer.android.com/build/dependencies?agpversion=4.1#dependency-types">Android documentation on dependencies</a>.
     /// 
     /// > Note: Only supported on Android and requires ``EditorExportPlatformAndroid/gradleBuild/useGradleBuild`` to be enabled.
     /// 
@@ -150,7 +150,7 @@ open class EditorExportPlugin: RefCounted {
     
     /// Virtual method to be overridden by the user. This is called to retrieve the URLs of Maven repositories for the set of Android dependencies provided by this plugin.
     /// 
-    /// For more information see [url=https://docs.gradle.org/current/userguide/dependency_management.html#sec:maven_repo]Gradle documentation on dependency management</a>.
+    /// For more information see <a href="https://docs.gradle.org/current/userguide/dependency_management.html#sec:maven_repo">Gradle documentation on dependency management</a>.
     /// 
     /// > Note: Google's Maven repo and the Maven Central repo are already included by default.
     /// 

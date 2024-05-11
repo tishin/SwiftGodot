@@ -532,7 +532,7 @@ public struct Vector3: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_VECTOR3, &name.content, 2597922253)!
     }()
     
-    /// Returns the point at the given `t` on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
+    /// Returns the point at the given `t` on the <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
     public func bezierInterpolate (control1: Vector3, control2: Vector3, end: Vector3, t: Double)-> Vector3 {
         var result: Vector3 = Vector3()
         var copy_control_1 = control1
@@ -564,7 +564,7 @@ public struct Vector3: Equatable, Hashable {
         return gi.variant_get_ptr_builtin_method (GDEXTENSION_VARIANT_TYPE_VECTOR3, &name.content, 2597922253)!
     }()
     
-    /// Returns the derivative at the given `t` on the [url=https://en.wikipedia.org/wiki/B%C3%A9zier_curve]Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
+    /// Returns the derivative at the given `t` on the <a href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">Bézier curve</a> defined by this vector and the given `control1`, `control2`, and `end` points.
     public func bezierDerivative (control1: Vector3, control2: Vector3, end: Vector3, t: Double)-> Vector3 {
         var result: Vector3 = Vector3()
         var copy_control_1 = control1

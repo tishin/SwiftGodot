@@ -30,7 +30,7 @@ open class FontVariation: Font {
         
     }
     
-    /// Font OpenType variation coordinates. More info: [url=https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg]OpenType variation tags</a>.
+    /// Font OpenType variation coordinates. More info: <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg">OpenType variation tags</a>.
     /// 
     /// > Note: This ``GDictionary`` uses OpenType tags as keys. Variation axes can be identified both by tags (integer, e.g. `0x77678674`) and names (``String``, e.g. `wght`). Some axes might be accessible by multiple names. For example, `wght` refers to the same axis as `weight`. Tags on the other hand are unique. To convert between names and tags, use ``TextServer/nameToTag(name:)`` and ``TextServer/tagToName(tag:)``.
     /// 
@@ -89,7 +89,7 @@ open class FontVariation: Font {
         
     }
     
-    /// A set of OpenType feature tags. More info: [url=https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags]OpenType feature tags</a>.
+    /// A set of OpenType feature tags. More info: <a href="https://docs.microsoft.com/en-us/typography/opentype/spec/featuretags">OpenType feature tags</a>.
     final public var opentypeFeatures: GDictionary {
         get {
             return getOpentypeFeatures ()

@@ -11,7 +11,7 @@
 /// 
 /// > Note: This singleton is not accessible in exported projects. Attempting to access it in an exported project will result in a script error as the singleton won't be declared. To prevent script errors in exported projects, use ``Engine/hasSingleton(name:)`` to check whether the singleton is available before using it.
 /// 
-/// > Note: On the Linux/BSD platform, Godot complies with the [url=https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html]XDG Base Directory Specification</a>. You can override environment variables following the specification to change the editor and project data paths.
+/// > Note: On the Linux/BSD platform, Godot complies with the <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>. You can override environment variables following the specification to change the editor and project data paths.
 /// 
 open class EditorPaths: Object {
     override open class var godotClassName: StringName { "EditorPaths" }

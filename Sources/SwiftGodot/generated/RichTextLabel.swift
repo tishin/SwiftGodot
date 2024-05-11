@@ -3634,7 +3634,7 @@ open class RichTextLabel: Control {
         
     }
     
-    /// Triggered when the user clicks on content between meta tags. If the meta is defined in text, e.g. [code skip-lint][url={"data"="hi"}]hi</a>`, then the parameter for this signal will be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:)`` method must be used to manually insert the data into the tag stack.
+    /// Triggered when the user clicks on content between meta tags. If the meta is defined in text, e.g. [code skip-lint]<a href="{"data"="hi"}">hi</a>`, then the parameter for this signal will be a ``String`` type. If a particular type or an object is desired, the ``pushMeta(data:)`` method must be used to manually insert the data into the tag stack.
     ///
     /// To connect to this signal, reference this property and call the
     /// 

@@ -978,7 +978,7 @@ open class Node2D: CanvasItem {
     
     /// Returns the angle between the node and the `point` in radians.
     /// 
-    /// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/node2d_get_angle_to.png]Illustration of the returned angle.</a>
+    /// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/node2d_get_angle_to.png">Illustration of the returned angle.</a>
     /// 
     public final func getAngleTo (point: Vector2)-> Double {
         var _result: Double = 0.0

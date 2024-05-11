@@ -1455,11 +1455,11 @@ open class OS: Object {
     
     /// Returns the host OS locale as a string of the form `language_Script_COUNTRY_VARIANT@extra`. If you want only the language code and not the fully specified locale from the OS, you can use ``getLocaleLanguage()``.
     /// 
-    /// `language` - 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code</a>, in lower case.
+    /// `language` - 2 or 3-letter <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">language code</a>, in lower case.
     /// 
     /// [code skip-lint]Script` - optional, 4-letter <a href="https://en.wikipedia.org/wiki/ISO_15924">script code</a>, in title case.
     /// 
-    /// `COUNTRY` - optional, 2 or 3-letter [url=https://en.wikipedia.org/wiki/ISO_3166-1]country code</a>, in upper case.
+    /// `COUNTRY` - optional, 2 or 3-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-1">country code</a>, in upper case.
     /// 
     /// `VARIANT` - optional, language variant, region and sort order. Variant can have any number of underscored keywords.
     /// 
@@ -1482,7 +1482,7 @@ open class OS: Object {
         
     }()
     
-    /// Returns the host OS locale's 2 or 3-letter [url=https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes]language code</a> as a string which should be consistent on all platforms. This is equivalent to extracting the `language` part of the ``getLocale()`` string.
+    /// Returns the host OS locale's 2 or 3-letter <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">language code</a> as a string which should be consistent on all platforms. This is equivalent to extracting the `language` part of the ``getLocale()`` string.
     /// 
     /// This can be used to narrow down fully specified locale strings to only the "common" language code, when you don't need the additional information about country code or variants. For example, for a French Canadian user with `fr_CA` locale, this would return `fr`.
     /// 

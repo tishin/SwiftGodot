@@ -610,7 +610,7 @@ public class GArray: Equatable, Collection {
     
     /// Sorts the array.
     /// 
-    /// > Note: The sorting algorithm used is not [url=https://en.wikipedia.org/wiki/Sorting_algorithm#Stability]stable</a>. This means that values considered equal may have their order changed when using ``sort()``.
+    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that values considered equal may have their order changed when using ``sort()``.
     /// 
     /// > Note: Strings are sorted in alphabetical order (as opposed to natural order). This may lead to unexpected behavior when sorting an array of strings ending with a sequence of numbers. Consider the following example:
     /// 
@@ -627,7 +627,7 @@ public class GArray: Equatable, Collection {
     
     /// Sorts the array using a custom method. The custom method receives two arguments (a pair of elements from the array) and must return either `true` or `false`. For two elements `a` and `b`, if the given method returns `true`, element `b` will be after element `a` in the array.
     /// 
-    /// > Note: The sorting algorithm used is not [url=https://en.wikipedia.org/wiki/Sorting_algorithm#Stability]stable</a>. This means that values considered equal may have their order changed when using ``sortCustom(`func`:)``.
+    /// > Note: The sorting algorithm used is not <a href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">stable</a>. This means that values considered equal may have their order changed when using ``sortCustom(`func`:)``.
     /// 
     /// > Note: You cannot randomize the return value as the heapsort algorithm expects a deterministic result. Randomizing the return value will result in unexpected behavior.
     /// 

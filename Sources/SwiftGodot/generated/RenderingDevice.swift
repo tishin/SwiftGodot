@@ -13,7 +13,7 @@
 /// 
 /// **Local RenderingDevices:** Using ``RenderingServer/createLocalRenderingDevice()``, you can create "secondary" rendering devices to perform drawing and GPU compute operations on separate threads.
 /// 
-/// > Note: ``RenderingDevice`` assumes intermediate knowledge of modern graphics APIs such as Vulkan, Direct3D 12, Metal or WebGPU. These graphics APIs are lower-level than OpenGL or Direct3D 11, requiring you to perform what was previously done by the graphics driver itself. If you have difficulty understanding the concepts used in this class, follow the [url=https://vulkan-tutorial.com/]Vulkan Tutorial</a> or <a href="https://vkguide.dev/">Vulkan Guide</a>. It's recommended to have existing modern OpenGL or Direct3D 11 knowledge before attempting to learn a low-level graphics API.
+/// > Note: ``RenderingDevice`` assumes intermediate knowledge of modern graphics APIs such as Vulkan, Direct3D 12, Metal or WebGPU. These graphics APIs are lower-level than OpenGL or Direct3D 11, requiring you to perform what was previously done by the graphics driver itself. If you have difficulty understanding the concepts used in this class, follow the <a href="https://vulkan-tutorial.com/">Vulkan Tutorial</a> or <a href="https://vkguide.dev/">Vulkan Guide</a>. It's recommended to have existing modern OpenGL or Direct3D 11 knowledge before attempting to learn a low-level graphics API.
 /// 
 /// > Note: ``RenderingDevice`` is not available when running in headless mode or when using the Compatibility rendering method.
 /// 
@@ -66,7 +66,7 @@ open class RenderingDevice: Object {
         case imageNativeTextureFormat = 7 // DRIVER_RESOURCE_VULKAN_IMAGE_NATIVE_TEXTURE_FORMAT
         /// Vulkan sampler driver resource.
         case sampler = 8 // DRIVER_RESOURCE_VULKAN_SAMPLER
-        /// Vulkan [url=https://vkguide.dev/docs/chapter-4/descriptors/]descriptor set</a> driver resource.
+        /// Vulkan <a href="https://vkguide.dev/docs/chapter-4/descriptors/">descriptor set</a> driver resource.
         case descriptorSet = 9 // DRIVER_RESOURCE_VULKAN_DESCRIPTOR_SET
         /// Vulkan buffer driver resource.
         case buffer = 10 // DRIVER_RESOURCE_VULKAN_BUFFER
@@ -99,7 +99,7 @@ open class RenderingDevice: Object {
     public enum DataFormat: Int64, CustomDebugStringConvertible {
         /// 4-bit-per-channel red/green channel data format, packed into 8 bits. Values are in the `[0.0, 1.0]` range.
         /// 
-        /// > Note: More information on all data formats can be found on the [url=https://registry.khronos.org/vulkan/specs/1.1/html/vkspec.html#_identification_of_formats]Identification of formats</a> section of the Vulkan specification, as well as the [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkFormat.html]VkFormat</a> enum.
+        /// > Note: More information on all data formats can be found on the <a href="https://registry.khronos.org/vulkan/specs/1.1/html/vkspec.html#_identification_of_formats">Identification of formats</a> section of the Vulkan specification, as well as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkFormat.html">VkFormat</a> enum.
         /// 
         case r4g4UnormPack8 = 0 // DATA_FORMAT_R4G4_UNORM_PACK8
         /// 4-bit-per-channel red/green/blue/alpha channel data format, packed into 16 bits. Values are in the `[0.0, 1.0]` range.
@@ -882,9 +882,9 @@ open class RenderingDevice: Object {
         public static let colorAttachmentBit = TextureUsageBits (rawValue: 2)
         /// Texture can be used as a depth/stencil attachment in a framebuffer.
         public static let depthStencilAttachmentBit = TextureUsageBits (rawValue: 4)
-        /// Texture can be used as a [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage]storage image</a>.
+        /// Texture can be used as a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a>.
         public static let storageBit = TextureUsageBits (rawValue: 8)
-        /// Texture can be used as a [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage]storage image</a> with support for atomic operations.
+        /// Texture can be used as a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-storageimage">storage image</a> with support for atomic operations.
         public static let storageAtomicBit = TextureUsageBits (rawValue: 16)
         /// Texture can be read back on the CPU using ``textureGetData(texture:layer:)`` faster than without this bit, since it is always kept in the system memory.
         public static let cpuReadBit = TextureUsageBits (rawValue: 32)
@@ -894,7 +894,7 @@ open class RenderingDevice: Object {
         public static let canCopyFromBit = TextureUsageBits (rawValue: 128)
         /// Texture can be a destination for ``textureCopy(fromTexture:toTexture:fromPos:toPos:size:srcMipmap:dstMipmap:srcLayer:dstLayer:postBarrier:)``.
         public static let canCopyToBit = TextureUsageBits (rawValue: 256)
-        /// Texture can be used as a [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-inputattachment]input attachment</a> in a framebuffer.
+        /// Texture can be used as a <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#descriptorsets-inputattachment">input attachment</a> in a framebuffer.
         public static let inputAttachmentBit = TextureUsageBits (rawValue: 512)
         /// A textual representation of this instance, suitable for debugging
         public var debugDescription: String {
@@ -1110,7 +1110,7 @@ open class RenderingDevice: Object {
         case imageBuffer = 6 // UNIFORM_TYPE_IMAGE_BUFFER
         /// Uniform buffer uniform.
         case uniformBuffer = 7 // UNIFORM_TYPE_UNIFORM_BUFFER
-        /// [url=https://vkguide.dev/docs/chapter-4/storage_buffers/]Storage buffer</a> uniform.
+        /// <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">Storage buffer</a> uniform.
         case storageBuffer = 8 // UNIFORM_TYPE_STORAGE_BUFFER
         /// Input attachment uniform.
         case inputAttachment = 9 // UNIFORM_TYPE_INPUT_ATTACHMENT
@@ -1141,28 +1141,28 @@ open class RenderingDevice: Object {
         case points = 0 // RENDER_PRIMITIVE_POINTS
         /// Line list rendering primitive. Lines are drawn separated from each other.
         case lines = 1 // RENDER_PRIMITIVE_LINES
-        /// [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-line-lists-with-adjacency]Line list rendering primitive with adjacency.</a>
+        /// <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-line-lists-with-adjacency">Line list rendering primitive with adjacency.</a>
         /// 
         /// > Note: Adjacency is only useful with geometry shaders, which Godot does not expose.
         /// 
         case linesWithAdjacency = 2 // RENDER_PRIMITIVE_LINES_WITH_ADJACENCY
         /// Line strip rendering primitive. Lines drawn are connected to the previous vertex.
         case linestrips = 3 // RENDER_PRIMITIVE_LINESTRIPS
-        /// [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-line-strips-with-adjacency]Line strip rendering primitive with adjacency.</a>
+        /// <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-line-strips-with-adjacency">Line strip rendering primitive with adjacency.</a>
         /// 
         /// > Note: Adjacency is only useful with geometry shaders, which Godot does not expose.
         /// 
         case linestripsWithAdjacency = 4 // RENDER_PRIMITIVE_LINESTRIPS_WITH_ADJACENCY
         /// Triangle list rendering primitive. Triangles are drawn separated from each other.
         case triangles = 5 // RENDER_PRIMITIVE_TRIANGLES
-        /// [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-triangle-lists-with-adjacency]Triangle list rendering primitive with adjacency.</a>
+        /// <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-triangle-lists-with-adjacency">Triangle list rendering primitive with adjacency.</a>
         /// 
         /// > Note: Adjacency is only useful with geometry shaders, which Godot does not expose.
         /// 
         case trianglesWithAdjacency = 6 // RENDER_PRIMITIVE_TRIANGLES_WITH_ADJACENCY
         /// Triangle strip rendering primitive. Triangles drawn are connected to the previous triangle.
         case triangleStrips = 7 // RENDER_PRIMITIVE_TRIANGLE_STRIPS
-        /// [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-triangle-strips-with-adjacency]Triangle strip rendering primitive with adjacency.</a>
+        /// <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#drawing-triangle-strips-with-adjacency">Triangle strip rendering primitive with adjacency.</a>
         /// 
         /// > Note: Adjacency is only useful with geometry shaders, which Godot does not expose.
         /// 
@@ -1638,7 +1638,7 @@ open class RenderingDevice: Object {
         case maxTexturesPerUniformSet = 2 // LIMIT_MAX_TEXTURES_PER_UNIFORM_SET
         /// Maximum number of samplers that can be used per uniform set.
         case maxSamplersPerUniformSet = 3 // LIMIT_MAX_SAMPLERS_PER_UNIFORM_SET
-        /// Maximum number of [url=https://vkguide.dev/docs/chapter-4/storage_buffers/]storage buffers</a> per uniform set.
+        /// Maximum number of <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">storage buffers</a> per uniform set.
         case maxStorageBuffersPerUniformSet = 4 // LIMIT_MAX_STORAGE_BUFFERS_PER_UNIFORM_SET
         /// Maximum number of storage images per uniform set.
         case maxStorageImagesPerUniformSet = 5 // LIMIT_MAX_STORAGE_IMAGES_PER_UNIFORM_SET
@@ -1664,7 +1664,7 @@ open class RenderingDevice: Object {
         case maxTexturesPerShaderStage = 15 // LIMIT_MAX_TEXTURES_PER_SHADER_STAGE
         /// Maximum number of samplers per shader stage.
         case maxSamplersPerShaderStage = 16 // LIMIT_MAX_SAMPLERS_PER_SHADER_STAGE
-        /// Maximum number of [url=https://vkguide.dev/docs/chapter-4/storage_buffers/]storage buffers</a> per shader stage.
+        /// Maximum number of <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">storage buffers</a> per shader stage.
         case maxStorageBuffersPerShaderStage = 17 // LIMIT_MAX_STORAGE_BUFFERS_PER_SHADER_STAGE
         /// Maximum number of storage images per shader stage.
         case maxStorageImagesPerShaderStage = 18 // LIMIT_MAX_STORAGE_IMAGES_PER_SHADER_STAGE
@@ -3372,7 +3372,7 @@ open class RenderingDevice: Object {
         
     }()
     
-    /// Creates a [url=https://vkguide.dev/docs/chapter-4/storage_buffers/]storage buffer</a> with the specified `data` and `usage`. It can be accessed with the RID that is returned.
+    /// Creates a <a href="https://vkguide.dev/docs/chapter-4/storage_buffers/">storage buffer</a> with the specified `data` and `usage`. It can be accessed with the RID that is returned.
     /// 
     /// Once finished with your RID, you will want to free the RID using the RenderingDevice's ``freeRid(_:)`` method.
     /// 
@@ -5413,7 +5413,7 @@ open class RenderingDevice: Object {
         
     }()
     
-    /// Returns the memory usage in bytes corresponding to the given `type`. When using Vulkan, these statistics are calculated by [url=https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator]Vulkan Memory Allocator</a>.
+    /// Returns the memory usage in bytes corresponding to the given `type`. When using Vulkan, these statistics are calculated by <a href="https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator">Vulkan Memory Allocator</a>.
     public final func getMemoryUsage (type: RenderingDevice.MemoryType)-> UInt {
         var _result: UInt = 0
         #if true

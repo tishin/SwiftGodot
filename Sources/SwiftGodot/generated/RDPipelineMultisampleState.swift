@@ -25,7 +25,7 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    /// If `true`, enables per-sample shading which replaces MSAA by SSAA. This provides higher quality antialiasing that works with transparent (alpha scissor) edges. This has a very high performance cost. See also ``minSampleShading``. See the [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-sampleshading]per-sample shading Vulkan documentation</a> for more details.
+    /// If `true`, enables per-sample shading which replaces MSAA by SSAA. This provides higher quality antialiasing that works with transparent (alpha scissor) edges. This has a very high performance cost. See also ``minSampleShading``. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#primsrast-sampleshading">per-sample shading Vulkan documentation</a> for more details.
     final public var enableSampleShading: Bool {
         get {
             return get_enable_sample_shading ()
@@ -73,7 +73,7 @@ open class RDPipelineMultisampleState: RefCounted {
         
     }
     
-    /// The sample mask array. See the [url=https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask]sample mask Vulkan documentation</a> for more details.
+    /// The sample mask array. See the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#fragops-samplemask">sample mask Vulkan documentation</a> for more details.
     final public var sampleMasks: VariantCollection<Int64> {
         get {
             return get_sample_masks ()

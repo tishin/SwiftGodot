@@ -184,7 +184,7 @@ open class Input: Object {
     /// 
     /// ``isKeyPressed(keycode:)`` is only recommended over ``isPhysicalKeyPressed(keycode:)`` in non-game applications. This ensures that shortcut keys behave as expected depending on the user's keyboard layout, as keyboard shortcuts are generally dependent on the keyboard layout in non-game applications. If in doubt, use ``isPhysicalKeyPressed(keycode:)``.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     public static func isKeyPressed (keycode: Key)-> Bool {
         var _result: Bool = false
@@ -223,7 +223,7 @@ open class Input: Object {
     /// 
     /// ``isPhysicalKeyPressed(keycode:)`` is recommended over ``isKeyPressed(keycode:)`` for in-game actions, as it will make [kbd]W[/kbd]/[kbd]A[/kbd]/[kbd]S[/kbd]/[kbd]D[/kbd] layouts work regardless of the user's keyboard layout. ``isPhysicalKeyPressed(keycode:)`` will also ensure that the top row number keys work on any keyboard layout. If in doubt, use ``isPhysicalKeyPressed(keycode:)``.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isPhysicalKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isPhysicalKeyPressed(keycode:)`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     public static func isPhysicalKeyPressed (keycode: Key)-> Bool {
         var _result: Bool = false
@@ -369,7 +369,7 @@ open class Input: Object {
     /// 
     /// If `exactMatch` is `false`, it ignores additional input modifiers for ``InputEventKey`` and ``InputEventMouseButton`` events, and the direction for ``InputEventJoypadMotion`` events.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isActionPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     public static func isActionPressed (action: StringName, exactMatch: Bool = false)-> Bool {
         var _result: Bool = false
@@ -415,7 +415,7 @@ open class Input: Object {
     /// 
     /// > Note: Returning `true` does not imply that the action is _still_ pressed. An action can be pressed and released again rapidly, and `true` will still be returned so as not to miss input.
     /// 
-    /// > Note: Due to keyboard ghosting, ``isActionJustPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See [url=$DOCS_URL/tutorials/inputs/input_examples.html#keyboard-events]Input examples</a> in the documentation for more information.
+    /// > Note: Due to keyboard ghosting, ``isActionJustPressed(action:exactMatch:)`` may return `false` even if one of the action's keys is pressed. See <a href="https://docs.godotengine.org/en//tutorials/inputs/input_examples.html#keyboard-events">Input examples</a> in the documentation for more information.
     /// 
     /// > Note: During input handling (e.g. ``Node/_input(event:)``), use ``InputEvent/isActionPressed(action:allowEcho:exactMatch:)`` instead to query the action state of the current event.
     /// 

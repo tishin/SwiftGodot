@@ -29,7 +29,7 @@
 /// 
 /// Some ``Tweener``s use transitions and eases. The first accepts a ``Tween/TransitionType`` constant, and refers to the way the timing of the animation is handled (see <a href="https://easings.net/">easings.net</a> for some examples). The second accepts an ``Tween/EaseType`` constant, and controls where the `trans_type` is applied to the interpolation (in the beginning, the end, or both). If you don't know which transition and easing to pick, you can try different ``Tween/TransitionType`` constants with .easeInOut, and use the one that looks best.
 /// 
-/// [url=https://raw.githubusercontent.com/godotengine/godot-docs/master/img/tween_cheatsheet.webp]Tween easing and transition types cheatsheet</a>
+/// <a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/tween_cheatsheet.webp">Tween easing and transition types cheatsheet</a>
 /// 
 /// > Note: Tweens are not designed to be re-used and trying to do so results in an undefined behavior. Create a new Tween for each animation and every time you replay an animation from start. Keep in mind that Tweens start immediately, so only create a Tween when you want to start animating.
 /// 
