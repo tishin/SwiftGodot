@@ -10,7 +10,7 @@
 /// ``CanvasItemMaterial``s provide a means of modifying the textures associated with a CanvasItem. They specialize in describing blend and lighting behaviors for textures. Use a ``ShaderMaterial`` to more fully customize a material's interactions with a ``CanvasItem``.
 open class CanvasItemMaterial: Material {
     override open class var godotClassName: StringName { "CanvasItemMaterial" }
-    public enum BlendMode: Int64, CustomDebugStringConvertible {
+    public enum BlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
         case mix = 0 // BLEND_MODE_MIX
         /// Additive blending mode.
@@ -35,7 +35,7 @@ open class CanvasItemMaterial: Material {
         
     }
     
-    public enum LightMode: Int64, CustomDebugStringConvertible {
+    public enum LightMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Render the material using both light and non-light sensitive material properties.
         case normal = 0 // LIGHT_MODE_NORMAL
         /// Render the material as if there were no light.

@@ -10,7 +10,7 @@
 /// A container that arranges its child controls horizontally or vertically and wraps them around at the borders. This is similar to how text in a book wraps around when no more words can fit on a line.
 open class FlowContainer: Container {
     override open class var godotClassName: StringName { "FlowContainer" }
-    public enum AlignmentMode: Int64, CustomDebugStringConvertible {
+    public enum AlignmentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
         case begin = 0 // ALIGNMENT_BEGIN
         /// The child controls will be centered in the container.

@@ -10,7 +10,7 @@
 /// Translated to `uniform float` in the shader language.
 open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     override open class var godotClassName: StringName { "VisualShaderNodeFloatParameter" }
-    public enum Hint: Int64, CustomDebugStringConvertible {
+    public enum Hint: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No hint used.
         case none = 0 // HINT_NONE
         /// A range hint for scalar value, which limits possible input values between ``min`` and ``max``. Translated to `hint_range(min, max)` in shader code.

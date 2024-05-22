@@ -13,7 +13,7 @@
 /// 
 open class SceneState: RefCounted {
     override open class var godotClassName: StringName { "SceneState" }
-    public enum GenEditState: Int64, CustomDebugStringConvertible {
+    public enum GenEditState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If passed to ``PackedScene/instantiate(editState:)``, blocks edits to the scene state.
         case disabled = 0 // GEN_EDIT_STATE_DISABLED
         /// If passed to ``PackedScene/instantiate(editState:)``, provides inherited scene resources to the local scene.

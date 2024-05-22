@@ -10,7 +10,7 @@
 /// TextureProgressBar works like ``ProgressBar``, but uses up to 3 textures instead of Godot's ``Theme`` resource. It can be used to create horizontal, vertical and radial progress bars.
 open class TextureProgressBar: Range {
     override open class var godotClassName: StringName { "TextureProgressBar" }
-    public enum FillMode: Int64, CustomDebugStringConvertible {
+    public enum FillMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``textureProgress`` fills from left to right.
         case leftToRight = 0 // FILL_LEFT_TO_RIGHT
         /// The ``textureProgress`` fills from right to left.

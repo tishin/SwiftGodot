@@ -15,7 +15,7 @@
 /// 
 open class NavigationPolygon: Resource {
     override open class var godotClassName: StringName { "NavigationPolygon" }
-    public enum ParsedGeometryType: Int64, CustomDebugStringConvertible {
+    public enum ParsedGeometryType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Parses mesh instances as obstruction geometry. This includes ``Polygon2D``, ``MeshInstance2D``, ``MultiMeshInstance2D``, and ``TileMap`` nodes.
         /// 
         /// Meshes are only parsed when they use a 2D vertices surface format.
@@ -40,7 +40,7 @@ open class NavigationPolygon: Resource {
         
     }
     
-    public enum SourceGeometryMode: Int64, CustomDebugStringConvertible {
+    public enum SourceGeometryMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Scans the child nodes of the root node recursively for geometry.
         case rootNodeChildren = 0 // SOURCE_GEOMETRY_ROOT_NODE_CHILDREN
         /// Scans nodes in a group and their child nodes recursively for geometry. The group is specified by ``sourceGeometryGroupName``.

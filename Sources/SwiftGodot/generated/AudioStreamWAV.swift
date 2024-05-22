@@ -13,7 +13,7 @@
 /// 
 open class AudioStreamWAV: AudioStream {
     override open class var godotClassName: StringName { "AudioStreamWAV" }
-    public enum Format: Int64, CustomDebugStringConvertible {
+    public enum Format: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 8-bit audio codec.
         case format8Bits = 0 // FORMAT_8_BITS
         /// 16-bit audio codec.
@@ -32,7 +32,7 @@ open class AudioStreamWAV: AudioStream {
         
     }
     
-    public enum LoopMode: Int64, CustomDebugStringConvertible {
+    public enum LoopMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Audio does not loop.
         case disabled = 0 // LOOP_DISABLED
         /// Audio loops the data between ``loopBegin`` and ``loopEnd``, playing forward only.

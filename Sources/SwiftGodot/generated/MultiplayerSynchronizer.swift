@@ -26,7 +26,7 @@
 /// - ``visibilityChanged``
 open class MultiplayerSynchronizer: Node {
     override open class var godotClassName: StringName { "MultiplayerSynchronizer" }
-    public enum VisibilityUpdateMode: Int64, CustomDebugStringConvertible {
+    public enum VisibilityUpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Visibility filters are updated during process frames (see ``Node/``notificationInternalProcess````).
         case idle = 0 // VISIBILITY_PROCESS_IDLE
         /// Visibility filters are updated during physics frames (see ``Node/``notificationInternalPhysicsProcess````).

@@ -19,7 +19,7 @@
 /// 
 open class Environment: Resource {
     override open class var godotClassName: StringName { "Environment" }
-    public enum BGMode: Int64, CustomDebugStringConvertible {
+    public enum BGMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Clears the background using the clear color defined in ``ProjectSettings/rendering/environment/defaults/defaultClearColor``.
         case clearColor = 0 // BG_CLEAR_COLOR
         /// Clears the background using a custom clear color.
@@ -50,7 +50,7 @@ open class Environment: Resource {
         
     }
     
-    public enum AmbientSource: Int64, CustomDebugStringConvertible {
+    public enum AmbientSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Gather ambient light from whichever source is specified as the background.
         case bg = 0 // AMBIENT_SOURCE_BG
         /// Disable ambient light. This provides a slight performance boost over .sky.
@@ -72,7 +72,7 @@ open class Environment: Resource {
         
     }
     
-    public enum ReflectionSource: Int64, CustomDebugStringConvertible {
+    public enum ReflectionSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the background for reflections.
         case bg = 0 // REFLECTION_SOURCE_BG
         /// Disable reflections. This provides a slight performance boost over other options.
@@ -91,7 +91,7 @@ open class Environment: Resource {
         
     }
     
-    public enum ToneMapper: Int64, CustomDebugStringConvertible {
+    public enum ToneMapper: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Linear tonemapper operator. Reads the linear data and passes it on unmodified. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
         case linear = 0 // TONE_MAPPER_LINEAR
         /// Reinhardt tonemapper operator. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
@@ -116,7 +116,7 @@ open class Environment: Resource {
         
     }
     
-    public enum GlowBlendMode: Int64, CustomDebugStringConvertible {
+    public enum GlowBlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Additive glow blending mode. Mostly used for particles, glows (bloom), lens flare, bright sources.
         case additive = 0 // GLOW_BLEND_MODE_ADDITIVE
         /// Screen glow blending mode. Increases brightness, used frequently with bloom.
@@ -141,7 +141,7 @@ open class Environment: Resource {
         
     }
     
-    public enum SDFGIYScale: Int64, CustomDebugStringConvertible {
+    public enum SDFGIYScale: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
         case sdfgiYScale50Percent = 0 // SDFGI_Y_SCALE_50_PERCENT
         /// Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.

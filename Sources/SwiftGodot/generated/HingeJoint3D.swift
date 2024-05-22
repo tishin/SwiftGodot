@@ -10,7 +10,7 @@
 /// A physics joint that restricts the rotation of a 3D physics body around an axis relative to another physics body. For example, Body A can be a ``StaticBody3D`` representing a door hinge that a ``RigidBody3D`` rotates around.
 open class HingeJoint3D: Joint3D {
     override open class var godotClassName: StringName { "HingeJoint3D" }
-    public enum Param: Int64, CustomDebugStringConvertible {
+    public enum Param: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The speed with which the two bodies get pulled together when they move in different directions.
         case bias = 0 // PARAM_BIAS
         /// The maximum rotation. Only active if ``angularLimit/enable`` is `true`.
@@ -47,7 +47,7 @@ open class HingeJoint3D: Joint3D {
         
     }
     
-    public enum Flag: Int64, CustomDebugStringConvertible {
+    public enum Flag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If `true`, the hinges maximum and minimum rotation, defined by ``angularLimit/lower`` and ``angularLimit/upper`` has effects.
         case useLimit = 0 // FLAG_USE_LIMIT
         /// When activated, a motor turns the hinge.

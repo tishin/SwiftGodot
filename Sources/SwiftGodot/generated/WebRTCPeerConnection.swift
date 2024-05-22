@@ -28,7 +28,7 @@
 /// - ``dataChannelReceived``
 open class WebRTCPeerConnection: RefCounted {
     override open class var godotClassName: StringName { "WebRTCPeerConnection" }
-    public enum ConnectionState: Int64, CustomDebugStringConvertible {
+    public enum ConnectionState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The connection is new, data channels and an offer can be created in this state.
         case new = 0 // STATE_NEW
         /// The peer is connecting, ICE is in progress, none of the transports has failed.
@@ -56,7 +56,7 @@ open class WebRTCPeerConnection: RefCounted {
         
     }
     
-    public enum GatheringState: Int64, CustomDebugStringConvertible {
+    public enum GatheringState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The peer connection was just created and hasn't done any networking yet.
         case new = 0 // GATHERING_STATE_NEW
         /// The ICE agent is in the process of gathering candidates for the connection.
@@ -75,7 +75,7 @@ open class WebRTCPeerConnection: RefCounted {
         
     }
     
-    public enum SignalingState: Int64, CustomDebugStringConvertible {
+    public enum SignalingState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// There is no ongoing exchange of offer and answer underway. This may mean that the ``WebRTCPeerConnection`` is new (.stateNew) or that negotiation is complete and a connection has been established (.stateConnected).
         case stable = 0 // SIGNALING_STATE_STABLE
         /// The local peer has called ``setLocalDescription(type:sdp:)``, passing in SDP representing an offer (usually created by calling ``createOffer()``), and the offer has been applied successfully.

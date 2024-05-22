@@ -21,7 +21,7 @@
 /// 
 open class LightmapGI: VisualInstance3D {
     override open class var godotClassName: StringName { "LightmapGI" }
-    public enum BakeQuality: Int64, CustomDebugStringConvertible {
+    public enum BakeQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityProbeRayCount``.
         case low = 0 // BAKE_QUALITY_LOW
         /// Medium bake quality (fast bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/mediumQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/mediumQualityProbeRayCount``.
@@ -43,7 +43,7 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    public enum GenerateProbes: Int64, CustomDebugStringConvertible {
+    public enum GenerateProbes: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Don't generate lightmap probes for lighting dynamic objects.
         case disabled = 0 // GENERATE_PROBES_DISABLED
         /// Lowest level of subdivision (fastest bake times, smallest file sizes).
@@ -68,7 +68,7 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    public enum BakeError: Int64, CustomDebugStringConvertible {
+    public enum BakeError: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lightmap baking was successful.
         case ok = 0 // BAKE_ERROR_OK
         /// Lightmap baking failed because the root node for the edited scene could not be accessed.
@@ -108,7 +108,7 @@ open class LightmapGI: VisualInstance3D {
         
     }
     
-    public enum EnvironmentMode: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Ignore environment lighting when baking lightmaps.
         case disabled = 0 // ENVIRONMENT_MODE_DISABLED
         /// Use the scene's environment lighting when baking lightmaps.

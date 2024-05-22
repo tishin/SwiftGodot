@@ -10,7 +10,7 @@
 /// A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
 open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorOp" }
-    public enum Operator: Int64, CustomDebugStringConvertible {
+    public enum Operator: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Adds two vectors.
         case add = 0 // OP_ADD
         /// Subtracts a vector from a vector.

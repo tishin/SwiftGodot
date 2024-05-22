@@ -27,7 +27,7 @@
 /// - ``finished``
 open class RichTextLabel: Control {
     override open class var godotClassName: StringName { "RichTextLabel" }
-    public enum ListType: Int64, CustomDebugStringConvertible {
+    public enum ListType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Each list item has a number marker.
         case numbers = 0 // LIST_NUMBERS
         /// Each list item has a letter marker.
@@ -49,7 +49,7 @@ open class RichTextLabel: Control {
         
     }
     
-    public enum MenuItems: Int64, CustomDebugStringConvertible {
+    public enum MenuItems: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Copies the selected text.
         case copy = 0 // MENU_COPY
         /// Selects the whole ``RichTextLabel`` text.

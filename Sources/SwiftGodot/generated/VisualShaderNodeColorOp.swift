@@ -10,7 +10,7 @@
 /// Applies ```operator``` to two color inputs.
 open class VisualShaderNodeColorOp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeColorOp" }
-    public enum Operator: Int64, CustomDebugStringConvertible {
+    public enum Operator: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Produce a screen effect with the following formula:
         /// 
         case screen = 0 // OP_SCREEN

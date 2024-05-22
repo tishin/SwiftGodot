@@ -2,7 +2,7 @@
 
 @_implementationOnly import GDExtension
 
-public enum Side: Int64, CustomDebugStringConvertible {
+public enum Side: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Left side, usually used for ``Control`` or ``StyleBox``-derived classes.
     case left = 0 // SIDE_LEFT
     /// Top side, usually used for ``Control`` or ``StyleBox``-derived classes.
@@ -24,7 +24,7 @@ public enum Side: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum Corner: Int64, CustomDebugStringConvertible {
+public enum Corner: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Top-left corner.
     case topLeft = 0 // CORNER_TOP_LEFT
     /// Top-right corner.
@@ -46,7 +46,7 @@ public enum Corner: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum Orientation: Int64, CustomDebugStringConvertible {
+public enum Orientation: Int64, CaseIterable, CustomDebugStringConvertible {
     /// General vertical alignment, usually used for ``Separator``, ``ScrollBar``, ``Slider``, etc.
     case vertical = 1 // VERTICAL
     /// General horizontal alignment, usually used for ``Separator``, ``ScrollBar``, ``Slider``, etc.
@@ -62,7 +62,7 @@ public enum Orientation: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum ClockDirection: Int64, CustomDebugStringConvertible {
+public enum ClockDirection: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Clockwise rotation. Used by some methods (e.g. ``Image/rotate90(direction:)``).
     case clockwise = 0 // CLOCKWISE
     /// Counter-clockwise rotation. Used by some methods (e.g. ``Image/rotate90(direction:)``).
@@ -78,7 +78,7 @@ public enum ClockDirection: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum HorizontalAlignment: Int64, CustomDebugStringConvertible {
+public enum HorizontalAlignment: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Horizontal left alignment, usually for text-derived classes.
     case left = 0 // HORIZONTAL_ALIGNMENT_LEFT
     /// Horizontal center alignment, usually for text-derived classes.
@@ -100,7 +100,7 @@ public enum HorizontalAlignment: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum VerticalAlignment: Int64, CustomDebugStringConvertible {
+public enum VerticalAlignment: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Vertical top alignment, usually for text-derived classes.
     case top = 0 // VERTICAL_ALIGNMENT_TOP
     /// Vertical center alignment, usually for text-derived classes.
@@ -122,7 +122,7 @@ public enum VerticalAlignment: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum InlineAlignment: Int64, CustomDebugStringConvertible {
+public enum InlineAlignment: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Aligns the center of the inline object (e.g. image, table) to the position of the text specified by `INLINE_ALIGNMENT_TO_*` constant.
     case centerTo = 1 // INLINE_ALIGNMENT_CENTER_TO
     /// Aligns the baseline (user defined) of the inline object (e.g. image, table) to the position of the text specified by `INLINE_ALIGNMENT_TO_*` constant.
@@ -159,7 +159,7 @@ public enum InlineAlignment: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum EulerOrder: Int64, CustomDebugStringConvertible {
+public enum EulerOrder: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Specifies that Euler angles should be in XYZ order. When composing, the order is X, Y, Z. When decomposing, the order is reversed, first Z, then Y, and X last.
     case xyz = 0 // EULER_ORDER_XYZ
     /// Specifies that Euler angles should be in XZY order. When composing, the order is X, Z, Y. When decomposing, the order is reversed, first Y, then Z, and X last.
@@ -187,7 +187,7 @@ public enum EulerOrder: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum Key: Int64, CustomDebugStringConvertible {
+public enum Key: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any key. This is used to initialize ``Key`` properties with a generic state.
     case none = 0 // KEY_NONE
     /// Keycodes with this bit applied are non-printable.
@@ -818,7 +818,7 @@ public struct KeyModifierMask: OptionSet, CustomDebugStringConvertible {
     
 }
 
-public enum MouseButton: Int64, CustomDebugStringConvertible {
+public enum MouseButton: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any mouse button. This is used to initialize ``MouseButton`` properties with a generic state.
     case none = 0 // MOUSE_BUTTON_NONE
     /// Primary mouse button, usually assigned to the left button.
@@ -888,7 +888,7 @@ public struct MouseButtonMask: OptionSet, CustomDebugStringConvertible {
     
 }
 
-public enum JoyButton: Int64, CustomDebugStringConvertible {
+public enum JoyButton: Int64, CaseIterable, CustomDebugStringConvertible {
     /// An invalid game controller button.
     case invalid = -1 // JOY_BUTTON_INVALID
     /// Game controller SDL button A. Corresponds to the bottom action button: Sony Cross, Xbox A, Nintendo B.
@@ -977,7 +977,7 @@ public enum JoyButton: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum JoyAxis: Int64, CustomDebugStringConvertible {
+public enum JoyAxis: Int64, CaseIterable, CustomDebugStringConvertible {
     /// An invalid game controller axis.
     case invalid = -1 // JOY_AXIS_INVALID
     /// Game controller left joystick x-axis.
@@ -1014,7 +1014,7 @@ public enum JoyAxis: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum MIDIMessage: Int64, CustomDebugStringConvertible {
+public enum MIDIMessage: Int64, CaseIterable, CustomDebugStringConvertible {
     /// Enum value which doesn't correspond to any MIDI message. This is used to initialize ``MIDIMessage`` properties with a generic state.
     case none = 0 // MIDI_MESSAGE_NONE
     /// MIDI note OFF message. Not all MIDI devices send this event; some send ``MIDIMessage/noteOn`` with zero velocity instead. See the documentation of ``InputEventMIDI`` for information of how to use MIDI inputs.
@@ -1081,7 +1081,7 @@ public enum MIDIMessage: Int64, CustomDebugStringConvertible {
     
 }
 
-public enum GodotError: Int64, CustomDebugStringConvertible, Error {
+public enum GodotError: Int64, CaseIterable, CustomDebugStringConvertible, Error {
     /// Methods that return ``GodotError`` return ``GodotError/ok`` when no error occurred.
     /// 
     /// Since ``GodotError/ok`` has value 0, and all other error constants are positive integers, it can also be used in boolean checks.
@@ -1249,7 +1249,7 @@ public enum GodotError: Int64, CustomDebugStringConvertible, Error {
     public var localizedDescription: String { debugDescription }
 }
 
-public enum PropertyHint: Int64, CustomDebugStringConvertible {
+public enum PropertyHint: Int64, CaseIterable, CustomDebugStringConvertible {
     /// The property has no hint for the editor.
     case none = 0 // PROPERTY_HINT_NONE
     /// Hints that an integer or float property should be within a range specified via the hint string `"min,max"` or `"min,max,step"`. The hint string can optionally include `"or_greater"` and/or `"or_less"` to allow manual input going respectively above the max or below the min values.
@@ -1558,7 +1558,7 @@ public struct MethodFlags: OptionSet, CustomDebugStringConvertible {
 }
 
 extension Variant {
-    public enum GType: Int64, CustomDebugStringConvertible {
+    public enum GType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Variable is `null`.
         case `nil` = 0 // TYPE_NIL
         /// Variable is of type [bool].
@@ -1688,7 +1688,7 @@ extension Variant {
 }
 
 extension Variant {
-    public enum Operator: Int64, CustomDebugStringConvertible {
+    public enum Operator: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Equality operator (`==`).
         case equal = 0 // OP_EQUAL
         /// Inequality operator (`!=`).

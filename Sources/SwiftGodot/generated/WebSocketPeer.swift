@@ -17,7 +17,7 @@
 /// 
 open class WebSocketPeer: PacketPeer {
     override open class var godotClassName: StringName { "WebSocketPeer" }
-    public enum WriteMode: Int64, CustomDebugStringConvertible {
+    public enum WriteMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Specifies that WebSockets messages should be transferred as text payload (only valid UTF-8 is allowed).
         case text = 0 // WRITE_MODE_TEXT
         /// Specifies that WebSockets messages should be transferred as binary payload (any byte combination is allowed).
@@ -33,7 +33,7 @@ open class WebSocketPeer: PacketPeer {
         
     }
     
-    public enum State: Int64, CustomDebugStringConvertible {
+    public enum State: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Socket has been created. The connection is not yet open.
         case connecting = 0 // STATE_CONNECTING
         /// The connection is open and ready to communicate.

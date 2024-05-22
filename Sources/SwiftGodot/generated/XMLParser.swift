@@ -15,7 +15,7 @@
 /// 
 open class XMLParser: RefCounted {
     override open class var godotClassName: StringName { "XMLParser" }
-    public enum NodeType: Int64, CustomDebugStringConvertible {
+    public enum NodeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// There's no node (no file or buffer opened).
         case none = 0 // NODE_NONE
         /// An element node type, also known as a tag, e.g. `<title>`.

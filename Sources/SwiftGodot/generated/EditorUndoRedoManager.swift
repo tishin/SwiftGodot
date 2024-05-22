@@ -31,7 +31,7 @@
 /// - ``versionChanged``
 open class EditorUndoRedoManager: Object {
     override open class var godotClassName: StringName { "EditorUndoRedoManager" }
-    public enum SpecialHistory: Int64, CustomDebugStringConvertible {
+    public enum SpecialHistory: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Global history not associated with any scene, but with external resources etc.
         case globalHistory = 0 // GLOBAL_HISTORY
         /// History associated with remote inspector. Used when live editing a running project.

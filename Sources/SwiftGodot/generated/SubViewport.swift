@@ -13,7 +13,7 @@
 /// 
 open class SubViewport: Viewport {
     override open class var godotClassName: StringName { "SubViewport" }
-    public enum ClearMode: Int64, CustomDebugStringConvertible {
+    public enum ClearMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Always clear the render target before drawing.
         case always = 0 // CLEAR_MODE_ALWAYS
         /// Never clear the render target.
@@ -32,7 +32,7 @@ open class SubViewport: Viewport {
         
     }
     
-    public enum UpdateMode: Int64, CustomDebugStringConvertible {
+    public enum UpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not update the render target.
         case disabled = 0 // UPDATE_DISABLED
         /// Update the render target once, then switch to .updateDisabled.

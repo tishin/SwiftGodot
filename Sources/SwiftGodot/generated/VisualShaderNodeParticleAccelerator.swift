@@ -10,7 +10,7 @@
 /// Particle accelerator can be used in "process" step of particle shader. It will accelerate the particles. Connect it to the Velocity output port.
 open class VisualShaderNodeParticleAccelerator: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeParticleAccelerator" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The particles will be accelerated based on their velocity.
         case linear = 0 // MODE_LINEAR
         /// The particles will be accelerated towards or away from the center.

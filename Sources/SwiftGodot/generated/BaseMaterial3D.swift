@@ -10,7 +10,7 @@
 /// This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
 open class BaseMaterial3D: Material {
     override open class var godotClassName: StringName { "BaseMaterial3D" }
-    public enum TextureParam: Int64, CustomDebugStringConvertible {
+    public enum TextureParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Texture specifying per-pixel color.
         case albedo = 0 // TEXTURE_ALBEDO
         /// Texture specifying per-pixel metallic value.
@@ -77,7 +77,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum TextureFilter: Int64, CustomDebugStringConvertible {
+    public enum TextureFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
         case nearest = 0 // TEXTURE_FILTER_NEAREST
         /// The texture filter blends between the nearest 4 pixels. Use this when you want to avoid a pixelated style, but do not want mipmaps.
@@ -108,7 +108,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum DetailUV: Int64, CustomDebugStringConvertible {
+    public enum DetailUV: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use `UV` with the detail texture.
         case detailUv1 = 0 // DETAIL_UV_1
         /// Use `UV2` with the detail texture.
@@ -124,7 +124,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum Transparency: Int64, CustomDebugStringConvertible {
+    public enum Transparency: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The material will not use transparency. This is the fastest to render.
         case disabled = 0 // TRANSPARENCY_DISABLED
         /// The material will use the texture's alpha values for transparency. This is the slowest to render, and disables shadow casting.
@@ -152,7 +152,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum ShadingMode: Int64, CustomDebugStringConvertible {
+    public enum ShadingMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The object will not receive shadows. This is the fastest to render, but it disables all interactions with lights.
         case unshaded = 0 // SHADING_MODE_UNSHADED
         /// The object will be shaded per pixel. Useful for realistic shading effects.
@@ -174,7 +174,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum Feature: Int64, CustomDebugStringConvertible {
+    public enum Feature: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant for setting ``emissionEnabled``.
         case emission = 0 // FEATURE_EMISSION
         /// Constant for setting ``normalEnabled``.
@@ -223,7 +223,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum BlendMode: Int64, CustomDebugStringConvertible {
+    public enum BlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default blend mode. The color of the object is blended over the background based on the object's alpha value.
         case mix = 0 // BLEND_MODE_MIX
         /// The color of the object is added to the background.
@@ -245,7 +245,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum AlphaAntiAliasing: Int64, CustomDebugStringConvertible {
+    public enum AlphaAntiAliasing: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables Alpha AntiAliasing for the material.
         case off = 0 // ALPHA_ANTIALIASING_OFF
         /// Enables AlphaToCoverage. Alpha values in the material are passed to the AntiAliasing sample mask.
@@ -264,7 +264,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum DepthDrawMode: Int64, CustomDebugStringConvertible {
+    public enum DepthDrawMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default depth draw mode. Depth is drawn only for opaque objects during the opaque prepass (if any) and during the opaque pass.
         case opaqueOnly = 0 // DEPTH_DRAW_OPAQUE_ONLY
         /// Objects will write to depth during the opaque and the transparent passes. Transparent objects that are close to the camera may obscure other transparent objects behind them.
@@ -286,7 +286,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum CullMode: Int64, CustomDebugStringConvertible {
+    public enum CullMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default cull mode. The back of the object is culled when not visible. Back face triangles will be culled when facing the camera. This results in only the front side of triangles being drawn. For closed-surface meshes, this means that only the exterior of the mesh will be visible.
         case back = 0 // CULL_BACK
         /// Front face triangles will be culled when facing the camera. This results in only the back side of triangles being drawn. For closed-surface meshes, this means that the interior of the mesh will be drawn instead of the exterior.
@@ -305,7 +305,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum Flags: Int64, CustomDebugStringConvertible {
+    public enum Flags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables the depth test, so this object is drawn on top of all others drawn before it. This puts the object in the transparent draw pass where it is sorted based on distance to camera. Objects drawn after it in the draw order may cover it. This also disables writing to depth.
         case disableDepthTest = 0 // FLAG_DISABLE_DEPTH_TEST
         /// Set `ALBEDO` to the per-vertex color specified in the mesh.
@@ -387,7 +387,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum DiffuseMode: Int64, CustomDebugStringConvertible {
+    public enum DiffuseMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default diffuse scattering algorithm.
         case burley = 0 // DIFFUSE_BURLEY
         /// Diffuse scattering ignores roughness.
@@ -409,7 +409,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum SpecularMode: Int64, CustomDebugStringConvertible {
+    public enum SpecularMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default specular blob.
         case schlickGgx = 0 // SPECULAR_SCHLICK_GGX
         /// Toon blob which changes size based on roughness.
@@ -428,7 +428,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum BillboardMode: Int64, CustomDebugStringConvertible {
+    public enum BillboardMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Billboard mode is disabled.
         case disabled = 0 // BILLBOARD_DISABLED
         /// The object's Z axis will always face the camera.
@@ -453,7 +453,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum TextureChannel: Int64, CustomDebugStringConvertible {
+    public enum TextureChannel: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Used to read from the red channel of a texture.
         case red = 0 // TEXTURE_CHANNEL_RED
         /// Used to read from the green channel of a texture.
@@ -478,7 +478,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum EmissionOperator: Int64, CustomDebugStringConvertible {
+    public enum EmissionOperator: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Adds the emission color to the color from the emission texture.
         case add = 0 // EMISSION_OP_ADD
         /// Multiplies the emission color by the color from the emission texture.
@@ -494,7 +494,7 @@ open class BaseMaterial3D: Material {
         
     }
     
-    public enum DistanceFadeMode: Int64, CustomDebugStringConvertible {
+    public enum DistanceFadeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not use distance fade.
         case disabled = 0 // DISTANCE_FADE_DISABLED
         /// Smoothly fades the object out based on each pixel's distance from the camera using the alpha channel.

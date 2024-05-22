@@ -60,7 +60,7 @@
 /// - ``textSubmitted``
 open class LineEdit: Control {
     override open class var godotClassName: StringName { "LineEdit" }
-    public enum MenuItems: Int64, CustomDebugStringConvertible {
+    public enum MenuItems: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Cuts (copies and clears) the selected text.
         case cut = 0 // MENU_CUT
         /// Copies the selected text.
@@ -166,7 +166,7 @@ open class LineEdit: Control {
         
     }
     
-    public enum VirtualKeyboardType: Int64, CustomDebugStringConvertible {
+    public enum VirtualKeyboardType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default text virtual keyboard.
         case `default` = 0 // KEYBOARD_TYPE_DEFAULT
         /// Multiline virtual keyboard.

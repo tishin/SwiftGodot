@@ -10,7 +10,7 @@
 /// ENet's purpose is to provide a relatively thin, simple and robust network communication layer on top of UDP (User Datagram Protocol).
 open class ENetConnection: RefCounted {
     override open class var godotClassName: StringName { "ENetConnection" }
-    public enum CompressionMode: Int64, CustomDebugStringConvertible {
+    public enum CompressionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No compression. This uses the most bandwidth, but has the upside of requiring the fewest CPU resources. This option may also be used to make network debugging using tools like Wireshark easier.
         case none = 0 // COMPRESS_NONE
         /// ENet's built-in range encoding. Works well on small packets, but is not the most efficient algorithm on packets larger than 4 KB.
@@ -35,7 +35,7 @@ open class ENetConnection: RefCounted {
         
     }
     
-    public enum EventType: Int64, CustomDebugStringConvertible {
+    public enum EventType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// An error occurred during ``service(timeout:)``. You will likely need to ``destroy()`` the host and recreate it.
         case error = -1 // EVENT_ERROR
         /// No event occurred within the specified time limit.
@@ -60,7 +60,7 @@ open class ENetConnection: RefCounted {
         
     }
     
-    public enum HostStatistic: Int64, CustomDebugStringConvertible {
+    public enum HostStatistic: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Total data sent.
         case sentData = 0 // HOST_TOTAL_SENT_DATA
         /// Total UDP packets sent.

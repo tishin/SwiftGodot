@@ -36,7 +36,7 @@
 /// - ``nothingSelected``
 open class Tree: Control {
     override open class var godotClassName: StringName { "Tree" }
-    public enum SelectMode: Int64, CustomDebugStringConvertible {
+    public enum SelectMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
         /// 
         /// The focus cursor is always hidden in this mode, but it is positioned at the current selection, making the currently selected item the currently focused item.
@@ -64,7 +64,7 @@ open class Tree: Control {
         
     }
     
-    public enum DropModeFlags: Int64, CustomDebugStringConvertible {
+    public enum DropModeFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables all drop sections, but still allows to detect the "on item" drop section by ``getDropSectionAtPosition(_:)``.
         /// 
         /// > Note: This is the default flag, it has no effect when combined with other flags.

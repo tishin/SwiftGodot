@@ -30,7 +30,7 @@
 /// - ``titlebarChanged``
 open class Window: Viewport {
     override open class var godotClassName: StringName { "Window" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Windowed mode, i.e. ``Window`` doesn't occupy the whole screen (unless set to the size of the screen).
         case windowed = 0 // MODE_WINDOWED
         /// Minimized window mode, i.e. ``Window`` is not visible and available on window manager's window list. Normally happens when the minimize button is pressed.
@@ -75,7 +75,7 @@ open class Window: Viewport {
         
     }
     
-    public enum Flags: Int64, CustomDebugStringConvertible {
+    public enum Flags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The window can't be resized by dragging its resize grip. It's still possible to resize the window using ``size``. This flag is ignored for full screen windows. Set with ``unresizable``.
         case resizeDisabled = 0 // FLAG_RESIZE_DISABLED
         /// The window do not have native title bar and other decorations. This flag is ignored for full-screen windows. Set with ``borderless``.
@@ -126,7 +126,7 @@ open class Window: Viewport {
         
     }
     
-    public enum ContentScaleMode: Int64, CustomDebugStringConvertible {
+    public enum ContentScaleMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The content will not be scaled to match the ``Window``'s size.
         case disabled = 0 // CONTENT_SCALE_MODE_DISABLED
         /// The content will be rendered at the target size. This is more performance-expensive than .viewport, but provides better results.
@@ -145,7 +145,7 @@ open class Window: Viewport {
         
     }
     
-    public enum ContentScaleAspect: Int64, CustomDebugStringConvertible {
+    public enum ContentScaleAspect: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The aspect will be ignored. Scaling will simply stretch the content to fit the target size.
         case ignore = 0 // CONTENT_SCALE_ASPECT_IGNORE
         /// The content's aspect will be preserved. If the target size has different aspect from the base one, the image will be centered and black bars will appear on left and right sides.
@@ -170,7 +170,7 @@ open class Window: Viewport {
         
     }
     
-    public enum ContentScaleStretch: Int64, CustomDebugStringConvertible {
+    public enum ContentScaleStretch: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The content will be stretched according to a fractional factor. This fills all the space available in the window, but allows "pixel wobble" to occur due to uneven pixel scaling.
         case fractional = 0 // CONTENT_SCALE_STRETCH_FRACTIONAL
         /// The content will be stretched only according to an integer factor, preserving sharp pixels. This may leave a black background visible on the window's edges depending on the window size.
@@ -186,7 +186,7 @@ open class Window: Viewport {
         
     }
     
-    public enum LayoutDirection: Int64, CustomDebugStringConvertible {
+    public enum LayoutDirection: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Automatic layout direction, determined from the parent window layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
         /// Automatic layout direction, determined from the current locale.
@@ -208,7 +208,7 @@ open class Window: Viewport {
         
     }
     
-    public enum WindowInitialPosition: Int64, CustomDebugStringConvertible {
+    public enum WindowInitialPosition: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Initial window position is determined by ``position``.
         case absolute = 0 // WINDOW_INITIAL_POSITION_ABSOLUTE
         /// Initial window position is the center of the primary screen.

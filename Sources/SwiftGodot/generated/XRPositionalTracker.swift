@@ -26,7 +26,7 @@
 /// - ``profileChanged``
 open class XRPositionalTracker: RefCounted {
     override open class var godotClassName: StringName { "XRPositionalTracker" }
-    public enum TrackerHand: Int64, CustomDebugStringConvertible {
+    public enum TrackerHand: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The hand this tracker is held in is unknown or not applicable.
         case unknown = 0 // TRACKER_HAND_UNKNOWN
         /// This tracker is the left hand controller.

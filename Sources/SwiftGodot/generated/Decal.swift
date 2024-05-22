@@ -21,7 +21,7 @@
 /// 
 open class Decal: VisualInstance3D {
     override open class var godotClassName: StringName { "Decal" }
-    public enum DecalTexture: Int64, CustomDebugStringConvertible {
+    public enum DecalTexture: Int64, CaseIterable, CustomDebugStringConvertible {
         /// ``Texture2D`` corresponding to ``textureAlbedo``.
         case albedo = 0 // TEXTURE_ALBEDO
         /// ``Texture2D`` corresponding to ``textureNormal``.

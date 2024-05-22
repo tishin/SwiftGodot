@@ -33,7 +33,7 @@ open class PhysicsServer3D: Object {
     }()
     
     override open class var godotClassName: StringName { "PhysicsServer3D" }
-    public enum JointType: Int64, CustomDebugStringConvertible {
+    public enum JointType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``Joint3D`` is a ``PinJoint3D``.
         case pin = 0 // JOINT_TYPE_PIN
         /// The ``Joint3D`` is a ``HingeJoint3D``.
@@ -61,7 +61,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum PinJointParam: Int64, CustomDebugStringConvertible {
+    public enum PinJointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The strength with which the pinned objects try to stay in positional relation to each other.
         /// 
         /// The higher, the stronger.
@@ -86,7 +86,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum HingeJointParam: Int64, CustomDebugStringConvertible {
+    public enum HingeJointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The speed with which the two bodies get pulled together when they move in different directions.
         case bias = 0 // HINGE_JOINT_BIAS
         /// The maximum rotation across the Hinge.
@@ -120,7 +120,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum HingeJointFlag: Int64, CustomDebugStringConvertible {
+    public enum HingeJointFlag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If `true`, the Hinge has a maximum and a minimum rotation.
         case useLimit = 0 // HINGE_JOINT_FLAG_USE_LIMIT
         /// If `true`, a motor turns the Hinge.
@@ -136,7 +136,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum SliderJointParam: Int64, CustomDebugStringConvertible {
+    public enum SliderJointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The maximum difference between the pivot points on their X axis before damping happens.
         case linearLimitUpper = 0 // SLIDER_JOINT_LINEAR_LIMIT_UPPER
         /// The minimum difference between the pivot points on their X axis before damping happens.
@@ -215,7 +215,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum ConeTwistJointParam: Int64, CustomDebugStringConvertible {
+    public enum ConeTwistJointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Swing is rotation from side to side, around the axis perpendicular to the twist axis.
         /// 
         /// The swing span defines, how much rotation will not get corrected along the swing axis.
@@ -253,7 +253,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum G6DOFJointAxisParam: Int64, CustomDebugStringConvertible {
+    public enum G6DOFJointAxisParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The minimum difference between the pivot points' axes.
         case linearLowerLimit = 0 // G6DOF_JOINT_LINEAR_LOWER_LIMIT
         /// The maximum difference between the pivot points' axes.
@@ -311,7 +311,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum G6DOFJointAxisFlag: Int64, CustomDebugStringConvertible {
+    public enum G6DOFJointAxisFlag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If set, linear motion is possible within the given limits.
         case linearLimit = 0 // G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT
         /// If set, rotational motion is possible.
@@ -333,7 +333,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum ShapeType: Int64, CustomDebugStringConvertible {
+    public enum ShapeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``Shape3D`` is a ``WorldBoundaryShape3D``.
         case worldBoundary = 0 // SHAPE_WORLD_BOUNDARY
         /// The ``Shape3D`` is a ``SeparationRayShape3D``.
@@ -376,7 +376,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum AreaParameter: Int64, CustomDebugStringConvertible {
+    public enum AreaParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get gravity override mode in an area. See ``PhysicsServer3D/AreaSpaceOverrideMode`` for possible values.
         case gravityOverrideMode = 0 // AREA_PARAM_GRAVITY_OVERRIDE_MODE
         /// Constant to set/get gravity strength in an area.
@@ -431,7 +431,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum AreaSpaceOverrideMode: Int64, CustomDebugStringConvertible {
+    public enum AreaSpaceOverrideMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
         case disabled = 0 // AREA_SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
@@ -456,7 +456,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum BodyMode: Int64, CustomDebugStringConvertible {
+    public enum BodyMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
         case `static` = 0 // BODY_MODE_STATIC
         /// Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
@@ -478,7 +478,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum BodyParameter: Int64, CustomDebugStringConvertible {
+    public enum BodyParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get a body's bounce factor.
         case bounce = 0 // BODY_PARAM_BOUNCE
         /// Constant to set/get a body's friction.
@@ -521,7 +521,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum BodyDampMode: Int64, CustomDebugStringConvertible {
+    public enum BodyDampMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The body's damping value is added to any value set in areas or the default value.
         case combine = 0 // BODY_DAMP_MODE_COMBINE
         /// The body's damping value replaces any value set in areas or the default value.
@@ -537,7 +537,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum BodyState: Int64, CustomDebugStringConvertible {
+    public enum BodyState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get the current transform matrix of the body.
         case transform = 0 // BODY_STATE_TRANSFORM
         /// Constant to set/get the current linear velocity of the body.
@@ -562,7 +562,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum AreaBodyStatus: Int64, CustomDebugStringConvertible {
+    public enum AreaBodyStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The value of the first parameter and area callback function receives, when an object enters one of its shapes.
         case added = 0 // AREA_BODY_ADDED
         /// The value of the first parameter and area callback function receives, when an object exits one of its shapes.
@@ -578,7 +578,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
+    public enum ProcessInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to get the number of objects that are not sleeping.
         case activeObjects = 0 // INFO_ACTIVE_OBJECTS
         /// Constant to get the number of possible collisions.
@@ -597,7 +597,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum SpaceParameter: Int64, CustomDebugStringConvertible {
+    public enum SpaceParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
         case contactRecycleRadius = 0 // SPACE_PARAM_CONTACT_RECYCLE_RADIUS
         /// Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded.
@@ -631,7 +631,7 @@ open class PhysicsServer3D: Object {
         
     }
     
-    public enum BodyAxis: Int64, CustomDebugStringConvertible {
+    public enum BodyAxis: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case linearX = 1 // BODY_AXIS_LINEAR_X
         /// 

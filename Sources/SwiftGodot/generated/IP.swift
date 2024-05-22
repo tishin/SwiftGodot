@@ -18,7 +18,7 @@ open class IP: Object {
     }()
     
     override open class var godotClassName: StringName { "IP" }
-    public enum ResolverStatus: Int64, CustomDebugStringConvertible {
+    public enum ResolverStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// DNS hostname resolver status: No status.
         case none = 0 // RESOLVER_STATUS_NONE
         /// DNS hostname resolver status: Waiting.
@@ -40,7 +40,7 @@ open class IP: Object {
         
     }
     
-    public enum GType: Int64, CustomDebugStringConvertible {
+    public enum GType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Address type: None.
         case none = 0 // TYPE_NONE
         /// Address type: Internet protocol version 4 (IPv4).

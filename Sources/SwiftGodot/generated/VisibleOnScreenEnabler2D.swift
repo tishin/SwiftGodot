@@ -15,7 +15,7 @@
 /// 
 open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     override open class var godotClassName: StringName { "VisibleOnScreenEnabler2D" }
-    public enum EnableMode: Int64, CustomDebugStringConvertible {
+    public enum EnableMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Corresponds to ``Node/ProcessMode/inherit``.
         case inherit = 0 // ENABLE_MODE_INHERIT
         /// Corresponds to ``Node/ProcessMode/always``.

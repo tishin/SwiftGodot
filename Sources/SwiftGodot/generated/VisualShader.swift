@@ -10,7 +10,7 @@
 /// This class provides a graph-like visual editor for creating a ``Shader``. Although ``VisualShader``s do not require coding, they share the same logic with script shaders. They use ``VisualShaderNode``s that can be connected to each other to control the flow of the shader. The visual shader graph is converted to a script shader behind the scenes.
 open class VisualShader: Shader {
     override open class var godotClassName: StringName { "VisualShader" }
-    public enum GType: Int64, CustomDebugStringConvertible {
+    public enum GType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A vertex shader, operating on vertices.
         case vertex = 0 // TYPE_VERTEX
         /// A fragment shader, operating on fragments (pixels).
@@ -53,7 +53,7 @@ open class VisualShader: Shader {
         
     }
     
-    public enum VaryingMode: Int64, CustomDebugStringConvertible {
+    public enum VaryingMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Varying is passed from `Vertex` function to `Fragment` and `Light` functions.
         case vertexToFragLight = 0 // VARYING_MODE_VERTEX_TO_FRAG_LIGHT
         /// Varying is passed from `Fragment` function to `Light` function.
@@ -72,7 +72,7 @@ open class VisualShader: Shader {
         
     }
     
-    public enum VaryingType: Int64, CustomDebugStringConvertible {
+    public enum VaryingType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Varying is of type float.
         case float = 0 // VARYING_TYPE_FLOAT
         /// Varying is of type integer.

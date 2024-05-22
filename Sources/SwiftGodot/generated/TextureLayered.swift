@@ -19,7 +19,7 @@
 /// 
 open class TextureLayered: Texture {
     override open class var godotClassName: StringName { "TextureLayered" }
-    public enum LayeredType: Int64, CustomDebugStringConvertible {
+    public enum LayeredType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Texture is a generic ``Texture2DArray``.
         case layeredType2dArray = 0 // LAYERED_TYPE_2D_ARRAY
         /// Texture is a ``Cubemap``, with each side in its own layer (6 in total).

@@ -10,7 +10,7 @@
 /// ``TextServer`` is the API backend for managing fonts and rendering text.
 open class TextServer: RefCounted {
     override open class var godotClassName: StringName { "TextServer" }
-    public enum FontAntialiasing: Int64, CustomDebugStringConvertible {
+    public enum FontAntialiasing: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Font glyphs are rasterized as 1-bit bitmaps.
         case none = 0 // FONT_ANTIALIASING_NONE
         /// Font glyphs are rasterized as 8-bit grayscale anti-aliased bitmaps.
@@ -34,7 +34,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum FontLCDSubpixelLayout: Int64, CustomDebugStringConvertible {
+    public enum FontLCDSubpixelLayout: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Unknown or unsupported subpixel layout, LCD subpixel antialiasing is disabled.
         case none = 0 // FONT_LCD_SUBPIXEL_LAYOUT_NONE
         /// Horizontal RGB subpixel layout.
@@ -62,7 +62,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum Direction: Int64, CustomDebugStringConvertible {
+    public enum Direction: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Text direction is determined based on contents and current locale.
         case auto = 0 // DIRECTION_AUTO
         /// Text is written from left to right.
@@ -84,7 +84,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum Orientation: Int64, CustomDebugStringConvertible {
+    public enum Orientation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Text is written horizontally.
         case horizontal = 0 // ORIENTATION_HORIZONTAL
         /// Left to right text is written vertically from top to bottom.
@@ -142,7 +142,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum AutowrapMode: Int64, CustomDebugStringConvertible {
+    public enum AutowrapMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Autowrap is disabled.
         case off = 0 // AUTOWRAP_OFF
         /// Wraps the text inside the node's bounding rectangle by allowing to break lines at arbitrary positions, which is useful when very limited space is available.
@@ -194,7 +194,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum VisibleCharactersBehavior: Int64, CustomDebugStringConvertible {
+    public enum VisibleCharactersBehavior: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Trims text before the shaping. e.g, increasing ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` value is visually identical to typing the text.
         case charsBeforeShaping = 0 // VC_CHARS_BEFORE_SHAPING
         /// Displays glyphs that are mapped to the first ``Label/visibleCharacters`` or ``RichTextLabel/visibleCharacters`` characters from the beginning of the text.
@@ -219,7 +219,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum OverrunBehavior: Int64, CustomDebugStringConvertible {
+    public enum OverrunBehavior: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No text trimming is performed.
         case noTrimming = 0 // OVERRUN_NO_TRIMMING
         /// Trims the text per character.
@@ -328,7 +328,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum Hinting: Int64, CustomDebugStringConvertible {
+    public enum Hinting: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables font hinting (smoother but less crisp).
         case none = 0 // HINTING_NONE
         /// Use the light font hinting mode.
@@ -350,7 +350,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum SubpixelPositioning: Int64, CustomDebugStringConvertible {
+    public enum SubpixelPositioning: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Glyph horizontal position is rounded to the whole pixel size, each glyph is rasterized once.
         case disabled = 0 // SUBPIXEL_POSITIONING_DISABLED
         /// Glyph horizontal position is rounded based on font size.
@@ -385,7 +385,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum Feature: Int64, CustomDebugStringConvertible {
+    public enum Feature: Int64, CaseIterable, CustomDebugStringConvertible {
         /// TextServer supports simple text layouts.
         case simpleLayout = 1 // FEATURE_SIMPLE_LAYOUT
         /// TextServer supports bidirectional text layouts.
@@ -440,7 +440,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum ContourPointTag: Int64, CustomDebugStringConvertible {
+    public enum ContourPointTag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Contour point is on the curve.
         case on = 1 // CONTOUR_CURVE_TAG_ON
         /// Contour point isn't on the curve, but serves as a control point for a conic (quadratic) Bézier arc.
@@ -459,7 +459,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum SpacingType: Int64, CustomDebugStringConvertible {
+    public enum SpacingType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Spacing for each glyph.
         case glyph = 0 // SPACING_GLYPH
         /// Spacing for the space character.
@@ -508,7 +508,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum StructuredTextParser: Int64, CustomDebugStringConvertible {
+    public enum StructuredTextParser: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use default Unicode BiDi algorithm.
         case `default` = 0 // STRUCTURED_TEXT_DEFAULT
         /// BiDi override for URI.
@@ -539,7 +539,7 @@ open class TextServer: RefCounted {
         
     }
     
-    public enum FixedSizeScaleMode: Int64, CustomDebugStringConvertible {
+    public enum FixedSizeScaleMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Bitmap font is not scaled.
         case disable = 0 // FIXED_SIZE_SCALE_DISABLE
         /// Bitmap font is scaled to the closest integer multiple of the font's fixed size. This is the recommended option for pixel art fonts.

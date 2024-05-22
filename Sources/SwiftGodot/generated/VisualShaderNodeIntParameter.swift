@@ -10,7 +10,7 @@
 /// A ``VisualShaderNodeParameter`` of type integer. Offers additional customization for range of accepted values.
 open class VisualShaderNodeIntParameter: VisualShaderNodeParameter {
     override open class var godotClassName: StringName { "VisualShaderNodeIntParameter" }
-    public enum Hint: Int64, CustomDebugStringConvertible {
+    public enum Hint: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The parameter will not constrain its value.
         case none = 0 // HINT_NONE
         /// The parameter's value must be within the specified ``min``/``max`` range.

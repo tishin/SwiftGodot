@@ -10,7 +10,7 @@
 /// Constrains a value to lie between `min` and `max` values.
 open class VisualShaderNodeClamp: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeClamp" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT
         /// An integer scalar.

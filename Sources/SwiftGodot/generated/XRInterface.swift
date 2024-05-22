@@ -18,7 +18,7 @@
 /// - ``playAreaChanged``
 open class XRInterface: RefCounted {
     override open class var godotClassName: StringName { "XRInterface" }
-    public enum Capabilities: Int64, CustomDebugStringConvertible {
+    public enum Capabilities: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No XR capabilities.
         case none = 0 // XR_NONE
         /// This interface can work with normal rendering output (non-HMD based AR).
@@ -49,7 +49,7 @@ open class XRInterface: RefCounted {
         
     }
     
-    public enum TrackingStatus: Int64, CustomDebugStringConvertible {
+    public enum TrackingStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Tracking is behaving as expected.
         case normalTracking = 0 // XR_NORMAL_TRACKING
         /// Tracking is hindered by excessive motion (the player is moving faster than tracking can keep up).
@@ -74,7 +74,7 @@ open class XRInterface: RefCounted {
         
     }
     
-    public enum PlayAreaMode: Int64, CustomDebugStringConvertible {
+    public enum PlayAreaMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Play area mode not set or not available.
         case unknown = 0 // XR_PLAY_AREA_UNKNOWN
         /// Play area only supports orientation tracking, no positional tracking, area will center around player.
@@ -99,7 +99,7 @@ open class XRInterface: RefCounted {
         
     }
     
-    public enum EnvironmentBlendMode: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentBlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Opaque blend mode. This is typically used for VR devices.
         case opaque = 0 // XR_ENV_BLEND_MODE_OPAQUE
         /// Additive blend mode. This is typically used for AR devices or VR devices with passthrough.

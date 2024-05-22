@@ -10,7 +10,7 @@
 /// Light3D is the _abstract_ base class for light nodes. As it can't be instantiated, it shouldn't be used directly. Other types of light nodes inherit from it. Light3D contains the common variables and parameters used for lighting.
 open class Light3D: VisualInstance3D {
     override open class var godotClassName: StringName { "Light3D" }
-    public enum Param: Int64, CustomDebugStringConvertible {
+    public enum Param: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant for accessing ``lightEnergy``.
         case energy = 0 // PARAM_ENERGY
         /// Constant for accessing ``lightIndirectEnergy``.
@@ -86,7 +86,7 @@ open class Light3D: VisualInstance3D {
         
     }
     
-    public enum BakeMode: Int64, CustomDebugStringConvertible {
+    public enum BakeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Light is ignored when baking. This is the fastest mode, but the light will be taken into account when baking global illumination. This mode should generally be used for dynamic lights that change quickly, as the effect of global illumination is less noticeable on those lights.
         /// 
         /// > Note: Hiding a light does _not_ affect baking ``LightmapGI``. Hiding a light will still affect baking ``VoxelGI`` and SDFGI (see [member Environment.sdfgi_enabled).

@@ -10,7 +10,7 @@
 /// This node enables OpenXR's hand tracking functionality. The node should be a child node of an ``XROrigin3D`` node, tracking will update its position to where the player's actual hand is positioned. This node also updates the skeleton of a properly skinned hand model. The hand mesh should be a child node of this node.
 open class OpenXRHand: Node3D {
     override open class var godotClassName: StringName { "OpenXRHand" }
-    public enum Hands: Int64, CustomDebugStringConvertible {
+    public enum Hands: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Tracking the player's left hand.
         case left = 0 // HAND_LEFT
         /// Tracking the player's right hand.
@@ -29,7 +29,7 @@ open class OpenXRHand: Node3D {
         
     }
     
-    public enum MotionRange: Int64, CustomDebugStringConvertible {
+    public enum MotionRange: Int64, CaseIterable, CustomDebugStringConvertible {
         /// When player grips, hand skeleton will form a full fist.
         case unobstructed = 0 // MOTION_RANGE_UNOBSTRUCTED
         /// When player grips, hand skeleton conforms to the controller the player is holding.

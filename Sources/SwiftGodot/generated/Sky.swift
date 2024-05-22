@@ -10,7 +10,7 @@
 /// The ``Sky`` class uses a ``Material`` to render a 3D environment's background and the light it emits by updating the reflection/radiance cubemaps.
 open class Sky: Resource {
     override open class var godotClassName: StringName { "Sky" }
-    public enum RadianceSize: Int64, CustomDebugStringConvertible {
+    public enum RadianceSize: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Radiance texture size is 32×32 pixels.
         case radianceSize32 = 0 // RADIANCE_SIZE_32
         /// Radiance texture size is 64×64 pixels.
@@ -44,7 +44,7 @@ open class Sky: Resource {
         
     }
     
-    public enum ProcessMode: Int64, CustomDebugStringConvertible {
+    public enum ProcessMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Automatically selects the appropriate process mode based on your sky shader. If your shader uses `TIME` or `POSITION`, this will use .realtime. If your shader uses any of the `LIGHT_*` variables or any custom uniforms, this uses .incremental. Otherwise, this defaults to .quality.
         case automatic = 0 // PROCESS_MODE_AUTOMATIC
         /// Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than .realtime but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ``ProjectSettings/rendering/reflections/skyReflections/ggxSamples``.

@@ -33,7 +33,7 @@
 /// 
 open class UPNP: RefCounted {
     override open class var godotClassName: StringName { "UPNP" }
-    public enum UPNPResult: Int64, CustomDebugStringConvertible {
+    public enum UPNPResult: Int64, CaseIterable, CustomDebugStringConvertible {
         /// UPNP command or discovery was successful.
         case success = 0 // UPNP_RESULT_SUCCESS
         /// Not authorized to use the command on the ``UPNPDevice``. May be returned when the user disabled UPNP on their router.

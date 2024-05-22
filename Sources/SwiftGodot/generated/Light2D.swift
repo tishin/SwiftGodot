@@ -10,7 +10,7 @@
 /// Casts light in a 2D environment. A light is defined as a color, an energy value, a mode (see constants), and various other parameters (range and shadows-related).
 open class Light2D: Node2D {
     override open class var godotClassName: StringName { "Light2D" }
-    public enum ShadowFilter: Int64, CustomDebugStringConvertible {
+    public enum ShadowFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See ``shadowFilter``.
         case none = 0 // SHADOW_FILTER_NONE
         /// Percentage closer filtering (5 samples) applies to the shadow map. This is slower compared to hard shadow rendering. See ``shadowFilter``.
@@ -29,7 +29,7 @@ open class Light2D: Node2D {
         
     }
     
-    public enum BlendMode: Int64, CustomDebugStringConvertible {
+    public enum BlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Adds the value of pixels corresponding to the Light2D to the values of pixels under it. This is the common behavior of a light.
         case add = 0 // BLEND_MODE_ADD
         /// Subtracts the value of pixels corresponding to the Light2D to the values of pixels under it, resulting in inversed light effect.

@@ -22,7 +22,7 @@
 /// - ``poseRecentered``
 open class OpenXRInterface: XRInterface {
     override open class var godotClassName: StringName { "OpenXRInterface" }
-    public enum Hand: Int64, CustomDebugStringConvertible {
+    public enum Hand: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Left hand.
         case left = 0 // HAND_LEFT
         /// Right hand.
@@ -41,7 +41,7 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    public enum HandMotionRange: Int64, CustomDebugStringConvertible {
+    public enum HandMotionRange: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case unobstructed = 0 // HAND_MOTION_RANGE_UNOBSTRUCTED
         /// 
@@ -60,7 +60,7 @@ open class OpenXRInterface: XRInterface {
         
     }
     
-    public enum HandJoints: Int64, CustomDebugStringConvertible {
+    public enum HandJoints: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Palm joint.
         case palm = 0 // HAND_JOINT_PALM
         /// Wrist joint.

@@ -13,7 +13,7 @@
 /// 
 open class Gradient: Resource {
     override open class var godotClassName: StringName { "Gradient" }
-    public enum InterpolationMode: Int64, CustomDebugStringConvertible {
+    public enum InterpolationMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Linear interpolation.
         case linear = 0 // GRADIENT_INTERPOLATE_LINEAR
         /// Constant interpolation, color changes abruptly at each point and stays uniform between. This might cause visible aliasing when used for a gradient texture in some cases.
@@ -32,7 +32,7 @@ open class Gradient: Resource {
         
     }
     
-    public enum ColorSpace: Int64, CustomDebugStringConvertible {
+    public enum ColorSpace: Int64, CaseIterable, CustomDebugStringConvertible {
         /// sRGB color space.
         case srgb = 0 // GRADIENT_COLOR_SPACE_SRGB
         /// Linear sRGB color space.

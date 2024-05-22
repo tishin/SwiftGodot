@@ -15,7 +15,7 @@
 /// - ``textureChanged``
 open class NinePatchRect: Control {
     override open class var godotClassName: StringName { "NinePatchRect" }
-    public enum AxisStretchMode: Int64, CustomDebugStringConvertible {
+    public enum AxisStretchMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Stretches the center texture across the NinePatchRect. This may cause the texture to be distorted.
         case stretch = 0 // AXIS_STRETCH_MODE_STRETCH
         /// Repeats the center texture across the NinePatchRect. This won't cause any visible distortion. The texture must be seamless for this to work without displaying artifacts between edges.

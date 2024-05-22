@@ -16,7 +16,7 @@
 /// 
 open class AudioEffectDistortion: AudioEffect {
     override open class var godotClassName: StringName { "AudioEffectDistortion" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Digital distortion effect which cuts off peaks at the top and bottom of the waveform.
         case clip = 0 // MODE_CLIP
         /// 

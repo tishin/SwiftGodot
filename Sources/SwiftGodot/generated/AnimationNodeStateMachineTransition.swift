@@ -18,7 +18,7 @@
 /// - ``advanceConditionChanged``
 open class AnimationNodeStateMachineTransition: Resource {
     override open class var godotClassName: StringName { "AnimationNodeStateMachineTransition" }
-    public enum SwitchMode: Int64, CustomDebugStringConvertible {
+    public enum SwitchMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
         case immediate = 0 // SWITCH_MODE_IMMEDIATE
         /// Switch to the next state immediately, but will seek the new state to the playback position of the old state.
@@ -37,7 +37,7 @@ open class AnimationNodeStateMachineTransition: Resource {
         
     }
     
-    public enum AdvanceMode: Int64, CustomDebugStringConvertible {
+    public enum AdvanceMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Don't use this transition.
         case disabled = 0 // ADVANCE_MODE_DISABLED
         /// Only use this transition during ``AnimationNodeStateMachinePlayback/travel(toNode:resetOnTeleport:)``.

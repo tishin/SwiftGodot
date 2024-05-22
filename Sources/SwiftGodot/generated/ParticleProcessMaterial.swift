@@ -10,7 +10,7 @@
 /// ``ParticleProcessMaterial`` defines particle properties and behavior. It is used in the `process_material` of the ``GPUParticles2D`` and ``GPUParticles3D`` nodes. Some of this material's properties are applied to each particle when emitted, while others can have a ``CurveTexture`` or a ``GradientTexture1D`` applied to vary numerical or color values over the lifetime of the particle.
 open class ParticleProcessMaterial: Material {
     override open class var godotClassName: StringName { "ParticleProcessMaterial" }
-    public enum Parameter: Int64, CustomDebugStringConvertible {
+    public enum Parameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamTexture(param:texture:)`` to set initial velocity properties.
         case initialLinearVelocity = 0 // PARAM_INITIAL_LINEAR_VELOCITY
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamTexture(param:texture:)`` to set angular velocity properties.
@@ -77,7 +77,7 @@ open class ParticleProcessMaterial: Material {
         
     }
     
-    public enum ParticleFlags: Int64, CustomDebugStringConvertible {
+    public enum ParticleFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagAlignY``.
         case alignYToVelocity = 0 // PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagRotateY``.
@@ -102,7 +102,7 @@ open class ParticleProcessMaterial: Material {
         
     }
     
-    public enum EmissionShape: Int64, CustomDebugStringConvertible {
+    public enum EmissionShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// All particles will be emitted from a single point.
         case point = 0 // EMISSION_SHAPE_POINT
         /// Particles will be emitted in the volume of a sphere.
@@ -136,7 +136,7 @@ open class ParticleProcessMaterial: Material {
         
     }
     
-    public enum SubEmitterMode: Int64, CustomDebugStringConvertible {
+    public enum SubEmitterMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case disabled = 0 // SUB_EMITTER_DISABLED
         /// 
@@ -161,7 +161,7 @@ open class ParticleProcessMaterial: Material {
         
     }
     
-    public enum CollisionMode: Int64, CustomDebugStringConvertible {
+    public enum CollisionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No collision for particles. Particles will go through ``GPUParticlesCollision3D`` nodes.
         case disabled = 0 // COLLISION_DISABLED
         /// ``RigidBody3D``-style collision for particles using ``GPUParticlesCollision3D`` nodes.

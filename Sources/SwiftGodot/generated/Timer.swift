@@ -20,7 +20,7 @@
 /// - ``timeout``
 open class Timer: Node {
     override open class var godotClassName: StringName { "Timer" }
-    public enum TimerProcessCallback: Int64, CustomDebugStringConvertible {
+    public enum TimerProcessCallback: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Update the timer during physics frames (see ``Node/``notificationInternalPhysicsProcess````).
         case physics = 0 // TIMER_PROCESS_PHYSICS
         /// Update the timer during process frames (see ``Node/``notificationInternalProcess````).

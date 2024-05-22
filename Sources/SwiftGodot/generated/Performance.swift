@@ -27,7 +27,7 @@ open class Performance: Object {
     }()
     
     override open class var godotClassName: StringName { "Performance" }
-    public enum Monitor: Int64, CustomDebugStringConvertible {
+    public enum Monitor: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The number of frames rendered in the last second. This metric is only updated once per second, even if queried more often. _Higher is better._
         case timeFps = 0 // TIME_FPS
         /// Time it took to complete one frame, in seconds. _Lower is better._

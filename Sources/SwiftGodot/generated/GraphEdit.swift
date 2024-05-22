@@ -35,7 +35,7 @@
 /// - ``scrollOffsetChanged``
 open class GraphEdit: Control {
     override open class var godotClassName: StringName { "GraphEdit" }
-    public enum PanningScheme: Int64, CustomDebugStringConvertible {
+    public enum PanningScheme: Int64, CaseIterable, CustomDebugStringConvertible {
         /// [kbd]Mouse Wheel[/kbd] will zoom, [kbd]Ctrl + Mouse Wheel[/kbd] will move the view.
         case zooms = 0 // SCROLL_ZOOMS
         /// [kbd]Mouse Wheel[/kbd] will move the view, [kbd]Ctrl + Mouse Wheel[/kbd] will zoom.

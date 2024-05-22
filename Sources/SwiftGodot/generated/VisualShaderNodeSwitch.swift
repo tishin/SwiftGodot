@@ -10,7 +10,7 @@
 /// Returns an associated value of the ``opType`` type if the provided boolean value is `true` or `false`.
 open class VisualShaderNodeSwitch: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeSwitch" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT
         /// An integer scalar.

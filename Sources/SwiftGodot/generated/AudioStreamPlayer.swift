@@ -18,7 +18,7 @@
 /// - ``finished``
 open class AudioStreamPlayer: Node {
     override open class var godotClassName: StringName { "AudioStreamPlayer" }
-    public enum MixTarget: Int64, CustomDebugStringConvertible {
+    public enum MixTarget: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The audio will be played only on the first channel.
         case stereo = 0 // MIX_TARGET_STEREO
         /// The audio will be played on all surround channels.

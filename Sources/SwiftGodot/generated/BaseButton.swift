@@ -18,7 +18,7 @@
 /// - ``toggled``
 open class BaseButton: Control {
     override open class var godotClassName: StringName { "BaseButton" }
-    public enum DrawMode: Int64, CustomDebugStringConvertible {
+    public enum DrawMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The normal state (i.e. not pressed, not hovered, not toggled and enabled) of buttons.
         case normal = 0 // DRAW_NORMAL
         /// The state of buttons are pressed.
@@ -43,7 +43,7 @@ open class BaseButton: Control {
         
     }
     
-    public enum ActionMode: Int64, CustomDebugStringConvertible {
+    public enum ActionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Require just a press to consider the button clicked.
         case press = 0 // ACTION_MODE_BUTTON_PRESS
         /// Require a press and a subsequent release before considering the button clicked.

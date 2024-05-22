@@ -25,7 +25,7 @@
 /// - ``guiFocusChanged``
 open class Viewport: Node {
     override open class var godotClassName: StringName { "Viewport" }
-    public enum PositionalShadowAtlasQuadrantSubdiv: Int64, CustomDebugStringConvertible {
+    public enum PositionalShadowAtlasQuadrantSubdiv: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This quadrant will not be used.
         case disabled = 0 // SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED
         /// This quadrant will only be used by one shadow map.
@@ -59,7 +59,7 @@ open class Viewport: Node {
         
     }
     
-    public enum Scaling3DMode: Int64, CustomDebugStringConvertible {
+    public enum Scaling3DMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be set using ``scaling3dScale``. Values less than `1.0` will result in undersampling while values greater than `1.0` will result in supersampling. A value of `1.0` disables scaling.
         case bilinear = 0 // SCALING_3D_MODE_BILINEAR
         /// Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
@@ -81,7 +81,7 @@ open class Viewport: Node {
         
     }
     
-    public enum MSAA: Int64, CustomDebugStringConvertible {
+    public enum MSAA: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Multisample antialiasing mode disabled. This is the default value, and is also the fastest setting.
         case disabled = 0 // MSAA_DISABLED
         /// Use 2× Multisample Antialiasing. This has a moderate performance cost. It helps reduce aliasing noticeably, but 4× MSAA still looks substantially better.
@@ -106,7 +106,7 @@ open class Viewport: Node {
         
     }
     
-    public enum ScreenSpaceAA: Int64, CustomDebugStringConvertible {
+    public enum ScreenSpaceAA: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not perform any antialiasing in the full screen post-process.
         case disabled = 0 // SCREEN_SPACE_AA_DISABLED
         /// Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
@@ -125,7 +125,7 @@ open class Viewport: Node {
         
     }
     
-    public enum RenderInfo: Int64, CustomDebugStringConvertible {
+    public enum RenderInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Amount of objects in frame.
         case objectsInFrame = 0 // RENDER_INFO_OBJECTS_IN_FRAME
         /// Amount of vertices in frame.
@@ -147,7 +147,7 @@ open class Viewport: Node {
         
     }
     
-    public enum RenderInfoType: Int64, CustomDebugStringConvertible {
+    public enum RenderInfoType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case visible = 0 // RENDER_INFO_TYPE_VISIBLE
         /// 
@@ -166,7 +166,7 @@ open class Viewport: Node {
         
     }
     
-    public enum DebugDraw: Int64, CustomDebugStringConvertible {
+    public enum DebugDraw: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Objects are displayed normally.
         case disabled = 0 // DEBUG_DRAW_DISABLED
         /// Objects are displayed without light information.
@@ -257,7 +257,7 @@ open class Viewport: Node {
         
     }
     
-    public enum DefaultCanvasItemTextureFilter: Int64, CustomDebugStringConvertible {
+    public enum DefaultCanvasItemTextureFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
         case nearest = 0 // DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
         /// The texture filter blends between the nearest 4 pixels. Use this when you want to avoid a pixelated style, but do not want mipmaps.
@@ -282,7 +282,7 @@ open class Viewport: Node {
         
     }
     
-    public enum DefaultCanvasItemTextureRepeat: Int64, CustomDebugStringConvertible {
+    public enum DefaultCanvasItemTextureRepeat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
         case disabled = 0 // DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED
         /// Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
@@ -304,7 +304,7 @@ open class Viewport: Node {
         
     }
     
-    public enum SDFOversize: Int64, CustomDebugStringConvertible {
+    public enum SDFOversize: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case sdfOversize100Percent = 0 // SDF_OVERSIZE_100_PERCENT
         /// 
@@ -329,7 +329,7 @@ open class Viewport: Node {
         
     }
     
-    public enum SDFScale: Int64, CustomDebugStringConvertible {
+    public enum SDFScale: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case sdfScale100Percent = 0 // SDF_SCALE_100_PERCENT
         /// 
@@ -351,7 +351,7 @@ open class Viewport: Node {
         
     }
     
-    public enum VRSMode: Int64, CustomDebugStringConvertible {
+    public enum VRSMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// VRS is disabled.
         case disabled = 0 // VRS_DISABLED
         /// VRS uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.

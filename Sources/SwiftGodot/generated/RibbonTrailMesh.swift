@@ -13,7 +13,7 @@
 /// 
 open class RibbonTrailMesh: PrimitiveMesh {
     override open class var godotClassName: StringName { "RibbonTrailMesh" }
-    public enum Shape: Int64, CustomDebugStringConvertible {
+    public enum Shape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Gives the mesh a single flat face.
         case flat = 0 // SHAPE_FLAT
         /// Gives the mesh two perpendicular flat faces, making a cross shape.

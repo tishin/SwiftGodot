@@ -7,7 +7,7 @@
 
 open class GDExtension: Resource {
     override open class var godotClassName: StringName { "GDExtension" }
-    public enum InitializationLevel: Int64, CustomDebugStringConvertible {
+    public enum InitializationLevel: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case core = 0 // INITIALIZATION_LEVEL_CORE
         /// 

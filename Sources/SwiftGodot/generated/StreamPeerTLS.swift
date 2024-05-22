@@ -13,7 +13,7 @@
 /// 
 open class StreamPeerTLS: StreamPeer {
     override open class var godotClassName: StringName { "StreamPeerTLS" }
-    public enum Status: Int64, CustomDebugStringConvertible {
+    public enum Status: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A status representing a ``StreamPeerTLS`` that is disconnected.
         case disconnected = 0 // STATUS_DISCONNECTED
         /// A status representing a ``StreamPeerTLS`` during handshaking.

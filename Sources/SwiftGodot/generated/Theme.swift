@@ -15,7 +15,7 @@
 /// 
 open class Theme: Resource {
     override open class var godotClassName: StringName { "Theme" }
-    public enum DataType: Int64, CustomDebugStringConvertible {
+    public enum DataType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Theme's ``Color`` item type.
         case color = 0 // DATA_TYPE_COLOR
         /// Theme's constant item type.

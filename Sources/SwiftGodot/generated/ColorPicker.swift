@@ -20,7 +20,7 @@
 /// - ``presetRemoved``
 open class ColorPicker: VBoxContainer {
     override open class var godotClassName: StringName { "ColorPicker" }
-    public enum ColorModeType: Int64, CustomDebugStringConvertible {
+    public enum ColorModeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Allows editing the color with Red/Green/Blue sliders.
         case rgb = 0 // MODE_RGB
         /// Allows editing the color with Hue/Saturation/Value sliders.
@@ -47,7 +47,7 @@ open class ColorPicker: VBoxContainer {
         
     }
     
-    public enum PickerShapeType: Int64, CustomDebugStringConvertible {
+    public enum PickerShapeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// HSV Color Model rectangle color space.
         case hsvRectangle = 0 // SHAPE_HSV_RECTANGLE
         /// HSV Color Model rectangle color space with a wheel.

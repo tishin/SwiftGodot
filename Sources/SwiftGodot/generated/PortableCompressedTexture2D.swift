@@ -19,7 +19,7 @@
 /// 
 open class PortableCompressedTexture2D: Texture2D {
     override open class var godotClassName: StringName { "PortableCompressedTexture2D" }
-    public enum CompressionMode: Int64, CustomDebugStringConvertible {
+    public enum CompressionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case lossless = 0 // COMPRESSION_MODE_LOSSLESS
         /// 

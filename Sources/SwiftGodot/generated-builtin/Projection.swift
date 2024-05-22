@@ -19,7 +19,7 @@ public struct Projection: Equatable, Hashable {
     public var z: Vector4
     /// The projection matrix's W vector (column 3). Equivalent to array index `3`.
     public var w: Vector4
-    public enum Planes: Int64, CustomDebugStringConvertible {
+    public enum Planes: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The index value of the projection's near clipping plane.
         case near = 0 // PLANE_NEAR
         /// The index value of the projection's far clipping plane.

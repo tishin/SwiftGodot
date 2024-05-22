@@ -13,7 +13,7 @@
 /// 
 open class HashingContext: RefCounted {
     override open class var godotClassName: StringName { "HashingContext" }
-    public enum HashType: Int64, CustomDebugStringConvertible {
+    public enum HashType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Hashing algorithm: MD5.
         case md5 = 0 // HASH_MD5
         /// Hashing algorithm: SHA-1.

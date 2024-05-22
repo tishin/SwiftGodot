@@ -10,7 +10,7 @@
 /// A control that displays a texture, for example an icon inside a GUI. The texture's placement can be controlled with the ``stretchMode`` property. It can scale, tile, or stay centered inside its bounding rectangle.
 open class TextureRect: Control {
     override open class var godotClassName: StringName { "TextureRect" }
-    public enum ExpandMode: Int64, CustomDebugStringConvertible {
+    public enum ExpandMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The minimum size will be equal to texture size, i.e. ``TextureRect`` can't be smaller than the texture.
         case keepSize = 0 // EXPAND_KEEP_SIZE
         /// The size of the texture won't be considered for minimum size calculation, so the ``TextureRect`` can be shrunk down past the texture size.
@@ -38,7 +38,7 @@ open class TextureRect: Control {
         
     }
     
-    public enum StretchMode: Int64, CustomDebugStringConvertible {
+    public enum StretchMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Scale to fit the node's bounding rectangle.
         case scale = 0 // STRETCH_SCALE
         /// Tile inside the node's bounding rectangle.

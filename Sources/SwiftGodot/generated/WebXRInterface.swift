@@ -44,7 +44,7 @@
 /// - ``displayRefreshRateChanged``
 open class WebXRInterface: XRInterface {
     override open class var godotClassName: StringName { "WebXRInterface" }
-    public enum TargetRayMode: Int64, CustomDebugStringConvertible {
+    public enum TargetRayMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// We don't know the the target ray mode.
         case unknown = 0 // TARGET_RAY_MODE_UNKNOWN
         /// Target ray originates at the viewer's eyes and points in the direction they are looking.

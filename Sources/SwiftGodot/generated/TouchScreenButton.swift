@@ -21,7 +21,7 @@
 /// - ``released``
 open class TouchScreenButton: Node2D {
     override open class var godotClassName: StringName { "TouchScreenButton" }
-    public enum VisibilityMode: Int64, CustomDebugStringConvertible {
+    public enum VisibilityMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Always visible.
         case always = 0 // VISIBILITY_ALWAYS
         /// Visible on touch screens only.

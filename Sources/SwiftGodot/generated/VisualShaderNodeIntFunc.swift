@@ -10,7 +10,7 @@
 /// Accept an integer scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeIntFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeIntFunc" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Returns the absolute value of the parameter. Translates to `abs(x)` in the Godot Shader Language.
         case abs = 0 // FUNC_ABS
         /// Negates the `x` using `-(x)`.

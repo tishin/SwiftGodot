@@ -15,7 +15,7 @@
 /// 
 open class TreeItem: Object {
     override open class var godotClassName: StringName { "TreeItem" }
-    public enum TreeCellMode: Int64, CustomDebugStringConvertible {
+    public enum TreeCellMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Cell contains a string.
         case string = 0 // CELL_MODE_STRING
         /// Cell contains a checkbox.

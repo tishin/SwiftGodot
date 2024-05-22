@@ -10,7 +10,7 @@
 /// Base node for geometry-based visual instances. Shares some common functionality like visibility and custom materials.
 open class GeometryInstance3D: VisualInstance3D {
     override open class var godotClassName: StringName { "GeometryInstance3D" }
-    public enum ShadowCastingSetting: Int64, CustomDebugStringConvertible {
+    public enum ShadowCastingSetting: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
         case off = 0 // SHADOW_CASTING_SETTING_OFF
         /// Will cast shadows from all visible faces in the GeometryInstance3D.
@@ -41,7 +41,7 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    public enum GIMode: Int64, CustomDebugStringConvertible {
+    public enum GIMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disabled global illumination mode. Use for dynamic objects that do not contribute to global illumination (such as characters). When using ``VoxelGI`` and SDFGI, the geometry will _receive_ indirect lighting and reflections but the geometry will not be considered in GI baking. When using ``LightmapGI``, the object will receive indirect lighting using lightmap probes instead of using the baked lightmap texture.
         case disabled = 0 // GI_MODE_DISABLED
         /// Baked global illumination mode. Use for static objects that contribute to global illumination (such as level geometry). This GI mode is effective when using ``VoxelGI``, SDFGI and ``LightmapGI``.
@@ -60,7 +60,7 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    public enum LightmapScale: Int64, CustomDebugStringConvertible {
+    public enum LightmapScale: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The standard texel density for lightmapping with ``LightmapGI``.
         case lightmapScale1x = 0 // LIGHTMAP_SCALE_1X
         /// Multiplies texel density by 2× for lightmapping with ``LightmapGI``. To ensure consistency in texel density, use this when scaling a mesh by a factor between 1.5 and 3.0.
@@ -85,7 +85,7 @@ open class GeometryInstance3D: VisualInstance3D {
         
     }
     
-    public enum VisibilityRangeFadeMode: Int64, CustomDebugStringConvertible {
+    public enum VisibilityRangeFadeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Will not fade itself nor its visibility dependencies, hysteresis will be used instead. This is the fastest approach to manual LOD, but it can result in noticeable LOD transitions depending on how the LOD meshes are authored. See ``visibilityRangeBegin`` and ``Node3D/visibilityParent`` for more information.
         case disabled = 0 // VISIBILITY_RANGE_FADE_DISABLED
         /// Will fade-out itself when reaching the limits of its own visibility range. This is slower than .visibilityRangeFadeDisabled, but it can provide smoother transitions. The fading range is determined by ``visibilityRangeBeginMargin`` and ``visibilityRangeEndMargin``.

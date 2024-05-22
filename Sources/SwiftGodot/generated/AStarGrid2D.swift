@@ -15,7 +15,7 @@
 /// 
 open class AStarGrid2D: RefCounted {
     override open class var godotClassName: StringName { "AStarGrid2D" }
-    public enum Heuristic: Int64, CustomDebugStringConvertible {
+    public enum Heuristic: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean heuristic</a> to be used for the pathfinding using the following formula:
         /// 
         /// > Note: This is also the internal heuristic used in ``AStar3D`` and ``AStar2D`` by default (with the inclusion of possible z-axis coordinate).
@@ -48,7 +48,7 @@ open class AStarGrid2D: RefCounted {
         
     }
     
-    public enum DiagonalMode: Int64, CustomDebugStringConvertible {
+    public enum DiagonalMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The pathfinding algorithm will ignore solid neighbors around the target cell and allow passing using diagonals.
         case always = 0 // DIAGONAL_MODE_ALWAYS
         /// The pathfinding algorithm will ignore all diagonals and the way will be always orthogonal.

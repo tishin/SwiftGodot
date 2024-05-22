@@ -21,7 +21,7 @@ open class DisplayServer: Object {
     }()
     
     override open class var godotClassName: StringName { "DisplayServer" }
-    public enum Feature: Int64, CustomDebugStringConvertible {
+    public enum Feature: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Display server supports global menu. This allows the application to display its menu items in the operating system's top bar. **macOS**
         case globalMenu = 0 // FEATURE_GLOBAL_MENU
         /// Display server supports multiple windows that can be moved outside of the main window. **Windows, macOS, Linux (X11)**
@@ -94,7 +94,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum MouseMode: Int64, CustomDebugStringConvertible {
+    public enum MouseMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Makes the mouse cursor visible if it is hidden.
         case visible = 0 // MOUSE_MODE_VISIBLE
         /// Makes the mouse cursor hidden if it is visible.
@@ -122,7 +122,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum ScreenOrientation: Int64, CustomDebugStringConvertible {
+    public enum ScreenOrientation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default landscape orientation.
         case landscape = 0 // SCREEN_LANDSCAPE
         /// Default portrait orientation.
@@ -153,7 +153,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum VirtualKeyboardType: Int64, CustomDebugStringConvertible {
+    public enum VirtualKeyboardType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Default text virtual keyboard.
         case `default` = 0 // KEYBOARD_TYPE_DEFAULT
         /// Multiline virtual keyboard.
@@ -190,7 +190,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum CursorShape: Int64, CustomDebugStringConvertible {
+    public enum CursorShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Arrow cursor shape. This is the default when not pointing anything that overrides the mouse cursor, such as a ``LineEdit`` or ``TextEdit``.
         case arrow = 0 // CURSOR_ARROW
         /// I-beam cursor shape. This is used by default when hovering a control that accepts text input, such as ``LineEdit`` or ``TextEdit``.
@@ -254,7 +254,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum FileDialogMode: Int64, CustomDebugStringConvertible {
+    public enum FileDialogMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The native file dialog allows selecting one, and only one file.
         case openFile = 0 // FILE_DIALOG_MODE_OPEN_FILE
         /// The native file dialog allows selecting multiple files.
@@ -279,7 +279,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum WindowMode: Int64, CustomDebugStringConvertible {
+    public enum WindowMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Windowed mode, i.e. ``Window`` doesn't occupy the whole screen (unless set to the size of the screen).
         case windowed = 0 // WINDOW_MODE_WINDOWED
         /// Minimized window mode, i.e. ``Window`` is not visible and available on window manager's window list. Normally happens when the minimize button is pressed.
@@ -324,7 +324,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum WindowFlags: Int64, CustomDebugStringConvertible {
+    public enum WindowFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The window can't be resized by dragging its resize grip. It's still possible to resize the window using ``windowSetSize(_:windowId:)``. This flag is ignored for full screen windows.
         case resizeDisabled = 0 // WINDOW_FLAG_RESIZE_DISABLED
         /// The window do not have native title bar and other decorations. This flag is ignored for full-screen windows.
@@ -373,7 +373,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum WindowEvent: Int64, CustomDebugStringConvertible {
+    public enum WindowEvent: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sent when the mouse pointer enters the window.
         case mouseEnter = 0 // WINDOW_EVENT_MOUSE_ENTER
         /// Sent when the mouse pointer exits the window.
@@ -416,7 +416,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum VSyncMode: Int64, CustomDebugStringConvertible {
+    public enum VSyncMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No vertical synchronization, which means the engine will display frames as fast as possible (tearing may be visible). Framerate is unlimited (notwithstanding ``Engine/maxFps``).
         case disabled = 0 // VSYNC_DISABLED
         /// Default vertical synchronization mode, the image is displayed only on vertical blanking intervals (no tearing is visible). Framerate is limited by the monitor refresh rate (notwithstanding ``Engine/maxFps``).
@@ -441,7 +441,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum HandleType: Int64, CustomDebugStringConvertible {
+    public enum HandleType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Display handle:
         /// 
         /// - Linux (X11): `X11::Display*` for the display.
@@ -495,7 +495,7 @@ open class DisplayServer: Object {
         
     }
     
-    public enum TTSUtteranceEvent: Int64, CustomDebugStringConvertible {
+    public enum TTSUtteranceEvent: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Utterance has begun to be spoken.
         case started = 0 // TTS_UTTERANCE_STARTED
         /// Utterance was successfully finished.

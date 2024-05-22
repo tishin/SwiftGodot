@@ -15,7 +15,7 @@
 /// 
 open class PacketPeerDTLS: PacketPeer {
     override open class var godotClassName: StringName { "PacketPeerDTLS" }
-    public enum Status: Int64, CustomDebugStringConvertible {
+    public enum Status: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A status representing a ``PacketPeerDTLS`` that is disconnected.
         case disconnected = 0 // STATUS_DISCONNECTED
         /// A status representing a ``PacketPeerDTLS`` that is currently performing the handshake with a remote peer.

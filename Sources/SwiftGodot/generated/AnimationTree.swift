@@ -18,7 +18,7 @@
 /// - ``animationPlayerChanged``
 open class AnimationTree: AnimationMixer {
     override open class var godotClassName: StringName { "AnimationTree" }
-    public enum AnimationProcessCallback: Int64, CustomDebugStringConvertible {
+    public enum AnimationProcessCallback: Int64, CaseIterable, CustomDebugStringConvertible {
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/physics``.
         case physics = 0 // ANIMATION_PROCESS_PHYSICS
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/idle``.

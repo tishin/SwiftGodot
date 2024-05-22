@@ -20,7 +20,7 @@
 /// - ``changed``
 open class TileMap: Node2D {
     override open class var godotClassName: StringName { "TileMap" }
-    public enum VisibilityMode: Int64, CustomDebugStringConvertible {
+    public enum VisibilityMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the debug settings to determine visibility.
         case `default` = 0 // VISIBILITY_MODE_DEFAULT
         /// Always hide.

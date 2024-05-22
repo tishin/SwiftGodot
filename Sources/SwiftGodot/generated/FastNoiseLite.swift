@@ -13,7 +13,7 @@
 /// 
 open class FastNoiseLite: Noise {
     override open class var godotClassName: StringName { "FastNoiseLite" }
-    public enum NoiseType: Int64, CustomDebugStringConvertible {
+    public enum NoiseType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A lattice of points are assigned random values then interpolated based on neighboring values.
         case value = 5 // TYPE_VALUE
         /// Similar to Value noise, but slower. Has more variance in peaks and valleys.
@@ -44,7 +44,7 @@ open class FastNoiseLite: Noise {
         
     }
     
-    public enum FractalType: Int64, CustomDebugStringConvertible {
+    public enum FractalType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No fractal noise.
         case none = 0 // FRACTAL_NONE
         /// Method using Fractional Brownian Motion to combine octaves into a fractal.
@@ -66,7 +66,7 @@ open class FastNoiseLite: Noise {
         
     }
     
-    public enum CellularDistanceFunction: Int64, CustomDebugStringConvertible {
+    public enum CellularDistanceFunction: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Euclidean distance to the nearest point.
         case euclidean = 0 // DISTANCE_EUCLIDEAN
         /// Squared Euclidean distance to the nearest point.
@@ -88,7 +88,7 @@ open class FastNoiseLite: Noise {
         
     }
     
-    public enum CellularReturnType: Int64, CustomDebugStringConvertible {
+    public enum CellularReturnType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The cellular distance function will return the same value for all points within a cell.
         case cellValue = 0 // RETURN_CELL_VALUE
         /// The cellular distance function will return a value determined by the distance to the nearest point.
@@ -119,7 +119,7 @@ open class FastNoiseLite: Noise {
         
     }
     
-    public enum DomainWarpType: Int64, CustomDebugStringConvertible {
+    public enum DomainWarpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The domain is warped using the simplex noise algorithm.
         case simplex = 0 // DOMAIN_WARP_SIMPLEX
         /// The domain is warped using a simplified version of the simplex noise algorithm.
@@ -138,7 +138,7 @@ open class FastNoiseLite: Noise {
         
     }
     
-    public enum DomainWarpFractalType: Int64, CustomDebugStringConvertible {
+    public enum DomainWarpFractalType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No fractal noise for warping the space.
         case none = 0 // DOMAIN_WARP_FRACTAL_NONE
         /// Warping the space progressively, octave for octave, resulting in a more "liquified" distortion.

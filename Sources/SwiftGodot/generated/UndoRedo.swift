@@ -28,7 +28,7 @@
 /// - ``versionChanged``
 open class UndoRedo: Object {
     override open class var godotClassName: StringName { "UndoRedo" }
-    public enum MergeMode: Int64, CustomDebugStringConvertible {
+    public enum MergeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Makes "do"/"undo" operations stay in separate actions.
         case disable = 0 // MERGE_DISABLE
         /// Makes so that the action's "undo" operations are from the first action created and the "do" operations are from the last subsequent action with the same name.

@@ -10,7 +10,7 @@
 /// Accept a floating-point scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeFloatFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeFloatFunc" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Returns the sine of the parameter. Translates to `sin(x)` in the Godot Shader Language.
         case sin = 0 // FUNC_SIN
         /// Returns the cosine of the parameter. Translates to `cos(x)` in the Godot Shader Language.

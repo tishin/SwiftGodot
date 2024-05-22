@@ -10,7 +10,7 @@
 /// Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
 open class VisualShaderNodeParticleRandomness: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeParticleRandomness" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.

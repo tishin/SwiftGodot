@@ -10,7 +10,7 @@
 /// Defines the API that the editor uses to extract information from the underlying VCS. The implementation of this API is included in VCS plugins, which are GDExtension plugins that inherit ``EditorVCSInterface`` and are attached (on demand) to the singleton instance of ``EditorVCSInterface``. Instead of performing the task themselves, all the virtual functions listed below are calling the internally overridden functions in the VCS plugins to provide a plug-n-play experience. A custom VCS plugin is supposed to inherit from ``EditorVCSInterface`` and override each of these virtual functions.
 open class EditorVCSInterface: Object {
     override open class var godotClassName: StringName { "EditorVCSInterface" }
-    public enum ChangeType: Int64, CustomDebugStringConvertible {
+    public enum ChangeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A new file has been added.
         case new = 0 // CHANGE_TYPE_NEW
         /// An earlier added file has been modified.
@@ -38,7 +38,7 @@ open class EditorVCSInterface: Object {
         
     }
     
-    public enum TreeArea: Int64, CustomDebugStringConvertible {
+    public enum TreeArea: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A commit is encountered from the commit area.
         case commit = 0 // TREE_AREA_COMMIT
         /// A file is encountered from the staged area.

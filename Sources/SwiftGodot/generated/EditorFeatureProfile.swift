@@ -13,7 +13,7 @@
 /// 
 open class EditorFeatureProfile: RefCounted {
     override open class var godotClassName: StringName { "EditorFeatureProfile" }
-    public enum Feature: Int64, CustomDebugStringConvertible {
+    public enum Feature: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
         case feature3d = 0 // FEATURE_3D
         /// The Script tab, which contains the script editor and class reference browser. If this feature is disabled, the Script tab won't display.

@@ -27,7 +27,7 @@ open class Time: Object {
     }()
     
     override open class var godotClassName: StringName { "Time" }
-    public enum Month: Int64, CustomDebugStringConvertible {
+    public enum Month: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The month of January, represented numerically as `01`.
         case january = 1 // MONTH_JANUARY
         /// The month of February, represented numerically as `02`.
@@ -73,7 +73,7 @@ open class Time: Object {
         
     }
     
-    public enum Weekday: Int64, CustomDebugStringConvertible {
+    public enum Weekday: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The day of the week Sunday, represented numerically as `0`.
         case sunday = 0 // WEEKDAY_SUNDAY
         /// The day of the week Monday, represented numerically as `1`.

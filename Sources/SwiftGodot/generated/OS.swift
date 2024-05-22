@@ -21,7 +21,7 @@ open class OS: Object {
     }()
     
     override open class var godotClassName: StringName { "OS" }
-    public enum RenderingDriver: Int64, CustomDebugStringConvertible {
+    public enum RenderingDriver: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The Vulkan rendering driver. It requires Vulkan 1.0 support and automatically uses features from Vulkan 1.1 and 1.2 if available.
         case vulkan = 0 // RENDERING_DRIVER_VULKAN
         /// The OpenGL 3 rendering driver. It uses OpenGL 3.3 Core Profile on desktop platforms, OpenGL ES 3.0 on mobile devices, and WebGL 2.0 on Web.
@@ -37,7 +37,7 @@ open class OS: Object {
         
     }
     
-    public enum SystemDir: Int64, CustomDebugStringConvertible {
+    public enum SystemDir: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Desktop directory path.
         case desktop = 0 // SYSTEM_DIR_DESKTOP
         /// DCIM (Digital Camera Images) directory path.

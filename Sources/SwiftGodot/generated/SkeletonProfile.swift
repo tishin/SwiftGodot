@@ -18,7 +18,7 @@
 /// - ``profileUpdated``
 open class SkeletonProfile: Resource {
     override open class var godotClassName: StringName { "SkeletonProfile" }
-    public enum TailDirection: Int64, CustomDebugStringConvertible {
+    public enum TailDirection: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Direction to the average coordinates of bone children.
         case averageChildren = 0 // TAIL_DIRECTION_AVERAGE_CHILDREN
         /// Direction to the coordinates of specified bone child.

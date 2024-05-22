@@ -29,7 +29,7 @@
 /// 
 open class HTTPClient: RefCounted {
     override open class var godotClassName: StringName { "HTTPClient" }
-    public enum Method: Int64, CustomDebugStringConvertible {
+    public enum Method: Int64, CaseIterable, CustomDebugStringConvertible {
         /// HTTP GET method. The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
         case get = 0 // METHOD_GET
         /// HTTP HEAD method. The HEAD method asks for a response identical to that of a GET request, but without the response body. This is useful to request metadata like HTTP headers or to check if a resource exists.
@@ -69,7 +69,7 @@ open class HTTPClient: RefCounted {
         
     }
     
-    public enum Status: Int64, CustomDebugStringConvertible {
+    public enum Status: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Status: Disconnected from the server.
         case disconnected = 0 // STATUS_DISCONNECTED
         /// Status: Currently resolving the hostname for the given URL into an IP.
@@ -109,7 +109,7 @@ open class HTTPClient: RefCounted {
         
     }
     
-    public enum ResponseCode: Int64, CustomDebugStringConvertible {
+    public enum ResponseCode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// HTTP status code `100 Continue`. Interim response that indicates everything so far is OK and that the client should continue with the request (or ignore this status if already finished).
         case `continue` = 100 // RESPONSE_CONTINUE
         /// HTTP status code `101 Switching Protocol`. Sent in response to an `Upgrade` request header by the client. Indicates the protocol the server is switching to.

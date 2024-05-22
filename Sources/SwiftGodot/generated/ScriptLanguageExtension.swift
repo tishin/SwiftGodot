@@ -7,7 +7,7 @@
 
 open class ScriptLanguageExtension: ScriptLanguage {
     override open class var godotClassName: StringName { "ScriptLanguageExtension" }
-    public enum LookupResultType: Int64, CustomDebugStringConvertible {
+    public enum LookupResultType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case scriptLocation = 0 // LOOKUP_RESULT_SCRIPT_LOCATION
         /// 
@@ -47,7 +47,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         
     }
     
-    public enum CodeCompletionLocation: Int64, CustomDebugStringConvertible {
+    public enum CodeCompletionLocation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
         case local = 0 // LOCATION_LOCAL
         /// The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc) to store the depth of an option in the class or a parent class.
@@ -69,7 +69,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         
     }
     
-    public enum CodeCompletionKind: Int64, CustomDebugStringConvertible {
+    public enum CodeCompletionKind: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case `class` = 0 // CODE_COMPLETION_KIND_CLASS
         /// 

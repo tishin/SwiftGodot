@@ -28,7 +28,7 @@
 /// - ``requestCompleted``
 open class HTTPRequest: Node {
     override open class var godotClassName: StringName { "HTTPRequest" }
-    public enum Result: Int64, CustomDebugStringConvertible {
+    public enum Result: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Request successful.
         case success = 0 // RESULT_SUCCESS
         /// 

@@ -10,7 +10,7 @@
 /// A resource to add to an ``AnimationNodeBlendTree``. Only has one output port using the ``animation`` property. Used as an input for ``AnimationNode``s that blend animations together.
 open class AnimationNodeAnimation: AnimationRootNode {
     override open class var godotClassName: StringName { "AnimationNodeAnimation" }
-    public enum PlayMode: Int64, CustomDebugStringConvertible {
+    public enum PlayMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Plays animation in forward direction.
         case forward = 0 // PLAY_MODE_FORWARD
         /// Plays animation in backward direction.

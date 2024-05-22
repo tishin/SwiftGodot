@@ -10,7 +10,7 @@
 /// Universal Plug and Play (UPnP) device. See ``UPNP`` for UPnP discovery and utility functions. Provides low-level access to UPNP control commands. Allows to manage port mappings (port forwarding) and to query network information of the device (like local and external IP address and status). Note that methods on this class are synchronous and block the calling thread.
 open class UPNPDevice: RefCounted {
     override open class var godotClassName: StringName { "UPNPDevice" }
-    public enum IGDStatus: Int64, CustomDebugStringConvertible {
+    public enum IGDStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// OK.
         case ok = 0 // IGD_STATUS_OK
         /// HTTP error.

@@ -20,7 +20,7 @@
 /// - ``finished``
 open class GPUParticles2D: Node2D {
     override open class var godotClassName: StringName { "GPUParticles2D" }
-    public enum DrawOrder: Int64, CustomDebugStringConvertible {
+    public enum DrawOrder: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX
         /// Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
@@ -39,7 +39,7 @@ open class GPUParticles2D: Node2D {
         
     }
     
-    public enum EmitFlags: Int64, CustomDebugStringConvertible {
+    public enum EmitFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Particle starts at the specified position.
         case position = 1 // EMIT_FLAG_POSITION
         /// Particle starts with specified rotation and scale.

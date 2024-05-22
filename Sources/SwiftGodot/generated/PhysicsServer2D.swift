@@ -33,7 +33,7 @@ open class PhysicsServer2D: Object {
     }()
     
     override open class var godotClassName: StringName { "PhysicsServer2D" }
-    public enum SpaceParameter: Int64, CustomDebugStringConvertible {
+    public enum SpaceParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated. The default value of this parameter is ``ProjectSettings/physics/2d/solver/contactRecycleRadius``.
         case contactRecycleRadius = 0 // SPACE_PARAM_CONTACT_RECYCLE_RADIUS
         /// Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded. The default value of this parameter is ``ProjectSettings/physics/2d/solver/contactMaxSeparation``.
@@ -70,7 +70,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum ShapeType: Int64, CustomDebugStringConvertible {
+    public enum ShapeType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This is the constant for creating world boundary shapes. A world boundary shape is an _infinite_ line with an origin point, and a normal. Thus, it can be used for front/behind checks.
         case worldBoundary = 0 // SHAPE_WORLD_BOUNDARY
         /// This is the constant for creating separation ray shapes. A separation ray is defined by a length and separates itself from what is touching its far endpoint. Useful for character controllers.
@@ -107,7 +107,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum AreaParameter: Int64, CustomDebugStringConvertible {
+    public enum AreaParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get gravity override mode in an area. See ``PhysicsServer2D/AreaSpaceOverrideMode`` for possible values. The default value of this parameter is .areaSpaceOverrideDisabled.
         case gravityOverrideMode = 0 // AREA_PARAM_GRAVITY_OVERRIDE_MODE
         /// Constant to set/get gravity strength in an area. The default value of this parameter is `9.80665`.
@@ -150,7 +150,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum AreaSpaceOverrideMode: Int64, CustomDebugStringConvertible {
+    public enum AreaSpaceOverrideMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
         case disabled = 0 // AREA_SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
@@ -175,7 +175,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum BodyMode: Int64, CustomDebugStringConvertible {
+    public enum BodyMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
         case `static` = 0 // BODY_MODE_STATIC
         /// Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
@@ -197,7 +197,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum BodyParameter: Int64, CustomDebugStringConvertible {
+    public enum BodyParameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get a body's bounce factor. The default value of this parameter is `0.0`.
         case bounce = 0 // BODY_PARAM_BOUNCE
         /// Constant to set/get a body's friction. The default value of this parameter is `1.0`.
@@ -245,7 +245,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum BodyDampMode: Int64, CustomDebugStringConvertible {
+    public enum BodyDampMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The body's damping value is added to any value set in areas or the default value.
         case combine = 0 // BODY_DAMP_MODE_COMBINE
         /// The body's damping value replaces any value set in areas or the default value.
@@ -261,7 +261,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum BodyState: Int64, CustomDebugStringConvertible {
+    public enum BodyState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get the current transform matrix of the body.
         case transform = 0 // BODY_STATE_TRANSFORM
         /// Constant to set/get the current linear velocity of the body.
@@ -286,7 +286,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum JointType: Int64, CustomDebugStringConvertible {
+    public enum JointType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to create pin joints.
         case pin = 0 // JOINT_TYPE_PIN
         /// Constant to create groove joints.
@@ -308,7 +308,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum JointParam: Int64, CustomDebugStringConvertible {
+    public enum JointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get how fast the joint pulls the bodies back to satisfy the joint constraint. The lower the value, the more the two bodies can pull on the joint. The default value of this parameter is `0.0`.
         /// 
         /// > Note: In Godot Physics, this parameter is only used for pin joints and groove joints.
@@ -336,7 +336,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum PinJointParam: Int64, CustomDebugStringConvertible {
+    public enum PinJointParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to set/get a how much the bond of the pin joint can flex. The default value of this parameter is `0.0`.
         case softness = 0 // PIN_JOINT_SOFTNESS
         /// The maximum rotation around the pin.
@@ -358,7 +358,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum PinJointFlag: Int64, CustomDebugStringConvertible {
+    public enum PinJointFlag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If `true`, the pin has a maximum and a minimum rotation.
         case angularLimitEnabled = 0 // PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED
         /// If `true`, a motor turns the pin.
@@ -374,7 +374,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum DampedSpringParam: Int64, CustomDebugStringConvertible {
+    public enum DampedSpringParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sets the resting length of the spring joint. The joint will always try to go to back this length when pulled apart. The default value of this parameter is the distance between the joint's anchor points.
         case restLength = 0 // DAMPED_SPRING_REST_LENGTH
         /// Sets the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length. The default value of this parameter is `20.0`.
@@ -393,7 +393,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum CCDMode: Int64, CustomDebugStringConvertible {
+    public enum CCDMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables continuous collision detection. This is the fastest way to detect body collisions, but it can miss small and/or fast-moving objects.
         case disabled = 0 // CCD_MODE_DISABLED
         /// Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
@@ -412,7 +412,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum AreaBodyStatus: Int64, CustomDebugStringConvertible {
+    public enum AreaBodyStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The value of the first parameter and area callback function receives, when an object enters one of its shapes.
         case added = 0 // AREA_BODY_ADDED
         /// The value of the first parameter and area callback function receives, when an object exits one of its shapes.
@@ -428,7 +428,7 @@ open class PhysicsServer2D: Object {
         
     }
     
-    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
+    public enum ProcessInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to get the number of objects that are not sleeping.
         case activeObjects = 0 // INFO_ACTIVE_OBJECTS
         /// Constant to get the number of possible collisions.

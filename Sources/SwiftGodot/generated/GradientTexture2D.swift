@@ -10,7 +10,7 @@
 /// A 2D texture that obtains colors from a ``Gradient`` to fill the texture data. This texture is able to transform a color transition into different patterns such as a linear or a radial gradient. The gradient is sampled individually for each pixel so it does not necessarily represent an exact copy of the gradient(see ``width`` and ``height``). See also ``GradientTexture1D``, ``CurveTexture`` and ``CurveXYZTexture``.
 open class GradientTexture2D: Texture2D {
     override open class var godotClassName: StringName { "GradientTexture2D" }
-    public enum Fill: Int64, CustomDebugStringConvertible {
+    public enum Fill: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The colors are linearly interpolated in a straight line.
         case linear = 0 // FILL_LINEAR
         /// The colors are linearly interpolated in a circular pattern.
@@ -29,7 +29,7 @@ open class GradientTexture2D: Texture2D {
         
     }
     
-    public enum Repeat: Int64, CustomDebugStringConvertible {
+    public enum Repeat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The gradient fill is restricted to the range defined by ``fillFrom`` to ``fillTo`` offsets.
         case repeatNone = 0 // REPEAT_NONE
         /// The texture is filled starting from ``fillFrom`` to ``fillTo`` offsets, repeating the same pattern in both directions.

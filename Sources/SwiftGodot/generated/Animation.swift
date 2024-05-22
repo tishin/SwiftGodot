@@ -15,7 +15,7 @@
 /// 
 open class Animation: Resource {
     override open class var godotClassName: StringName { "Animation" }
-    public enum TrackType: Int64, CustomDebugStringConvertible {
+    public enum TrackType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Value tracks set values in node properties, but only those which can be interpolated. For 3D position/rotation/scale, using the dedicated .typePosition3d, .typeRotation3d and .typeScale3d track types instead of .typeValue is recommended for performance reasons.
         case value = 0 // TYPE_VALUE
         /// 3D position track (values are stored in ``Vector3``s).
@@ -52,7 +52,7 @@ open class Animation: Resource {
         
     }
     
-    public enum InterpolationType: Int64, CustomDebugStringConvertible {
+    public enum InterpolationType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No interpolation (nearest value).
         case nearest = 0 // INTERPOLATION_NEAREST
         /// Linear interpolation.
@@ -83,7 +83,7 @@ open class Animation: Resource {
         
     }
     
-    public enum UpdateMode: Int64, CustomDebugStringConvertible {
+    public enum UpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Update between keyframes and hold the value.
         case continuous = 0 // UPDATE_CONTINUOUS
         /// Update at the keyframes.
@@ -102,7 +102,7 @@ open class Animation: Resource {
         
     }
     
-    public enum LoopMode: Int64, CustomDebugStringConvertible {
+    public enum LoopMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// At both ends of the animation, the animation will stop playing.
         case none = 0 // LOOP_NONE
         /// At both ends of the animation, the animation will be repeated without changing the playback direction.
@@ -121,7 +121,7 @@ open class Animation: Resource {
         
     }
     
-    public enum LoopedFlag: Int64, CustomDebugStringConvertible {
+    public enum LoopedFlag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This flag indicates that the animation proceeds without any looping.
         case none = 0 // LOOPED_FLAG_NONE
         /// This flag indicates that the animation has reached the end of the animation and just after loop processed.
@@ -140,7 +140,7 @@ open class Animation: Resource {
         
     }
     
-    public enum FindMode: Int64, CustomDebugStringConvertible {
+    public enum FindMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Finds the nearest time key.
         case nearest = 0 // FIND_MODE_NEAREST
         /// Finds only the key with approximating the time.

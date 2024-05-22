@@ -15,7 +15,7 @@
 /// - ``dragged``
 open class SplitContainer: Container {
     override open class var godotClassName: StringName { "SplitContainer" }
-    public enum DraggerVisibility: Int64, CustomDebugStringConvertible {
+    public enum DraggerVisibility: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The split dragger is visible when the cursor hovers it.
         case visible = 0 // DRAGGER_VISIBLE
         /// The split dragger is never visible.

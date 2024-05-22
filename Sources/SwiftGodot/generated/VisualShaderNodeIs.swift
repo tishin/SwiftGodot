@@ -10,7 +10,7 @@
 /// Returns the boolean result of the comparison between `INF` or `NaN` and a scalar parameter.
 open class VisualShaderNodeIs: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeIs" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Comparison with `INF` (Infinity).
         case isInf = 0 // FUNC_IS_INF
         /// Comparison with `NaN` (Not a Number; denotes invalid numeric results, e.g. division by zero).

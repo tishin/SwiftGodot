@@ -21,7 +21,7 @@ public struct Vector4: Equatable, Hashable {
     public var z: Float
     /// The vector's W component. Also accessible by using the index position `[3]`.
     public var w: Float
-    public enum Axis: Int64, CustomDebugStringConvertible {
+    public enum Axis: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Enumerated value for the X axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.
         case x = 0 // AXIS_X
         /// Enumerated value for the Y axis. Returned by ``maxAxisIndex()`` and ``minAxisIndex()``.

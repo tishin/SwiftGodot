@@ -26,7 +26,7 @@ open class Input: Object {
     }()
     
     override open class var godotClassName: StringName { "Input" }
-    public enum MouseMode: Int64, CustomDebugStringConvertible {
+    public enum MouseMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Makes the mouse cursor visible if it is hidden.
         case visible = 0 // MOUSE_MODE_VISIBLE
         /// Makes the mouse cursor hidden if it is visible.
@@ -54,7 +54,7 @@ open class Input: Object {
         
     }
     
-    public enum CursorShape: Int64, CustomDebugStringConvertible {
+    public enum CursorShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Arrow cursor. Standard, default pointing cursor.
         case arrow = 0 // CURSOR_ARROW
         /// I-beam cursor. Usually used to show where the text cursor will appear when the mouse is clicked.

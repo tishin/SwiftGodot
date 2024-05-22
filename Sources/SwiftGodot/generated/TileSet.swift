@@ -21,7 +21,7 @@
 /// 
 open class TileSet: Resource {
     override open class var godotClassName: StringName { "TileSet" }
-    public enum TileShape: Int64, CustomDebugStringConvertible {
+    public enum TileShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Rectangular tile shape.
         case square = 0 // TILE_SHAPE_SQUARE
         /// Diamond tile shape (for isometric look).
@@ -46,7 +46,7 @@ open class TileSet: Resource {
         
     }
     
-    public enum TileLayout: Int64, CustomDebugStringConvertible {
+    public enum TileLayout: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Tile coordinates layout where both axis stay consistent with their respective local horizontal and vertical axis.
         case stacked = 0 // TILE_LAYOUT_STACKED
         /// Same as .stacked, but the first half-offset is negative instead of positive.
@@ -74,7 +74,7 @@ open class TileSet: Resource {
         
     }
     
-    public enum TileOffsetAxis: Int64, CustomDebugStringConvertible {
+    public enum TileOffsetAxis: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Horizontal half-offset.
         case horizontal = 0 // TILE_OFFSET_AXIS_HORIZONTAL
         /// Vertical half-offset.
@@ -90,7 +90,7 @@ open class TileSet: Resource {
         
     }
     
-    public enum CellNeighbor: Int64, CustomDebugStringConvertible {
+    public enum CellNeighbor: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Neighbor on the right side.
         case rightSide = 0 // CELL_NEIGHBOR_RIGHT_SIDE
         /// Neighbor in the right corner.
@@ -148,7 +148,7 @@ open class TileSet: Resource {
         
     }
     
-    public enum TerrainMode: Int64, CustomDebugStringConvertible {
+    public enum TerrainMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Requires both corners and side to match with neighboring tiles' terrains.
         case cornersAndSides = 0 // TERRAIN_MODE_MATCH_CORNERS_AND_SIDES
         /// Requires corners to match with neighboring tiles' terrains.

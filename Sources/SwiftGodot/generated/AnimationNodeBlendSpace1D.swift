@@ -15,7 +15,7 @@
 /// 
 open class AnimationNodeBlendSpace1D: AnimationRootNode {
     override open class var godotClassName: StringName { "AnimationNodeBlendSpace1D" }
-    public enum BlendMode: Int64, CustomDebugStringConvertible {
+    public enum BlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The interpolation between animations is linear.
         case interpolated = 0 // BLEND_MODE_INTERPOLATED
         /// The blend space plays the animation of the animation node which blending position is closest to. Useful for frame-by-frame 2D animations.

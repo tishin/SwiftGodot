@@ -26,7 +26,7 @@
 /// - ``gutterRemoved``
 open class TextEdit: Control {
     override open class var godotClassName: StringName { "TextEdit" }
-    public enum MenuItems: Int64, CustomDebugStringConvertible {
+    public enum MenuItems: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Cuts (copies and clears) the selected text.
         case cut = 0 // MENU_CUT
         /// Copies the selected text.
@@ -129,7 +129,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum EditAction: Int64, CustomDebugStringConvertible {
+    public enum EditAction: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No current action.
         case none = 0 // ACTION_NONE
         /// A typing action.
@@ -151,7 +151,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum SearchFlags: Int64, CustomDebugStringConvertible {
+    public enum SearchFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Match case when searching.
         case matchCase = 1 // SEARCH_MATCH_CASE
         /// Match whole words when searching.
@@ -170,7 +170,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum CaretType: Int64, CustomDebugStringConvertible {
+    public enum CaretType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Vertical line caret.
         case line = 0 // CARET_TYPE_LINE
         /// Block caret.
@@ -186,7 +186,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum SelectionMode: Int64, CustomDebugStringConvertible {
+    public enum SelectionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Not selecting.
         case none = 0 // SELECTION_MODE_NONE
         /// Select as if `shift` is pressed.
@@ -211,7 +211,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum LineWrappingMode: Int64, CustomDebugStringConvertible {
+    public enum LineWrappingMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Line wrapping is disabled.
         case none = 0 // LINE_WRAPPING_NONE
         /// Line wrapping occurs at the control boundary, beyond what would normally be visible.
@@ -227,7 +227,7 @@ open class TextEdit: Control {
         
     }
     
-    public enum GutterType: Int64, CustomDebugStringConvertible {
+    public enum GutterType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Draw a string.
         case string = 0 // GUTTER_TYPE_STRING
         /// Draw an icon.

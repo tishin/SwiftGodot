@@ -13,7 +13,7 @@
 /// Allows modulation of pitch independently of tempo. All frequencies can be increased/decreased with minimal effect on transients.
 open class AudioEffectPitchShift: AudioEffect {
     override open class var godotClassName: StringName { "AudioEffectPitchShift" }
-    public enum FFTSize: Int64, CustomDebugStringConvertible {
+    public enum FFTSize: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
         case fftSize256 = 0 // FFT_SIZE_256
         /// Use a buffer of 512 samples for the Fast Fourier transform. Low latency, but less stable over time.

@@ -18,7 +18,7 @@ open class Geometry2D: Object {
     }()
     
     override open class var godotClassName: StringName { "Geometry2D" }
-    public enum PolyBooleanOperation: Int64, CustomDebugStringConvertible {
+    public enum PolyBooleanOperation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Create regions where either subject or clip polygons (or both) are filled.
         case union = 0 // OPERATION_UNION
         /// Create regions where subject polygons are filled except where clip polygons are filled.
@@ -40,7 +40,7 @@ open class Geometry2D: Object {
         
     }
     
-    public enum PolyJoinType: Int64, CustomDebugStringConvertible {
+    public enum PolyJoinType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Squaring is applied uniformally at all convex edge joins at `1 * delta`.
         case square = 0 // JOIN_SQUARE
         /// While flattened paths can never perfectly trace an arc, they are approximated by a series of arc chords.
@@ -59,7 +59,7 @@ open class Geometry2D: Object {
         
     }
     
-    public enum PolyEndType: Int64, CustomDebugStringConvertible {
+    public enum PolyEndType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Endpoints are joined using the ``Geometry2D/PolyJoinType`` value and the path filled as a polygon.
         case polygon = 0 // END_POLYGON
         /// Endpoints are joined using the ``Geometry2D/PolyJoinType`` value and the path filled as a polyline.

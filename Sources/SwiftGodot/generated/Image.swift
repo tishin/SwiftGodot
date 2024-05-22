@@ -15,7 +15,7 @@
 /// 
 open class Image: Resource {
     override open class var godotClassName: StringName { "Image" }
-    public enum Format: Int64, CustomDebugStringConvertible {
+    public enum Format: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Texture format with a single 8-bit depth representing luminance.
         case l8 = 0 // FORMAT_L8
         /// OpenGL texture format with two values, luminance and alpha each stored with 8 bits.
@@ -172,7 +172,7 @@ open class Image: Resource {
         
     }
     
-    public enum Interpolation: Int64, CustomDebugStringConvertible {
+    public enum Interpolation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Performs nearest-neighbor interpolation. If the image is resized, it will be pixelated.
         case nearest = 0 // INTERPOLATE_NEAREST
         /// Performs bilinear interpolation. If the image is resized, it will be blurry. This mode is faster than .interpolateCubic, but it results in lower quality.
@@ -206,7 +206,7 @@ open class Image: Resource {
         
     }
     
-    public enum AlphaMode: Int64, CustomDebugStringConvertible {
+    public enum AlphaMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Image does not have alpha.
         case none = 0 // ALPHA_NONE
         /// Image stores alpha in a single bit.
@@ -225,7 +225,7 @@ open class Image: Resource {
         
     }
     
-    public enum CompressMode: Int64, CustomDebugStringConvertible {
+    public enum CompressMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use S3TC compression.
         case s3tc = 0 // COMPRESS_S3TC
         /// Use ETC compression.
@@ -253,7 +253,7 @@ open class Image: Resource {
         
     }
     
-    public enum UsedChannels: Int64, CustomDebugStringConvertible {
+    public enum UsedChannels: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case l = 0 // USED_CHANNELS_L
         /// 
@@ -281,7 +281,7 @@ open class Image: Resource {
         
     }
     
-    public enum CompressSource: Int64, CustomDebugStringConvertible {
+    public enum CompressSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Source texture (before compression) is a regular texture. Default for all textures.
         case generic = 0 // COMPRESS_SOURCE_GENERIC
         /// Source texture (before compression) is in sRGB space.
@@ -300,7 +300,7 @@ open class Image: Resource {
         
     }
     
-    public enum ASTCFormat: Int64, CustomDebugStringConvertible {
+    public enum ASTCFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Hint to indicate that the high quality 4x4 ASTC compression format should be used.
         case astcFormat4x4 = 0 // ASTC_FORMAT_4x4
         /// Hint to indicate that the low quality 8x8 ASTC compression format should be used.

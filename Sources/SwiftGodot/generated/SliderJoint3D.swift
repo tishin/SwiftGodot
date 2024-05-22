@@ -10,7 +10,7 @@
 /// A physics joint that restricts the movement of a 3D physics body along an axis relative to another physics body. For example, Body A could be a ``StaticBody3D`` representing a piston base, while Body B could be a ``RigidBody3D`` representing the piston head, moving up and down.
 open class SliderJoint3D: Joint3D {
     override open class var godotClassName: StringName { "SliderJoint3D" }
-    public enum Param: Int64, CustomDebugStringConvertible {
+    public enum Param: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The maximum difference between the pivot points on their X axis before damping happens.
         case linearLimitUpper = 0 // PARAM_LINEAR_LIMIT_UPPER
         /// The minimum difference between the pivot points on their X axis before damping happens.

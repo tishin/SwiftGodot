@@ -13,7 +13,7 @@
 /// 
 open class CSGPolygon3D: CSGPrimitive3D {
     override open class var godotClassName: StringName { "CSGPolygon3D" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``polygon`` shape is extruded along the negative Z axis.
         case depth = 0 // MODE_DEPTH
         /// The ``polygon`` shape is extruded by rotating it around the Y axis.
@@ -32,7 +32,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    public enum PathRotation: Int64, CustomDebugStringConvertible {
+    public enum PathRotation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``polygon`` shape is not rotated.
         /// 
         /// > Note: Requires the path Z coordinates to continually decrease to ensure viable shapes.
@@ -57,7 +57,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         
     }
     
-    public enum PathIntervalType: Int64, CustomDebugStringConvertible {
+    public enum PathIntervalType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// When ``mode`` is set to .path, ``pathInterval`` will determine the distance, in meters, each interval of the path will extrude.
         case distance = 0 // PATH_INTERVAL_DISTANCE
         /// When ``mode`` is set to .path, ``pathInterval`` will subdivide the polygons along the path.

@@ -10,7 +10,7 @@
 /// This node is only available in `Fragment` and `Light` visual shaders.
 open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeDerivativeFunc" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.
@@ -35,7 +35,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sum of absolute derivative in `x` and `y`.
         case sum = 0 // FUNC_SUM
         /// Derivative in `x` using local differencing.
@@ -57,7 +57,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         
     }
     
-    public enum Precision: Int64, CustomDebugStringConvertible {
+    public enum Precision: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No precision is specified, the GPU driver is allowed to use whatever level of precision it chooses. This is the default option and is equivalent to using `dFdx()` or `dFdy()` in text shaders.
         case none = 0 // PRECISION_NONE
         /// The derivative will be calculated using the current fragment's neighbors (which may not include the current fragment). This tends to be faster than using .fine, but may not be suitable when more precision is needed. This is equivalent to using `dFdxCoarse()` or `dFdyCoarse()` in text shaders.

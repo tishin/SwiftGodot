@@ -10,7 +10,7 @@
 /// A physics joint that connects two 3D physics bodies in a way that simulates a ball-and-socket joint. The twist axis is initiated as the X axis of the ``ConeTwistJoint3D``. Once the physics bodies swing, the twist axis is calculated as the middle of the X axes of the joint in the local space of the two physics bodies. Useful for limbs like shoulders and hips, lamps hanging off a ceiling, etc.
 open class ConeTwistJoint3D: Joint3D {
     override open class var godotClassName: StringName { "ConeTwistJoint3D" }
-    public enum Param: Int64, CustomDebugStringConvertible {
+    public enum Param: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Swing is rotation from side to side, around the axis perpendicular to the twist axis.
         /// 
         /// The swing span defines, how much rotation will not get corrected along the swing axis.

@@ -21,7 +21,7 @@
 /// 
 open class SurfaceTool: RefCounted {
     override open class var godotClassName: StringName { "SurfaceTool" }
-    public enum CustomFormat: Int64, CustomDebugStringConvertible {
+    public enum CustomFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to unsigned normalized 0 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/arrayCustomRgba8Unorm``.
         case rgba8Unorm = 0 // CUSTOM_RGBA8_UNORM
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to signed normalized -1 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/arrayCustomRgba8Snorm``.
@@ -58,7 +58,7 @@ open class SurfaceTool: RefCounted {
         
     }
     
-    public enum SkinWeightCount: Int64, CustomDebugStringConvertible {
+    public enum SkinWeightCount: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Each individual vertex can be influenced by only 4 bone weights.
         case skin4Weights = 0 // SKIN_4_WEIGHTS
         /// Each individual vertex can be influenced by up to 8 bone weights.

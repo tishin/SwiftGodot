@@ -13,7 +13,7 @@
 /// 
 open class PlaneMesh: PrimitiveMesh {
     override open class var godotClassName: StringName { "PlaneMesh" }
-    public enum Orientation: Int64, CustomDebugStringConvertible {
+    public enum Orientation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// ``PlaneMesh`` will face the positive X-axis.
         case x = 0 // FACE_X
         /// ``PlaneMesh`` will face the positive Y-axis. This matches the behavior of the ``PlaneMesh`` in Godot 3.x.

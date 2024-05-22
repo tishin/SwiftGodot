@@ -13,7 +13,7 @@
 /// 
 open class PathFollow3D: Node3D {
     override open class var godotClassName: StringName { "PathFollow3D" }
-    public enum RotationMode: Int64, CustomDebugStringConvertible {
+    public enum RotationMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Forbids the PathFollow3D to rotate.
         case none = 0 // ROTATION_NONE
         /// Allows the PathFollow3D to rotate in the Y axis only.

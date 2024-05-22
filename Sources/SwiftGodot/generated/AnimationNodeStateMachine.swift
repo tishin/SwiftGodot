@@ -13,7 +13,7 @@
 /// 
 open class AnimationNodeStateMachine: AnimationRootNode {
     override open class var godotClassName: StringName { "AnimationNodeStateMachine" }
-    public enum StateMachineType: Int64, CustomDebugStringConvertible {
+    public enum StateMachineType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Seeking to the beginning is treated as playing from the start state. Transition to the end state is treated as exiting the state machine.
         case root = 0 // STATE_MACHINE_TYPE_ROOT
         /// Seeking to the beginning is treated as seeking to the beginning of the animation in the current state. Transition to the end state, or the absence of transitions in each state, is treated as exiting the state machine.

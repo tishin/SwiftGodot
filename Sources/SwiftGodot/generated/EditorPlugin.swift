@@ -22,7 +22,7 @@
 /// - ``projectSettingsChanged``
 open class EditorPlugin: Node {
     override open class var godotClassName: StringName { "EditorPlugin" }
-    public enum CustomControlContainer: Int64, CustomDebugStringConvertible {
+    public enum CustomControlContainer: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Main editor toolbar, next to play buttons.
         case toolbar = 0 // CONTAINER_TOOLBAR
         /// The toolbar that appears when 3D editor is active.
@@ -68,7 +68,7 @@ open class EditorPlugin: Node {
         
     }
     
-    public enum DockSlot: Int64, CustomDebugStringConvertible {
+    public enum DockSlot: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Dock slot, left side, upper-left (empty in default layout).
         case leftUl = 0 // DOCK_SLOT_LEFT_UL
         /// Dock slot, left side, bottom-left (empty in default layout).
@@ -105,7 +105,7 @@ open class EditorPlugin: Node {
         
     }
     
-    public enum AfterGUIInput: Int64, CustomDebugStringConvertible {
+    public enum AfterGUIInput: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Forwards the ``InputEvent`` to other EditorPlugins.
         case pass = 0 // AFTER_GUI_INPUT_PASS
         /// Prevents the ``InputEvent`` from reaching other Editor classes.

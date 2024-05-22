@@ -15,7 +15,7 @@
 /// 
 open class Line2D: Node2D {
     override open class var godotClassName: StringName { "Line2D" }
-    public enum LineJointMode: Int64, CustomDebugStringConvertible {
+    public enum LineJointMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on ``sharpLimit``), the joint falls back to .lineJointBevel to prevent very long miters.
         case sharp = 0 // LINE_JOINT_SHARP
         /// Makes the polyline's joints bevelled/chamfered, connecting the sides of the two segments with a simple line.
@@ -34,7 +34,7 @@ open class Line2D: Node2D {
         
     }
     
-    public enum LineCapMode: Int64, CustomDebugStringConvertible {
+    public enum LineCapMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Draws no line cap.
         case none = 0 // LINE_CAP_NONE
         /// Draws the line cap as a box, slightly extending the first/last segment.
@@ -53,7 +53,7 @@ open class Line2D: Node2D {
         
     }
     
-    public enum LineTextureMode: Int64, CustomDebugStringConvertible {
+    public enum LineTextureMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Takes the left pixels of the texture and renders them over the whole polyline.
         case none = 0 // LINE_TEXTURE_NONE
         /// Tiles the texture over the polyline. ``CanvasItem/textureRepeat`` of the ``Line2D`` node must be ``CanvasItem/TextureRepeat/enabled`` or ``CanvasItem/TextureRepeat/mirror`` for it to work properly.

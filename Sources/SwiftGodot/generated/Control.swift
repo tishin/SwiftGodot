@@ -42,7 +42,7 @@
 /// - ``themeChanged``
 open class Control: CanvasItem {
     override open class var godotClassName: StringName { "Control" }
-    public enum FocusMode: Int64, CustomDebugStringConvertible {
+    public enum FocusMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The node cannot grab focus. Use with ``focusMode``.
         case none = 0 // FOCUS_NONE
         /// The node can only grab focus on mouse clicks. Use with ``focusMode``.
@@ -61,7 +61,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum CursorShape: Int64, CustomDebugStringConvertible {
+    public enum CursorShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Show the system's arrow mouse cursor when the user hovers the node. Use with ``mouseDefaultCursorShape``.
         case arrow = 0 // CURSOR_ARROW
         /// Show the system's I-beam mouse cursor when the user hovers the node. The I-beam pointer has a shape similar to "I". It tells the user they can highlight or insert text.
@@ -122,7 +122,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum LayoutPreset: Int64, CustomDebugStringConvertible {
+    public enum LayoutPreset: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Snap all 4 anchors to the top-left of the parent control's bounds. Use with ``setAnchorsPreset(_:keepOffsets:)``.
         case topLeft = 0 // PRESET_TOP_LEFT
         /// Snap all 4 anchors to the top-right of the parent control's bounds. Use with ``setAnchorsPreset(_:keepOffsets:)``.
@@ -180,7 +180,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum LayoutPresetMode: Int64, CustomDebugStringConvertible {
+    public enum LayoutPresetMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The control will be resized to its minimum size.
         case minsize = 0 // PRESET_MODE_MINSIZE
         /// The control's width will not change.
@@ -232,7 +232,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum MouseFilter: Int64, CustomDebugStringConvertible {
+    public enum MouseFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
         case stop = 0 // MOUSE_FILTER_STOP
         /// The control will receive mouse movement input events and mouse button input events if clicked on through ``_guiInput(event:)``. And the control will receive the [signal mouse_entered] and [signal mouse_exited] signals. If this control does not handle the event, the parent control (if any) will be considered, and so on until there is no more parent control to potentially handle it. This also allows signals to fire in other controls. If no control handled it, the event will be passed to ``Node/_shortcutInput(event:)`` for further processing.
@@ -254,7 +254,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum GrowDirection: Int64, CustomDebugStringConvertible {
+    public enum GrowDirection: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The control will grow to the left or top to make up if its minimum size is changed to be greater than its current size on the respective axis.
         case begin = 0 // GROW_DIRECTION_BEGIN
         /// The control will grow to the right or bottom to make up if its minimum size is changed to be greater than its current size on the respective axis.
@@ -273,7 +273,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum Anchor: Int64, CustomDebugStringConvertible {
+    public enum Anchor: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Snaps one of the 4 anchor's sides to the origin of the node's `Rect`, in the top left. Use it with one of the `anchor_*` member variables, like ``anchorLeft``. To change all 4 anchors at once, use ``setAnchorsPreset(_:keepOffsets:)``.
         case begin = 0 // ANCHOR_BEGIN
         /// Snaps one of the 4 anchor's sides to the end of the node's `Rect`, in the bottom right. Use it with one of the `anchor_*` member variables, like ``anchorLeft``. To change all 4 anchors at once, use ``setAnchorsPreset(_:keepOffsets:)``.
@@ -289,7 +289,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum LayoutDirection: Int64, CustomDebugStringConvertible {
+    public enum LayoutDirection: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Automatic layout direction, determined from the parent control layout direction.
         case inherited = 0 // LAYOUT_DIRECTION_INHERITED
         /// Automatic layout direction, determined from the current locale.
@@ -311,7 +311,7 @@ open class Control: CanvasItem {
         
     }
     
-    public enum TextDirection: Int64, CustomDebugStringConvertible {
+    public enum TextDirection: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Text writing direction is the same as layout direction.
         case inherited = 3 // TEXT_DIRECTION_INHERITED
         /// Automatic text writing direction, determined from the current locale and text content.

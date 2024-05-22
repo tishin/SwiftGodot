@@ -10,7 +10,7 @@
 /// A virtual class, use the descendants instead.
 open class VisualShaderNodeSample3D: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeSample3D" }
-    public enum Source: Int64, CustomDebugStringConvertible {
+    public enum Source: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Creates internal uniform and provides a way to assign it within node.
         case texture = 0 // SOURCE_TEXTURE
         /// Use the uniform texture from sampler port.

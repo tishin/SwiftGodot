@@ -10,7 +10,7 @@
 /// A container type that arranges its child controls in a way that preserves their proportions automatically when the container is resized. Useful when a container has a dynamic size and the child nodes must adjust their sizes accordingly without losing their aspect ratios.
 open class AspectRatioContainer: Container {
     override open class var godotClassName: StringName { "AspectRatioContainer" }
-    public enum StretchMode: Int64, CustomDebugStringConvertible {
+    public enum StretchMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The height of child controls is automatically adjusted based on the width of the container.
         case widthControlsHeight = 0 // STRETCH_WIDTH_CONTROLS_HEIGHT
         /// The width of child controls is automatically adjusted based on the height of the container.
@@ -35,7 +35,7 @@ open class AspectRatioContainer: Container {
         
     }
     
-    public enum AlignmentMode: Int64, CustomDebugStringConvertible {
+    public enum AlignmentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Aligns child controls with the beginning (left or top) of the container.
         case begin = 0 // ALIGNMENT_BEGIN
         /// Aligns child controls with the center of the container.

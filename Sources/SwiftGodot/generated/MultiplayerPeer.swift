@@ -21,7 +21,7 @@
 /// - ``peerDisconnected``
 open class MultiplayerPeer: PacketPeer {
     override open class var godotClassName: StringName { "MultiplayerPeer" }
-    public enum ConnectionStatus: Int64, CustomDebugStringConvertible {
+    public enum ConnectionStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The MultiplayerPeer is disconnected.
         case disconnected = 0 // CONNECTION_DISCONNECTED
         /// The MultiplayerPeer is currently connecting to a server.
@@ -40,7 +40,7 @@ open class MultiplayerPeer: PacketPeer {
         
     }
     
-    public enum TransferMode: Int64, CustomDebugStringConvertible {
+    public enum TransferMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Packets are not acknowledged, no resend attempts are made for lost packets. Packets may arrive in any order. Potentially faster than .unreliableOrdered. Use for non-critical data, and always consider whether the order matters.
         case unreliable = 0 // TRANSFER_MODE_UNRELIABLE
         /// Packets are not acknowledged, no resend attempts are made for lost packets. Packets are received in the order they were sent in. Potentially faster than .reliable. Use for non-critical data or data that would be outdated if received late due to resend attempt(s) anyway, for example movement and positional data.

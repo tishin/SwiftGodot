@@ -13,7 +13,7 @@
 /// 
 open class CharacterBody2D: PhysicsBody2D {
     override open class var godotClassName: StringName { "CharacterBody2D" }
-    public enum MotionMode: Int64, CustomDebugStringConvertible {
+    public enum MotionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Apply when notions of walls, ceiling and floor are relevant. In this mode the body motion will react to slopes (acceleration/slowdown). This mode is suitable for sided games like platformers.
         case grounded = 0 // MOTION_MODE_GROUNDED
         /// Apply when there is no notion of floor or ceiling. All collisions will be reported as `on_wall`. In this mode, when you slide, the speed will always be constant. This mode is suitable for top-down games.
@@ -29,7 +29,7 @@ open class CharacterBody2D: PhysicsBody2D {
         
     }
     
-    public enum PlatformOnLeave: Int64, CustomDebugStringConvertible {
+    public enum PlatformOnLeave: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Add the last platform velocity to the ``velocity`` when you leave a moving platform.
         case addVelocity = 0 // PLATFORM_ON_LEAVE_ADD_VELOCITY
         /// Add the last platform velocity to the ``velocity`` when you leave a moving platform, but any downward motion is ignored. It's useful to keep full jump height even when the platform is moving down.

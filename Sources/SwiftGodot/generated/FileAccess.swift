@@ -21,7 +21,7 @@
 /// 
 open class FileAccess: RefCounted {
     override open class var godotClassName: StringName { "FileAccess" }
-    public enum ModeFlags: Int64, CustomDebugStringConvertible {
+    public enum ModeFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Opens the file for read operations. The cursor is positioned at the beginning of the file.
         case read = 1 // READ
         /// Opens the file for write operations. The file is created if it does not exist, and truncated if it does.
@@ -43,7 +43,7 @@ open class FileAccess: RefCounted {
         
     }
     
-    public enum CompressionMode: Int64, CustomDebugStringConvertible {
+    public enum CompressionMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Uses the <a href="https://fastlz.org/">FastLZ</a> compression method.
         case fastlz = 0 // COMPRESSION_FASTLZ
         /// Uses the <a href="https://en.wikipedia.org/wiki/DEFLATE">DEFLATE</a> compression method.

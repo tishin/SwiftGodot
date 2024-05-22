@@ -44,7 +44,7 @@
 /// - ``finished``
 open class Tween: RefCounted {
     override open class var godotClassName: StringName { "Tween" }
-    public enum TweenProcessMode: Int64, CustomDebugStringConvertible {
+    public enum TweenProcessMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``Tween`` updates after each physics frame (see ``Node/_physicsProcess(delta:)``).
         case physics = 0 // TWEEN_PROCESS_PHYSICS
         /// The ``Tween`` updates after each process frame (see ``Node/_process(delta:)``).
@@ -60,7 +60,7 @@ open class Tween: RefCounted {
         
     }
     
-    public enum TweenPauseMode: Int64, CustomDebugStringConvertible {
+    public enum TweenPauseMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If the ``Tween`` has a bound node, it will process when that node can process (see ``Node/processMode``). Otherwise it's the same as .tweenPauseStop.
         case bound = 0 // TWEEN_PAUSE_BOUND
         /// If ``SceneTree`` is paused, the ``Tween`` will also pause.
@@ -79,7 +79,7 @@ open class Tween: RefCounted {
         
     }
     
-    public enum TransitionType: Int64, CustomDebugStringConvertible {
+    public enum TransitionType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The animation is interpolated linearly.
         case linear = 0 // TRANS_LINEAR
         /// The animation is interpolated using a sine function.
@@ -125,7 +125,7 @@ open class Tween: RefCounted {
         
     }
     
-    public enum EaseType: Int64, CustomDebugStringConvertible {
+    public enum EaseType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The interpolation starts slowly and speeds up towards the end.
         case `in` = 0 // EASE_IN
         /// The interpolation starts quickly and slows down towards the end.

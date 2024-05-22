@@ -11,7 +11,7 @@
 /// 
 open class AESContext: RefCounted {
     override open class var godotClassName: StringName { "AESContext" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// AES electronic codebook encryption mode.
         case ecbEncrypt = 0 // MODE_ECB_ENCRYPT
         /// AES electronic codebook decryption mode.

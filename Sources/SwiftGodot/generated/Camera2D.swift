@@ -17,7 +17,7 @@
 /// 
 open class Camera2D: Node2D {
     override open class var godotClassName: StringName { "Camera2D" }
-    public enum AnchorMode: Int64, CustomDebugStringConvertible {
+    public enum AnchorMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The camera's position is fixed so that the top-left corner is always at the origin.
         case fixedTopLeft = 0 // ANCHOR_MODE_FIXED_TOP_LEFT
         /// The camera's position takes into account vertical/horizontal offsets and the screen size.
@@ -33,7 +33,7 @@ open class Camera2D: Node2D {
         
     }
     
-    public enum Camera2DProcessCallback: Int64, CustomDebugStringConvertible {
+    public enum Camera2DProcessCallback: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The camera updates during physics frames (see ``Node/``notificationInternalPhysicsProcess````).
         case physics = 0 // CAMERA2D_PROCESS_PHYSICS
         /// The camera updates during process frames (see ``Node/``notificationInternalProcess````).

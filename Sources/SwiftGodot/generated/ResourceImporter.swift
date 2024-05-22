@@ -10,7 +10,7 @@
 /// This is the base class for Godot's resource importers. To implement your own resource importers using editor plugins, see ``EditorImportPlugin``.
 open class ResourceImporter: RefCounted {
     override open class var godotClassName: StringName { "ResourceImporter" }
-    public enum ImportOrder: Int64, CustomDebugStringConvertible {
+    public enum ImportOrder: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The default import order.
         case `default` = 0 // IMPORT_ORDER_DEFAULT
         /// The import order for scenes, which ensures scenes are imported _after_ all other core resources such as textures. Custom importers should generally have an import order lower than `100` to avoid issues when importing scenes that rely on custom resources.

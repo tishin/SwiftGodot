@@ -29,7 +29,7 @@ open class CameraServer: Object {
     }()
     
     override open class var godotClassName: StringName { "CameraServer" }
-    public enum FeedImage: Int64, CustomDebugStringConvertible {
+    public enum FeedImage: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The RGBA camera image.
         case rgbaImage = 0 // FEED_RGBA_IMAGE
         /// The <a href="https://en.wikipedia.org/wiki/YCbCr">YCbCr</a> camera image.

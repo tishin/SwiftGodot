@@ -19,7 +19,7 @@
 /// 
 open class TileSetAtlasSource: TileSetSource {
     override open class var godotClassName: StringName { "TileSetAtlasSource" }
-    public enum TileAnimationMode: Int64, CustomDebugStringConvertible {
+    public enum TileAnimationMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Tile animations start at same time, looking identical.
         case `default` = 0 // TILE_ANIMATION_MODE_DEFAULT
         /// Tile animations start at random times, looking varied.

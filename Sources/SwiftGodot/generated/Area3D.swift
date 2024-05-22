@@ -27,7 +27,7 @@
 /// - ``areaExited``
 open class Area3D: CollisionObject3D {
     override open class var godotClassName: StringName { "Area3D" }
-    public enum SpaceOverride: Int64, CustomDebugStringConvertible {
+    public enum SpaceOverride: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This area does not affect gravity/damping.
         case disabled = 0 // SPACE_OVERRIDE_DISABLED
         /// This area adds its gravity/damping values to whatever has been calculated so far (in ``priority`` order).

@@ -10,7 +10,7 @@
 /// A navigation mesh is a collection of polygons that define which areas of an environment are traversable to aid agents in pathfinding through complicated spaces.
 open class NavigationMesh: Resource {
     override open class var godotClassName: StringName { "NavigationMesh" }
-    public enum SamplePartitionType: Int64, CustomDebugStringConvertible {
+    public enum SamplePartitionType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Watershed partitioning. Generally the best choice if you precompute the navigation mesh, use this if you have large open areas.
         case watershed = 0 // SAMPLE_PARTITION_WATERSHED
         /// Monotone partitioning. Use this if you want fast navigation mesh generation.
@@ -32,7 +32,7 @@ open class NavigationMesh: Resource {
         
     }
     
-    public enum ParsedGeometryType: Int64, CustomDebugStringConvertible {
+    public enum ParsedGeometryType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Parses mesh instances as geometry. This includes ``MeshInstance3D``, ``CSGShape3D``, and ``GridMap`` nodes.
         case meshInstances = 0 // PARSED_GEOMETRY_MESH_INSTANCES
         /// Parses ``StaticBody3D`` colliders as geometry. The collider should be in any of the layers specified by ``geometryCollisionMask``.
@@ -54,7 +54,7 @@ open class NavigationMesh: Resource {
         
     }
     
-    public enum SourceGeometryMode: Int64, CustomDebugStringConvertible {
+    public enum SourceGeometryMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Scans the child nodes of the root node recursively for geometry.
         case rootNodeChildren = 0 // SOURCE_GEOMETRY_ROOT_NODE_CHILDREN
         /// Scans nodes in a group and their child nodes recursively for geometry. The group is specified by ``geometrySourceGroupName``.

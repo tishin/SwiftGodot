@@ -10,7 +10,7 @@
 /// Translates to `mix(a, b, weight)` in the shader language.
 open class VisualShaderNodeMix: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeMix" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.

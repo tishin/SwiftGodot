@@ -13,7 +13,7 @@
 /// 
 open class VisualShaderNodeSmoothStep: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeSmoothStep" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar type.
         case scalar = 0 // OP_TYPE_SCALAR
         /// A 2D vector type.

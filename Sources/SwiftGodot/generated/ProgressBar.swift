@@ -10,7 +10,7 @@
 /// A control used for visual representation of a percentage. Shows fill percentage from right to left.
 open class ProgressBar: Range {
     override open class var godotClassName: StringName { "ProgressBar" }
-    public enum FillMode: Int64, CustomDebugStringConvertible {
+    public enum FillMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The progress bar fills from begin to end horizontally, according to the language direction. If ``Control/isLayoutRtl()`` returns `false`, it fills from left to right, and if it returns `true`, it fills from right to left.
         case beginToEnd = 0 // FILL_BEGIN_TO_END
         /// The progress bar fills from end to begin horizontally, according to the language direction. If ``Control/isLayoutRtl()`` returns `false`, it fills from right to left, and if it returns `true`, it fills from left to right.

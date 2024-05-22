@@ -27,7 +27,7 @@
 /// - ``physicsFrame``
 open class SceneTree: MainLoop {
     override open class var godotClassName: StringName { "SceneTree" }
-    public enum GroupCallFlags: Int64, CustomDebugStringConvertible {
+    public enum GroupCallFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Call a group with no flags (default).
         case `default` = 0 // GROUP_CALL_DEFAULT
         /// Call a group in reverse scene order.

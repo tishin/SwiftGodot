@@ -10,7 +10,7 @@
 /// UV functions are similar to ``Vector2`` functions, but the input port of this node uses the shader's UV value by default.
 open class VisualShaderNodeUVFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeUVFunc" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Translates `uv` by using `scale` and `offset` values using the following formula: `uv = uv + offset * scale`. `uv` port is connected to `UV` built-in by default.
         case panning = 0 // FUNC_PANNING
         /// Scales `uv` by using `scale` and `pivot` values using the following formula: `uv = (uv - pivot) * scale + pivot`. `uv` port is connected to `UV` built-in by default.

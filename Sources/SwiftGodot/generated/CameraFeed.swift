@@ -13,7 +13,7 @@
 /// 
 open class CameraFeed: RefCounted {
     override open class var godotClassName: StringName { "CameraFeed" }
-    public enum FeedDataType: Int64, CustomDebugStringConvertible {
+    public enum FeedDataType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No image set for the feed.
         case noimage = 0 // FEED_NOIMAGE
         /// Feed supplies RGB images.
@@ -35,7 +35,7 @@ open class CameraFeed: RefCounted {
         
     }
     
-    public enum FeedPosition: Int64, CustomDebugStringConvertible {
+    public enum FeedPosition: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Unspecified position.
         case unspecified = 0 // FEED_UNSPECIFIED
         /// Camera is mounted at the front of the device.

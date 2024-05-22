@@ -18,7 +18,7 @@
 /// - ``rangeChanged``
 open class Curve: Resource {
     override open class var godotClassName: StringName { "Curve" }
-    public enum TangentMode: Int64, CustomDebugStringConvertible {
+    public enum TangentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The tangent on this side of the point is user-defined.
         case free = 0 // TANGENT_FREE
         /// The curve calculates the tangent on this side of the point as the slope halfway towards the adjacent point.

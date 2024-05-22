@@ -18,7 +18,7 @@
 /// - ``finished``
 open class CPUParticles3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "CPUParticles3D" }
-    public enum DrawOrder: Int64, CustomDebugStringConvertible {
+    public enum DrawOrder: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX
         /// Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
@@ -37,7 +37,7 @@ open class CPUParticles3D: GeometryInstance3D {
         
     }
     
-    public enum Parameter: Int64, CustomDebugStringConvertible {
+    public enum Parameter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamCurve(param:curve:)`` to set initial velocity properties.
         case initialLinearVelocity = 0 // PARAM_INITIAL_LINEAR_VELOCITY
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamCurve(param:curve:)`` to set angular velocity properties.
@@ -86,7 +86,7 @@ open class CPUParticles3D: GeometryInstance3D {
         
     }
     
-    public enum ParticleFlags: Int64, CustomDebugStringConvertible {
+    public enum ParticleFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagAlignY``.
         case alignYToVelocity = 0 // PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY
         /// Use with ``setParticleFlag(_:enable:)`` to set ``particleFlagRotateY``.
@@ -108,7 +108,7 @@ open class CPUParticles3D: GeometryInstance3D {
         
     }
     
-    public enum EmissionShape: Int64, CustomDebugStringConvertible {
+    public enum EmissionShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// All particles will be emitted from a single point.
         case point = 0 // EMISSION_SHAPE_POINT
         /// Particles will be emitted in the volume of a sphere.

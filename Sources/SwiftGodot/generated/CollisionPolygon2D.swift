@@ -13,7 +13,7 @@
 /// 
 open class CollisionPolygon2D: Node2D {
     override open class var godotClassName: StringName { "CollisionPolygon2D" }
-    public enum BuildMode: Int64, CustomDebugStringConvertible {
+    public enum BuildMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Collisions will include the polygon and its contained area. In this mode the node has the same effect as several ``ConvexPolygonShape2D`` nodes, one for each convex shape in the convex decomposition of the polygon (but without the overhead of multiple nodes).
         case solids = 0 // BUILD_SOLIDS
         /// Collisions will only include the polygon edges. In this mode the node has the same effect as a single ``ConcavePolygonShape2D`` made of segments, with the restriction that each segment (after the first one) starts where the previous one ends, and the last one ends where the first one starts (forming a closed but hollow polygon).

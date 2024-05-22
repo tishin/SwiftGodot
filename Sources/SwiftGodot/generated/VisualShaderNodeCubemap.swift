@@ -10,7 +10,7 @@
 /// Translated to `texture(cubemap, vec3)` in the shader language. Returns a color vector and alpha channel as scalar.
 open class VisualShaderNodeCubemap: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeCubemap" }
-    public enum Source: Int64, CustomDebugStringConvertible {
+    public enum Source: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the ``Cubemap`` set via ``cubeMap``. If this is set to ``source``, the `samplerCube` port is ignored.
         case texture = 0 // SOURCE_TEXTURE
         /// Use the ``Cubemap`` sampler reference passed via the `samplerCube` port. If this is set to ``source``, the ``cubeMap`` texture is ignored.
@@ -29,7 +29,7 @@ open class VisualShaderNodeCubemap: VisualShaderNode {
         
     }
     
-    public enum TextureType: Int64, CustomDebugStringConvertible {
+    public enum TextureType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA
         /// Adds `hint_albedo` as hint to the uniform declaration for proper sRGB to linear conversion.

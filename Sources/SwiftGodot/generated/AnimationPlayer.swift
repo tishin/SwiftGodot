@@ -23,7 +23,7 @@
 /// - ``animationChanged``
 open class AnimationPlayer: AnimationMixer {
     override open class var godotClassName: StringName { "AnimationPlayer" }
-    public enum AnimationProcessCallback: Int64, CustomDebugStringConvertible {
+    public enum AnimationProcessCallback: Int64, CaseIterable, CustomDebugStringConvertible {
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/physics``.
         case physics = 0 // ANIMATION_PROCESS_PHYSICS
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeProcess/idle``.
@@ -42,7 +42,7 @@ open class AnimationPlayer: AnimationMixer {
         
     }
     
-    public enum AnimationMethodCallMode: Int64, CustomDebugStringConvertible {
+    public enum AnimationMethodCallMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeMethod/deferred``.
         case deferred = 0 // ANIMATION_METHOD_CALL_DEFERRED
         /// For backward compatibility. See ``AnimationMixer/AnimationCallbackModeMethod/immediate``.

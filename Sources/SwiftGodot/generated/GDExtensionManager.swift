@@ -20,7 +20,7 @@ open class GDExtensionManager: Object {
     }()
     
     override open class var godotClassName: StringName { "GDExtensionManager" }
-    public enum LoadStatus: Int64, CustomDebugStringConvertible {
+    public enum LoadStatus: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case ok = 0 // LOAD_STATUS_OK
         /// 

@@ -13,7 +13,7 @@
 /// 
 open class Generic6DOFJoint3D: Joint3D {
     override open class var godotClassName: StringName { "Generic6DOFJoint3D" }
-    public enum Param: Int64, CustomDebugStringConvertible {
+    public enum Param: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The minimum difference between the pivot points' axes.
         case linearLowerLimit = 0 // PARAM_LINEAR_LOWER_LIMIT
         /// The maximum difference between the pivot points' axes.
@@ -92,7 +92,7 @@ open class Generic6DOFJoint3D: Joint3D {
         
     }
     
-    public enum Flag: Int64, CustomDebugStringConvertible {
+    public enum Flag: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If enabled, linear motion is possible within the given limits.
         case enableLinearLimit = 0 // FLAG_ENABLE_LINEAR_LIMIT
         /// If enabled, rotational motion is possible within the given limits.

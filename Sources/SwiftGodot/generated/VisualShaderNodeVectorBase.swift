@@ -10,7 +10,7 @@
 /// This is an abstract class. See the derived types for descriptions of the possible operations.
 open class VisualShaderNodeVectorBase: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorBase" }
-    public enum OpType: Int64, CustomDebugStringConvertible {
+    public enum OpType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A 2D vector type.
         case vector2d = 0 // OP_TYPE_VECTOR_2D
         /// A 3D vector type.

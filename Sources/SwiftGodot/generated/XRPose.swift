@@ -13,7 +13,7 @@
 /// 
 open class XRPose: RefCounted {
     override open class var godotClassName: StringName { "XRPose" }
-    public enum TrackingConfidence: Int64, CustomDebugStringConvertible {
+    public enum TrackingConfidence: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No tracking information is available for this pose.
         case none = 0 // XR_TRACKING_CONFIDENCE_NONE
         /// Tracking information may be inaccurate or estimated. For example, with inside out tracking this would indicate a controller may be (partially) obscured.

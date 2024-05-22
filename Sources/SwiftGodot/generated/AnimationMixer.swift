@@ -23,7 +23,7 @@
 /// - ``cachesCleared``
 open class AnimationMixer: Node {
     override open class var godotClassName: StringName { "AnimationMixer" }
-    public enum AnimationCallbackModeProcess: Int64, CustomDebugStringConvertible {
+    public enum AnimationCallbackModeProcess: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Process animation during physics frames (see ``Node/``notificationInternalPhysicsProcess````). This is especially useful when animating physics bodies.
         case physics = 0 // ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
         /// Process animation during process frames (see ``Node/``notificationInternalProcess````).
@@ -42,7 +42,7 @@ open class AnimationMixer: Node {
         
     }
     
-    public enum AnimationCallbackModeMethod: Int64, CustomDebugStringConvertible {
+    public enum AnimationCallbackModeMethod: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Batch method calls during the animation process, then do the calls after events are processed. This avoids bugs involving deleting nodes or modifying the AnimationPlayer while playing.
         case deferred = 0 // ANIMATION_CALLBACK_MODE_METHOD_DEFERRED
         /// Make method calls immediately when reached in the animation.

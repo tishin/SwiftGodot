@@ -15,7 +15,7 @@
 /// 
 open class TextureButton: BaseButton {
     override open class var godotClassName: StringName { "TextureButton" }
-    public enum StretchMode: Int64, CustomDebugStringConvertible {
+    public enum StretchMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Scale to fit the node's bounding rectangle.
         case scale = 0 // STRETCH_SCALE
         /// Tile inside the node's bounding rectangle.

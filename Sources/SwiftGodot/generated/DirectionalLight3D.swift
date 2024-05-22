@@ -10,7 +10,7 @@
 /// A directional light is a type of ``Light3D`` node that models an infinite number of parallel rays covering the entire scene. It is used for lights with strong intensity that are located far away from the scene to model sunlight or moonlight. The worldspace location of the DirectionalLight3D transform (origin) is ignored. Only the basis is used to determine light direction.
 open class DirectionalLight3D: Light3D {
     override open class var godotClassName: StringName { "DirectionalLight3D" }
-    public enum ShadowMode: Int64, CustomDebugStringConvertible {
+    public enum ShadowMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Renders the entire scene's shadow map from an orthogonal point of view. This is the fastest directional shadow mode. May result in blurrier shadows on close objects.
         case orthogonal = 0 // SHADOW_ORTHOGONAL
         /// Splits the view frustum in 2 areas, each with its own shadow map. This shadow mode is a compromise between .shadowOrthogonal and .shadowParallel4Splits in terms of performance.
@@ -29,7 +29,7 @@ open class DirectionalLight3D: Light3D {
         
     }
     
-    public enum SkyMode: Int64, CustomDebugStringConvertible {
+    public enum SkyMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Makes the light visible in both scene lighting and sky rendering.
         case lightAndSky = 0 // SKY_MODE_LIGHT_AND_SKY
         /// Makes the light visible in scene lighting only (including direct lighting and global illumination). When using this mode, the light will not be visible from sky shaders.

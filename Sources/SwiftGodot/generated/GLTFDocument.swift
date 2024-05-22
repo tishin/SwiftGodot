@@ -15,7 +15,7 @@
 /// 
 open class GLTFDocument: Resource {
     override open class var godotClassName: StringName { "GLTFDocument" }
-    public enum RootNodeMode: Int64, CustomDebugStringConvertible {
+    public enum RootNodeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the `GODOT_single_root` glTF extension. This will be parsed the same as .keepRoot if the implementation does not support `GODOT_single_root`.
         case singleRoot = 0 // ROOT_NODE_MODE_SINGLE_ROOT
         /// Treat the Godot scene's root node as the root node of the glTF file, but do not mark it as anything special. An extra root node will be generated when importing into Godot. This uses only vanilla glTF features. This is equivalent to the behavior in Godot 4.1 and earlier.

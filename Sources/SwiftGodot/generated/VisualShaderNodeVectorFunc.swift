@@ -10,7 +10,7 @@
 /// A visual shader node able to perform different functions using vectors.
 open class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
     override open class var godotClassName: StringName { "VisualShaderNodeVectorFunc" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Normalizes the vector so that it has a length of `1` but points in the same direction.
         case normalize = 0 // FUNC_NORMALIZE
         /// Clamps the value between `0.0` and `1.0`.

@@ -22,7 +22,7 @@
 /// - ``finished``
 open class AudioStreamPlayer3D: Node3D {
     override open class var godotClassName: StringName { "AudioStreamPlayer3D" }
-    public enum AttenuationModel: Int64, CustomDebugStringConvertible {
+    public enum AttenuationModel: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Attenuation of loudness according to linear distance.
         case inverseDistance = 0 // ATTENUATION_INVERSE_DISTANCE
         /// Attenuation of loudness according to squared distance.
@@ -44,7 +44,7 @@ open class AudioStreamPlayer3D: Node3D {
         
     }
     
-    public enum DopplerTracking: Int64, CustomDebugStringConvertible {
+    public enum DopplerTracking: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables doppler tracking.
         case disabled = 0 // DOPPLER_TRACKING_DISABLED
         /// Executes doppler tracking during process frames (see ``Node/``notificationInternalProcess````).

@@ -10,7 +10,7 @@
 /// Allows frequencies other than the ``cutoffHz`` to pass.
 open class AudioEffectFilter: AudioEffect {
     override open class var godotClassName: StringName { "AudioEffectFilter" }
-    public enum FilterDB: Int64, CustomDebugStringConvertible {
+    public enum FilterDB: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case filter6db = 0 // FILTER_6DB
         /// 

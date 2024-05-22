@@ -16,7 +16,7 @@
 /// - ``scrollEnded``
 open class ScrollContainer: Container {
     override open class var godotClassName: StringName { "ScrollContainer" }
-    public enum ScrollMode: Int64, CustomDebugStringConvertible {
+    public enum ScrollMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Scrolling disabled, scrollbar will be invisible.
         case disabled = 0 // SCROLL_MODE_DISABLED
         /// Scrolling enabled, scrollbar will be visible only if necessary, i.e. container's content is bigger than the container.

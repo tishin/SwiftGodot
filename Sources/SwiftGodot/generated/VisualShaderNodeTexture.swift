@@ -10,7 +10,7 @@
 /// Performs a lookup operation on the provided texture, with support for multiple texture sources to choose from.
 open class VisualShaderNodeTexture: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeTexture" }
-    public enum Source: Int64, CustomDebugStringConvertible {
+    public enum Source: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the texture given as an argument for this function.
         case texture = 0 // SOURCE_TEXTURE
         /// Use the current viewport's texture as the source.
@@ -47,7 +47,7 @@ open class VisualShaderNodeTexture: VisualShaderNode {
         
     }
     
-    public enum TextureType: Int64, CustomDebugStringConvertible {
+    public enum TextureType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA
         /// Adds `hint_albedo` as hint to the uniform declaration for proper sRGB to linear conversion.

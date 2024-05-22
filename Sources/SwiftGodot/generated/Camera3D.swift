@@ -10,7 +10,7 @@
 /// ``Camera3D`` is a special node that displays what is visible from its current location. Cameras register themselves in the nearest ``Viewport`` node (when ascending the tree). Only one camera can be active per viewport. If no viewport is available ascending the tree, the camera will register in the global viewport. In other words, a camera just provides 3D display capabilities to a ``Viewport``, and, without one, a scene registered in that ``Viewport`` (or higher viewports) can't be displayed.
 open class Camera3D: Node3D {
     override open class var godotClassName: StringName { "Camera3D" }
-    public enum ProjectionType: Int64, CustomDebugStringConvertible {
+    public enum ProjectionType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Perspective projection. Objects on the screen becomes smaller when they are far away.
         case perspective = 0 // PROJECTION_PERSPECTIVE
         /// Orthogonal projection, also known as orthographic projection. Objects remain the same size on the screen no matter how far away they are.
@@ -29,7 +29,7 @@ open class Camera3D: Node3D {
         
     }
     
-    public enum KeepAspect: Int64, CustomDebugStringConvertible {
+    public enum KeepAspect: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Preserves the horizontal aspect ratio; also known as Vert- scaling. This is usually the best option for projects running in portrait mode, as taller aspect ratios will benefit from a wider vertical FOV.
         case width = 0 // KEEP_WIDTH
         /// Preserves the vertical aspect ratio; also known as Hor+ scaling. This is usually the best option for projects running in landscape mode, as wider aspect ratios will automatically benefit from a wider horizontal FOV.
@@ -45,7 +45,7 @@ open class Camera3D: Node3D {
         
     }
     
-    public enum DopplerTracking: Int64, CustomDebugStringConvertible {
+    public enum DopplerTracking: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> simulation (default).
         case disabled = 0 // DOPPLER_TRACKING_DISABLED
         /// Simulate <a href="https://en.wikipedia.org/wiki/Doppler_effect">Doppler effect</a> by tracking positions of objects that are changed in `_process`. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's ``AudioStreamPlayer3D/pitchScale``).

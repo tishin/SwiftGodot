@@ -13,7 +13,7 @@
 /// 
 open class AnimationNodeOneShot: AnimationNodeSync {
     override open class var godotClassName: StringName { "AnimationNodeOneShot" }
-    public enum OneShotRequest: Int64, CustomDebugStringConvertible {
+    public enum OneShotRequest: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The default state of the request. Nothing is done.
         case none = 0 // ONE_SHOT_REQUEST_NONE
         /// The request to play the animation connected to "shot" port.
@@ -35,7 +35,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         
     }
     
-    public enum MixMode: Int64, CustomDebugStringConvertible {
+    public enum MixMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Blends two animations. See also ``AnimationNodeBlend2``.
         case blend = 0 // MIX_MODE_BLEND
         /// Blends two animations additively. See also ``AnimationNodeAdd2``.

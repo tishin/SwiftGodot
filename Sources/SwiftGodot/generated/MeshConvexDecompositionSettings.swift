@@ -10,7 +10,7 @@
 /// Parameters to be used with a ``Mesh`` convex decomposition operation.
 open class MeshConvexDecompositionSettings: RefCounted {
     override open class var godotClassName: StringName { "MeshConvexDecompositionSettings" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant for voxel-based approximate convex decomposition.
         case voxel = 0 // CONVEX_DECOMPOSITION_MODE_VOXEL
         /// Constant for tetrahedron-based approximate convex decomposition.

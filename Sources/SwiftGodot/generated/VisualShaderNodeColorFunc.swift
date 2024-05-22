@@ -10,7 +10,7 @@
 /// Accept a ``Color`` to the input port and transform it according to ``function``.
 open class VisualShaderNodeColorFunc: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeColorFunc" }
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Converts the color to grayscale using the following formula:
         /// 
         case grayscale = 0 // FUNC_GRAYSCALE

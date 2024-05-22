@@ -10,7 +10,7 @@
 /// Compares `a` and `b` of ``type`` by ``function``. Returns a boolean scalar. Translates to `if` instruction in shader code.
 open class VisualShaderNodeCompare: VisualShaderNode {
     override open class var godotClassName: StringName { "VisualShaderNodeCompare" }
-    public enum ComparisonType: Int64, CustomDebugStringConvertible {
+    public enum ComparisonType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// A floating-point scalar.
         case scalar = 0 // CTYPE_SCALAR
         /// An integer scalar.
@@ -47,7 +47,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         
     }
     
-    public enum Function: Int64, CustomDebugStringConvertible {
+    public enum Function: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Comparison for equality (`a == b`).
         case equal = 0 // FUNC_EQUAL
         /// Comparison for inequality (`a != b`).
@@ -78,7 +78,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         
     }
     
-    public enum Condition: Int64, CustomDebugStringConvertible {
+    public enum Condition: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The result will be true if all of component in vector satisfy the comparison condition.
         case all = 0 // COND_ALL
         /// The result will be true if any of component in vector satisfy the comparison condition.

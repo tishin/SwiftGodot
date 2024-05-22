@@ -13,7 +13,7 @@
 /// 
 open class CSGShape3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "CSGShape3D" }
-    public enum Operation: Int64, CustomDebugStringConvertible {
+    public enum Operation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Geometry of both primitives is merged, intersecting geometry is removed.
         case union = 0 // OPERATION_UNION
         /// Only intersecting geometry remains, the rest is removed.

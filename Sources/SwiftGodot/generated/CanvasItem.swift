@@ -25,7 +25,7 @@
 /// - ``itemRectChanged``
 open class CanvasItem: Node {
     override open class var godotClassName: StringName { "CanvasItem" }
-    public enum TextureFilter: Int64, CustomDebugStringConvertible {
+    public enum TextureFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``CanvasItem`` will inherit the filter from its parent.
         case parentNode = 0 // TEXTURE_FILTER_PARENT_NODE
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering. Useful for pixel art.
@@ -65,7 +65,7 @@ open class CanvasItem: Node {
         
     }
     
-    public enum TextureRepeat: Int64, CustomDebugStringConvertible {
+    public enum TextureRepeat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The ``CanvasItem`` will inherit the filter from its parent.
         case parentNode = 0 // TEXTURE_REPEAT_PARENT_NODE
         /// Texture will not repeat.
@@ -90,7 +90,7 @@ open class CanvasItem: Node {
         
     }
     
-    public enum ClipChildrenMode: Int64, CustomDebugStringConvertible {
+    public enum ClipChildrenMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Child draws over parent and is not clipped.
         case disabled = 0 // CLIP_CHILDREN_DISABLED
         /// Parent is used for the purposes of clipping only. Child is clipped to the parent's visible area, parent is not drawn.

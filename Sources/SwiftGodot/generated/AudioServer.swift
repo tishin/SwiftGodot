@@ -24,7 +24,7 @@ open class AudioServer: Object {
     }()
     
     override open class var godotClassName: StringName { "AudioServer" }
-    public enum SpeakerMode: Int64, CustomDebugStringConvertible {
+    public enum SpeakerMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Two or fewer speakers were detected.
         case modeStereo = 0 // SPEAKER_MODE_STEREO
         /// A 3.1 channel surround setup was detected.

@@ -15,7 +15,7 @@
 /// 
 open class ResourceFormatLoader: RefCounted {
     override open class var godotClassName: StringName { "ResourceFormatLoader" }
-    public enum CacheMode: Int64, CustomDebugStringConvertible {
+    public enum CacheMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case ignore = 0 // CACHE_MODE_IGNORE
         /// 

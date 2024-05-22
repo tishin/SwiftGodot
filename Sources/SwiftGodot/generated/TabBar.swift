@@ -22,7 +22,7 @@
 /// - ``activeTabRearranged``
 open class TabBar: Control {
     override open class var godotClassName: StringName { "TabBar" }
-    public enum AlignmentMode: Int64, CustomDebugStringConvertible {
+    public enum AlignmentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Places tabs to the left.
         case left = 0 // ALIGNMENT_LEFT
         /// Places tabs in the middle.
@@ -44,7 +44,7 @@ open class TabBar: Control {
         
     }
     
-    public enum CloseButtonDisplayPolicy: Int64, CustomDebugStringConvertible {
+    public enum CloseButtonDisplayPolicy: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Never show the close buttons.
         case showNever = 0 // CLOSE_BUTTON_SHOW_NEVER
         /// Only show the close button on the currently active tab.

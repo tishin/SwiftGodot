@@ -10,7 +10,7 @@
 /// Performs a lookup operation on the texture provided as a uniform for the shader.
 open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     override open class var godotClassName: StringName { "VisualShaderNodeTextureParameter" }
-    public enum TextureType: Int64, CustomDebugStringConvertible {
+    public enum TextureType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA
         /// Adds `source_color` as hint to the uniform declaration for proper sRGB to linear conversion.
@@ -35,7 +35,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    public enum ColorDefault: Int64, CustomDebugStringConvertible {
+    public enum ColorDefault: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Defaults to fully opaque white color.
         case white = 0 // COLOR_DEFAULT_WHITE
         /// Defaults to fully opaque black color.
@@ -57,7 +57,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    public enum TextureFilter: Int64, CustomDebugStringConvertible {
+    public enum TextureFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sample the texture using the filter determined by the node this shader is attached to.
         case `default` = 0 // FILTER_DEFAULT
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
@@ -97,7 +97,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    public enum TextureRepeat: Int64, CustomDebugStringConvertible {
+    public enum TextureRepeat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sample the texture using the repeat mode determined by the node this shader is attached to.
         case `default` = 0 // REPEAT_DEFAULT
         /// Texture will repeat normally.
@@ -119,7 +119,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         
     }
     
-    public enum TextureSource: Int64, CustomDebugStringConvertible {
+    public enum TextureSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The texture source is not specified in the shader.
         case none = 0 // SOURCE_NONE
         /// The texture source is the screen texture which captures all opaque objects drawn this frame.

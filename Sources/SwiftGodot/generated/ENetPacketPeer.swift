@@ -15,7 +15,7 @@
 /// 
 open class ENetPacketPeer: PacketPeer {
     override open class var godotClassName: StringName { "ENetPacketPeer" }
-    public enum PeerState: Int64, CustomDebugStringConvertible {
+    public enum PeerState: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The peer is disconnected.
         case disconnected = 0 // STATE_DISCONNECTED
         /// The peer is currently attempting to connect.
@@ -55,7 +55,7 @@ open class ENetPacketPeer: PacketPeer {
         
     }
     
-    public enum PeerStatistic: Int64, CustomDebugStringConvertible {
+    public enum PeerStatistic: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Mean packet loss of reliable packets as a ratio with respect to the ``packetLossScale``.
         case packetLoss = 0 // PEER_PACKET_LOSS
         /// Packet loss variance.

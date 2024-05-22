@@ -11,7 +11,7 @@
 /// 
 open class ZIPPacker: RefCounted {
     override open class var godotClassName: StringName { "ZIPPacker" }
-    public enum ZipAppend: Int64, CustomDebugStringConvertible {
+    public enum ZipAppend: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Create a new zip archive at the given path.
         case create = 0 // APPEND_CREATE
         /// Append a new zip archive to the end of the already existing file at the given path.

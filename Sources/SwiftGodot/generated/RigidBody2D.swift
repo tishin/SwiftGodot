@@ -28,7 +28,7 @@
 /// - ``sleepingStateChanged``
 open class RigidBody2D: PhysicsBody2D {
     override open class var godotClassName: StringName { "RigidBody2D" }
-    public enum FreezeMode: Int64, CustomDebugStringConvertible {
+    public enum FreezeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Static body freeze mode (default). The body is not affected by gravity and forces. It can be only moved by user code and doesn't collide with other bodies along its path.
         case `static` = 0 // FREEZE_MODE_STATIC
         /// Kinematic body freeze mode. Similar to .`static`, but collides with other bodies along its path when moved. Useful for a frozen body that needs to be animated.
@@ -44,7 +44,7 @@ open class RigidBody2D: PhysicsBody2D {
         
     }
     
-    public enum CenterOfMassMode: Int64, CustomDebugStringConvertible {
+    public enum CenterOfMassMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// In this mode, the body's center of mass is calculated automatically based on its shapes. This assumes that the shapes' origins are also their center of mass.
         case auto = 0 // CENTER_OF_MASS_MODE_AUTO
         /// In this mode, the body's center of mass is set through ``centerOfMass``. Defaults to the body's origin position.
@@ -60,7 +60,7 @@ open class RigidBody2D: PhysicsBody2D {
         
     }
     
-    public enum DampMode: Int64, CustomDebugStringConvertible {
+    public enum DampMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// In this mode, the body's damping value is added to any value set in areas or the default value.
         case combine = 0 // DAMP_MODE_COMBINE
         /// In this mode, the body's damping value replaces any value set in areas or the default value.
@@ -76,7 +76,7 @@ open class RigidBody2D: PhysicsBody2D {
         
     }
     
-    public enum CCDMode: Int64, CustomDebugStringConvertible {
+    public enum CCDMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Continuous collision detection disabled. This is the fastest way to detect body collisions, but can miss small, fast-moving objects.
         case disabled = 0 // CCD_MODE_DISABLED
         /// Continuous collision detection enabled using raycasting. This is faster than shapecasting but less precise.

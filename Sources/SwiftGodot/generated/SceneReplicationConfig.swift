@@ -8,7 +8,7 @@
 /// Configuration for properties to synchronize with a ``MultiplayerSynchronizer``.
 open class SceneReplicationConfig: Resource {
     override open class var godotClassName: StringName { "SceneReplicationConfig" }
-    public enum ReplicationMode: Int64, CustomDebugStringConvertible {
+    public enum ReplicationMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not keep the given property synchronized.
         case never = 0 // REPLICATION_MODE_NEVER
         /// Replicate the given property on process by constantly sending updates using unreliable transfer mode.

@@ -19,7 +19,7 @@
 /// 
 open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     override open class var godotClassName: StringName { "GPUParticlesCollisionHeightField3D" }
-    public enum Resolution: Int64, CustomDebugStringConvertible {
+    public enum Resolution: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Generate a 256×256 heightmap. Intended for small-scale scenes, or larger scenes with no distant particles.
         case resolution256 = 0 // RESOLUTION_256
         /// Generate a 512×512 heightmap. Intended for medium-scale scenes, or larger scenes with no distant particles.
@@ -50,7 +50,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         
     }
     
-    public enum UpdateMode: Int64, CustomDebugStringConvertible {
+    public enum UpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Only update the heightmap when the ``GPUParticlesCollisionHeightField3D`` node is moved, or when the camera moves if ``followCameraEnabled`` is `true`. An update can be forced by slightly moving the ``GPUParticlesCollisionHeightField3D`` in any direction, or by calling ``RenderingServer/particlesCollisionHeightFieldUpdate(particlesCollision:)``.
         case whenMoved = 0 // UPDATE_MODE_WHEN_MOVED
         /// Update the heightmap every frame. This has a significant performance cost. This update should only be used when geometry that particles can collide with changes significantly during gameplay.

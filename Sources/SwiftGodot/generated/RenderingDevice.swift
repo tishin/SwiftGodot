@@ -19,7 +19,7 @@
 /// 
 open class RenderingDevice: Object {
     override open class var godotClassName: StringName { "RenderingDevice" }
-    public enum DeviceType: Int64, CustomDebugStringConvertible {
+    public enum DeviceType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Rendering device type does not match any of the other enum values or is unknown.
         case other = 0 // DEVICE_TYPE_OTHER
         /// Rendering device is an integrated GPU, which is typically _(but not always)_ slower than dedicated GPUs (.discreteGpu). On Android and iOS, the rendering device type is always considered to be .integratedGpu.
@@ -47,7 +47,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum DriverResource: Int64, CustomDebugStringConvertible {
+    public enum DriverResource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Vulkan device driver resource. This is a "global" resource and ignores the RID passed in
         case device = 0 // DRIVER_RESOURCE_VULKAN_DEVICE
         /// Physical device (graphics card) driver resource.
@@ -96,7 +96,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum DataFormat: Int64, CustomDebugStringConvertible {
+    public enum DataFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 4-bit-per-channel red/green channel data format, packed into 8 bits. Values are in the `[0.0, 1.0]` range.
         /// 
         /// > Note: More information on all data formats can be found on the <a href="https://registry.khronos.org/vulkan/specs/1.1/html/vkspec.html#_identification_of_formats">Identification of formats</a> section of the Vulkan specification, as well as the <a href="https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkFormat.html">VkFormat</a> enum.
@@ -802,7 +802,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureType: Int64, CustomDebugStringConvertible {
+    public enum TextureType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 1-dimensional texture.
         case textureType1d = 0 // TEXTURE_TYPE_1D
         /// 2-dimensional texture.
@@ -836,7 +836,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureSamples: Int64, CustomDebugStringConvertible {
+    public enum TextureSamples: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Perform 1 texture sample (this is the fastest but lowest-quality for antialiasing).
         case textureSamples1 = 0 // TEXTURE_SAMPLES_1
         /// Perform 2 texture samples.
@@ -915,7 +915,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureSwizzle: Int64, CustomDebugStringConvertible {
+    public enum TextureSwizzle: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Return the sampled value as-is.
         case identity = 0 // TEXTURE_SWIZZLE_IDENTITY
         /// Always return `0.0` when sampling.
@@ -949,7 +949,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum TextureSliceType: Int64, CustomDebugStringConvertible {
+    public enum TextureSliceType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 2-dimensional texture slice.
         case textureSlice2d = 0 // TEXTURE_SLICE_2D
         /// Cubemap texture slice.
@@ -968,7 +968,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum SamplerFilter: Int64, CustomDebugStringConvertible {
+    public enum SamplerFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Nearest-neighbor sampler filtering. Sampling at higher resolutions than the source will result in a pixelated look.
         case nearest = 0 // SAMPLER_FILTER_NEAREST
         /// Bilinear sampler filtering. Sampling at higher resolutions than the source will result in a blurry look.
@@ -984,7 +984,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum SamplerRepeatMode: Int64, CustomDebugStringConvertible {
+    public enum SamplerRepeatMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sample with repeating enabled.
         case `repeat` = 0 // SAMPLER_REPEAT_MODE_REPEAT
         /// Sample with mirrored repeating enabled. When sampling outside the `[0.0, 1.0]` range, return a mirrored version of the sampler. This mirrored version is mirrored again if sampling further away, with the pattern repeating indefinitely.
@@ -1012,7 +1012,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum SamplerBorderColor: Int64, CustomDebugStringConvertible {
+    public enum SamplerBorderColor: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Return a floating-point transparent black color when sampling outside the `[0.0, 1.0]` range. Only effective if the sampler repeat mode is .clampToBorder.
         case floatTransparentBlack = 0 // SAMPLER_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK
         /// Return a integer transparent black color when sampling outside the `[0.0, 1.0]` range. Only effective if the sampler repeat mode is .clampToBorder.
@@ -1043,7 +1043,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum VertexFrequency: Int64, CustomDebugStringConvertible {
+    public enum VertexFrequency: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Vertex attribute addressing is a function of the vertex. This is used to specify the rate at which vertex attributes are pulled from buffers.
         case vertex = 0 // VERTEX_FREQUENCY_VERTEX
         /// Vertex attribute addressing is a function of the instance index. This is used to specify the rate at which vertex attributes are pulled from buffers.
@@ -1059,7 +1059,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum IndexBufferFormat: Int64, CustomDebugStringConvertible {
+    public enum IndexBufferFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Index buffer in 16-bit unsigned integer format. This limits the maximum index that can be specified to `65535`.
         case uint16 = 0 // INDEX_BUFFER_FORMAT_UINT16
         /// Index buffer in 32-bit unsigned integer format. This limits the maximum index that can be specified to `4294967295`.
@@ -1093,7 +1093,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum UniformType: Int64, CustomDebugStringConvertible {
+    public enum UniformType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Sampler uniform.
         case sampler = 0 // UNIFORM_TYPE_SAMPLER
         /// Sampler uniform with a texture.
@@ -1136,7 +1136,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum RenderPrimitive: Int64, CustomDebugStringConvertible {
+    public enum RenderPrimitive: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Point rendering primitive (with constant size, regardless of distance from camera).
         case points = 0 // RENDER_PRIMITIVE_POINTS
         /// Line list rendering primitive. Lines are drawn separated from each other.
@@ -1197,7 +1197,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum PolygonCullMode: Int64, CustomDebugStringConvertible {
+    public enum PolygonCullMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not use polygon front face or backface culling.
         case disabled = 0 // POLYGON_CULL_DISABLED
         /// Use polygon frontface culling (faces pointing towards the camera are hidden).
@@ -1216,7 +1216,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum PolygonFrontFace: Int64, CustomDebugStringConvertible {
+    public enum PolygonFrontFace: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Clockwise winding order to determine which face of a polygon is its front face.
         case clockwise = 0 // POLYGON_FRONT_FACE_CLOCKWISE
         /// Counter-clockwise winding order to determine which face of a polygon is its front face.
@@ -1232,7 +1232,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum StencilOperation: Int64, CustomDebugStringConvertible {
+    public enum StencilOperation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Keep the current stencil value.
         case keep = 0 // STENCIL_OP_KEEP
         /// Set the stencil value to `0`.
@@ -1269,7 +1269,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum CompareOperator: Int64, CustomDebugStringConvertible {
+    public enum CompareOperator: Int64, CaseIterable, CustomDebugStringConvertible {
         /// "Never" comparison (opposite of .compareOpAlways).
         case never = 0 // COMPARE_OP_NEVER
         /// "Less than" comparison.
@@ -1306,7 +1306,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum LogicOperation: Int64, CustomDebugStringConvertible {
+    public enum LogicOperation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Clear logic operation (result is always `0`). See also .logicOpSet.
         case clear = 0 // LOGIC_OP_CLEAR
         /// AND logic operation.
@@ -1367,7 +1367,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum BlendFactor: Int64, CustomDebugStringConvertible {
+    public enum BlendFactor: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant `0.0` blend factor.
         case zero = 0 // BLEND_FACTOR_ZERO
         /// Constant `1.0` blend factor.
@@ -1437,7 +1437,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum BlendOperation: Int64, CustomDebugStringConvertible {
+    public enum BlendOperation: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Additive blending operation (`source + destination`).
         case add = 0 // BLEND_OP_ADD
         /// Subtractive blending operation (`source - destination`).
@@ -1501,7 +1501,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum InitialAction: Int64, CustomDebugStringConvertible {
+    public enum InitialAction: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Start rendering and clear the whole framebuffer.
         case clear = 0 // INITIAL_ACTION_CLEAR
         /// Start rendering and clear the framebuffer in the specified region.
@@ -1532,7 +1532,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum FinalAction: Int64, CustomDebugStringConvertible {
+    public enum FinalAction: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Store the texture for reading and make it read-only if it has the .textureUsageSamplingBit bit (only applies to color, depth and stencil attachments).
         case read = 0 // FINAL_ACTION_READ
         /// Discard the texture data and make it read-only if it has the .textureUsageSamplingBit bit (only applies to color, depth and stencil attachments).
@@ -1554,7 +1554,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum ShaderStage: Int64, CustomDebugStringConvertible {
+    public enum ShaderStage: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Vertex shader stage. This can be used to manipulate vertices from a shader (but not create new vertices).
         case vertex = 0 // SHADER_STAGE_VERTEX
         /// Fragment shader stage (called "pixel shader" in Direct3D). This can be used to manipulate pixels from a shader.
@@ -1594,7 +1594,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum ShaderLanguage: Int64, CustomDebugStringConvertible {
+    public enum ShaderLanguage: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Khronos' GLSL shading language (used natively by OpenGL and Vulkan). This is the language used for core Godot shaders.
         case glsl = 0 // SHADER_LANGUAGE_GLSL
         /// Microsoft's High-Level Shading Language (used natively by Direct3D, but can also be used in Vulkan).
@@ -1610,7 +1610,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum PipelineSpecializationConstantType: Int64, CustomDebugStringConvertible {
+    public enum PipelineSpecializationConstantType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Boolean specialization constant.
         case bool = 0 // PIPELINE_SPECIALIZATION_CONSTANT_TYPE_BOOL
         /// Integer specialization constant.
@@ -1629,7 +1629,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum Limit: Int64, CustomDebugStringConvertible {
+    public enum Limit: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Maximum number of uniform sets that can be bound at a given time.
         case maxBoundUniformSets = 0 // LIMIT_MAX_BOUND_UNIFORM_SETS
         /// Maximum number of color framebuffer attachments that can be used at a given time.
@@ -1750,7 +1750,7 @@ open class RenderingDevice: Object {
         
     }
     
-    public enum MemoryType: Int64, CustomDebugStringConvertible {
+    public enum MemoryType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Memory taken by textures.
         case textures = 0 // MEMORY_TEXTURES
         /// Memory taken by buffers.

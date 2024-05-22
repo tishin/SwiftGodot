@@ -10,7 +10,7 @@
 /// This class stores the result of a 2D navigation path query from the ``NavigationServer2D``.
 open class NavigationPathQueryResult2D: RefCounted {
     override open class var godotClassName: StringName { "NavigationPathQueryResult2D" }
-    public enum PathSegmentType: Int64, CustomDebugStringConvertible {
+    public enum PathSegmentType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This segment of the path goes through a region.
         case region = 0 // PATH_SEGMENT_TYPE_REGION
         /// This segment of the path goes through a link.

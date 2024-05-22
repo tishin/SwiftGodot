@@ -41,7 +41,7 @@ open class RenderingServer: Object {
     }()
     
     override open class var godotClassName: StringName { "RenderingServer" }
-    public enum TextureLayeredType: Int64, CustomDebugStringConvertible {
+    public enum TextureLayeredType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Array of 2-dimensional textures (see ``Texture2DArray``).
         case textureLayered2dArray = 0 // TEXTURE_LAYERED_2D_ARRAY
         /// Cubemap texture (see ``Cubemap``).
@@ -60,7 +60,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CubeMapLayer: Int64, CustomDebugStringConvertible {
+    public enum CubeMapLayer: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Left face of a ``Cubemap``.
         case left = 0 // CUBEMAP_LAYER_LEFT
         /// Right face of a ``Cubemap``.
@@ -88,7 +88,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ShaderMode: Int64, CustomDebugStringConvertible {
+    public enum ShaderMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Shader is a 3D shader.
         case spatial = 0 // SHADER_SPATIAL
         /// Shader is a 2D shader.
@@ -116,7 +116,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ArrayType: Int64, CustomDebugStringConvertible {
+    public enum ArrayType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Array is a vertex position array.
         case vertex = 0 // ARRAY_VERTEX
         /// Array is a normal array.
@@ -168,7 +168,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ArrayCustomFormat: Int64, CustomDebugStringConvertible {
+    public enum ArrayCustomFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Custom data array contains 8-bit-per-channel red/green/blue/alpha color data. Values are normalized, unsigned floating-point in the `[0.0, 1.0]` range.
         case rgba8Unorm = 0 // ARRAY_CUSTOM_RGBA8_UNORM
         /// Custom data array contains 8-bit-per-channel red/green/blue/alpha color data. Values are normalized, signed floating-point in the `[-1.0, 1.0]` range.
@@ -316,7 +316,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum PrimitiveType: Int64, CustomDebugStringConvertible {
+    public enum PrimitiveType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Primitive to draw consists of points.
         case points = 0 // PRIMITIVE_POINTS
         /// Primitive to draw consists of lines.
@@ -344,7 +344,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum BlendShapeMode: Int64, CustomDebugStringConvertible {
+    public enum BlendShapeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Blend shapes are normalized.
         case normalized = 0 // BLEND_SHAPE_MODE_NORMALIZED
         /// Blend shapes are relative to base weight.
@@ -360,7 +360,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum MultimeshTransformFormat: Int64, CustomDebugStringConvertible {
+    public enum MultimeshTransformFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use ``Transform2D`` to store MultiMesh transform.
         case multimeshTransform2d = 0 // MULTIMESH_TRANSFORM_2D
         /// Use ``Transform3D`` to store MultiMesh transform.
@@ -376,7 +376,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightProjectorFilter: Int64, CustomDebugStringConvertible {
+    public enum LightProjectorFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Nearest-neighbor filter for light projectors (use for pixel art light projectors). No mipmaps are used for rendering, which means light projectors at a distance will look sharp but grainy. This has roughly the same performance cost as using mipmaps.
         case nearest = 0 // LIGHT_PROJECTOR_FILTER_NEAREST
         /// Linear filter for light projectors (use for non-pixel art light projectors). No mipmaps are used for rendering, which means light projectors at a distance will look smooth but blurry. This has roughly the same performance cost as using mipmaps.
@@ -404,7 +404,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightType: Int64, CustomDebugStringConvertible {
+    public enum LightType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Directional (sun/moon) light (see ``DirectionalLight3D``).
         case directional = 0 // LIGHT_DIRECTIONAL
         /// Omni light (see ``OmniLight3D``).
@@ -423,7 +423,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightParam: Int64, CustomDebugStringConvertible {
+    public enum LightParam: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The light's energy multiplier.
         case energy = 0 // LIGHT_PARAM_ENERGY
         /// The light's indirect energy multiplier (final indirect energy is .energy * .indirectEnergy).
@@ -499,7 +499,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightBakeMode: Int64, CustomDebugStringConvertible {
+    public enum LightBakeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Light is ignored when baking. This is the fastest mode, but the light will be taken into account when baking global illumination. This mode should generally be used for dynamic lights that change quickly, as the effect of global illumination is less noticeable on those lights.
         case disabled = 0 // LIGHT_BAKE_DISABLED
         /// Light is taken into account in static baking (``VoxelGI``, ``LightmapGI``, SDFGI (``Environment/sdfgiEnabled``)). The light can be moved around or modified, but its global illumination will not update in real-time. This is suitable for subtle changes (such as flickering torches), but generally not large changes such as toggling a light on and off.
@@ -518,7 +518,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightOmniShadowMode: Int64, CustomDebugStringConvertible {
+    public enum LightOmniShadowMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use a dual paraboloid shadow map for omni lights.
         case dualParaboloid = 0 // LIGHT_OMNI_SHADOW_DUAL_PARABOLOID
         /// Use a cubemap shadow map for omni lights. Slower but better quality than dual paraboloid.
@@ -534,7 +534,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightDirectionalShadowMode: Int64, CustomDebugStringConvertible {
+    public enum LightDirectionalShadowMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use orthogonal shadow projection for directional light.
         case orthogonal = 0 // LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL
         /// Use 2 splits for shadow projection when using directional light.
@@ -553,7 +553,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum LightDirectionalSkyMode: Int64, CustomDebugStringConvertible {
+    public enum LightDirectionalSkyMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use DirectionalLight3D in both sky rendering and scene lighting.
         case lightAndSky = 0 // LIGHT_DIRECTIONAL_SKY_MODE_LIGHT_AND_SKY
         /// Only use DirectionalLight3D in scene lighting.
@@ -572,7 +572,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ShadowQuality: Int64, CustomDebugStringConvertible {
+    public enum ShadowQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lowest shadow filtering quality (fastest). Soft shadows are not available with this quality setting, which means the ``Light3D/shadowBlur`` property is ignored if ``Light3D/lightSize`` and ``Light3D/lightAngularDistance`` is `0.0`.
         /// 
         /// > Note: The variable shadow blur performed by ``Light3D/lightSize`` and ``Light3D/lightAngularDistance`` is still effective when using hard shadow filtering. In this case, ``Light3D/shadowBlur`` _is_ taken into account. However, the results will not be blurred, instead the blur amount is treated as a maximum radius for the penumbra.
@@ -606,7 +606,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ReflectionProbeUpdateMode: Int64, CustomDebugStringConvertible {
+    public enum ReflectionProbeUpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Reflection probe will update reflections once and then stop.
         case once = 0 // REFLECTION_PROBE_UPDATE_ONCE
         /// Reflection probe will update each frame. This mode is necessary to capture moving objects.
@@ -622,7 +622,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ReflectionProbeAmbientMode: Int64, CustomDebugStringConvertible {
+    public enum ReflectionProbeAmbientMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not apply any ambient lighting inside the reflection probe's box defined by its size.
         case disabled = 0 // REFLECTION_PROBE_AMBIENT_DISABLED
         /// Apply automatically-sourced environment lighting inside the reflection probe's box defined by its size.
@@ -641,7 +641,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum DecalTexture: Int64, CustomDebugStringConvertible {
+    public enum DecalTexture: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Albedo texture slot in a decal (``Decal/textureAlbedo``).
         case albedo = 0 // DECAL_TEXTURE_ALBEDO
         /// Normal map texture slot in a decal (``Decal/textureNormal``).
@@ -666,7 +666,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum DecalFilter: Int64, CustomDebugStringConvertible {
+    public enum DecalFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Nearest-neighbor filter for decals (use for pixel art decals). No mipmaps are used for rendering, which means decals at a distance will look sharp but grainy. This has roughly the same performance cost as using mipmaps.
         case nearest = 0 // DECAL_FILTER_NEAREST
         /// Linear filter for decals (use for non-pixel art decals). No mipmaps are used for rendering, which means decals at a distance will look smooth but blurry. This has roughly the same performance cost as using mipmaps.
@@ -694,7 +694,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum VoxelGIQuality: Int64, CustomDebugStringConvertible {
+    public enum VoxelGIQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Low ``VoxelGI`` rendering quality using 4 cones.
         case low = 0 // VOXEL_GI_QUALITY_LOW
         /// High ``VoxelGI`` rendering quality using 6 cones.
@@ -710,7 +710,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ParticlesMode: Int64, CustomDebugStringConvertible {
+    public enum ParticlesMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 2D particles.
         case particlesMode2d = 0 // PARTICLES_MODE_2D
         /// 3D particles.
@@ -726,7 +726,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ParticlesTransformAlign: Int64, CustomDebugStringConvertible {
+    public enum ParticlesTransformAlign: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case disabled = 0 // PARTICLES_TRANSFORM_ALIGN_DISABLED
         /// 
@@ -748,7 +748,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ParticlesDrawOrder: Int64, CustomDebugStringConvertible {
+    public enum ParticlesDrawOrder: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Draw particles in the order that they appear in the particles array.
         case index = 0 // PARTICLES_DRAW_ORDER_INDEX
         /// Sort particles based on their lifetime. In other words, the particle with the highest lifetime is drawn at the front.
@@ -770,7 +770,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ParticlesCollisionType: Int64, CustomDebugStringConvertible {
+    public enum ParticlesCollisionType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case sphereAttract = 0 // PARTICLES_COLLISION_TYPE_SPHERE_ATTRACT
         /// 
@@ -801,7 +801,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ParticlesCollisionHeightfieldResolution: Int64, CustomDebugStringConvertible {
+    public enum ParticlesCollisionHeightfieldResolution: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 
         case particlesCollisionHeightfieldResolution256 = 0 // PARTICLES_COLLISION_HEIGHTFIELD_RESOLUTION_256
         /// 
@@ -832,7 +832,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum FogVolumeShape: Int64, CustomDebugStringConvertible {
+    public enum FogVolumeShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// ``FogVolume`` will be shaped like an ellipsoid (stretched sphere).
         case ellipsoid = 0 // FOG_VOLUME_SHAPE_ELLIPSOID
         /// ``FogVolume`` will be shaped like a cone pointing upwards (in local coordinates). The cone's angle is set automatically to fill the size. The cone will be adjusted to fit within the size. Rotate the ``FogVolume`` node to reorient the cone. Non-uniform scaling via size is not supported (scale the ``FogVolume`` node instead).
@@ -860,7 +860,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportScaling3DMode: Int64, CustomDebugStringConvertible {
+    public enum ViewportScaling3DMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will result in undersampling while values greater than `1.0` will result in supersampling. A value of `1.0` disables scaling.
         case bilinear = 0 // VIEWPORT_SCALING_3D_MODE_BILINEAR
         /// Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using ``Viewport/scaling3dScale``. Values less than `1.0` will be result in the viewport being upscaled using FSR. Values greater than `1.0` are not supported and bilinear downsampling will be used instead. A value of `1.0` disables scaling.
@@ -882,7 +882,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportUpdateMode: Int64, CustomDebugStringConvertible {
+    public enum ViewportUpdateMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not update the viewport's render target.
         case disabled = 0 // VIEWPORT_UPDATE_DISABLED
         /// Update the viewport's render target once, then switch to .viewportUpdateDisabled.
@@ -907,7 +907,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportClearMode: Int64, CustomDebugStringConvertible {
+    public enum ViewportClearMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Always clear the viewport's render target before drawing.
         case always = 0 // VIEWPORT_CLEAR_ALWAYS
         /// Never clear the viewport's render target.
@@ -926,7 +926,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportEnvironmentMode: Int64, CustomDebugStringConvertible {
+    public enum ViewportEnvironmentMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disable rendering of 3D environment over 2D canvas.
         case disabled = 0 // VIEWPORT_ENVIRONMENT_DISABLED
         /// Enable rendering of 3D environment over 2D canvas.
@@ -948,7 +948,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportSDFOversize: Int64, CustomDebugStringConvertible {
+    public enum ViewportSDFOversize: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not oversize the 2D signed distance field. Occluders may disappear when touching the viewport's edges, and ``GPUParticles3D`` collision may stop working earlier than intended. This has the lowest GPU requirements.
         case viewportSdfOversize100Percent = 0 // VIEWPORT_SDF_OVERSIZE_100_PERCENT
         /// 2D signed distance field covers 20% of the viewport's size outside the viewport on each side (top, right, bottom, left).
@@ -973,7 +973,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportSDFScale: Int64, CustomDebugStringConvertible {
+    public enum ViewportSDFScale: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Full resolution 2D signed distance field scale. This has the highest GPU requirements.
         case viewportSdfScale100Percent = 0 // VIEWPORT_SDF_SCALE_100_PERCENT
         /// Half resolution 2D signed distance field scale on each axis (25% of the viewport pixel count).
@@ -995,7 +995,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportMSAA: Int64, CustomDebugStringConvertible {
+    public enum ViewportMSAA: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Multisample antialiasing for 3D is disabled. This is the default value, and also the fastest setting.
         case disabled = 0 // VIEWPORT_MSAA_DISABLED
         /// Multisample antialiasing uses 2 samples per pixel for 3D. This has a moderate impact on performance.
@@ -1020,7 +1020,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportScreenSpaceAA: Int64, CustomDebugStringConvertible {
+    public enum ViewportScreenSpaceAA: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not perform any antialiasing in the full screen post-process.
         case disabled = 0 // VIEWPORT_SCREEN_SPACE_AA_DISABLED
         /// Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
@@ -1039,7 +1039,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportOcclusionCullingBuildQuality: Int64, CustomDebugStringConvertible {
+    public enum ViewportOcclusionCullingBuildQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Low occlusion culling BVH build quality (as defined by Embree). Results in the lowest CPU usage, but least effective culling.
         case low = 0 // VIEWPORT_OCCLUSION_BUILD_QUALITY_LOW
         /// Medium occlusion culling BVH build quality (as defined by Embree).
@@ -1058,7 +1058,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportRenderInfo: Int64, CustomDebugStringConvertible {
+    public enum ViewportRenderInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Number of objects drawn in a single frame.
         case objectsInFrame = 0 // VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME
         /// Number of points, lines, or triangles drawn in a single frame.
@@ -1080,7 +1080,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportRenderInfoType: Int64, CustomDebugStringConvertible {
+    public enum ViewportRenderInfoType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Visible render pass (excluding shadows).
         case visible = 0 // VIEWPORT_RENDER_INFO_TYPE_VISIBLE
         /// Shadow render pass. Objects will be rendered several times depending on the number of amounts of lights with shadows and the number of directional shadow splits.
@@ -1099,7 +1099,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportDebugDraw: Int64, CustomDebugStringConvertible {
+    public enum ViewportDebugDraw: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Debug draw is disabled. Default setting.
         case disabled = 0 // VIEWPORT_DEBUG_DRAW_DISABLED
         /// Objects are displayed without light information.
@@ -1198,7 +1198,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ViewportVRSMode: Int64, CustomDebugStringConvertible {
+    public enum ViewportVRSMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Variable rate shading is disabled.
         case disabled = 0 // VIEWPORT_VRS_DISABLED
         /// Variable rate shading uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.
@@ -1220,7 +1220,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum SkyMode: Int64, CustomDebugStringConvertible {
+    public enum SkyMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Automatically selects the appropriate process mode based on your sky shader. If your shader uses `TIME` or `POSITION`, this will use .realtime. If your shader uses any of the `LIGHT_*` variables or any custom uniforms, this uses .incremental. Otherwise, this defaults to .quality.
         case automatic = 0 // SKY_MODE_AUTOMATIC
         /// Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than .realtime but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ``ProjectSettings/rendering/reflections/skyReflections/ggxSamples``.
@@ -1245,7 +1245,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentBG: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentBG: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the clear color as background.
         case clearColor = 0 // ENV_BG_CLEAR_COLOR
         /// Use a specified color as the background.
@@ -1276,7 +1276,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentAmbientSource: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentAmbientSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Gather ambient light from whichever source is specified as the background.
         case bg = 0 // ENV_AMBIENT_SOURCE_BG
         /// Disable ambient light.
@@ -1298,7 +1298,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentReflectionSource: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentReflectionSource: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use the background for reflections.
         case bg = 0 // ENV_REFLECTION_SOURCE_BG
         /// Disable reflections.
@@ -1317,7 +1317,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentGlowBlendMode: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentGlowBlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Additive glow blending mode. Mostly used for particles, glows (bloom), lens flare, bright sources.
         case additive = 0 // ENV_GLOW_BLEND_MODE_ADDITIVE
         /// Screen glow blending mode. Increases brightness, used frequently with bloom.
@@ -1342,7 +1342,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentToneMapper: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentToneMapper: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Output color as they came in. This can cause bright lighting to look blown out, with noticeable clipping in the output colors.
         case linear = 0 // ENV_TONE_MAPPER_LINEAR
         /// Use the Reinhard tonemapper. Performs a variation on rendered pixels' colors by this formula: `color = color / (1 + color)`. This avoids clipping bright highlights, but the resulting image can look a bit dull.
@@ -1367,7 +1367,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSSRRoughnessQuality: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSSRRoughnessQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lowest quality of roughness filter for screen-space reflections. Rough materials will not have blurrier screen-space reflections compared to smooth (non-rough) materials. This is the fastest option.
         case disabled = 0 // ENV_SSR_ROUGHNESS_QUALITY_DISABLED
         /// Low quality of roughness filter for screen-space reflections.
@@ -1389,7 +1389,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSSAOQuality: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSSAOQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lowest quality of screen-space ambient occlusion.
         case veryLow = 0 // ENV_SSAO_QUALITY_VERY_LOW
         /// Low quality screen-space ambient occlusion.
@@ -1414,7 +1414,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSSILQuality: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSSILQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lowest quality of screen-space indirect lighting.
         case veryLow = 0 // ENV_SSIL_QUALITY_VERY_LOW
         /// Low quality screen-space indirect lighting.
@@ -1439,7 +1439,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSDFGIYScale: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSDFGIYScale: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
         case envSdfgiYScale50Percent = 0 // ENV_SDFGI_Y_SCALE_50_PERCENT
         /// Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.
@@ -1458,7 +1458,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSDFGIRayCount: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSDFGIRayCount: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Throw 4 rays per frame when converging SDFGI. This has the lowest GPU requirements, but creates the most noisy result.
         case envSdfgiRayCount4 = 0 // ENV_SDFGI_RAY_COUNT_4
         /// Throw 8 rays per frame when converging SDFGI.
@@ -1492,7 +1492,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSDFGIFramesToConverge: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSDFGIFramesToConverge: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Converge SDFGI over 5 frames. This is the most responsive, but creates the most noisy result with a given ray count.
         case in5Frames = 0 // ENV_SDFGI_CONVERGE_IN_5_FRAMES
         /// Configure SDFGI to fully converge over 10 frames.
@@ -1523,7 +1523,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum EnvironmentSDFGIFramesToUpdateLight: Int64, CustomDebugStringConvertible {
+    public enum EnvironmentSDFGIFramesToUpdateLight: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Update indirect light from dynamic lights in SDFGI over 1 frame. This is the most responsive, but has the highest GPU requirements.
         case in1Frame = 0 // ENV_SDFGI_UPDATE_LIGHT_IN_1_FRAME
         /// Update indirect light from dynamic lights in SDFGI over 2 frames.
@@ -1551,7 +1551,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum SubSurfaceScatteringQuality: Int64, CustomDebugStringConvertible {
+    public enum SubSurfaceScatteringQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disables subsurface scattering entirely, even on materials that have ``BaseMaterial3D/subsurfScatterEnabled`` set to `true`. This has the lowest GPU requirements.
         case disabled = 0 // SUB_SURFACE_SCATTERING_QUALITY_DISABLED
         /// Low subsurface scattering quality.
@@ -1573,7 +1573,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum DOFBokehShape: Int64, CustomDebugStringConvertible {
+    public enum DOFBokehShape: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Calculate the DOF blur using a box filter. The fastest option, but results in obvious lines in blur pattern.
         case box = 0 // DOF_BOKEH_BOX
         /// Calculates DOF blur using a hexagon shaped filter.
@@ -1592,7 +1592,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum DOFBlurQuality: Int64, CustomDebugStringConvertible {
+    public enum DOFBlurQuality: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Lowest quality DOF blur. This is the fastest setting, but you may be able to see filtering artifacts.
         case veryLow = 0 // DOF_BLUR_QUALITY_VERY_LOW
         /// Low quality DOF blur.
@@ -1614,7 +1614,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum InstanceType: Int64, CustomDebugStringConvertible {
+    public enum InstanceType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The instance does not have a type.
         case none = 0 // INSTANCE_NONE
         /// The instance is a mesh.
@@ -1669,7 +1669,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum InstanceFlags: Int64, CustomDebugStringConvertible {
+    public enum InstanceFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Allows the instance to be used in baked lighting.
         case useBakedLight = 0 // INSTANCE_FLAG_USE_BAKED_LIGHT
         /// Allows the instance to be used with dynamic global illumination.
@@ -1694,7 +1694,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum ShadowCastingSetting: Int64, CustomDebugStringConvertible {
+    public enum ShadowCastingSetting: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disable shadows from this instance.
         case off = 0 // SHADOW_CASTING_SETTING_OFF
         /// Cast shadows from this instance.
@@ -1716,7 +1716,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum VisibilityRangeFadeMode: Int64, CustomDebugStringConvertible {
+    public enum VisibilityRangeFadeMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Disable visibility range fading for the given instance.
         case disabled = 0 // VISIBILITY_RANGE_FADE_DISABLED
         /// Fade-out the given instance when it approaches its visibility range limits.
@@ -1735,7 +1735,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum BakeChannels: Int64, CustomDebugStringConvertible {
+    public enum BakeChannels: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Index of ``Image`` in array of ``Image``s returned by ``bakeRenderUv2(base:materialOverrides:imageSize:)``. Image uses ``Image/Format/rgba8`` and contains albedo color in the `.rgb` channels and alpha in the `.a` channel.
         case albedoAlpha = 0 // BAKE_CHANNEL_ALBEDO_ALPHA
         /// Index of ``Image`` in array of ``Image``s returned by ``bakeRenderUv2(base:materialOverrides:imageSize:)``. Image uses ``Image/Format/rgba8`` and contains the per-pixel normal of the object in the `.rgb` channels and nothing in the `.a` channel. The per-pixel normal is encoded as `normal * 0.5 + 0.5`.
@@ -1757,7 +1757,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasTextureChannel: Int64, CustomDebugStringConvertible {
+    public enum CanvasTextureChannel: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Diffuse canvas texture (``CanvasTexture/diffuseTexture``).
         case diffuse = 0 // CANVAS_TEXTURE_CHANNEL_DIFFUSE
         /// Normal map canvas texture (``CanvasTexture/normalTexture``).
@@ -1776,7 +1776,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum NinePatchAxisMode: Int64, CustomDebugStringConvertible {
+    public enum NinePatchAxisMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// The nine patch gets stretched where needed.
         case stretch = 0 // NINE_PATCH_STRETCH
         /// The nine patch gets filled with tiles where needed.
@@ -1795,7 +1795,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasItemTextureFilter: Int64, CustomDebugStringConvertible {
+    public enum CanvasItemTextureFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Uses the default filter mode for this ``Viewport``.
         case `default` = 0 // CANVAS_ITEM_TEXTURE_FILTER_DEFAULT
         /// The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
@@ -1829,7 +1829,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasItemTextureRepeat: Int64, CustomDebugStringConvertible {
+    public enum CanvasItemTextureRepeat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Uses the default repeat mode for this ``Viewport``.
         case `default` = 0 // CANVAS_ITEM_TEXTURE_REPEAT_DEFAULT
         /// Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
@@ -1854,7 +1854,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasGroupMode: Int64, CustomDebugStringConvertible {
+    public enum CanvasGroupMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Child draws over parent and is not clipped.
         case disabled = 0 // CANVAS_GROUP_MODE_DISABLED
         /// Parent is used for the purposes of clipping only. Child is clipped to the parent's visible area, parent is not drawn.
@@ -1876,7 +1876,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasLightMode: Int64, CustomDebugStringConvertible {
+    public enum CanvasLightMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// 2D point light (see ``PointLight2D``).
         case point = 0 // CANVAS_LIGHT_MODE_POINT
         /// 2D directional (sun/moon) light (see ``DirectionalLight2D``).
@@ -1892,7 +1892,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasLightBlendMode: Int64, CustomDebugStringConvertible {
+    public enum CanvasLightBlendMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Adds light color additive to the canvas.
         case add = 0 // CANVAS_LIGHT_BLEND_MODE_ADD
         /// Adds light color subtractive to the canvas.
@@ -1911,7 +1911,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasLightShadowFilter: Int64, CustomDebugStringConvertible {
+    public enum CanvasLightShadowFilter: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Do not apply a filter to canvas light shadows.
         case none = 0 // CANVAS_LIGHT_FILTER_NONE
         /// Use PCF5 filtering to filter canvas light shadows.
@@ -1933,7 +1933,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum CanvasOccluderPolygonCullMode: Int64, CustomDebugStringConvertible {
+    public enum CanvasOccluderPolygonCullMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Culling of the canvas occluder is disabled.
         case disabled = 0 // CANVAS_OCCLUDER_POLYGON_CULL_DISABLED
         /// Culling of the canvas occluder is clockwise.
@@ -1952,7 +1952,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum GlobalShaderParameterType: Int64, CustomDebugStringConvertible {
+    public enum GlobalShaderParameterType: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Boolean global shader parameter (`global uniform bool ...`).
         case bool = 0 // GLOBAL_VAR_TYPE_BOOL
         /// 2-dimensional boolean vector global shader parameter (`global uniform bvec2 ...`).
@@ -2049,7 +2049,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum RenderingInfo: Int64, CustomDebugStringConvertible {
+    public enum RenderingInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Number of objects rendered in the current 3D scene. This varies depending on camera position and rotation.
         case totalObjectsInFrame = 0 // RENDERING_INFO_TOTAL_OBJECTS_IN_FRAME
         /// Number of points, lines, or triangles rendered in the current 3D scene. This varies depending on camera position and rotation.
@@ -2077,7 +2077,7 @@ open class RenderingServer: Object {
         
     }
     
-    public enum Features: Int64, CustomDebugStringConvertible {
+    public enum Features: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Hardware supports shaders. This enum is currently unused in Godot 3.x.
         case shaders = 0 // FEATURE_SHADERS
         /// Hardware supports multithreading. This enum is currently unused in Godot 3.x.

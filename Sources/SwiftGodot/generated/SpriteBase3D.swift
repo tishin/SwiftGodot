@@ -10,7 +10,7 @@
 /// A node that displays 2D texture information in a 3D environment. See also ``Sprite3D`` where many other properties are defined.
 open class SpriteBase3D: GeometryInstance3D {
     override open class var godotClassName: StringName { "SpriteBase3D" }
-    public enum DrawFlags: Int64, CustomDebugStringConvertible {
+    public enum DrawFlags: Int64, CaseIterable, CustomDebugStringConvertible {
         /// If set, the texture's transparency and the opacity are used to make those parts of the sprite invisible.
         case transparent = 0 // FLAG_TRANSPARENT
         /// If set, lights in the environment affect the sprite.
@@ -38,7 +38,7 @@ open class SpriteBase3D: GeometryInstance3D {
         
     }
     
-    public enum AlphaCutMode: Int64, CustomDebugStringConvertible {
+    public enum AlphaCutMode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping.
         case disabled = 0 // ALPHA_CUT_DISABLED
         /// This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ``ProjectSettings/rendering/antiAliasing/quality/screenSpaceAa``). On the bright side, this mode doesn't suffer from transparency sorting issues when multiple transparent materials are overlapping. This mode is also known as _alpha testing_ or _1-bit transparency_.

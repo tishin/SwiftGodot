@@ -21,7 +21,7 @@
 /// 
 open class MultiMesh: Resource {
     override open class var godotClassName: StringName { "MultiMesh" }
-    public enum TransformFormat: Int64, CustomDebugStringConvertible {
+    public enum TransformFormat: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Use this when using 2D transforms.
         case transform2d = 0 // TRANSFORM_2D
         /// Use this when using 3D transforms.

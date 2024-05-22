@@ -13,7 +13,7 @@
 /// 
 open class Shader: Resource {
     override open class var godotClassName: StringName { "Shader" }
-    public enum Mode: Int64, CustomDebugStringConvertible {
+    public enum Mode: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Mode used to draw all 3D objects.
         case spatial = 0 // MODE_SPATIAL
         /// Mode used to draw all 2D objects.

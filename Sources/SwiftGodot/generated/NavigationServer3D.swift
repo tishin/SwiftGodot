@@ -40,7 +40,7 @@ open class NavigationServer3D: Object {
     }()
     
     override open class var godotClassName: StringName { "NavigationServer3D" }
-    public enum ProcessInfo: Int64, CustomDebugStringConvertible {
+    public enum ProcessInfo: Int64, CaseIterable, CustomDebugStringConvertible {
         /// Constant to get the number of active navigation maps.
         case activeMaps = 0 // INFO_ACTIVE_MAPS
         /// Constant to get the number of active navigation regions.
