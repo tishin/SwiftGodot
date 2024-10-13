@@ -18,8 +18,8 @@ var token: GDExtensionClassLibraryPtr! {
 /// for scenarios where SwiftGodot is being used with multiple active Godot runtimes in the same process
 public var swiftGodotLibraryGeneration: UInt16 = 0
 
-var extensionInitCallbacks: [((GDExtension.InitializationLevel)->())] = []
-var extensionDeInitCallbacks: [((GDExtension.InitializationLevel)->())] = []
+var extensionInitCallbacks: [OpaquePointer:((GDExtension.InitializationLevel)->())] = [:]
+var extensionDeInitCallbacks: [OpaquePointer:((GDExtension.InitializationLevel)->())] = [:]
 
 func loadFunctions (loader: GDExtensionInterfaceGetProcAddress) {
     
@@ -42,20 +42,23 @@ public func setExtensionInterface (to: OpaquePointer?, library lib: OpaquePointe
 // Extension initialization callback
 func extension_initialize (userData: UnsafeMutableRawPointer?, l: GDExtensionInitializationLevel) {
     //print ("SWIFT: extension_initialize")
-    let level = GDExtension.InitializationLevel(rawValue: Int64 (exactly: l.rawValue)!)!
-    
-    for cb in extensionInitCallbacks {
-        cb (level)
-    }
+    guard let level = GDExtension.InitializationLevel(rawValue: Int64 (exactly: l.rawValue)!) else { return }
+    guard let userData else { return }
+    guard let callback = extensionInitCallbacks [OpaquePointer(userData)] else { return }
+    callback (level)
 }
 
 // Extension deinitialization callback
 func extension_deinitialize (userData: UnsafeMutableRawPointer?, l: GDExtensionInitializationLevel) {
     //print ("SWIFT: extension_deinitialize")
-    
-    let level = GDExtension.InitializationLevel(rawValue: Int64 (exactly: l.rawValue)!)!
-    for cb in extensionDeInitCallbacks {
-        cb (level)
+    guard let userData else { return }
+    let key = OpaquePointer(userData)
+    guard let callback = extensionDeInitCallbacks [key] else { return }
+    guard let level = GDExtension.InitializationLevel(rawValue: Int64 (exactly: l.rawValue)!) else { return }
+    callback (level)
+    if level == .core {
+        // Last one, remove 
+        extensionDeInitCallbacks.removeValue(forKey: key)
     }
 }
 
@@ -113,6 +116,7 @@ struct GodotInterface {
     
     let classdb_construct_object: GDExtensionInterfaceClassdbConstructObject
     let classdb_get_method_bind: GDExtensionInterfaceClassdbGetMethodBind
+    let classdb_get_class_tag: GDExtensionInterfaceClassdbGetClassTag
     let classdb_register_extension_class: GDExtensionInterfaceClassdbRegisterExtensionClass2
     let classdb_register_extension_class_signal: GDExtensionInterfaceClassdbRegisterExtensionClassSignal
     let classdb_register_extension_class_method: GDExtensionInterfaceClassdbRegisterExtensionClassMethod
@@ -128,6 +132,8 @@ struct GodotInterface {
     
     let object_method_bind_ptrcall: GDExtensionInterfaceObjectMethodBindPtrcall
     let object_destroy: GDExtensionInterfaceObjectDestroy
+    let object_has_script_method: GDExtensionInterfaceObjectHasScriptMethod
+    let object_call_script_method: GDExtensionInterfaceObjectCallScriptMethod
     
     // @convention(c) (GDExtensionMethodBindPtr?, GDExtensionObjectPtr?, UnsafePointer<GDExtensionConstTypePtr?>?, GDExtensionTypePtr?) -> Void
     @inline(__always)
@@ -204,6 +210,8 @@ struct GodotInterface {
     let packed_vector2_array_operator_index_const: GDExtensionInterfacePackedVector2ArrayOperatorIndexConst
     let packed_vector3_array_operator_index: GDExtensionInterfacePackedVector3ArrayOperatorIndex
     let packed_vector3_array_operator_index_const: GDExtensionInterfacePackedVector3ArrayOperatorIndexConst
+    let packed_vector4_array_operator_index: GDExtensionInterfacePackedVector4ArrayOperatorIndex
+    let packed_vector4_array_operator_index_const: GDExtensionInterfacePackedVector4ArrayOperatorIndexConst
 
     let callable_custom_create: GDExtensionInterfaceCallableCustomCreate
 }
@@ -244,6 +252,7 @@ func loadGodotInterface (_ godotGetProcAddrPtr: GDExtensionInterfaceGetProcAddre
         
         classdb_construct_object: load ("classdb_construct_object"),
         classdb_get_method_bind: load ("classdb_get_method_bind"),
+        classdb_get_class_tag: load("classdb_get_class_tag"),
         classdb_register_extension_class: load ("classdb_register_extension_class2"),
         classdb_register_extension_class_signal: load ("classdb_register_extension_class_signal"),
         classdb_register_extension_class_method: load ("classdb_register_extension_class_method"),
@@ -257,6 +266,8 @@ func loadGodotInterface (_ godotGetProcAddrPtr: GDExtensionInterfaceGetProcAddre
         object_get_class_name: load ("object_get_class_name"),
         object_method_bind_ptrcall: load ("object_method_bind_ptrcall"),
         object_destroy: load ("object_destroy"),
+        object_has_script_method: load("object_has_script_method"),
+        object_call_script_method: load("object_call_script_method"),
         
         global_get_singleton: load ("global_get_singleton"),
         ref_get_object: load ("ref_get_object"),
@@ -308,6 +319,8 @@ func loadGodotInterface (_ godotGetProcAddrPtr: GDExtensionInterfaceGetProcAddre
         packed_vector2_array_operator_index_const: load ("packed_vector2_array_operator_index_const"),
         packed_vector3_array_operator_index: load ("packed_vector3_array_operator_index"),
         packed_vector3_array_operator_index_const: load ("packed_vector3_array_operator_index_const"),
+        packed_vector4_array_operator_index: load ("packed_vector4_array_operator_index"),
+        packed_vector4_array_operator_index_const: load ("packed_vector4_array_operator_index_const"),
 
         callable_custom_create: load ("callable_custom_create")
     )
@@ -324,7 +337,7 @@ func loadGodotInterface (_ godotGetProcAddrPtr: GDExtensionInterfaceGetProcAddre
 /// your Swift entry point, which can look like this:
 ///
 /// ```
-/// @cdecl ("swift_entry_point")
+/// @cdecl("swift_entry_point")
 /// public func swift_entry_point (i: OpaquePointer?, l: OpaquePointer?, e: OpaquePointer?) -> UInt8 {
 ///     guard let iface, let lib, let ext else {
 ///         return 0
@@ -369,12 +382,13 @@ public func initializeSwiftModule (
     if library == nil {
         library = GDExtensionClassLibraryPtr(libraryPtr)
     }
-    extensionInitCallbacks = [initHook]
-    extensionDeInitCallbacks = [deInitHook]
+    extensionInitCallbacks [libraryPtr] = initHook
+    extensionDeInitCallbacks [libraryPtr] = deInitHook
     let initialization = UnsafeMutablePointer<GDExtensionInitialization> (extensionPtr)
     initialization.pointee.deinitialize = extension_deinitialize
     initialization.pointee.initialize = extension_initialize
     initialization.pointee.minimum_initialization_level = GDEXTENSION_INITIALIZATION_SCENE
+    initialization.pointee.userdata = UnsafeMutableRawPointer(libraryPtr)
 }
 
 /*

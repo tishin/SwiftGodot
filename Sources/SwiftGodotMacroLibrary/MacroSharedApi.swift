@@ -80,7 +80,7 @@ enum GodotMacroError: Error, DiagnosticMessage {
             "@Callable does not support asynchronous or throwing functions"
         case .noSupportForOptionalEnums:
             "@Export(.enum) does not support optional values for the enumeration"
-		}
+        }
     }
     
     var diagnosticID: MessageID {
@@ -183,6 +183,7 @@ var godotVariants = [
     "PackedStringArray": ".packedStringArray",
     "PackedVector2Array": ".packedVector2Array",
     "PackedVector3Array": ".packedVector3Array",
+    "PackedVector4Array": ".packedVector4Array",
     "Plane": ".plane",
     "Projection": ".projection",
     "Quaternion": ".quaternion",
