@@ -27,8 +27,8 @@ var defaultExtensionApiJsonUrl: URL {
 
 var defaultGeneratorOutputlUrl: URL {
     rootUrl
-        .appendingPathComponent("GeneratedForDebug")
         .appendingPathComponent("Sources")
+        .appendingPathComponent("SwiftGodot")
 }
 
 var defaultDocRootUrl: URL {
