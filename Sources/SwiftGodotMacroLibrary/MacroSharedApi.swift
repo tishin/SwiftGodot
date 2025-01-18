@@ -133,28 +133,37 @@ func hasExportAttribute (_ attrs: AttributeListSyntax?) -> Bool {
     hasAttribute ("Export", attrs)
 }
 
+/// True if the attribtue list syntax has an attribute name 'Signal'
+func hasSignalAttribute (_ attrs: AttributeListSyntax?) -> Bool {
+    hasAttribute ("Signal", attrs)
+}
+
 /// True if the attribtue list syntax has an attribute name 'Callable'
 func hasCallableAttribute (_ attrs: AttributeListSyntax?) -> Bool {
     hasAttribute ("Callable", attrs)
 }
 
-/// True if the attribtue list syntax has an attribute name 'signal'
-func hasSignalAttribute (_ attrs: AttributeListSyntax?) -> Bool {
-    hasAttribute ("signal", attrs)
-}
-
-func getTypeName (_ parameter: FunctionParameterSyntax) -> String? {
-    guard [
-        parameter.isArray,
-        parameter.isObjectCollection,
-        parameter.isVariantCollection
-    ].allSatisfy ({ $0 == false }) else {
+func getTypeName(_ parameter: FunctionParameterSyntax) -> String? {
+    guard !parameter.isVariantCollection,
+          !parameter.isSwiftArray,
+          !parameter.isObjectCollection else {
         return "GArray"
     }
-    guard let typeName = parameter.type.as (IdentifierTypeSyntax.self)?.name.text else {
+    
+    if let typeName = parameter.type.as (IdentifierTypeSyntax.self)?.name.text {
+        // `TypeName`
+        return typeName
+    } else if let optionalWrappedType = parameter.type.as(OptionalTypeSyntax.self)?.wrappedType {
+        // `TypeName?`
+        // only `Variant?` is supported now
+        if optionalWrappedType.as(IdentifierTypeSyntax.self)?.name.text == "Variant" {
+            return "Variant?"
+        } else {
+            return nil
+        }
+    } else {
         return nil
     }
-    return typeName
 }
 
 func getParamName(_ parameter: FunctionParameterSyntax) -> String {
@@ -172,7 +181,6 @@ var godotVariants = [
     "Callable": ".callable",
     "Color": ".color",
     "GDictionary": ".dictionary",
-    "Nil": ".nil",
     "NodePath": ".nodePath",
     "PackedByteArray": ".packedByteArray",
     "PackedColorArray": ".packedColorArray",
@@ -201,6 +209,14 @@ var godotVariants = [
     "Vector3i": ".vector3i",
     "Vector4": ".vector4",
     "Vector4i": ".vector4i",
+    
+    // According to:
+    // - https://github.com/godotengine/godot/issues/67544#issuecomment-1382229216
+    // - https://github.com/godotengine/godot/blob/b6e06038f8a373f7fb8d26e92d5f06887e459598/core/doc_data.cpp#L85
+    // It's `.nil` with hint = `.nilIsVariant` in returned value prop info
+    // And `.nil` with hint = `.none` in argument prop info    
+    "Variant": ".nil",
+    "Variant?": ".nil",
 ]
 
 func godotTypeToProp (typeName: String) -> String {

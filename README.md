@@ -1,13 +1,17 @@
-# SwiftGodot
+<div align="center">
+  <h1>SwiftGodot</h1>
+  <img src="https://github.com/user-attachments/assets/c537aefa-561d-413c-a563-8aac1b1758ba" width="200">
+</div>
+<br>
 
 [![SwiftPM compatible](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager)
 ![Platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20Linux%20%7C%20macOS%20%7C%20Windows-333333.svg?style=flat)
 [![Swift Package Index](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmigueldeicaza%2FSwiftGodot%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/migueldeicaza/SwiftGodot)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg?maxAge=2592000)](https://raw.githubusercontent.com/migueldeicaza/SwiftGodot/main/LICENSE)
 
-SwiftGodot provides Swift language bindings for the Godot 4.2 game
+SwiftGodot provides Swift language bindings for the Godot 4.3 game
 engine using the new [GDExtension](https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/what_is_gdextension.html) system (for 4.1 compatibility, use
-the 4.1 branch, preview for upcoming 4.3 release is in the 4.3 branch).
+the 4.1 branch, for 4.2 compatibility use the 4.2 branch).
 
 SwiftGodot can be used to either build an extension that can be added
 to an existing Godot project, where your code is providing services
@@ -84,7 +88,7 @@ components:
 * Your Swift code: this is where you bring the magic
 * A `.gdextension` file that describes where to find the requires
   Swift library assets
-* Some Swift registation code and bootstrap code
+* Some Swift registration code and bootstrap code
 * Importing your extension into your project
 
 ## Your Swift Code
@@ -174,6 +178,30 @@ import SwiftGodot
 
 #initSwiftExtension(cdecl: "swift_entry_point", types: [SpinningCube.self])
 ```
+
+Also, you can use `EntryPointGeneratorPlugin` that will scan the target source files and generate entry point called `swift_entry_point` with `types` array mentioning all classes with `@Godot` macro attached. All you need is to add `plugins` entry in your `Package.swift` as below: 
+
+```
+let package = Package(
+    name: "MyFirstGame",
+    products: [
+        .library(name: "MyFirstGame", type: .dynamic, targets: ["MyFirstGame"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/migueldeicaza/SwiftGodot", branch: "main")
+    ],
+    targets: [
+        .target(
+            name: "MyFirstGame",
+            dependencies: ["SwiftGodot"],
+            // this plugin will generate a source file visible to compiler with '#initSwiftExtension(cdecl: "swift_entry_point", types: [SpinningCube.self])'
+            plugins: [
+                .plugin(name: "EntryPointGeneratorPlugin", package: "SwiftGodot")
+            ]
+        )
+    ],
+)
+```           
 
 ## Bundling Your Extension
 

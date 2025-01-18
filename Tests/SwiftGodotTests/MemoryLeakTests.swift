@@ -15,7 +15,7 @@ struct FooN: Codable {
 }
 
 protocol GodotEncodingContainer {
-    var data: Variant { get }
+    var data: Variant? { get }
 }
 
 extension Vector2: Codable {
@@ -51,19 +51,20 @@ class GodotEncoder: Encoder {
 
     func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> where Key : CodingKey {
 
-        var container = GodotKeyedContainer<Key>(codingPath: codingPath, userInfo: userInfo)
+        let container = GodotKeyedContainer<Key>(codingPath: codingPath, userInfo: userInfo)
         self.container = container
         return KeyedEncodingContainer(container)
     }
 
-    var data: Variant {
-        return container?.data ?? Variant()
+    var data: Variant? {
+        return container?.data
     }
 
     func encode(key codingKey: [CodingKey], value: Variant) {
         let key = codingKey.map { $0.stringValue }.joined(separator: ".")
         fatalError()
         //dict [key] = value
+        _ = key
     }
 
     func unkeyedContainer() -> any UnkeyedEncodingContainer {
@@ -80,20 +81,22 @@ class GodotEncoder: Encoder {
 
     class GodotKeyedContainer<Key:CodingKey>: KeyedEncodingContainerProtocol, GodotEncodingContainer {
         func encodeNil(forKey key: Key) throws {
-            var container = self.nestedSingleValueContainer(forKey: key)
+            let container = self.nestedSingleValueContainer(forKey: key)
             fatalError()
             //try container.encode(Variant())
+            _ = container
         }
 
         var codingPath: [any CodingKey] = []
         var userInfo: [CodingUserInfoKey: Any]
         var storage: [String:GodotEncodingContainer] = [:]
 
-        var data: Variant {
+        var data: Variant? {
             let dict = GDictionary()
             for (k,v) in storage {
-                dict[k] = Variant(v.data)
+                dict[k] = v.data
             }
+            
             return Variant(dict)
         }
 
@@ -103,7 +106,7 @@ class GodotEncoder: Encoder {
         }
 
         func encode(_ value: String, forKey key: Key) throws {
-            var container = self.nestedSingleValueContainer(forKey: key)
+            let container = self.nestedSingleValueContainer(forKey: key)
             try container.encode(value)
             self.storage[key.stringValue] = container
         }
@@ -154,7 +157,7 @@ class GodotEncoder: Encoder {
 
         var storage = GArray()
 
-        var data: Variant {
+        var data: Variant? {
             return Variant(storage)
         }
 
@@ -279,7 +282,7 @@ class GodotEncoder: Encoder {
     class GodotSingleValueContainer: SingleValueEncodingContainer, GodotEncodingContainer {
         func encode<T>(_ value: T) throws where T : Encodable {
             if value is Array<Any> {
-                var container = GodotUnkeyedContainer (codingPath: codingPath, userInfo: userInfo)
+                let container = GodotUnkeyedContainer (codingPath: codingPath, userInfo: userInfo)
                 try container.encode(value)
                 self.value = container.data
             } else if let i = value as? Int {
@@ -287,7 +290,7 @@ class GodotEncoder: Encoder {
             } else if let str = value as? String {
                 try self.encode(str)
             } else {
-                var nested = GodotEncoder()
+                let nested = GodotEncoder()
                 try value.encode(to: nested)
                 self.value = nested.container?.data
             }
@@ -301,8 +304,8 @@ class GodotEncoder: Encoder {
         var userInfo: [CodingUserInfoKey: Any]
         var value: Variant?
 
-        var data: Variant {
-            value ?? Variant()
+        var data: Variant? {
+            value
         }
 
         init (codingPath: [any CodingKey], userInfo: [CodingUserInfoKey: Any]) {
@@ -399,7 +402,7 @@ final class MemoryLeakTests: GodotTestCase {
         func oneIteration(object: Object) {
             let list = object.getPropertyList()
             let it = list.makeIterator()
-            for prop: GDictionary in it {
+            for prop: GDictionary? in it {
                 _ = prop
             }
         }
@@ -533,6 +536,7 @@ final class MemoryLeakTests: GodotTestCase {
                     return
                 }
                 let strFoo1 = String(gstrFoo0)
+                _ = [strFoo, strFoo0, strFoo1] // suppress unused warnings
             }
         }
         
@@ -549,6 +553,7 @@ final class MemoryLeakTests: GodotTestCase {
                     return
                 }
                 let strBar1 = String(gstrBar0)
+                _ = [strBar, strBar0, strBar1] // suppress unused warnings
             }
         }
     }
@@ -569,21 +574,23 @@ final class MemoryLeakTests: GodotTestCase {
             for _ in 0 ..< 200 {
                 let object = Object()
                 let methodName = StringName("get_method_list")
-                let methodList = object.call(method: methodName)
+                _ = object.call(method: methodName)
             }
         }
     }
     
     func test_godot_string_description_leak() {
+        var buffer: String = ""
         checkLeaks {
             let string = GString("A")
-            for _ in 0 ..< 100 {
-                print(string.description)
+            for _ in 0..<100 {
+                buffer += string.description
             }
         }
     }
     
     func test_godot_string_from_variant_leak() {
+        var buffer: String = ""
         let variant = Variant("A")
         checkLeaks {
             for _ in 0 ..< 100 {
@@ -592,12 +599,13 @@ final class MemoryLeakTests: GodotTestCase {
                     break
                 }
                 
-                print(gstring.description)
+                buffer += gstring.description
             }
         }
     }
     
     func test_531_crash_or_leak() {
+        var buffer: String = ""
         checkLeaks {
             let g = GodotEncoder()
             let foon = FooN(myInt: 9, myText: "nine", myFoo: [
@@ -605,7 +613,7 @@ final class MemoryLeakTests: GodotTestCase {
                 Foo(myInt: 30, myText: "Nested2", myIntArray: [2,2,2])])
             try? foon.encode(to: g)
             
-            print(g.data.description)
+            buffer += g.data?.description ?? "nil"
         }
     }
     

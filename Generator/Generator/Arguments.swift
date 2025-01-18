@@ -32,8 +32,10 @@ func getArgumentDeclaration(_ argument: JGodotArgument, omitLabel: Bool, kind: A
     
     var def: String = ""
     if var dv = argument.defaultValue, dv != "" {
-        func dvMissing (_ kind: String) {
-            print ("Generator/default_value: no support for [\(kind)] = \(dv)")
+        func dvMissing(_ kind: String) {
+            #if WARN_MISSING
+                print("Generator/default_value: no support for [\(kind)] = \(dv)")
+            #endif
         }
         
         let argumentType = argument.type
@@ -67,7 +69,7 @@ func getArgumentDeclaration(_ argument: JGodotArgument, omitLabel: Bool, kind: A
         //  - nil values (needs to both turn the value nullable and handle that in the marshal code
         //  - typedarrays, the default values need to be handled one by one, or a general conversion
         // system needs to be implemented
-        if !argumentType.starts(with: "Array") && !argumentType.starts(with: "bitfield::") && (!(isStructMap [argumentType] ?? false) || isPrimitiveType(name: argumentType)) && argumentType != "NodePath" && !argumentType.starts(with: "typedarray::") && !argumentType.starts (with: "Dictionary") && dv != "null" {
+        if !argumentType.starts(with: "Array") && !argumentType.starts(with: "bitfield::") && (!isStruct(argumentType) || isPrimitiveType(name: argumentType)) && argumentType != "NodePath" && !argumentType.starts(with: "typedarray::") && !argumentType.starts (with: "Dictionary") && dv != "null" {
             if argument.type == "String" {
                 def = " = \(dv)"
             } else if argument.type == "StringName" {
@@ -190,11 +192,9 @@ func getArgRef (arg: JGodotArgument) -> String {
     var argref: String
     var optstorage: String
     var needAddress = "&"
-    if !(isStructMap [arg.type] ?? false) { // { ) isCoreType(name: arg.type){
+    if !isStruct(arg.type) { // { ) isCoreType(name: arg.type){
         argref = godotArgumentToSwift (arg.name)
-        if isStructMap [arg.type] ?? false {
-            optstorage = ""
-        } else if arg.type == "String" && mapStringToSwift {
+        if arg.type == "String" && mapStringToSwift {
             argref = "gstr_\(arg.name)"
             optstorage = ".content"
         } else {
@@ -205,13 +205,10 @@ func getArgRef (arg: JGodotArgument) -> String {
                 optstorage = ".handle"
             }
         }
+        return "\(needAddress)\(escapeSwift(argref))\(optstorage)"
     } else {
         argref = "copy_\(arg.name)"
         optstorage = ""
-    }
-    if (isStructMap [arg.type] ?? false) {
-        return "\(needAddress)\(escapeSwift(argref))\(optstorage)"
-    } else {
         return "\(needAddress)\(escapeSwift(argref))\(optstorage)"
     }
 }

@@ -7,11 +7,6 @@
 
 @_implementationOnly import GDExtension
 
-/// If your application is crashing due to the Variant leak fixes, please
-/// enable this flag, and provide me with a test case, so I can find that
-/// pesky scenario.
-public var experimentalDisableVariantUnref = false
-
 /// Variant objects box various Godot Objects, you create them with one of the
 /// constructors, and you can retrieve the contents using the various extension
 /// constructors that are declared on the various types that are wrapped.
@@ -43,54 +38,56 @@ public var experimentalDisableVariantUnref = false
 /// Modifications to a container will modify all references to it.
 
 public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
-    static var fromTypeMap: [GDExtensionVariantFromTypeConstructorFunc] = {
+    static let fromTypeMap: [GDExtensionVariantFromTypeConstructorFunc] = {
         var map: [GDExtensionVariantFromTypeConstructorFunc] = []
         
-        for vtype in 0..<Variant.GType.max.rawValue {
-            let v = GDExtensionVariantType.RawValue (vtype == 0 ? 1 : vtype)
-            map.append (gi.get_variant_from_type_constructor (GDExtensionVariantType (v))!)
+        // stub for GDEXTENSION_VARIANT_TYPE_NIL
+        map.append({ _, _ in })
+        
+        for vtype in GDEXTENSION_VARIANT_TYPE_NIL.rawValue + 1 ..< GDEXTENSION_VARIANT_TYPE_VARIANT_MAX.rawValue {
+            map.append(gi.get_variant_from_type_constructor(GDExtensionVariantType(rawValue: vtype))!)
         }
         return map
     }()
     
-    static var toTypeMap: [GDExtensionTypeFromVariantConstructorFunc] = {
+    static let toTypeMap: [GDExtensionTypeFromVariantConstructorFunc] = {
         var map: [GDExtensionTypeFromVariantConstructorFunc] = []
         
-        for vtype in 0..<Variant.GType.max.rawValue {
-            let v = GDExtensionVariantType.RawValue (vtype == 0 ? 1 : vtype)
-            map.append (gi.get_variant_to_type_constructor (GDExtensionVariantType (v))!)
+        // stub for GDEXTENSION_VARIANT_TYPE_NIL
+        map.append({ _, _ in })
+        
+        for vtype in GDEXTENSION_VARIANT_TYPE_NIL.rawValue + 1 ..< GDEXTENSION_VARIANT_TYPE_VARIANT_MAX.rawValue {
+            map.append(gi.get_variant_to_type_constructor(GDExtensionVariantType(rawValue: vtype))!)
         }
+        
         return map
     }()
     
     typealias ContentType = (Int, Int, Int)
-    var content: ContentType = (0, 0, 0)
+    var content: ContentType = Variant.zero
     static var zero: ContentType = (0, 0, 0)
     
     /// Initializes from the raw contents of another Variant, this will make a copy of the variant contents
-    init(copying otherContent: ContentType) {
+    init?(copying otherContent: ContentType) {
+        if otherContent == Variant.zero { return nil }
+        
         withUnsafePointer(to: otherContent) { src in
             gi.variant_new_copy(&content, src)
         }
     }
     
     /// Initializes using `ContentType` and assuming that this `Variant` is sole owner of this content now.
-    init(takingOver other: ContentType) {
-        self.content = other
+    init?(takingOver otherContent: ContentType) {
+        if otherContent == Variant.zero { return nil }
+        
+        self.content = otherContent
     }
 
     deinit {
-        if experimentalDisableVariantUnref { return }
+        if !extensionInterface.variantShouldDeinit(content: &content) { return }
         gi.variant_destroy (&content)
     }
     
-    /// Creates an empty Variant, that represents the Godot type `nil`
-    public init () {
-        withUnsafeMutablePointer(to: &content) { ptr in
-            gi.variant_new_nil (ptr)
-        }
-    }
-
     /// Compares two variants, does this by delegating the comparison to Godot
     public static func == (lhs: Variant, rhs: Variant) -> Bool {
         var valid = GDExtensionBool (0)
@@ -105,7 +102,7 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
     }
     
     /// Creates a new Variant based on a copy of the reference variant passed in
-    public init (_ other: Variant) {
+    public init(_ other: Variant) {
         withUnsafeMutablePointer(to: &content) { selfPtr in
             withUnsafePointer(to: other.content) { ptr in
                 gi.variant_new_copy(selfPtr, ptr)
@@ -115,14 +112,6 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
     
     convenience public init(_ value: some VariantStorable) {
         self.init(representable: value.toVariantRepresentable())
-    }
-    
-    convenience public init(_ value: (some VariantStorable)?) {
-        if let value {
-            self.init(value)
-        } else {
-            self.init()
-        }
     }
     
     private init<T: VariantRepresentable>(representable value: T) {
@@ -138,8 +127,13 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
     
     /// This describes the type of the data wrapped by this variant
     public var gtype: GType {
-        var copy = content
-        return GType (rawValue: Int64 (gi.variant_get_type (&copy).rawValue)) ?? .nil
+        let rawValue = gi.variant_get_type(&content).rawValue
+        
+        guard let result = GType(rawValue: Int64(rawValue)) else {
+            fatalError("Unknown GType with raw value \(rawValue).")
+        }
+        
+        return result
     }
     
     func toType (_ type: GType, dest: UnsafeMutableRawPointer) {
@@ -148,7 +142,7 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
         }
     }
     
-    /// Returns true if the variant is flagged as being an object (`gtype == .object`) and it has a nil pointer.
+    /// Returns true if the variant is not an object, or the object is missing from the lookup table
     public var isNull: Bool {
         return asObject(Object.self) == nil
     }
@@ -165,9 +159,10 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
         guard gtype == .object else {
             return nil
         }
-        var value: UnsafeRawPointer = UnsafeRawPointer(bitPattern: 1)!
+
+        var value: UnsafeRawPointer? = UnsafeRawPointer(bitPattern: 1)!
         toType(.object, dest: &value)
-        if value == UnsafeRawPointer(bitPattern: 0) {
+        guard let value else {
             return nil
         }
         let ret: T? = lookupObject(nativeHandle: value)
@@ -186,13 +181,35 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
     public var debugDescription: String {
         "\(gtype) [\(description)]"
     }
-    
+
+    public enum VariantErrorType: Error {
+        case notFound
+    }
+
+    /// Gets the value of a named key from a Variant.
+    /// - Parameter key: a Variant representing the key.
+    /// - Returns: Result with the value on success
+    public func getNamed(key: StringName) -> Result<Variant?, VariantErrorType> {
+        var newContent: ContentType = Variant.zero
+        var valid: GDExtensionBool = 0
+
+        gi.variant_get_named(&content, &key.content, &newContent, &valid)
+        if valid != 0 {
+            if newContent == Variant.zero {
+                return .success(nil)
+            }
+            return .success(Variant(takingOver: newContent))
+        } else {
+            return .failure(.notFound)
+        }
+    }
+
     /// Invokes a variant's method by name.
     /// - Parameters:
     ///  - method: name of the method to invoke
     ///  - arguments: variable list of arguments to pass to the method
     /// - Returns: on success, the variant result, on error, the reason
-    public func call(method: StringName, _ arguments: Variant...) -> Result<Variant, CallErrorType> {
+    public func call(method: StringName, _ arguments: Variant?...) -> Result<Variant?, CallErrorType> {
         var result = Variant.zero
         
         // Shadow self.content, we just need a copy of it locally
@@ -304,5 +321,35 @@ public class Variant: Hashable, Equatable, CustomDebugStringConvertible {
         gi.variant_get_type_name (GDExtensionVariantType (GDExtensionVariantType.RawValue(type.rawValue)), &res.content)
         let ret = GString.stringFromGStringPtr(ptr: &res.content)
         return ret ?? ""
+    }
+}
+
+extension Optional where Wrapped == Variant {
+    var content: Variant.ContentType {
+        if let wrapped = self {
+            return wrapped.content
+        } else {
+            return Variant.zero
+        }
+    }
+}
+
+extension Optional: VariantStorable where Wrapped: VariantStorable {
+    public typealias Representable = Wrapped.Representable
+    
+    public func toVariantRepresentable() -> Wrapped.Representable {
+        if let wrapped = self {
+            return wrapped.toVariantRepresentable()
+        }
+        // It's not needed and is just a wrong abstraction of internal implementation leaking into the public API
+        fatalError("It's illegal to construct a `Variant` from `Variant?`, unwrap it or pass it as it is.")
+    }
+    
+    public init?(_ variant: Variant) {
+        if let wrapped = Wrapped(variant) {
+            self = .some(wrapped)
+        } else {
+            return nil
+        }
     }
 }

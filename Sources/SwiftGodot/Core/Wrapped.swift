@@ -123,6 +123,7 @@ open class Wrapped: Equatable, Identifiable, Hashable {
     deinit {
         if ownsHandle {
             if let handle {
+                guard extensionInterface.objectShouldDeinit(handle: handle) else { return }
 #if DEBUG_INSTANCES
                 let type = xmap[handle] ?? "unknown"
                 let txt = "DEINIT for object=\(type) handle=\(handle)"
@@ -169,6 +170,7 @@ open class Wrapped: Equatable, Identifiable, Hashable {
             print ("deinit: we do not own this object, nothing to do: object=\(txt) handle=\(handle)")
 #endif
         }
+        extensionInterface.objectDeinited(object: self)
     }
     static var userTypeBindingCallback = GDExtensionInstanceBindingCallbacks(
         create_callback: userTypeBindingCreate,
@@ -185,13 +187,22 @@ open class Wrapped: Equatable, Identifiable, Hashable {
     public var godotClassName: StringName {
         var sc: StringName.ContentType = StringName.zero
         
-        if gi.object_get_class_name (handle, library, &sc) != 0 {
+        if gi.object_get_class_name (handle, extensionInterface.getLibrary(), &sc) != 0 {
             let sn = StringName(content: sc)
             return sn
         }
         return ""
     }
+
+    /// This method is posted by Godot, you can override this method and
+    /// be notified of interesting events, the values for this notification are declared on various
+    /// different types, like the constants in Object or Node.
+    ///
+    /// For example `Node.notificationProcess`
+    open func _notification(code: Int, reversed: Bool) {
+    }
     
+
     /// Checks if this object has a script with the given method.
     /// - Parameter method: StringName identifying the method.
     /// - Returns: `true` if the object has a script and that script has a method with the given name.
@@ -205,28 +216,30 @@ open class Wrapped: Equatable, Identifiable, Hashable {
     ///  - method: the method to invoke on the target
     ///  - arguments: variable list of arguments
     /// - Returns: if there is an error, this function raises an error, otherwise, a Variant with the result is returned
-    public func callScript (method: StringName, _ arguments: Variant...) throws -> Variant {
+    public func callScript (method: StringName, _ arguments: Variant?...) throws -> Variant? {
         var args: [UnsafeRawPointer?] = []
         let cptr = UnsafeMutableBufferPointer<Variant.ContentType>.allocate(capacity: arguments.count)
         defer { cptr.deallocate () }
         
         for idx in 0..<arguments.count {
-            cptr [idx] = arguments [idx].content
+            cptr [idx] = arguments[idx].content
             args.append (cptr.baseAddress! + idx)
         }
-        let result: Variant = Variant()
+        var result = Variant.zero
         var error = GDExtensionCallError()
-        gi.object_call_script_method(&handle, &method.content, &args, Int64(args.count), &result.content, &error)
+        gi.object_call_script_method(&handle, &method.content, &args, Int64(args.count), &result, &error)
         if error.error != GDEXTENSION_CALL_OK {
             throw toCallErrorType(error.error)
         }
-        return result
+        
+        return Variant(takingOver: result)
     }
     
     /// For use by the framework, you should not need to call this.
     public required init (nativeHandle: UnsafeRawPointer) {
         handle = nativeHandle
         ownsHandle = false
+        extensionInterface.objectInited(object: self)
 #if DEBUG_INSTANCES
         xmap [nativeHandle] = "\(self)"
         print ("Init Object From Handle: \(nativeHandle) -> \(self)")
@@ -258,6 +271,7 @@ open class Wrapped: Equatable, Identifiable, Hashable {
 #endif
         bindGodotInstance(instance: self, handle: handle)
         let _ = Self.classInitializer
+        extensionInterface.objectInited(object: self)
     }
     
     open class var godotClassName: StringName {
@@ -299,7 +313,7 @@ func bindGodotInstance(instance: some Wrapped, handle: UnsafeRawPointer) {
         }
     }
     
-    gi.object_set_instance_binding(UnsafeMutableRawPointer (mutating: handle), token, retain.toOpaque(), &callbacks)
+    gi.object_set_instance_binding(UnsafeMutableRawPointer (mutating: handle),  extensionInterface.getLibrary(), retain.toOpaque(), &callbacks)
 }
 
 var userTypes: [String:(UnsafeRawPointer)->Wrapped] = [:]
@@ -347,7 +361,7 @@ func register<T:Wrapped> (type name: StringName, parent: StringName, type: T.Typ
     info.class_userdata = retained.toOpaque()
     
     withUnsafePointer(to: &parent.content) { parentPtr in
-        gi.classdb_register_extension_class (library, &nameContent, parentPtr, &info)
+        gi.classdb_register_extension_class (extensionInterface.getLibrary(), &nameContent, parentPtr, &info)
     }
 }
 
@@ -369,7 +383,7 @@ public func unregister<T:Wrapped> (type: T.Type) {
     let name = StringName (typeStr)
     pd ("Unregistering \(typeStr)")
     withUnsafePointer (to: &name.content) { namePtr in
-        gi.classdb_unregister_extension_class (library, namePtr)
+        gi.classdb_unregister_extension_class (extensionInterface.getLibrary(), namePtr)
     }
 }
 
@@ -429,7 +443,7 @@ func lookupObject<T: Object> (nativeHandle: UnsafeRawPointer) -> T? {
     }
     var className: String = ""
     var sc: StringName.ContentType = StringName.zero
-    if gi.object_get_class_name (nativeHandle, library, &sc) != 0 {
+    if gi.object_get_class_name (nativeHandle, extensionInterface.getLibrary(), &sc) != 0 {
         let sn = StringName(content: sc)
         className = String(sn)
     } else {
@@ -528,7 +542,9 @@ func freeFunc (_ userData: UnsafeMutableRawPointer?, _ objectHandle: UnsafeMutab
 }
 
 func notificationFunc (ptr: UnsafeMutableRawPointer?, code: Int32, reversed: UInt8) {
-    //print ("SWIFT: Notification \(code) on \(ptr)")
+    guard let ptr else { return } 
+    let original = Unmanaged<Wrapped>.fromOpaque(ptr).takeUnretainedValue()
+    original._notification(code: Int(code), reversed: reversed != 0)
 }
 
 func userTypeBindingCreate (_ token: UnsafeMutableRawPointer?, _ instance: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
@@ -600,21 +616,21 @@ struct CallableWrapper {
     }
     
     @available(*, deprecated, message: "Use version taking `@escaping (borrowing Arguments) -> Variant?` instead.")    
-    static func callableVariantContent(wrapping function: @escaping ([Variant]) -> Variant?) -> Callable.ContentType {
+    static func callableVariantContent(wrapping function: @escaping ([Variant?]) -> Variant?) -> Callable.ContentType {
         callableVariantContent { (arguments: borrowing Arguments) in
             let array = Array(arguments)
             let result = function(array)
-            return result ?? Variant()
+            return result
         }
     }
     
-    static func callableVariantContent(wrapping function: @escaping (borrowing Arguments) -> Variant) -> Callable.ContentType {
+    static func callableVariantContent(wrapping function: @escaping (borrowing Arguments) -> Variant?) -> Callable.ContentType {
         let wrapperPtr = UnsafeMutablePointer<Self>.allocate(capacity: 1)
         wrapperPtr.initialize(to: Self(function: function))
         
         var cci = GDExtensionCallableCustomInfo(
             callable_userdata: wrapperPtr,
-            token: token,
+            token: extensionInterface.getLibrary(),
             object_id: 0,
             call_func: invokeWrappedCallable,
             is_valid_func: nil,

@@ -122,10 +122,24 @@ class GodotMacroProcessor {
         }
         
         let name = "prop_\(propertyDeclarations.count)"
-        let hint = propType == ".array" ? ".arrayType" : ".none"
+        
+        let hint: String
+        if propType == ".array" && hintStr != "" {
+            hint = ".arrayType"
+        } else {
+            hint = ".none"
+        }
+        
+        let usage: String
+        if propType == ".nil" {
+            usage = ".nilIsVariant"
+        } else {
+            usage = ".default"
+        }
+        
         // TODO: perhaps for these prop infos that are parameters to functions, we should not bother making them unique
         // and instead share all the Ints, all the Floats and so on.
-        ctor.append ("    let \(name) = PropInfo (propertyType: \(propType), propertyName: \"\", className: StringName(\"\(className)\"), hint: \(hint), hintStr: \"\(hintStr)\", usage: .default)\n")
+        ctor.append ("    let \(name) = PropInfo (propertyType: \(propType), propertyName: \"\", className: StringName(\"\(className)\"), hint: \(hint), hintStr: \"\(hintStr)\", usage: \(usage))\n")
         propertyDeclarations [key] = name
         return name
     }
@@ -203,13 +217,26 @@ class GodotMacroProcessor {
         ctor.append (funcArgs)
         ctor.append ("    classInfo.registerMethod(name: StringName(\"\(funcName)\"), flags: .default, returnValue: \(retProp ?? "nil"), arguments: \(funcArgs == "" ? "[]" : "\(funcName)Args"), function: \(className)._mproxy_\(funcName))\n")
     }
+      
+
+    func processVariable(_ varDecl: VariableDeclSyntax, previousGroupPrefix: String?, previousSubgroupPrefix: String?) throws -> Bool {
+        if varDecl.isGArrayCollection {
+            try processGArrayCollectionVariable(varDecl, prefix: previousSubgroupPrefix ?? previousGroupPrefix)
+        } else if hasExportAttribute(varDecl.attributes) {
+            return try processExportVariable(varDecl, prefix: previousSubgroupPrefix ?? previousGroupPrefix)
+        } else if hasSignalAttribute(varDecl.attributes) {
+            try processSignalVariable(varDecl, prefix: previousSubgroupPrefix ?? previousGroupPrefix)
+        }
+            
+        return false
+    }
+
     
     // Returns true if it used "tryCase"
-    func processVariable (_ varDecl: VariableDeclSyntax, prefix: String?) throws -> Bool {
+    func processExportVariable (_ varDecl: VariableDeclSyntax, prefix: String?) throws -> Bool {
+        assert(hasExportAttribute(varDecl.attributes))
+        
         var usedTryCase = false
-        guard hasExportAttribute(varDecl.attributes) else {
-            return false
-        }
         guard let last = varDecl.bindings.last else {
             throw GodotMacroError.noVariablesFound
         }
@@ -219,12 +246,17 @@ class GodotMacroProcessor {
         if let optSyntax = type.as (OptionalTypeSyntax.self) {
             type = optSyntax.wrappedType
         }
-        guard varDecl.isArray == false else {
+        guard varDecl.isSwiftArray == false else {
             throw GodotMacroError.requiresGArrayCollection
         }
         guard let typeName = type.as (IdentifierTypeSyntax.self)?.name.text else {
             throw GodotMacroError.unsupportedType(varDecl)
         }
+
+        guard let ta = last.typeAnnotation?.type.description.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
+            throw GodotMacroError.noTypeFound(varDecl)
+        }
+
         let exportAttr = varDecl.attributes.first?.as(AttributeSyntax.self)
         let labeledExpressionList = exportAttr?.arguments?.as(LabeledExprListSyntax.self)
         let firstLabeledExpression = labeledExpressionList?.first?.expression.as(MemberAccessExprSyntax.self)?.declName
@@ -234,12 +266,6 @@ class GodotMacroProcessor {
             guard let ips = singleVar.pattern.as(IdentifierPatternSyntax.self) else {
                 throw GodotMacroError.expectedIdentifier(singleVar)
             }
-            guard let last = varDecl.bindings.last else {
-                throw GodotMacroError.noVariablesFound
-            }
-            guard let ta = last.typeAnnotation?.type.description.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) else {
-                throw GodotMacroError.noTypeFound(varDecl)
-            }
             
             let varNameWithPrefix = ips.identifier.text
             let varNameWithoutPrefix = String(varNameWithPrefix.trimmingPrefix(prefix ?? ""))
@@ -247,7 +273,7 @@ class GodotMacroProcessor {
             let proxyGetterName = "_mproxy_get_\(varNameWithPrefix)"
             let setterName = "_mproxy_set_\(varNameWithoutPrefix)"
             let getterName = "_mproxy_get_\(varNameWithoutPrefix)"
-
+            
             if let accessors = last.accessorBlock {
                 if CodeBlockSyntax (accessors) != nil {
                     throw MacroError.propertyGetSet
@@ -256,27 +282,27 @@ class GodotMacroProcessor {
                     var hasSet = false
                     var hasGet = false
                     switch block.accessors {
-                    case .accessors(let list):
-                        for accessor in list {
-                            switch accessor.accessorSpecifier.tokenKind {
-                            case .keyword(let val):
-                                switch val {
-                                case .didSet, .willSet:
-                                    hasSet = true
-                                    hasGet = true
-                                case .set:
-                                    hasSet = true
-                                case .get:
-                                    hasGet = true
-                                default:
-                                    break
+                        case .accessors(let list):
+                            for accessor in list {
+                                switch accessor.accessorSpecifier.tokenKind {
+                                    case .keyword(let val):
+                                        switch val {
+                                            case .didSet, .willSet:
+                                                hasSet = true
+                                                hasGet = true
+                                            case .set:
+                                                hasSet = true
+                                            case .get:
+                                                hasGet = true
+                                            default:
+                                                break
+                                        }
+                                    default:
+                                        break
                                 }
-                            default:
-                                break
                             }
-                        }
-                    default:
-                        throw MacroError.propertyGetSet
+                        default:
+                            throw MacroError.propertyGetSet
                     }
                     
                     if hasSet == false || hasGet == false {
@@ -410,6 +436,38 @@ class GodotMacroProcessor {
         }
     }
     
+    
+    // Returns true if it used "tryCase"
+    func processSignalVariable (_ varDecl: VariableDeclSyntax, prefix: String?) throws {
+        guard let last = varDecl.bindings.last else {
+            throw GodotMacroError.noVariablesFound
+        }
+        
+        guard let type = last.typeAnnotation?.type else {
+            throw GodotMacroError.noTypeFound(varDecl)
+        }
+        
+        guard var typeName = type.as (IdentifierTypeSyntax.self)?.name.text else {
+            throw GodotMacroError.unsupportedType(varDecl)
+        }
+        
+        if let genericArgs = type.as (IdentifierTypeSyntax.self)?.genericArgumentClause {
+            typeName += "\(genericArgs)"
+        }
+
+        for variable in varDecl.bindings {
+            guard let ips = variable.pattern.as(IdentifierPatternSyntax.self) else {
+                throw GodotMacroError.expectedIdentifier(variable)
+            }
+            
+            let nameWithPrefix = ips.identifier.text
+            let name = String(nameWithPrefix.trimmingPrefix(prefix ?? ""))
+
+            ctor.append("\(typeName).register(\"\(name.camelCaseToSnakeCase())\", info: classInfo)")
+        }
+    }
+
+    
     var ctor: String = ""
     var genMethods: [String] = []
     
@@ -426,29 +484,29 @@ class GodotMacroProcessor {
         var needTrycase = false
         for member in classDecl.memberBlock.members.enumerated() {
             let decl = member.element.decl
+            let macroExpansion = MacroExpansionDeclSyntax(decl)
             
-            if let macroExpansion = MacroExpansionDeclSyntax(decl),
-               let name = macroExpansion.exportGroupName {
-                previousGroupPrefix = macroExpansion.exportGroupPrefix ?? ""
+            if let name = macroExpansion?.exportGroupName {
+                previousGroupPrefix = macroExpansion?.exportGroupPrefix ?? ""
                 processExportGroup(name: name, prefix: previousGroupPrefix ?? "")
-            } else if let macroExpansion = MacroExpansionDeclSyntax(decl),
-                 let name = macroExpansion.exportSubgroupName {
-                previousSubgroupPrefix = macroExpansion.exportSubgroupPrefix ?? ""
+            } else if let name = macroExpansion?.exportSubgroupName {
+                previousSubgroupPrefix = macroExpansion?.exportSubgroupPrefix ?? ""
                 processExportSubgroup(name: name, prefix: previousSubgroupPrefix ?? "")
             } else if let funcDecl = FunctionDeclSyntax(decl) {
                 try processFunction (funcDecl)
             } else if let varDecl = VariableDeclSyntax(decl) {
-                if varDecl.isGArrayCollection {
-                    try processGArrayCollectionVariable(varDecl, prefix: previousSubgroupPrefix ?? previousGroupPrefix)
-                } else {
-                    if try processVariable(varDecl, prefix: previousSubgroupPrefix ?? previousGroupPrefix) {
-                        needTrycase = true
-                    }
+                if try processVariable(
+                    varDecl,
+                    previousGroupPrefix: previousGroupPrefix,
+                    previousSubgroupPrefix: previousSubgroupPrefix
+                ) {
+                    needTrycase = true
                 }
-            } else if let macroDecl = MacroExpansionDeclSyntax(decl) {
-                try classInitSignals(macroDecl)
+            } else if let macroExpansion {
+                try classInitSignals(macroExpansion)
             }
         }
+
         if needTrycase {
             ctor.append (
             """
@@ -621,7 +679,8 @@ struct godotMacrosPlugin: CompilerPlugin {
         PickerNameProviderMacro.self,
         SceneTreeMacro.self,
         Texture2DLiteralMacro.self,
-        SignalMacro.self
+        SignalMacro.self,
+        SignalAttachmentMacro.self,
     ]
 }
 

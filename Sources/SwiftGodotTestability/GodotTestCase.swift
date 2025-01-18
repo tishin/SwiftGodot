@@ -6,93 +6,65 @@
 //
 
 import XCTest
+
 @testable import SwiftGodot
 
-open class GodotTestCase: XCTestCase {
-    
-    private static var testSuites: [XCTestSuite] = []
-    
-    override open class var defaultTestSuite: XCTestSuite {
-        let testSuite = super.defaultTestSuite
-        testSuites.append (testSuite)
-        return testSuite
-    }
-    
-    override open func run () {
+
+/// Base class for all test cases that run in the Godot runtime.
+open class GodotTestCase: EmbeddedTestCase<GodotTestHost> {
+    open override class func setUp() {
+        super.setUp()
         if GodotRuntime.isRunning {
-            super.run ()
-        } else {
-            guard !GodotRuntime.isInitialized else { return }
-            GodotRuntime.run {
-                if !Self.testSuites.isEmpty {
-                    // Executing all test suites from the context
-                    for testSuite in Self.testSuites {
-                        testSuite.perform (XCTestSuiteRun (test: testSuite))
-                    }
-                } else {
-                    Self.godotSetUp ()
-                    // Executing single test method
-                    super.run ()
-                    Self.godotTearDown ()
-                }
-                
-                GodotRuntime.stop ()
+            // register any types that are needed for the tests
+            for subclass in godotSubclasses {
+                register(type: subclass)
             }
         }
     }
-    
+
+    override open class func tearDown() {
+        if GodotRuntime.isRunning {
+            // unregister any types that were registered for the tests
+            for subclass in godotSubclasses {
+                unregister(type: subclass)
+            }
+        }
+        super.tearDown()
+    }
+
+    override open func tearDown() async throws {
+        if GodotRuntime.isRunning {
+            // clean up test objects
+            let liveObjects: [Wrapped] = Array(liveFrameworkObjects.values) + Array(liveSubtypedObjects.values)
+            for liveObject in liveObjects {
+                switch liveObject {
+                case let node as Node:
+                    node.queueFree()
+                case let refCounted as RefCounted:
+                    refCounted._exp_unref()
+                case let object as Object:
+                    _ = object.call(method: "free")
+                default:
+                    print("Unable to free \(liveObject)")
+                }
+            }
+            liveFrameworkObjects.removeAll()
+            liveSubtypedObjects.removeAll()
+
+            // waiting for queueFree to take effect
+            let scene = try GodotRuntime.getScene()
+            await scene.processFrame.emitted
+        }
+    }
+
+    /// List of types that need to be registered in the Godot runtime.
+    /// Subclasses should override this to return the types they need.
     open class var godotSubclasses: [Wrapped.Type] {
         return []
     }
-    
-    open class func godotSetUp () {
-        for subclass in godotSubclasses {
-            register (type: subclass)
-        }
-    }
-    
-    open class func godotTearDown () {
-        for subclass in godotSubclasses {
-            unregister (type: subclass)
-        }
-    }
-    
-    override open class func setUp () {
-        if GodotRuntime.isRunning {
-            godotSetUp ()
-        }
-    }
-    
-    override open class func tearDown () {
-        if GodotRuntime.isRunning {
-            godotTearDown ()
-        }
-    }
-    
-    override open func tearDown () async throws {
-        // Cleaning up test objects
-        let liveObjects: [Wrapped] = Array (liveFrameworkObjects.values) + Array (liveSubtypedObjects.values)
-        for liveObject in liveObjects {
-            switch liveObject {
-            case let node as Node:
-                node.queueFree ()
-            case let refCounted as RefCounted:
-                refCounted._exp_unref ()
-            case let object as Object:
-                _ = object.call (method: "free")
-            default:
-                print ("Unable to free \(liveObject)")
-            }
-        }
-        liveFrameworkObjects.removeAll ()
-        liveSubtypedObjects.removeAll ()
-        
-        // Waiting for queueFree to take effect
-        let scene = try GodotRuntime.getScene ()
-        await scene.processFrame.emitted
-    }
-    
+
 }
+
 
 public extension GodotTestCase {
     
