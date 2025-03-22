@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Holds physics-related properties of a surface, namely its roughness and bounciness. This class is used to apply these properties to a physics body.
 open class PhysicsMaterial: Resource {
-    override open class var godotClassName: StringName { "PhysicsMaterial" }
+    fileprivate static var className = StringName("PhysicsMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

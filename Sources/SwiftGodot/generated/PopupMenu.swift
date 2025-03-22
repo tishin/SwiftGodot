@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ import Musl
 /// - ``indexPressed``
 /// - ``menuChanged``
 open class PopupMenu: Popup {
-    override open class var godotClassName: StringName { "PopupMenu" }
+    fileprivate static var className = StringName("PopupMenu")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

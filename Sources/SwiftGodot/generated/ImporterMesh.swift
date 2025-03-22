@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Unlike its runtime counterpart, ``ImporterMesh`` contains mesh data before various import steps, such as lod and shadow mesh generation, have taken place. Modify surface data by calling ``clear()``, followed by ``addSurface(primitive:arrays:blendShapes:lods:material:name:flags:)`` for each surface.
 /// 
 open class ImporterMesh: Resource {
-    override open class var godotClassName: StringName { "ImporterMesh" }
+    fileprivate static var className = StringName("ImporterMesh")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_add_blend_shape: GDExtensionMethodBindPtr = {
         let methodName = StringName("add_blend_shape")

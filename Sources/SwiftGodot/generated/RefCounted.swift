@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: In C#, reference-counted objects will not be freed instantly after they are no longer in use. Instead, garbage collection will run periodically and will free reference-counted objects that are no longer in use. This means that unused ones will remain in memory for a while before being removed.
 /// 
 open class RefCounted: Object {
-    override open class var godotClassName: StringName { "RefCounted" }
+    fileprivate static var className = StringName("RefCounted")
+    override open class var godotClassName: StringName { className }
     public required init () {
         super.init ()
         _ = initRef()

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: On Android, this requires the ``ProjectSettings/inputDevices/pointing/android/enablePanAndScaleGestures`` project setting to be enabled.
 /// 
 open class InputEventMagnifyGesture: InputEventGesture {
-    override open class var godotClassName: StringName { "InputEventMagnifyGesture" }
+    fileprivate static var className = StringName("InputEventMagnifyGesture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

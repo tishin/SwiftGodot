@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Represents a light as defined by the `KHR_lights_punctual` GLTF extension.
 open class GLTFLight: Resource {
-    override open class var godotClassName: StringName { "GLTFLight" }
+    fileprivate static var className = StringName("GLTFLight")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

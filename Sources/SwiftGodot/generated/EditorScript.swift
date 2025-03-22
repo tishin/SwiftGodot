@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: EditorScript is ``RefCounted``, meaning it is destroyed when nothing references it. This can cause errors during asynchronous operations if there are no references to the script.
 /// 
 open class EditorScript: RefCounted {
-    override open class var godotClassName: StringName { "EditorScript" }
+    fileprivate static var className = StringName("EditorScript")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// This method is executed by the Editor when **File > Run** is used.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The body tracking position-data is scaled by ``Skeleton3D/motionScale`` when applied to the skeleton, which can be used to adjust the tracked body to match the scale of the body model.
 /// 
 open class XRBodyModifier3D: SkeletonModifier3D {
-    override open class var godotClassName: StringName { "XRBodyModifier3D" }
+    fileprivate static var className = StringName("XRBodyModifier3D")
+    override open class var godotClassName: StringName { className }
     public struct BodyUpdate: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
         public init (rawValue: Int) {

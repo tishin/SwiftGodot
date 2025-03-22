@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Remap will transform the input range into output range, e.g. you can change a `0..1` value to `-2..2` etc. See ``@GlobalScope.remap`` for more details.
 open class VisualShaderNodeRemap: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeRemap" }
+    fileprivate static var className = StringName("VisualShaderNodeRemap")
+    override open class var godotClassName: StringName { className }
 }
 

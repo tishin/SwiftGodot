@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// Here is an example on how to iterate through the files of a directory:
 /// 
 open class DirAccess: RefCounted {
-    override open class var godotClassName: StringName { "DirAccess" }
+    fileprivate static var className = StringName("DirAccess")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

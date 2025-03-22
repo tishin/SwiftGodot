@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``waitToFinish()`` should have been called on it.
 /// 
 open class Thread: RefCounted {
-    override open class var godotClassName: StringName { "Thread" }
+    fileprivate static var className = StringName("Thread")
+    override open class var godotClassName: StringName { className }
     public enum Priority: Int64, CaseIterable {
         /// A thread running with lower priority than normally.
         case low = 0 // PRIORITY_LOW

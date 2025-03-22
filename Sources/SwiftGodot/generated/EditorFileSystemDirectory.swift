@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A more generalized, low-level variation of the directory concept.
 open class EditorFileSystemDirectory: Object {
-    override open class var godotClassName: StringName { "EditorFileSystemDirectory" }
+    fileprivate static var className = StringName("EditorFileSystemDirectory")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_subdir_count: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_subdir_count")

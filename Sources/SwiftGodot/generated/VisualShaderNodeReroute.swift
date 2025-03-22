@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Automatically adapts its port type to the type of the incoming connection and ensures valid connections.
 open class VisualShaderNodeReroute: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeReroute" }
+    fileprivate static var className = StringName("VisualShaderNodeReroute")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

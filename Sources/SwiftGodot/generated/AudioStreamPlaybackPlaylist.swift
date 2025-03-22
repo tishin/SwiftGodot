@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,6 +21,7 @@ import Musl
 
 /// Playback class used for ``AudioStreamPlaylist``.
 open class AudioStreamPlaybackPlaylist: AudioStreamPlayback {
-    override open class var godotClassName: StringName { "AudioStreamPlaybackPlaylist" }
+    fileprivate static var className = StringName("AudioStreamPlaybackPlaylist")
+    override open class var godotClassName: StringName { className }
 }
 

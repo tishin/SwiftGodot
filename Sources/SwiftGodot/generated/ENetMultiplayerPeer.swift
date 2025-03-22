@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ENet only uses UDP, not TCP. When forwarding the server port to make your server accessible on the public Internet, you only need to forward the server port in UDP. You can use the ``UPNP`` class to try to forward the server port automatically when starting the server.
 /// 
 open class ENetMultiplayerPeer: MultiplayerPeer {
-    override open class var godotClassName: StringName { "ENetMultiplayerPeer" }
+    fileprivate static var className = StringName("ENetMultiplayerPeer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

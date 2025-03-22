@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``valueFocusEntered``
 /// - ``valueFocusExited``
 open class EditorSpinSlider: Range {
-    override open class var godotClassName: StringName { "EditorSpinSlider" }
+    fileprivate static var className = StringName("EditorSpinSlider")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

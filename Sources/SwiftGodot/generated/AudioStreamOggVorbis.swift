@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// The AudioStreamOggVorbis class is a specialized ``AudioStream`` for handling Ogg Vorbis file formats. It offers functionality for loading and playing back Ogg Vorbis files, as well as managing looping and other playback properties. This class is part of the audio stream system, which also supports WAV files through the ``AudioStreamWAV`` class.
 open class AudioStreamOggVorbis: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamOggVorbis" }
+    fileprivate static var className = StringName("AudioStreamOggVorbis")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

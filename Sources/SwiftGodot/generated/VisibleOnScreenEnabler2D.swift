@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``VisibleOnScreenEnabler2D`` uses the render culling code to determine whether it's visible on screen, so it won't function unless ``CanvasItem/visible`` is set to `true`.
 /// 
 open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
-    override open class var godotClassName: StringName { "VisibleOnScreenEnabler2D" }
+    fileprivate static var className = StringName("VisibleOnScreenEnabler2D")
+    override open class var godotClassName: StringName { className }
     public enum EnableMode: Int64, CaseIterable {
         /// Corresponds to ``Node/ProcessMode/inherit``.
         case inherit = 0 // ENABLE_MODE_INHERIT

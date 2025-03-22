@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Uses three operands to compute `(a * b + c)` expression.
 open class VisualShaderNodeMultiplyAdd: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeMultiplyAdd" }
+    fileprivate static var className = StringName("VisualShaderNodeMultiplyAdd")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar type.
         case scalar = 0 // OP_TYPE_SCALAR

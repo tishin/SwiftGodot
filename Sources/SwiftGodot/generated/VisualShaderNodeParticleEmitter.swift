@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Particle emitter nodes can be used in "start" step of particle shaders and they define the starting position of the particles. Connect them to the Position output port.
 open class VisualShaderNodeParticleEmitter: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleEmitter" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleEmitter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

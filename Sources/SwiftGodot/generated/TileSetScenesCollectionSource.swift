@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Scenes are instantiated as children of the ``TileMap`` when it enters the tree. If you add/remove a scene tile in the ``TileMap`` that is already inside the tree, the ``TileMap`` will automatically instantiate/free the scene accordingly.
 /// 
 open class TileSetScenesCollectionSource: TileSetSource {
-    override open class var godotClassName: StringName { "TileSetScenesCollectionSource" }
+    fileprivate static var className = StringName("TileSetScenesCollectionSource")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_scene_tiles_count: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_scene_tiles_count")

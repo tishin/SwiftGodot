@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``finished``
 open class CPUParticles3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "CPUParticles3D" }
+    fileprivate static var className = StringName("CPUParticles3D")
+    override open class var godotClassName: StringName { className }
     public enum DrawOrder: Int64, CaseIterable {
         /// Particles are drawn in the order emitted.
         case index = 0 // DRAW_ORDER_INDEX

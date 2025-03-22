@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// If there is no active ``AudioListener2D`` in the current ``Viewport``, center of the screen will be used as a hearing point for the audio. ``AudioListener2D`` needs to be inside ``SceneTree`` to function.
 /// 
 open class AudioListener2D: Node2D {
-    override open class var godotClassName: StringName { "AudioListener2D" }
+    fileprivate static var className = StringName("AudioListener2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_make_current: GDExtensionMethodBindPtr = {
         let methodName = StringName("make_current")

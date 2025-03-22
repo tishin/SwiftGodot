@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// **Performance:** ``ConvexPolygonShape2D`` is faster to check collisions against compared to ``ConcavePolygonShape2D``, but it is slower than primitive collision shapes such as ``CircleShape2D`` and ``RectangleShape2D``. Its use should generally be limited to medium-sized objects that cannot have their collision accurately represented by primitive shapes.
 /// 
 open class ConvexPolygonShape2D: Shape2D {
-    override open class var godotClassName: StringName { "ConvexPolygonShape2D" }
+    fileprivate static var className = StringName("ConvexPolygonShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

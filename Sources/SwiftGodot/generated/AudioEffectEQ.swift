@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// 
 /// AudioEffectEQ gives you control over frequencies. Use it to compensate for existing deficiencies in audio. AudioEffectEQs are useful on the Master bus to completely master a mix and give it more character. They are also useful when a game is run on a mobile device, to adjust the mix to that kind of speakers (it can be added but disabled when headphones are plugged).
 open class AudioEffectEQ: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectEQ" }
+    fileprivate static var className = StringName("AudioEffectEQ")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_band_gain_db: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_band_gain_db")

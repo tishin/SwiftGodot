@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,6 +41,7 @@ import Musl
 /// See also ``AudioEffectEQ``, ``AudioEffectEQ10``, ``AudioEffectEQ21``.
 /// 
 open class AudioEffectEQ6: AudioEffectEQ {
-    override open class var godotClassName: StringName { "AudioEffectEQ6" }
+    fileprivate static var className = StringName("AudioEffectEQ6")
+    override open class var godotClassName: StringName { className }
 }
 

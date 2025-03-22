@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// - ``cellSizeChanged``
 /// - ``changed``
 open class GridMap: Node3D {
-    override open class var godotClassName: StringName { "GridMap" }
+    fileprivate static var className = StringName("GridMap")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Invalid cell item that can be used in ``setCellItem(position:item:orientation:)`` to clear cells (or represent an empty cell in ``getCellItem(position:)``).
     public static let invalidCellItem = -1

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: By default, this event is only emitted once per frame rendered at most. If you need more precise input reporting, set ``Input/useAccumulatedInput`` to `false` to make events emitted as often as possible. If you use InputEventMouseMotion to draw lines, consider implementing <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham's line algorithm</a> as well to avoid visible gaps in lines if the user is moving the mouse quickly.
 /// 
 open class InputEventMouseMotion: InputEventMouse {
-    override open class var godotClassName: StringName { "InputEventMouseMotion" }
+    fileprivate static var className = StringName("InputEventMouseMotion")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

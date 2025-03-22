@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// 3D textures are typically used to store density maps for ``FogMaterial``, color correction LUTs for ``Environment``, vector fields for ``GPUParticlesAttractorVectorField3D`` and collision maps for ``GPUParticlesCollisionSDF3D``. 3D textures can also be used in custom shaders.
 /// 
 open class ImageTexture3D: Texture3D {
-    override open class var godotClassName: StringName { "ImageTexture3D" }
+    fileprivate static var className = StringName("ImageTexture3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create: GDExtensionMethodBindPtr = {
         let methodName = StringName("create")

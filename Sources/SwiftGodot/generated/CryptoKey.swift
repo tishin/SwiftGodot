@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// They can be used to generate a self-signed ``X509Certificate`` via ``Crypto/generateSelfSignedCertificate(key:issuerName:notBefore:notAfter:)`` and as private key in ``StreamPeerTLS/acceptStream(_:serverOptions:)`` along with the appropriate certificate.
 /// 
 open class CryptoKey: Resource {
-    override open class var godotClassName: StringName { "CryptoKey" }
+    fileprivate static var className = StringName("CryptoKey")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_save: GDExtensionMethodBindPtr = {
         let methodName = StringName("save")

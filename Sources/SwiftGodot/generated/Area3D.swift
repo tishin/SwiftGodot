@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// - ``areaEntered``
 /// - ``areaExited``
 open class Area3D: CollisionObject3D {
-    override open class var godotClassName: StringName { "Area3D" }
+    fileprivate static var className = StringName("Area3D")
+    override open class var godotClassName: StringName { className }
     public enum SpaceOverride: Int64, CaseIterable {
         /// This area does not affect gravity/damping.
         case disabled = 0 // SPACE_OVERRIDE_DISABLED

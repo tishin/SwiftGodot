@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// 
 /// - ``trianglesUpdated``
 open class AnimationNodeBlendSpace2D: AnimationRootNode {
-    override open class var godotClassName: StringName { "AnimationNodeBlendSpace2D" }
+    fileprivate static var className = StringName("AnimationNodeBlendSpace2D")
+    override open class var godotClassName: StringName { className }
     public enum BlendMode: Int64, CaseIterable {
         /// The interpolation between animations is linear.
         case interpolated = 0 // BLEND_MODE_INTERPOLATED

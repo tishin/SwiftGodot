@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: The margin sizes are theme overrides, not normal properties. This is an example of how to change them in code:
 /// 
 open class MarginContainer: Container {
-    override open class var godotClassName: StringName { "MarginContainer" }
+    fileprivate static var className = StringName("MarginContainer")
+    override open class var godotClassName: StringName { className }
 }
 

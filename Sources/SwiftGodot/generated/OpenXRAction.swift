@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// Note that the name of the resource is used to register the action with.
 /// 
 open class OpenXRAction: Resource {
-    override open class var godotClassName: StringName { "OpenXRAction" }
+    fileprivate static var className = StringName("OpenXRAction")
+    override open class var godotClassName: StringName { className }
     public enum ActionType: Int64, CaseIterable {
         /// This action provides a boolean value.
         case bool = 0 // OPENXR_ACTION_BOOL

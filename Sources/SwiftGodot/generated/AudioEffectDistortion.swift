@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// By distorting the waveform the frequency content changes, which will often make the sound "crunchy" or "abrasive". For games, it can simulate sound coming from some saturated device or speaker very efficiently.
 /// 
 open class AudioEffectDistortion: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectDistortion" }
+    fileprivate static var className = StringName("AudioEffectDistortion")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Digital distortion effect which cuts off peaks at the top and bottom of the waveform.
         case clip = 0 // MODE_CLIP

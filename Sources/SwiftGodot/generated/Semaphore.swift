@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - When a ``Thread``'s reference count reaches zero and it is therefore destroyed, it must not be waiting on any semaphore.
 /// 
 open class Semaphore: RefCounted {
-    override open class var godotClassName: StringName { "Semaphore" }
+    fileprivate static var className = StringName("Semaphore")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_wait: GDExtensionMethodBindPtr = {
         let methodName = StringName("wait")

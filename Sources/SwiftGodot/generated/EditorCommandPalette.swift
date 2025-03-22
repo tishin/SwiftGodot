@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: This class shouldn't be instantiated directly. Instead, access the singleton using ``EditorInterface/getCommandPalette()``.
 /// 
 open class EditorCommandPalette: ConfirmationDialog {
-    override open class var godotClassName: StringName { "EditorCommandPalette" }
+    fileprivate static var className = StringName("EditorCommandPalette")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_add_command: GDExtensionMethodBindPtr = {
         let methodName = StringName("add_command")

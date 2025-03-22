@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class allows for a RenderData implementation to be made in GDExtension.
 open class RenderDataExtension: RenderData {
-    override open class var godotClassName: StringName { "RenderDataExtension" }
+    fileprivate static var className = StringName("RenderDataExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Implement this in GDExtension to return the ``RID`` of the implementations environment object.
     @_documentation(visibility: public)

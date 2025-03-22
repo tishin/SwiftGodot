@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This is used to provide Godot with a flexible and powerful Inverse Kinematics solution that can be adapted for many different uses.
 /// 
 open class SkeletonModification2D: Resource {
-    override open class var godotClassName: StringName { "SkeletonModification2D" }
+    fileprivate static var className = StringName("SkeletonModification2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

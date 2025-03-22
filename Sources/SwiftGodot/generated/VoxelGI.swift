@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: Meshes should have sufficiently thick walls to avoid light leaks (avoid one-sided walls). For interior levels, enclose your level geometry in a sufficiently large box and bridge the loops to close the mesh. To further prevent light leaks, you can also strategically place temporary ``MeshInstance3D`` nodes with their ``GeometryInstance3D/giMode`` set to ``GeometryInstance3D/GIMode/`static```. These temporary nodes can then be hidden after baking the ``VoxelGI`` node.
 /// 
 open class VoxelGI: VisualInstance3D {
-    override open class var godotClassName: StringName { "VoxelGI" }
+    fileprivate static var className = StringName("VoxelGI")
+    override open class var godotClassName: StringName { className }
     public enum Subdiv: Int64, CaseIterable {
         /// Use 64 subdivisions. This is the lowest quality setting, but the fastest. Use it if you can, but especially use it on lower-end hardware.
         case subdiv64 = 0 // SUBDIV_64

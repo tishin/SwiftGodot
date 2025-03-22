@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``animationPlayerChanged``
 open class AnimationTree: AnimationMixer {
-    override open class var godotClassName: StringName { "AnimationTree" }
+    fileprivate static var className = StringName("AnimationTree")
+    override open class var godotClassName: StringName { className }
     public enum AnimationProcessCallback: Int64, CaseIterable {
         /// 
         case physics = 0 // ANIMATION_PROCESS_PHYSICS

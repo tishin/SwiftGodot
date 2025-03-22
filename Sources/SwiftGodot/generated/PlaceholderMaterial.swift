@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// - When this subclass is missing due to using a different engine version or build (e.g. modules disabled).
 /// 
 open class PlaceholderMaterial: Material {
-    override open class var godotClassName: StringName { "PlaceholderMaterial" }
+    fileprivate static var className = StringName("PlaceholderMaterial")
+    override open class var godotClassName: StringName { className }
 }
 

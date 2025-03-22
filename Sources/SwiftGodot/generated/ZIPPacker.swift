@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -22,7 +24,8 @@ import Musl
 /// This class implements a writer that allows storing the multiple blobs in a zip archive.
 /// 
 open class ZIPPacker: RefCounted {
-    override open class var godotClassName: StringName { "ZIPPacker" }
+    fileprivate static var className = StringName("ZIPPacker")
+    override open class var godotClassName: StringName { className }
     public enum ZipAppend: Int64, CaseIterable {
         /// Create a new zip archive at the given path.
         case create = 0 // APPEND_CREATE

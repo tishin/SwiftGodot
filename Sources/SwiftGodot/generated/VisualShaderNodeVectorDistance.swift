@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// Translated to `distance(p0, p1)` in the shader language.
 /// 
 open class VisualShaderNodeVectorDistance: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorDistance" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorDistance")
+    override open class var godotClassName: StringName { className }
 }
 

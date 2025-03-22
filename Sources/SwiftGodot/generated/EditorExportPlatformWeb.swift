@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: Godot on Web is rendered inside a `<canvas>` tag. Normally, the canvas cannot be positioned or resized manually, but otherwise acts as the main ``Window`` of the application.
 /// 
 open class EditorExportPlatformWeb: EditorExportPlatform {
-    override open class var godotClassName: StringName { "EditorExportPlatformWeb" }
+    fileprivate static var className = StringName("EditorExportPlatformWeb")
+    override open class var godotClassName: StringName { className }
 }
 

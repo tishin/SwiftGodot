@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// The ScreenNormalWorldSpace node allows to create outline effects.
 open class VisualShaderNodeScreenNormalWorldSpace: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeScreenNormalWorldSpace" }
+    fileprivate static var className = StringName("VisualShaderNodeScreenNormalWorldSpace")
+    override open class var godotClassName: StringName { className }
 }
 

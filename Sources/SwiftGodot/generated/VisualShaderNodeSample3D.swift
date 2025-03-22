@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A virtual class, use the descendants instead.
 open class VisualShaderNodeSample3D: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeSample3D" }
+    fileprivate static var className = StringName("VisualShaderNodeSample3D")
+    override open class var godotClassName: StringName { className }
     public enum Source: Int64, CaseIterable {
         /// Creates internal uniform and provides a way to assign it within node.
         case texture = 0 // SOURCE_TEXTURE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``SpringArm3D`` casts a ray or a shape along its Z axis and moves all its direct children to the collision point, with an optional margin. This is useful for 3rd person cameras that move closer to the player when inside a tight space (you may need to exclude the player's collider from the ``SpringArm3D``'s collision check).
 open class SpringArm3D: Node3D {
-    override open class var godotClassName: StringName { "SpringArm3D" }
+    fileprivate static var className = StringName("SpringArm3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

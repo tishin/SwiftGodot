@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Increases or decreases the volume being routed through the audio bus.
 open class AudioEffectAmplify: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectAmplify" }
+    fileprivate static var className = StringName("AudioEffectAmplify")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

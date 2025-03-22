@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform sampler2D` in the shader language.
 open class VisualShaderNodeTexture2DParameter: VisualShaderNodeTextureParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeTexture2DParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeTexture2DParameter")
+    override open class var godotClassName: StringName { className }
 }
 

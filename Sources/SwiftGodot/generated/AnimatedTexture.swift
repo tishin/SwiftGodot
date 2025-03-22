@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Warning: The current implementation is not efficient for the modern renderers.
 /// 
 open class AnimatedTexture: Texture2D {
-    override open class var godotClassName: StringName { "AnimatedTexture" }
+    fileprivate static var className = StringName("AnimatedTexture")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// The maximum number of frames supported by ``AnimatedTexture``. If you need more frames in your animation, use ``AnimationPlayer`` or ``AnimatedSprite2D``.
     public static let maxFrames = 256

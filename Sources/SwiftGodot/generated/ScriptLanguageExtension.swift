@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class ScriptLanguageExtension: ScriptLanguage {
-    override open class var godotClassName: StringName { "ScriptLanguageExtension" }
+    fileprivate static var className = StringName("ScriptLanguageExtension")
+    override open class var godotClassName: StringName { className }
     public enum LookupResultType: Int64, CaseIterable {
         /// 
         case scriptLocation = 0 // LOOKUP_RESULT_SCRIPT_LOCATION

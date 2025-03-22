@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``Tween/tweenProperty(object:property:finalVal:duration:)`` is the only correct way to create ``PropertyTweener``. Any ``PropertyTweener`` created manually will not function correctly.
 /// 
 open class PropertyTweener: Tweener {
-    override open class var godotClassName: StringName { "PropertyTweener" }
+    fileprivate static var className = StringName("PropertyTweener")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_from: GDExtensionMethodBindPtr = {
         let methodName = StringName("from")

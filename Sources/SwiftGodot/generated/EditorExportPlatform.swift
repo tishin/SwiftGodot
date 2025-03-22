@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Used in scripting by ``EditorExportPlugin`` to configure platform-specific customization of scenes and resources. See ``EditorExportPlugin/_beginCustomizeScenes(platform:features:)`` and ``EditorExportPlugin/_beginCustomizeResources(platform:features:)`` for more details.
 /// 
 open class EditorExportPlatform: RefCounted {
-    override open class var godotClassName: StringName { "EditorExportPlatform" }
+    fileprivate static var className = StringName("EditorExportPlatform")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_os_name: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_os_name")

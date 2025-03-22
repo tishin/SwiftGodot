@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: On Wear OS devices, rotary input is mapped to ``MouseButton/wheelUp`` and ``MouseButton/wheelDown``. This can be changed to ``MouseButton/wheelLeft`` and ``MouseButton/wheelRight`` with the ``ProjectSettings/inputDevices/pointing/android/rotaryInputScrollAxis`` setting.
 /// 
 open class InputEventMouseButton: InputEventMouse {
-    override open class var godotClassName: StringName { "InputEventMouseButton" }
+    fileprivate static var className = StringName("InputEventMouseButton")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

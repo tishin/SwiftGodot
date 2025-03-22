@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Class representing a cylindrical ``PrimitiveMesh``. This class can be used to create cones by setting either the ``topRadius`` or ``bottomRadius`` properties to `0.0`.
 open class CylinderMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "CylinderMesh" }
+    fileprivate static var className = StringName("CylinderMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

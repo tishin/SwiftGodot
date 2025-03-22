@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Unlike ``AudioEffectRecord``, this effect only returns the raw audio samples instead of encoding them into an ``AudioStream``.
 /// 
 open class AudioEffectCapture: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectCapture" }
+    fileprivate static var className = StringName("AudioEffectCapture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class allows OpenXR core and extensions to register metadata relating to supported interaction devices such as controllers, trackers, haptic devices, etc. It is primarily used by the action map editor and to sanitize any action map by removing extension-dependent entries when applicable.
 open class OpenXRInteractionProfileMetadata: Object {
-    override open class var godotClassName: StringName { "OpenXRInteractionProfileMetadata" }
+    fileprivate static var className = StringName("OpenXRInteractionProfileMetadata")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_register_profile_rename: GDExtensionMethodBindPtr = {
         let methodName = StringName("register_profile_rename")

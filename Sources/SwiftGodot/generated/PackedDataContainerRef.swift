@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -22,7 +24,8 @@ import Musl
 /// When packing nested containers using ``PackedDataContainer``, they are recursively packed into ``PackedDataContainerRef`` (only applies to ``GArray`` and ``GDictionary``). Their data can be retrieved the same way as from ``PackedDataContainer``.
 /// 
 open class PackedDataContainerRef: RefCounted {
-    override open class var godotClassName: StringName { "PackedDataContainerRef" }
+    fileprivate static var className = StringName("PackedDataContainerRef")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_size: GDExtensionMethodBindPtr = {
         let methodName = StringName("size")

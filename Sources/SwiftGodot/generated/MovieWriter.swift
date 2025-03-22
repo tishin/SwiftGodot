@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ import Musl
 /// > Note: MovieWriter is available for use in both the editor and exported projects, but it is _not_ designed for use by end users to record videos while playing. Players wishing to record gameplay videos should install tools such as <a href="https://obsproject.com/">OBS Studio</a> or <a href="https://www.maartenbaert.be/simplescreenrecorder/">SimpleScreenRecorder</a> instead.
 /// 
 open class MovieWriter: Object {
-    override open class var godotClassName: StringName { "MovieWriter" }
+    fileprivate static var className = StringName("MovieWriter")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when the audio sample rate used for recording the audio is requested by the engine. The value returned must be specified in Hz. Defaults to 48000 Hz if ``_getAudioMixRate()`` is not overridden.
     @_documentation(visibility: public)

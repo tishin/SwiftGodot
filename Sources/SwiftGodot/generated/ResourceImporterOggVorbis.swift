@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Ogg Vorbis requires more CPU to decode than ``ResourceImporterWAV``. If you need to play a lot of simultaneous sounds, it's recommended to use WAV for those sounds instead, especially if targeting low-end devices.
 /// 
 open class ResourceImporterOggVorbis: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterOggVorbis" }
+    fileprivate static var className = StringName("ResourceImporterOggVorbis")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_load_from_buffer: GDExtensionMethodBindPtr = {
         let methodName = StringName("load_from_buffer")

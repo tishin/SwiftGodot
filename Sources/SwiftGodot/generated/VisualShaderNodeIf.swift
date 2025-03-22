@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,6 +30,7 @@ import Musl
 /// - Ports **4**, **5**, and **6** are the possible outputs, returned if `a == b`, `a > b`, or `a < b` respectively.
 /// 
 open class VisualShaderNodeIf: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeIf" }
+    fileprivate static var className = StringName("VisualShaderNodeIf")
+    override open class var godotClassName: StringName { className }
 }
 

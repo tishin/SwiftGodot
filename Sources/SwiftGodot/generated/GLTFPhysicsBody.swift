@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Represents a physics body as an intermediary between the `OMI_physics_body` GLTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different GLTF physics extensions in the future.
 open class GLTFPhysicsBody: Resource {
-    override open class var godotClassName: StringName { "GLTFPhysicsBody" }
+    fileprivate static var className = StringName("GLTFPhysicsBody")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

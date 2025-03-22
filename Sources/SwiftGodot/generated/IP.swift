@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class IP: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "IP" }
+    fileprivate static var className = StringName("IP")
+    override open class var godotClassName: StringName { className }
     public enum ResolverStatus: Int64, CaseIterable {
         /// DNS hostname resolver status: No status.
         case none = 0 // RESOLVER_STATUS_NONE

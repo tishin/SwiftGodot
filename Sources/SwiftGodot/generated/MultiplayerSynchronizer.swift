@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``deltaSynchronized``
 /// - ``visibilityChanged``
 open class MultiplayerSynchronizer: Node {
-    override open class var godotClassName: StringName { "MultiplayerSynchronizer" }
+    fileprivate static var className = StringName("MultiplayerSynchronizer")
+    override open class var godotClassName: StringName { className }
     public enum VisibilityUpdateMode: Int64, CaseIterable {
         /// Visibility filters are updated during process frames (see ``Node/notificationInternalProcess``).
         case idle = 0 // VISIBILITY_PROCESS_IDLE

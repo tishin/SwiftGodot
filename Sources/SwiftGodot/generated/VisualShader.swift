@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class provides a graph-like visual editor for creating a ``Shader``. Although ``VisualShader``s do not require coding, they share the same logic with script shaders. They use ``VisualShaderNode``s that can be connected to each other to control the flow of the shader. The visual shader graph is converted to a script shader behind the scenes.
 open class VisualShader: Shader {
-    override open class var godotClassName: StringName { "VisualShader" }
+    fileprivate static var className = StringName("VisualShader")
+    override open class var godotClassName: StringName { className }
     public enum GType: Int64, CaseIterable {
         /// A vertex shader, operating on vertices.
         case vertex = 0 // TYPE_VERTEX

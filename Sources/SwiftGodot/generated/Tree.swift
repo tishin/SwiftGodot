@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -47,7 +49,8 @@ import Musl
 /// - ``columnTitleClicked``
 /// - ``nothingSelected``
 open class Tree: Control {
-    override open class var godotClassName: StringName { "Tree" }
+    fileprivate static var className = StringName("Tree")
+    override open class var godotClassName: StringName { className }
     public enum SelectMode: Int64, CaseIterable {
         /// Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
         /// 

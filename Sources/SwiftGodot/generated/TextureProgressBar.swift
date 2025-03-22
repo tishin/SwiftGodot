@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// TextureProgressBar works like ``ProgressBar``, but uses up to 3 textures instead of Godot's ``Theme`` resource. It can be used to create horizontal, vertical and radial progress bars.
 open class TextureProgressBar: Range {
-    override open class var godotClassName: StringName { "TextureProgressBar" }
+    fileprivate static var className = StringName("TextureProgressBar")
+    override open class var godotClassName: StringName { className }
     public enum FillMode: Int64, CaseIterable {
         /// The ``textureProgress`` fills from left to right.
         case leftToRight = 0 // FILL_LEFT_TO_RIGHT

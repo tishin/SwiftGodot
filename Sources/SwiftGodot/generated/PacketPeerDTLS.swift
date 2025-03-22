@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Warning: TLS certificate revocation and certificate pinning are currently not supported. Revoked certificates are accepted as long as they are otherwise valid. If this is a concern, you may want to use automatically managed certificates with a short validity period.
 /// 
 open class PacketPeerDTLS: PacketPeer {
-    override open class var godotClassName: StringName { "PacketPeerDTLS" }
+    fileprivate static var className = StringName("PacketPeerDTLS")
+    override open class var godotClassName: StringName { className }
     public enum Status: Int64, CaseIterable {
         /// A status representing a ``PacketPeerDTLS`` that is disconnected.
         case disconnected = 0 // STATUS_DISCONNECTED

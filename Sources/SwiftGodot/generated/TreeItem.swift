@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: The ID values used for buttons are 32-bit, unlike integer which is always 64-bit. They go from `-2147483648` to `2147483647`.
 /// 
 open class TreeItem: Object {
-    override open class var godotClassName: StringName { "TreeItem" }
+    fileprivate static var className = StringName("TreeItem")
+    override open class var godotClassName: StringName { className }
     public enum TreeCellMode: Int64, CaseIterable {
         /// Cell shows a string label. When editable, the text can be edited using a ``LineEdit``, or a ``TextEdit`` popup if ``setEditMultiline(column:multiline:)`` is used.
         case string = 0 // CELL_MODE_STRING

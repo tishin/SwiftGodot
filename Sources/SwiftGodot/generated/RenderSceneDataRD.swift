@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneDataRD: RenderSceneData {
-    override open class var godotClassName: StringName { "RenderSceneDataRD" }
+    fileprivate static var className = StringName("RenderSceneDataRD")
+    override open class var godotClassName: StringName { className }
 }
 

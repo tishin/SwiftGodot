@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class ResourceSaver: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ResourceSaver" }
+    fileprivate static var className = StringName("ResourceSaver")
+    override open class var godotClassName: StringName { className }
     public struct SaverFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
         public init (rawValue: Int) {

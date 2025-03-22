@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,6 +40,7 @@ import Musl
 /// See ``Cubemap`` for a general description of cubemaps.
 /// 
 open class CompressedCubemap: CompressedTextureLayered {
-    override open class var godotClassName: StringName { "CompressedCubemap" }
+    fileprivate static var className = StringName("CompressedCubemap")
+    override open class var godotClassName: StringName { className }
 }
 

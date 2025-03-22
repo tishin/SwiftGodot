@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Editor facility that helps you draw a 2D polygon used as resource for ``LightOccluder2D``.
 open class OccluderPolygon2D: Resource {
-    override open class var godotClassName: StringName { "OccluderPolygon2D" }
+    fileprivate static var className = StringName("OccluderPolygon2D")
+    override open class var godotClassName: StringName { className }
     public enum CullMode: Int64, CaseIterable {
         /// Culling is disabled. See ``cullMode``.
         case disabled = 0 // CULL_DISABLED

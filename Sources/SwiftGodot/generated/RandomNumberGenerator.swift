@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To generate a random float number (within a given range) based on a time-dependent seed:
 /// 
 open class RandomNumberGenerator: RefCounted {
-    override open class var godotClassName: StringName { "RandomNumberGenerator" }
+    fileprivate static var className = StringName("RandomNumberGenerator")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

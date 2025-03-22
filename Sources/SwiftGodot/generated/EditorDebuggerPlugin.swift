@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// You can retrieve the available ``EditorDebuggerSession``s via ``getSessions()`` or get a specific one via ``getSession(id:)``.
 /// 
 open class EditorDebuggerPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorDebuggerPlugin" }
+    fileprivate static var className = StringName("EditorDebuggerPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to be notified whenever a new ``EditorDebuggerSession`` is created (the session may be inactive during this stage).
     @_documentation(visibility: public)

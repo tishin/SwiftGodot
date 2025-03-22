@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``pressed``
 /// - ``released``
 open class TouchScreenButton: Node2D {
-    override open class var godotClassName: StringName { "TouchScreenButton" }
+    fileprivate static var className = StringName("TouchScreenButton")
+    override open class var godotClassName: StringName { className }
     public enum VisibilityMode: Int64, CaseIterable {
         /// Always visible.
         case always = 0 // VISIBILITY_ALWAYS

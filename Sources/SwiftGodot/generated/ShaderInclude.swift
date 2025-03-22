@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A shader include file, saved with the `.gdshaderinc` extension. This class allows you to define a custom shader snippet that can be included in a ``Shader`` by using the preprocessor directive `#include`, followed by the file path (e.g. `#include "res://shader_lib.gdshaderinc"`). The snippet doesn't have to be a valid shader on its own.
 open class ShaderInclude: Resource {
-    override open class var godotClassName: StringName { "ShaderInclude" }
+    fileprivate static var className = StringName("ShaderInclude")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

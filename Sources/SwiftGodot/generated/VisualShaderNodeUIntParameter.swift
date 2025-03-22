@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A ``VisualShaderNodeParameter`` of type unsigned integer. Offers additional customization for range of accepted values.
 open class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeUIntParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeUIntParameter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

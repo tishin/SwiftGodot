@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Constrains a value to lie between `min` and `max` values.
 open class VisualShaderNodeClamp: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeClamp" }
+    fileprivate static var className = StringName("VisualShaderNodeClamp")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT

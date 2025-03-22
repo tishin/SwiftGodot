@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Use ``XRBodyModifier3D`` to animate a body mesh using body tracking data.
 /// 
 open class XRBodyTracker: XRPositionalTracker {
-    override open class var godotClassName: StringName { "XRBodyTracker" }
+    fileprivate static var className = StringName("XRBodyTracker")
+    override open class var godotClassName: StringName { className }
     public struct BodyFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
         public init (rawValue: Int) {

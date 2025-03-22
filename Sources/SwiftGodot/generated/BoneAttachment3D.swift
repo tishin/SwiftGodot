@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This node selects a bone in a ``Skeleton3D`` and attaches to it. This means that the ``BoneAttachment3D`` node will either dynamically copy or override the 3D transform of the selected bone.
 open class BoneAttachment3D: Node3D {
-    override open class var godotClassName: StringName { "BoneAttachment3D" }
+    fileprivate static var className = StringName("BoneAttachment3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

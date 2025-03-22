@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// The ``XRController3D`` consumes objects of this type and should be used in your project.
 /// 
 open class XRControllerTracker: XRPositionalTracker {
-    override open class var godotClassName: StringName { "XRControllerTracker" }
+    fileprivate static var className = StringName("XRControllerTracker")
+    override open class var godotClassName: StringName { className }
 }
 

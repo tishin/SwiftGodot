@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``despawned``
 /// - ``spawned``
 open class MultiplayerSpawner: Node {
-    override open class var godotClassName: StringName { "MultiplayerSpawner" }
+    fileprivate static var className = StringName("MultiplayerSpawner")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

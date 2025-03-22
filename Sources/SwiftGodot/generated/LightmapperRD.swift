@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: Only usable when using the Vulkan backend (Forward+ or Mobile), not OpenGL.
 /// 
 open class LightmapperRD: Lightmapper {
-    override open class var godotClassName: StringName { "LightmapperRD" }
+    fileprivate static var className = StringName("LightmapperRD")
+    override open class var godotClassName: StringName { className }
 }
 

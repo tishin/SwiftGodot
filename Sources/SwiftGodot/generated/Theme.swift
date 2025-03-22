@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Use ``Control/theme`` of any control node to set up a theme that will be available to that control and all of its direct and indirect children.
 /// 
 open class Theme: Resource {
-    override open class var godotClassName: StringName { "Theme" }
+    fileprivate static var className = StringName("Theme")
+    override open class var godotClassName: StringName { className }
     public enum DataType: Int64, CaseIterable {
         /// Theme's ``Color`` item type.
         case color = 0 // DATA_TYPE_COLOR

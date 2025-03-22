@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// This means that the ``SceneTree`` will act as the multiplayer authority by default. Calls to ``MultiplayerAPI/isServer()`` will return `true`, and calls to ``MultiplayerAPI/getUniqueId()`` will return ``MultiplayerPeer/targetPeerServer``.
 /// 
 open class OfflineMultiplayerPeer: MultiplayerPeer {
-    override open class var godotClassName: StringName { "OfflineMultiplayerPeer" }
+    fileprivate static var className = StringName("OfflineMultiplayerPeer")
+    override open class var godotClassName: StringName { className }
 }
 

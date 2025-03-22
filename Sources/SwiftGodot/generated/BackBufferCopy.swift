@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Since this node inherits from ``Node2D`` (and not ``Control``), anchors and margins won't apply to child ``Control``-derived nodes. This can be problematic when resizing the window. To avoid this, add ``Control``-derived nodes as _siblings_ to the ``BackBufferCopy`` node instead of adding them as children.
 /// 
 open class BackBufferCopy: Node2D {
-    override open class var godotClassName: StringName { "BackBufferCopy" }
+    fileprivate static var className = StringName("BackBufferCopy")
+    override open class var godotClassName: StringName { className }
     public enum CopyMode: Int64, CaseIterable {
         /// Disables the buffering mode. This means the ``BackBufferCopy`` node will directly use the portion of screen it covers.
         case disabled = 0 // COPY_MODE_DISABLED

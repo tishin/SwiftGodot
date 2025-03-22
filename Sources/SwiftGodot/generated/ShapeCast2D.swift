@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Shape casting is more computationally expensive than ray casting.
 /// 
 open class ShapeCast2D: Node2D {
-    override open class var godotClassName: StringName { "ShapeCast2D" }
+    fileprivate static var className = StringName("ShapeCast2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

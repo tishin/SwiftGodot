@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// Native extensions can alternatively use the ``MultiplayerAPI/setDefaultInterface(interfaceName:)`` method during initialization to configure themselves as the default implementation.
 /// 
 open class MultiplayerAPIExtension: MultiplayerAPI {
-    override open class var godotClassName: StringName { "MultiplayerAPIExtension" }
+    fileprivate static var className = StringName("MultiplayerAPIExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Callback for ``MultiplayerAPI/poll()``.
     @_documentation(visibility: public)

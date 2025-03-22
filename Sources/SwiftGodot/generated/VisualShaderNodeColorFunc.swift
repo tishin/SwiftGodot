@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Accept a ``Color`` to the input port and transform it according to ``function``.
 open class VisualShaderNodeColorFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeColorFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeColorFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Converts the color to grayscale using the following formula:
         /// 

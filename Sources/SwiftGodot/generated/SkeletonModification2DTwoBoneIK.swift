@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// TwoBoneIK is great for arms, legs, and really any joints that can be represented by just two bones that bend to reach a target. This solver is more lightweight than ``SkeletonModification2DFABRIK``, but gives similar, natural looking results.
 /// 
 open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DTwoBoneIK" }
+    fileprivate static var className = StringName("SkeletonModification2DTwoBoneIK")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class WebRTCDataChannel: PacketPeer {
-    override open class var godotClassName: StringName { "WebRTCDataChannel" }
+    fileprivate static var className = StringName("WebRTCDataChannel")
+    override open class var godotClassName: StringName { className }
     public enum WriteMode: Int64, CaseIterable {
         /// Tells the channel to send data over this channel as text. An external peer (non-Godot) would receive this as a string.
         case text = 0 // WRITE_MODE_TEXT

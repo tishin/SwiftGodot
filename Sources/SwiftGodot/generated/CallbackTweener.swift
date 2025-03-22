@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``Tween/tweenCallback(_:)`` is the only correct way to create ``CallbackTweener``. Any ``CallbackTweener`` created manually will not function correctly.
 /// 
 open class CallbackTweener: Tweener {
-    override open class var godotClassName: StringName { "CallbackTweener" }
+    fileprivate static var className = StringName("CallbackTweener")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_delay: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_delay")

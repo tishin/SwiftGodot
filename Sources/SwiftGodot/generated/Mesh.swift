@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Mesh is a type of ``Resource`` that contains vertex array-based geometry, divided in _surfaces_. Each surface contains a completely separate array and a material used to draw it. Design wise, a mesh with multiple surfaces is preferred to a single surface, because objects created in 3D editing software commonly contain multiple materials. The maximum number of surfaces per mesh is ``RenderingServer/maxMeshSurfaces``.
 open class Mesh: Resource {
-    override open class var godotClassName: StringName { "Mesh" }
+    fileprivate static var className = StringName("Mesh")
+    override open class var godotClassName: StringName { className }
     public enum PrimitiveType: Int64, CaseIterable {
         /// Render array as points (one vertex equals one point).
         case points = 0 // PRIMITIVE_POINTS

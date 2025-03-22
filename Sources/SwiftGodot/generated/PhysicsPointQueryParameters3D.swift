@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the point position, you can configure the parameters for ``PhysicsDirectSpaceState3D/intersectPoint(parameters:maxResults:)``.
 open class PhysicsPointQueryParameters3D: RefCounted {
-    override open class var godotClassName: StringName { "PhysicsPointQueryParameters3D" }
+    fileprivate static var className = StringName("PhysicsPointQueryParameters3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

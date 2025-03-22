@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This texture class allows you to use a 3D texture created directly on the ``RenderingDevice`` as a texture for materials, meshes, etc.
 open class Texture3DRD: Texture3D {
-    override open class var godotClassName: StringName { "Texture3DRD" }
+    fileprivate static var className = StringName("Texture3DRD")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

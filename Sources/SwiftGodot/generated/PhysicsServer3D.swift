@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -44,7 +46,8 @@ open class PhysicsServer3D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "PhysicsServer3D" }
+    fileprivate static var className = StringName("PhysicsServer3D")
+    override open class var godotClassName: StringName { className }
     public enum JointType: Int64, CaseIterable {
         /// The ``Joint3D`` is a ``PinJoint3D``.
         case pin = 0 // JOINT_TYPE_PIN

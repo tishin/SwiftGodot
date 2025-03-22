@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``inputVector2Changed``
 /// - ``profileChanged``
 open class XRPositionalTracker: XRTracker {
-    override open class var godotClassName: StringName { "XRPositionalTracker" }
+    fileprivate static var className = StringName("XRPositionalTracker")
+    override open class var godotClassName: StringName { className }
     public enum TrackerHand: Int64, CaseIterable {
         /// The hand this tracker is held in is unknown or not applicable.
         case unknown = 0 // TRACKER_HAND_UNKNOWN

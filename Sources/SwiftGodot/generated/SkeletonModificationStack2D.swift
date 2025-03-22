@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// This resource also controls how strongly all of the modifications are applied to the ``Skeleton2D``.
 /// 
 open class SkeletonModificationStack2D: Resource {
-    override open class var godotClassName: StringName { "SkeletonModificationStack2D" }
+    fileprivate static var className = StringName("SkeletonModificationStack2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

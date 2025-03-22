@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to `uniform float` in the shader language.
 open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeFloatParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeFloatParameter")
+    override open class var godotClassName: StringName { className }
     public enum Hint: Int64, CaseIterable {
         /// No hint used.
         case none = 0 // HINT_NONE

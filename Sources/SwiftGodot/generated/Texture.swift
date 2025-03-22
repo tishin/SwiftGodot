@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ``Texture`` is the base class for all texture types. Common texture types are ``Texture2D`` and ``ImageTexture``. See also ``Image``.
 open class Texture: Resource {
-    override open class var godotClassName: StringName { "Texture" }
+    fileprivate static var className = StringName("Texture")
+    override open class var godotClassName: StringName { className }
 }
 

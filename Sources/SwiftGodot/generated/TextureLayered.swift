@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// Internally, Godot maps these files to their respective counterparts in the target rendering driver (Vulkan, OpenGL3).
 /// 
 open class TextureLayered: Texture {
-    override open class var godotClassName: StringName { "TextureLayered" }
+    fileprivate static var className = StringName("TextureLayered")
+    override open class var godotClassName: StringName { className }
     public enum LayeredType: Int64, CaseIterable {
         /// Texture is a generic ``Texture2DArray``.
         case layeredType2dArray = 0 // LAYERED_TYPE_2D_ARRAY

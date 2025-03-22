@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// - ``filesSelected``
 /// - ``dirSelected``
 open class EditorFileDialog: ConfirmationDialog {
-    override open class var godotClassName: StringName { "EditorFileDialog" }
+    fileprivate static var className = StringName("EditorFileDialog")
+    override open class var godotClassName: StringName { className }
     public enum FileMode: Int64, CaseIterable {
         /// The ``EditorFileDialog`` can select only one file. Accepting the window will open the file.
         case openFile = 0 // FILE_MODE_OPEN_FILE

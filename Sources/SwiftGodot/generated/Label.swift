@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A control for displaying plain text. It gives you control over the horizontal and vertical alignment and can wrap the text inside the node's bounding rectangle. It doesn't support bold, italics, or other rich text formatting. For that, use ``RichTextLabel`` instead.
 open class Label: Control {
-    override open class var godotClassName: StringName { "Label" }
+    fileprivate static var className = StringName("Label")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

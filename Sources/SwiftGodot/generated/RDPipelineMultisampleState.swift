@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``RDPipelineMultisampleState`` is used to control how multisample or supersample antialiasing is being performed when rendering using ``RenderingDevice``.
 open class RDPipelineMultisampleState: RefCounted {
-    override open class var godotClassName: StringName { "RDPipelineMultisampleState" }
+    fileprivate static var className = StringName("RDPipelineMultisampleState")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

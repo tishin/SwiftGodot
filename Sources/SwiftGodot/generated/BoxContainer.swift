@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A container that arranges its child controls horizontally or vertically, rearranging them automatically when their minimum size changes.
 open class BoxContainer: Container {
-    override open class var godotClassName: StringName { "BoxContainer" }
+    fileprivate static var className = StringName("BoxContainer")
+    override open class var godotClassName: StringName { className }
     public enum AlignmentMode: Int64, CaseIterable {
         /// The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
         case begin = 0 // ALIGNMENT_BEGIN

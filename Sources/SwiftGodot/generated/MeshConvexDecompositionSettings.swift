@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Parameters to be used with a ``Mesh`` convex decomposition operation.
 open class MeshConvexDecompositionSettings: RefCounted {
-    override open class var godotClassName: StringName { "MeshConvexDecompositionSettings" }
+    fileprivate static var className = StringName("MeshConvexDecompositionSettings")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Constant for voxel-based approximate convex decomposition.
         case voxel = 0 // CONVEX_DECOMPOSITION_MODE_VOXEL

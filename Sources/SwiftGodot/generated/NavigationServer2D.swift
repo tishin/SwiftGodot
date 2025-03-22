@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -50,7 +52,8 @@ open class NavigationServer2D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "NavigationServer2D" }
+    fileprivate static var className = StringName("NavigationServer2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_maps: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_maps")

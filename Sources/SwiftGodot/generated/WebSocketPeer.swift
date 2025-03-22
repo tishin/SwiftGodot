@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// To use the peer as part of a WebSocket server refer to ``acceptStream(_:)`` and the online tutorial.
 /// 
 open class WebSocketPeer: PacketPeer {
-    override open class var godotClassName: StringName { "WebSocketPeer" }
+    fileprivate static var className = StringName("WebSocketPeer")
+    override open class var godotClassName: StringName { className }
     public enum WriteMode: Int64, CaseIterable {
         /// Specifies that WebSockets messages should be transferred as text payload (only valid UTF-8 is allowed).
         case text = 0 // WRITE_MODE_TEXT

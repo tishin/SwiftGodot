@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``visibilityChanged``
 open class Node3D: Node {
-    override open class var godotClassName: StringName { "Node3D" }
+    fileprivate static var className = StringName("Node3D")
+    override open class var godotClassName: StringName { className }
     public enum RotationEditMode: Int64, CaseIterable {
         /// The rotation is edited using ``Vector3`` Euler angles.
         case euler = 0 // ROTATION_EDIT_MODE_EULER

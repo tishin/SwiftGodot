@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Here is an example of using ``XMLParser`` to parse an SVG file (which is based on XML), printing each element and its attributes as a dictionary:
 /// 
 open class XMLParser: RefCounted {
-    override open class var godotClassName: StringName { "XMLParser" }
+    fileprivate static var className = StringName("XMLParser")
+    override open class var godotClassName: StringName { className }
     public enum NodeType: Int64, CaseIterable {
         /// There's no node (no file or buffer opened).
         case none = 0 // NODE_NONE

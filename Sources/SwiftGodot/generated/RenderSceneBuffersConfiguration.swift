@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This configuration object is created and populated by the render engine on a viewport change and used to (re)configure a ``RenderSceneBuffers`` object.
 open class RenderSceneBuffersConfiguration: RefCounted {
-    override open class var godotClassName: StringName { "RenderSceneBuffersConfiguration" }
+    fileprivate static var className = StringName("RenderSceneBuffersConfiguration")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

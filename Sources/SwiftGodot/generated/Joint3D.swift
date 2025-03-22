@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Abstract base class for all joints in 3D physics. 3D joints bind together two physics bodies (``nodeA`` and ``nodeB``) and apply a constraint. If only one body is defined, it is attached to a fixed ``StaticBody3D`` without collision shapes.
 open class Joint3D: Node3D {
-    override open class var godotClassName: StringName { "Joint3D" }
+    fileprivate static var className = StringName("Joint3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

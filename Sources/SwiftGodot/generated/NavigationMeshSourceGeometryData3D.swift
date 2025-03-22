@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Container for parsed source geometry data used in navigation mesh baking.
 open class NavigationMeshSourceGeometryData3D: Resource {
-    override open class var godotClassName: StringName { "NavigationMeshSourceGeometryData3D" }
+    fileprivate static var className = StringName("NavigationMeshSourceGeometryData3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: There are many known bugs in ``SoftBody3D``. Therefore, it's not recommended to use them for things that can affect gameplay (such as trampolines).
 /// 
 open class SoftBody3D: MeshInstance3D {
-    override open class var godotClassName: StringName { "SoftBody3D" }
+    fileprivate static var className = StringName("SoftBody3D")
+    override open class var godotClassName: StringName { className }
     public enum DisableMode: Int64, CaseIterable {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``SoftBody3D``.
         /// 

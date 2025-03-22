@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// It also provides methods for querying the status of OpenXR initialization, and helper methods for ease of use of the API with GDExtension.
 /// 
 open class OpenXRAPIExtension: RefCounted {
-    override open class var godotClassName: StringName { "OpenXRAPIExtension" }
+    fileprivate static var className = StringName("OpenXRAPIExtension")
+    override open class var godotClassName: StringName { className }
     public enum OpenXRAlphaBlendModeSupport: Int64, CaseIterable {
         /// Means that ``XRInterface/EnvironmentBlendMode/alphaBlend`` isn't supported at all.
         case none = 0 // OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE

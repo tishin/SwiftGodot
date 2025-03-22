@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``previewInvalidated``
 open class EditorResourcePreview: Node {
-    override open class var godotClassName: StringName { "EditorResourcePreview" }
+    fileprivate static var className = StringName("EditorResourcePreview")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_queue_resource_preview: GDExtensionMethodBindPtr = {
         let methodName = StringName("queue_resource_preview")

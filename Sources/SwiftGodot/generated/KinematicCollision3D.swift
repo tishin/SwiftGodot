@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The collision data includes the colliding object, the remaining motion, and the collision position. This data can be used to determine a custom response to the collision.
 /// 
 open class KinematicCollision3D: RefCounted {
-    override open class var godotClassName: StringName { "KinematicCollision3D" }
+    fileprivate static var className = StringName("KinematicCollision3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_travel: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_travel")

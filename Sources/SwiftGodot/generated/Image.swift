@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: The maximum image size is 16384×16384 pixels due to graphics hardware limitations. Larger images may fail to import.
 /// 
 open class Image: Resource {
-    override open class var godotClassName: StringName { "Image" }
+    fileprivate static var className = StringName("Image")
+    override open class var godotClassName: StringName { className }
     public enum Format: Int64, CaseIterable {
         /// Texture format with a single 8-bit depth representing luminance.
         case l8 = 0 // FORMAT_L8

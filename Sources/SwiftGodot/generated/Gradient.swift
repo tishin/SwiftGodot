@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See also ``Curve`` which supports more complex easing methods, but does not support colors.
 /// 
 open class Gradient: Resource {
-    override open class var godotClassName: StringName { "Gradient" }
+    fileprivate static var className = StringName("Gradient")
+    override open class var godotClassName: StringName { className }
     public enum InterpolationMode: Int64, CaseIterable {
         /// Linear interpolation.
         case linear = 0 // GRADIENT_INTERPOLATE_LINEAR

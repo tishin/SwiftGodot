@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// In general, the blend value should be in the `[0.0, 1.0]` range. Values outside of this range can blend amplified or inverted animations, however, ``AnimationNodeAdd2`` works better for this purpose.
 /// 
 open class AnimationNodeBlend2: AnimationNodeSync {
-    override open class var godotClassName: StringName { "AnimationNodeBlend2" }
+    fileprivate static var className = StringName("AnimationNodeBlend2")
+    override open class var godotClassName: StringName { className }
 }
 

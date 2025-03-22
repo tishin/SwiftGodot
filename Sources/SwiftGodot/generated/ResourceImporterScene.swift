@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// > Note: ``ResourceImporterScene`` is _not_ used for ``PackedScene``s, such as `.tscn` and `.scn` files.
 /// 
 open class ResourceImporterScene: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterScene" }
+    fileprivate static var className = StringName("ResourceImporterScene")
+    override open class var godotClassName: StringName { className }
 }
 

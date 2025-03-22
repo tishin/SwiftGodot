@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// GLTFDocument can be extended with arbitrary functionality by extending the ``GLTFDocumentExtension`` class and registering it with GLTFDocument via ``registerGltfDocumentExtension(_:firstPriority:)``. This allows for custom data to be imported and exported.
 /// 
 open class GLTFDocument: Resource {
-    override open class var godotClassName: StringName { "GLTFDocument" }
+    fileprivate static var className = StringName("GLTFDocument")
+    override open class var godotClassName: StringName { className }
     public enum RootNodeMode: Int64, CaseIterable {
         /// Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the `GODOT_single_root` glTF extension. This will be parsed the same as ``RootNodeMode/keepRoot`` if the implementation does not support `GODOT_single_root`.
         case singleRoot = 0 // ROOT_NODE_MODE_SINGLE_ROOT

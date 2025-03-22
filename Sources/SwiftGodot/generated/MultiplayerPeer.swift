@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``peerConnected``
 /// - ``peerDisconnected``
 open class MultiplayerPeer: PacketPeer {
-    override open class var godotClassName: StringName { "MultiplayerPeer" }
+    fileprivate static var className = StringName("MultiplayerPeer")
+    override open class var godotClassName: StringName { className }
     public enum ConnectionStatus: Int64, CaseIterable {
         /// The MultiplayerPeer is disconnected.
         case disconnected = 0 // CONNECTION_DISCONNECTED

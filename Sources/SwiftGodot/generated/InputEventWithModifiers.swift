@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Stores information about mouse, keyboard, and touch gesture input events. This includes information about which modifier keys are pressed, such as [kbd]Shift[/kbd] or [kbd]Alt[/kbd]. See ``Node/_input(event:)``.
 open class InputEventWithModifiers: InputEventFromWindow {
-    override open class var godotClassName: StringName { "InputEventWithModifiers" }
+    fileprivate static var className = StringName("InputEventWithModifiers")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

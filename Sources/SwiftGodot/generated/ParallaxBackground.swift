@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Each ``ParallaxBackground`` is drawn on one specific ``Viewport`` and cannot be shared between multiple ``Viewport``s, see ``CanvasLayer/customViewport``. When using multiple ``Viewport``s, for example in a split-screen game, you need create an individual ``ParallaxBackground`` for each ``Viewport`` you want it to be drawn on.
 /// 
 open class ParallaxBackground: CanvasLayer {
-    override open class var godotClassName: StringName { "ParallaxBackground" }
+    fileprivate static var className = StringName("ParallaxBackground")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

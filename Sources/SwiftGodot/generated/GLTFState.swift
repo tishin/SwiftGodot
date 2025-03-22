@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// GLTFState can be populated by ``GLTFDocument`` reading a file or by converting a Godot scene. Then the data can either be used to create a Godot scene or save to a GLTF file. The code that converts to/from a Godot scene can be intercepted at arbitrary points by ``GLTFDocumentExtension`` classes. This allows for custom data to be stored in the GLTF file or for custom data to be converted to/from Godot nodes.
 /// 
 open class GLTFState: Resource {
-    override open class var godotClassName: StringName { "GLTFState" }
+    fileprivate static var className = StringName("GLTFState")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Discards all embedded textures and uses untextured materials.
     public static let handleBinaryDiscardTextures = 0

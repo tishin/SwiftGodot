@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Unlike the other ``InputEvent`` subclasses which map to unique physical events, this virtual one is not emitted by the engine. This class is useful to emit actions manually with ``Input/parseInputEvent(_:)``, which are then received in ``Node/_input(event:)``. To check if a physical event matches an action from the Input Map, use ``InputEvent/isAction(_:exactMatch:)`` and ``InputEvent/isActionPressed(action:allowEcho:exactMatch:)``.
 /// 
 open class InputEventAction: InputEvent {
-    override open class var godotClassName: StringName { "InputEventAction" }
+    fileprivate static var className = StringName("InputEventAction")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

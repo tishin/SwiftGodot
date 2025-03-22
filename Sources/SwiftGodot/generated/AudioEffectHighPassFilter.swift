@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Cuts frequencies lower than the ``AudioEffectFilter/cutoffHz`` and allows higher frequencies to pass.
 open class AudioEffectHighPassFilter: AudioEffectFilter {
-    override open class var godotClassName: StringName { "AudioEffectHighPassFilter" }
+    fileprivate static var className = StringName("AudioEffectHighPassFilter")
+    override open class var godotClassName: StringName { className }
 }
 

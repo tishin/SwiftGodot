@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// CCDIK also fully supports angle constraints, allowing for more control over how a solution is met.
 /// 
 open class SkeletonModification2DCCDIK: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DCCDIK" }
+    fileprivate static var className = StringName("SkeletonModification2DCCDIK")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

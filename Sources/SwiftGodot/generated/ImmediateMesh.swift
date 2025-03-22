@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Generating complex geometries with ``ImmediateMesh`` is highly inefficient. Instead, it is designed to generate simple geometry that changes often.
 /// 
 open class ImmediateMesh: Mesh {
-    override open class var godotClassName: StringName { "ImmediateMesh" }
+    fileprivate static var className = StringName("ImmediateMesh")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_surface_begin: GDExtensionMethodBindPtr = {
         let methodName = StringName("surface_begin")

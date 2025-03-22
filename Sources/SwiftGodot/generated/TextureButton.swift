@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// See also ``BaseButton`` which contains common properties and methods associated with this node.
 /// 
 open class TextureButton: BaseButton {
-    override open class var godotClassName: StringName { "TextureButton" }
+    fileprivate static var className = StringName("TextureButton")
+    override open class var godotClassName: StringName { className }
     public enum StretchMode: Int64, CaseIterable {
         /// Scale to fit the node's bounding rectangle.
         case scale = 0 // STRETCH_SCALE

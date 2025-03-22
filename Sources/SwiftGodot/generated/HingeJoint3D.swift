@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that restricts the rotation of a 3D physics body around an axis relative to another physics body. For example, Body A can be a ``StaticBody3D`` representing a door hinge that a ``RigidBody3D`` rotates around.
 open class HingeJoint3D: Joint3D {
-    override open class var godotClassName: StringName { "HingeJoint3D" }
+    fileprivate static var className = StringName("HingeJoint3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// The speed with which the two bodies get pulled together when they move in different directions.
         case bias = 0 // PARAM_BIAS

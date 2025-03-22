@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A node for displaying plain text in 3D space. By adjusting various properties of this node, you can configure things such as the text's appearance and whether it always faces the camera.
 open class Label3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "Label3D" }
+    fileprivate static var className = StringName("Label3D")
+    override open class var godotClassName: StringName { className }
     public enum DrawFlags: Int64, CaseIterable {
         /// If set, lights in the environment affect the label.
         case shaded = 0 // FLAG_SHADED

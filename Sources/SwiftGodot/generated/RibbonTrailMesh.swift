@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This primitive mesh is usually used for particle trails.
 /// 
 open class RibbonTrailMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "RibbonTrailMesh" }
+    fileprivate static var className = StringName("RibbonTrailMesh")
+    override open class var godotClassName: StringName { className }
     public enum Shape: Int64, CaseIterable {
         /// Gives the mesh a single flat face.
         case flat = 0 // SHAPE_FLAT

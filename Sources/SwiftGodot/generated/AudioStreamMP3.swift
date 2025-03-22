@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// MP3 audio stream driver. See ``data`` if you want to load an MP3 file at run-time.
 open class AudioStreamMP3: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamMP3" }
+    fileprivate static var className = StringName("AudioStreamMP3")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: As soon as a ``RichTextLabel`` contains at least one ``RichTextEffect``, it will continuously process the effect unless the project is paused. This may impact battery life negatively.
 /// 
 open class RichTextEffect: Resource {
-    override open class var godotClassName: StringName { "RichTextEffect" }
+    fileprivate static var className = StringName("RichTextEffect")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to modify properties in `charFx`. The method must return `true` if the character could be transformed successfully. If the method returns `false`, it will skip transformation to avoid displaying broken text.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -53,7 +55,8 @@ import Musl
 /// - ``minimumSizeChanged``
 /// - ``themeChanged``
 open class Control: CanvasItem {
-    override open class var godotClassName: StringName { "Control" }
+    fileprivate static var className = StringName("Control")
+    override open class var godotClassName: StringName { className }
     public enum FocusMode: Int64, CaseIterable {
         /// The node cannot grab focus. Use with ``focusMode``.
         case none = 0 // FOCUS_NONE

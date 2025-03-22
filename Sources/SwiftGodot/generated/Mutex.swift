@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - When a ``Thread``'s reference count reaches zero and it is therefore destroyed, it must not have any mutex locked.
 /// 
 open class Mutex: RefCounted {
-    override open class var godotClassName: StringName { "Mutex" }
+    fileprivate static var className = StringName("Mutex")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_lock: GDExtensionMethodBindPtr = {
         let methodName = StringName("lock")

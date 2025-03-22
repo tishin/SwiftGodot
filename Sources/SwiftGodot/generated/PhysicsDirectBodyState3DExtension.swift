@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsDirectBodyState3D``.
 /// 
 open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
-    override open class var godotClassName: StringName { "PhysicsDirectBodyState3DExtension" }
+    fileprivate static var className = StringName("PhysicsDirectBodyState3DExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// 
     @_documentation(visibility: public)

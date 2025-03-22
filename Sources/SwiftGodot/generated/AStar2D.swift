@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See ``AStar3D`` for a more thorough explanation on how to use this class. ``AStar2D`` is a wrapper for ``AStar3D`` that enforces 2D coordinates.
 /// 
 open class AStar2D: RefCounted {
-    override open class var godotClassName: StringName { "AStar2D" }
+    fileprivate static var className = StringName("AStar2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when estimating the cost between a point and the path's ending point.
     /// 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// GLTFMesh handles 3D mesh data imported from GLTF files. It includes properties for blend channels, blend weights, instance materials, and the mesh itself.
 open class GLTFMesh: Resource {
-    override open class var godotClassName: StringName { "GLTFMesh" }
+    fileprivate static var className = StringName("GLTFMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

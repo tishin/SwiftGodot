@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An OpenXR composition layer that allows rendering a ``SubViewport`` on an internal slice of a cylinder.
 open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
-    override open class var godotClassName: StringName { "OpenXRCompositionLayerCylinder" }
+    fileprivate static var className = StringName("OpenXRCompositionLayerCylinder")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// 
 /// - ``changed``
 open class TileMapLayer: Node2D {
-    override open class var godotClassName: StringName { "TileMapLayer" }
+    fileprivate static var className = StringName("TileMapLayer")
+    override open class var godotClassName: StringName { className }
     public enum DebugVisibilityMode: Int64, CaseIterable {
         /// Hide the collisions or navigation debug shapes in the editor, and use the debug settings to determine their visibility in game (i.e. ``SceneTree/debugCollisionsHint`` or ``SceneTree/debugNavigationHint``).
         case `default` = 0 // DEBUG_VISIBILITY_MODE_DEFAULT

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that restricts the movement of two 2D physics bodies to a fixed axis. For example, a ``StaticBody2D`` representing a piston base can be attached to a ``RigidBody2D`` representing the piston head, moving up and down.
 open class GrooveJoint2D: Joint2D {
-    override open class var godotClassName: StringName { "GrooveJoint2D" }
+    fileprivate static var className = StringName("GrooveJoint2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

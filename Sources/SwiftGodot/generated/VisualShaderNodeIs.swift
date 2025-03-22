@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Returns the boolean result of the comparison between `INF` or `NaN` and a scalar parameter.
 open class VisualShaderNodeIs: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeIs" }
+    fileprivate static var className = StringName("VisualShaderNodeIs")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Comparison with `INF` (Infinity).
         case isInf = 0 // FUNC_IS_INF

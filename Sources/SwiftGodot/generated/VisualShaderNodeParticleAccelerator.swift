@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Particle accelerator can be used in "process" step of particle shader. It will accelerate the particles. Connect it to the Velocity output port.
 open class VisualShaderNodeParticleAccelerator: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleAccelerator" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleAccelerator")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// The particles will be accelerated based on their velocity.
         case linear = 0 // MODE_LINEAR

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Translated to [code skip-lint]bool` in the shader language.
 /// 
 open class VisualShaderNodeBooleanConstant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeBooleanConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeBooleanConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

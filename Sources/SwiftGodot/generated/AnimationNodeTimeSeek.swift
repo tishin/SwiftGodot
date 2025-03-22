@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// After setting the time and changing the animation playback, the time seek node automatically goes into sleep mode on the next process frame by setting its `seek_request` value to `-1.0`.
 /// 
 open class AnimationNodeTimeSeek: AnimationNode {
-    override open class var godotClassName: StringName { "AnimationNodeTimeSeek" }
+    fileprivate static var className = StringName("AnimationNodeTimeSeek")
+    override open class var godotClassName: StringName { className }
 }
 

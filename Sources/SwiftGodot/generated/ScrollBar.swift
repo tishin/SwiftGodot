@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``scrolling``
 open class ScrollBar: Range {
-    override open class var godotClassName: StringName { "ScrollBar" }
+    fileprivate static var className = StringName("ScrollBar")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

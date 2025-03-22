@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Describes the motion and collision result from ``PhysicsServer2D/bodyTestMotion(body:parameters:result:)``.
 open class PhysicsTestMotionResult2D: RefCounted {
-    override open class var godotClassName: StringName { "PhysicsTestMotionResult2D" }
+    fileprivate static var className = StringName("PhysicsTestMotionResult2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_travel: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_travel")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Casts light in a 2D environment. A light is defined as a color, an energy value, a mode (see constants), and various other parameters (range and shadows-related).
 open class Light2D: Node2D {
-    override open class var godotClassName: StringName { "Light2D" }
+    fileprivate static var className = StringName("Light2D")
+    override open class var godotClassName: StringName { className }
     public enum ShadowFilter: Int64, CaseIterable {
         /// No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See ``shadowFilter``.
         case none = 0 // SHADOW_FILTER_NONE

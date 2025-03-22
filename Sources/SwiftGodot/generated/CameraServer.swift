@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ open class CameraServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "CameraServer" }
+    fileprivate static var className = StringName("CameraServer")
+    override open class var godotClassName: StringName { className }
     public enum FeedImage: Int64, CaseIterable {
         /// The RGBA camera image.
         case rgbaImage = 0 // FEED_RGBA_IMAGE

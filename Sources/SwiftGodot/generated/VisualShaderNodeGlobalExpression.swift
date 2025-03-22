@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Custom Godot Shader Language expression, which is placed on top of the generated shader. You can place various function definitions inside to call later in ``VisualShaderNodeExpression``s (which are injected in the main shader functions). You can also declare varyings, uniforms and global constants.
 open class VisualShaderNodeGlobalExpression: VisualShaderNodeExpression {
-    override open class var godotClassName: StringName { "VisualShaderNodeGlobalExpression" }
+    fileprivate static var className = StringName("VisualShaderNodeGlobalExpression")
+    override open class var godotClassName: StringName { className }
 }
 

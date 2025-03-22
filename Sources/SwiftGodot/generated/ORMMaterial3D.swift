@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ORMMaterial3D's properties are inherited from ``BaseMaterial3D``. Unlike ``StandardMaterial3D``, ORMMaterial3D uses a single texture for ambient occlusion, roughness and metallic maps, known as an ORM texture.
 open class ORMMaterial3D: BaseMaterial3D {
-    override open class var godotClassName: StringName { "ORMMaterial3D" }
+    fileprivate static var className = StringName("ORMMaterial3D")
+    override open class var godotClassName: StringName { className }
 }
 

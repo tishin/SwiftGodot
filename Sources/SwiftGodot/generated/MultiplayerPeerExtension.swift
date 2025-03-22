@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class is designed to be inherited from a GDExtension plugin to implement custom networking layers for the multiplayer API (such as WebRTC). All the methods below **must** be implemented to have a working custom multiplayer implementation. See also ``MultiplayerAPI``.
 open class MultiplayerPeerExtension: MultiplayerPeer {
-    override open class var godotClassName: StringName { "MultiplayerPeerExtension" }
+    fileprivate static var className = StringName("MultiplayerPeerExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when the available packet count is internally requested by the ``MultiplayerAPI``.
     @_documentation(visibility: public)

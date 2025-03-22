@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -52,7 +54,8 @@ open class RenderingServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "RenderingServer" }
+    fileprivate static var className = StringName("RenderingServer")
+    override open class var godotClassName: StringName { className }
     public enum TextureLayeredType: Int64, CaseIterable {
         /// Array of 2-dimensional textures (see ``Texture2DArray``).
         case textureLayered2dArray = 0 // TEXTURE_LAYERED_2D_ARRAY

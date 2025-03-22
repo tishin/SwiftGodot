@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Accept an integer scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeIntFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeIntFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeIntFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Returns the absolute value of the parameter. Translates to `abs(x)` in the Godot Shader Language.
         case abs = 0 // FUNC_ABS

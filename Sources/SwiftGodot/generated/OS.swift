@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class OS: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "OS" }
+    fileprivate static var className = StringName("OS")
+    override open class var godotClassName: StringName { className }
     public enum RenderingDriver: Int64, CaseIterable {
         /// The Vulkan rendering driver. It requires Vulkan 1.0 support and automatically uses features from Vulkan 1.1 and 1.2 if available.
         case vulkan = 0 // RENDERING_DRIVER_VULKAN

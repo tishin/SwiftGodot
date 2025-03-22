@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This resource defines a custom rendering effect that can be applied to ``Viewport``s through the viewports' ``Environment``. You can implement a callback that is called during rendering at a given stage of the rendering pipeline and allows you to insert additional passes. Note that this callback happens on the rendering thread.
 open class CompositorEffect: Resource {
-    override open class var godotClassName: StringName { "CompositorEffect" }
+    fileprivate static var className = StringName("CompositorEffect")
+    override open class var godotClassName: StringName { className }
     public enum EffectCallbackType: Int64, CaseIterable {
         /// The callback is called before our opaque rendering pass, but after depth prepass (if applicable).
         case preOpaque = 0 // EFFECT_CALLBACK_TYPE_PRE_OPAQUE

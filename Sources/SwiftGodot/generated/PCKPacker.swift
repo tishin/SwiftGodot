@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The above ``PCKPacker`` creates package `test.pck`, then adds a file named `text.txt` at the root of the package.
 /// 
 open class PCKPacker: RefCounted {
-    override open class var godotClassName: StringName { "PCKPacker" }
+    fileprivate static var className = StringName("PCKPacker")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_pck_start: GDExtensionMethodBindPtr = {
         let methodName = StringName("pck_start")

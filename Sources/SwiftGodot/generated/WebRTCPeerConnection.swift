@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ import Musl
 /// - ``iceCandidateCreated``
 /// - ``dataChannelReceived``
 open class WebRTCPeerConnection: RefCounted {
-    override open class var godotClassName: StringName { "WebRTCPeerConnection" }
+    fileprivate static var className = StringName("WebRTCPeerConnection")
+    override open class var godotClassName: StringName { className }
     public enum ConnectionState: Int64, CaseIterable {
         /// The connection is new, data channels and an offer can be created in this state.
         case new = 0 // STATE_NEW

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``breaked``
 /// - ``continued``
 open class EditorDebuggerSession: RefCounted {
-    override open class var godotClassName: StringName { "EditorDebuggerSession" }
+    fileprivate static var className = StringName("EditorDebuggerSession")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_send_message: GDExtensionMethodBindPtr = {
         let methodName = StringName("send_message")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Use ``XRHandModifier3D`` to animate a hand mesh using hand tracking data.
 /// 
 open class XRHandTracker: XRPositionalTracker {
-    override open class var godotClassName: StringName { "XRHandTracker" }
+    fileprivate static var className = StringName("XRHandTracker")
+    override open class var godotClassName: StringName { className }
     public enum HandTrackingSource: Int64, CaseIterable {
         /// The source of hand tracking data is unknown.
         case unknown = 0 // HAND_TRACKING_SOURCE_UNKNOWN

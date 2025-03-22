@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Input event type for gamepad buttons. For gamepad analog sticks and joysticks, see ``InputEventJoypadMotion``.
 open class InputEventJoypadButton: InputEvent {
-    override open class var godotClassName: StringName { "InputEventJoypadButton" }
+    fileprivate static var className = StringName("InputEventJoypadButton")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

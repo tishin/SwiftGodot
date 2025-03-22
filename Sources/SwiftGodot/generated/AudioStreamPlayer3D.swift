@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``finished``
 open class AudioStreamPlayer3D: Node3D {
-    override open class var godotClassName: StringName { "AudioStreamPlayer3D" }
+    fileprivate static var className = StringName("AudioStreamPlayer3D")
+    override open class var godotClassName: StringName { className }
     public enum AttenuationModel: Int64, CaseIterable {
         /// Attenuation of loudness according to linear distance.
         case inverseDistance = 0 // ATTENUATION_INVERSE_DISTANCE

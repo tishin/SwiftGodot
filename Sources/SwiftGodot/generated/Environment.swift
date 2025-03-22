@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - Adjustments
 /// 
 open class Environment: Resource {
-    override open class var godotClassName: StringName { "Environment" }
+    fileprivate static var className = StringName("Environment")
+    override open class var godotClassName: StringName { className }
     public enum BGMode: Int64, CaseIterable {
         /// Clears the background using the clear color defined in ``ProjectSettings/rendering/environment/defaults/defaultClearColor``.
         case clearColor = 0 // BG_CLEAR_COLOR

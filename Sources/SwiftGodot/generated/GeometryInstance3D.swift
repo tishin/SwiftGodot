@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base node for geometry-based visual instances. Shares some common functionality like visibility and custom materials.
 open class GeometryInstance3D: VisualInstance3D {
-    override open class var godotClassName: StringName { "GeometryInstance3D" }
+    fileprivate static var className = StringName("GeometryInstance3D")
+    override open class var godotClassName: StringName { className }
     public enum ShadowCastingSetting: Int64, CaseIterable {
         /// Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
         case off = 0 // SHADOW_CASTING_SETTING_OFF

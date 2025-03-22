@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See also ``BaseButton`` which contains common properties and methods associated with this node.
 /// 
 open class LinkButton: BaseButton {
-    override open class var godotClassName: StringName { "LinkButton" }
+    fileprivate static var className = StringName("LinkButton")
+    override open class var godotClassName: StringName { className }
     public enum UnderlineMode: Int64, CaseIterable {
         /// The LinkButton will always show an underline at the bottom of its text.
         case always = 0 // UNDERLINE_MODE_ALWAYS

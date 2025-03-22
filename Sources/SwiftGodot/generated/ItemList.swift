@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ import Musl
 /// - ``multiSelected``
 /// - ``itemActivated``
 open class ItemList: Control {
-    override open class var godotClassName: StringName { "ItemList" }
+    fileprivate static var className = StringName("ItemList")
+    override open class var godotClassName: StringName { className }
     public enum IconMode: Int64, CaseIterable {
         /// Icon is drawn above the text.
         case top = 0 // ICON_MODE_TOP

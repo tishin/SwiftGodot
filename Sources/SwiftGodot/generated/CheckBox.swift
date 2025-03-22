@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// When ``BaseButton/buttonGroup`` specifies a ``ButtonGroup``, ``CheckBox`` changes its appearance to that of a radio button and uses the various `radio_*` theme properties.
 /// 
 open class CheckBox: Button {
-    override open class var godotClassName: StringName { "CheckBox" }
+    fileprivate static var className = StringName("CheckBox")
+    override open class var godotClassName: StringName { className }
 }
 

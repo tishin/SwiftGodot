@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Stores general information about mouse events.
 open class InputEventMouse: InputEventWithModifiers {
-    override open class var godotClassName: StringName { "InputEventMouse" }
+    fileprivate static var className = StringName("InputEventMouse")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

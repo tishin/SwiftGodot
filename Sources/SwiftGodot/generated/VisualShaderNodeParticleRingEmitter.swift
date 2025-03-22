@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in ring shape with the specified inner and outer radii and height.
 open class VisualShaderNodeParticleRingEmitter: VisualShaderNodeParticleEmitter {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleRingEmitter" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleRingEmitter")
+    override open class var godotClassName: StringName { className }
 }
 

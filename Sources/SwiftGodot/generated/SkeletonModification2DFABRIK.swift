@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// To help control how the FABRIK joints move, a magnet vector can be passed, which can nudge the bones in a certain direction prior to solving, giving a level of control over the final result.
 /// 
 open class SkeletonModification2DFABRIK: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DFABRIK" }
+    fileprivate static var className = StringName("SkeletonModification2DFABRIK")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

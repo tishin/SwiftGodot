@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This is a stream that can be fitted with sub-streams, which will be played in-sync. The streams being at exactly the same time when play is pressed, and will end when the last of them ends. If one of the sub-streams loops, then playback will continue.
 open class AudioStreamSynchronized: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamSynchronized" }
+    fileprivate static var className = StringName("AudioStreamSynchronized")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Maximum amount of streams that can be synchrohized.
     public static let maxStreams = 32

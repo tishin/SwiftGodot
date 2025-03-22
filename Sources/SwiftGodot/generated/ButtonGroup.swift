@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``pressed``
 open class ButtonGroup: Resource {
-    override open class var godotClassName: StringName { "ButtonGroup" }
+    fileprivate static var className = StringName("ButtonGroup")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// **Example of saving a node with different owners:** The following example creates 3 objects: ``Node2D`` (`node`), ``RigidBody2D`` (`body`) and ``CollisionObject2D`` (`collision`). `collision` is a child of `body` which is a child of `node`. Only `body` is owned by `node` and ``pack(path:)`` will therefore only save those two nodes, but not `collision`.
 /// 
 open class PackedScene: Resource {
-    override open class var godotClassName: StringName { "PackedScene" }
+    fileprivate static var className = StringName("PackedScene")
+    override open class var godotClassName: StringName { className }
     public enum GenEditState: Int64, CaseIterable {
         /// If passed to ``instantiate(editState:)``, blocks edits to the scene state.
         case disabled = 0 // GEN_EDIT_STATE_DISABLED

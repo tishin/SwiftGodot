@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Any changes to this node's position and scale made after it enters the scene will be ignored.
 /// 
 open class ParallaxLayer: Node2D {
-    override open class var godotClassName: StringName { "ParallaxLayer" }
+    fileprivate static var className = StringName("ParallaxLayer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An audio effect instance manipulates the audio it receives for a given effect. This instance is automatically created by an ``AudioEffect`` when it is added to a bus, and should usually not be created directly. If necessary, it can be fetched at run-time with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
 open class AudioEffectInstance: RefCounted {
-    override open class var godotClassName: StringName { "AudioEffectInstance" }
+    fileprivate static var className = StringName("AudioEffectInstance")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called by the ``AudioServer`` to process this effect. When ``_processSilence()`` is not overridden or it returns `false`, this method is called only when the bus is active.
     /// 

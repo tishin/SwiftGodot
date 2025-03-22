@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class WebRTCDataChannelExtension: WebRTCDataChannel {
-    override open class var godotClassName: StringName { "WebRTCDataChannelExtension" }
+    fileprivate static var className = StringName("WebRTCDataChannelExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// 
     @_documentation(visibility: public)

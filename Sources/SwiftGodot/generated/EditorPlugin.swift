@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ import Musl
 /// - ``sceneSaved``
 /// - ``projectSettingsChanged``
 open class EditorPlugin: Node {
-    override open class var godotClassName: StringName { "EditorPlugin" }
+    fileprivate static var className = StringName("EditorPlugin")
+    override open class var godotClassName: StringName { className }
     public enum CustomControlContainer: Int64, CaseIterable {
         /// Main editor toolbar, next to play buttons.
         case toolbar = 0 // CONTAINER_TOOLBAR

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``profileUpdated``
 open class SkeletonProfile: Resource {
-    override open class var godotClassName: StringName { "SkeletonProfile" }
+    fileprivate static var className = StringName("SkeletonProfile")
+    override open class var godotClassName: StringName { className }
     public enum TailDirection: Int64, CaseIterable {
         /// Direction to the average coordinates of bone children.
         case averageChildren = 0 // TAIL_DIRECTION_AVERAGE_CHILDREN

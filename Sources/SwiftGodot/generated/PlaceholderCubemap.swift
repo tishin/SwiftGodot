@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,6 +30,7 @@ import Musl
 /// > Note: This class is not intended for rendering or for use in shaders. Operations like calculating UV are not guaranteed to work.
 /// 
 open class PlaceholderCubemap: PlaceholderTextureLayered {
-    override open class var godotClassName: StringName { "PlaceholderCubemap" }
+    fileprivate static var className = StringName("PlaceholderCubemap")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class allows for a RenderSceneData implementation to be made in GDExtension.
 open class RenderSceneDataExtension: RenderSceneData {
-    override open class var godotClassName: StringName { "RenderSceneDataExtension" }
+    fileprivate static var className = StringName("RenderSceneDataExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Implement this in GDExtension to return the camera ``Transform3D``.
     @_documentation(visibility: public)

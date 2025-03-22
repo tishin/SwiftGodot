@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This primitive mesh is usually used for particle trails.
 /// 
 open class TubeTrailMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "TubeTrailMesh" }
+    fileprivate static var className = StringName("TubeTrailMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

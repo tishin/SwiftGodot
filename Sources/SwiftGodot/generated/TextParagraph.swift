@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Abstraction over ``TextServer`` for handling a single paragraph of text.
 open class TextParagraph: RefCounted {
-    override open class var godotClassName: StringName { "TextParagraph" }
+    fileprivate static var className = StringName("TextParagraph")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

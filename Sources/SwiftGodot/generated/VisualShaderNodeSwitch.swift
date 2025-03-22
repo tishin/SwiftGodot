@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Returns an associated value of the ``opType`` type if the provided boolean value is `true` or `false`.
 open class VisualShaderNodeSwitch: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeSwitch" }
+    fileprivate static var className = StringName("VisualShaderNodeSwitch")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar.
         case float = 0 // OP_TYPE_FLOAT

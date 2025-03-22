@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// An empty ``StyleBox`` that can be used to display nothing instead of the default style (e.g. it can "disable" `focus` styles).
 open class StyleBoxEmpty: StyleBox {
-    override open class var godotClassName: StringName { "StyleBoxEmpty" }
+    fileprivate static var className = StringName("StyleBoxEmpty")
+    override open class var godotClassName: StringName { className }
 }
 

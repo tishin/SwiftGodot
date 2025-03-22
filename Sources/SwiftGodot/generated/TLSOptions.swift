@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Objects of this class cannot be instantiated directly, and one of the static methods ``client(trustedChain:commonNameOverride:)``, ``clientUnsafe(trustedChain:)``, or ``server(key:certificate:)`` should be used instead.
 /// 
 open class TLSOptions: RefCounted {
-    override open class var godotClassName: StringName { "TLSOptions" }
+    fileprivate static var className = StringName("TLSOptions")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_client: GDExtensionMethodBindPtr = {
         let methodName = StringName("client")

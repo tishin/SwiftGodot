@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A resource to add to an ``AnimationNodeBlendTree``. Only has one output port using the ``animation`` property. Used as an input for ``AnimationNode``s that blend animations together.
 open class AnimationNodeAnimation: AnimationRootNode {
-    override open class var godotClassName: StringName { "AnimationNodeAnimation" }
+    fileprivate static var className = StringName("AnimationNodeAnimation")
+    override open class var godotClassName: StringName { className }
     public enum PlayMode: Int64, CaseIterable {
         /// Plays animation in forward direction.
         case forward = 0 // PLAY_MODE_FORWARD

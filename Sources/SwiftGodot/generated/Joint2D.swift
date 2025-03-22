@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Abstract base class for all joints in 2D physics. 2D joints bind together two physics bodies (``nodeA`` and ``nodeB``) and apply a constraint.
 open class Joint2D: Node2D {
-    override open class var godotClassName: StringName { "Joint2D" }
+    fileprivate static var className = StringName("Joint2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

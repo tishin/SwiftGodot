@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Takes a 4×4 transform matrix and decomposes it into four `vec3` values, one from each row of the matrix.
 open class VisualShaderNodeTransformDecompose: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeTransformDecompose" }
+    fileprivate static var className = StringName("VisualShaderNodeTransformDecompose")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Abstract base class of all types of input events. See ``Node/_input(event:)``.
 open class InputEvent: Resource {
-    override open class var godotClassName: StringName { "InputEvent" }
+    fileprivate static var className = StringName("InputEvent")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Device ID used for emulated mouse input from a touchscreen, or for emulated touch input from a mouse. This can be used to distinguish emulated mouse input from physical mouse input, or emulated touch input from physical touch input.
     public static let deviceIdEmulation = -1

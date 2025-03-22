@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class Skin: Resource {
-    override open class var godotClassName: StringName { "Skin" }
+    fileprivate static var className = StringName("Skin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_bind_count: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_bind_count")

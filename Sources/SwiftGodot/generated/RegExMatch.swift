@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Contains the results of a single ``RegEx`` match returned by ``RegEx/search(subject:offset:end:)`` and ``RegEx/searchAll(subject:offset:end:)``. It can be used to find the position and range of the match and its capturing groups, and it can extract its substring for you.
 open class RegExMatch: RefCounted {
-    override open class var godotClassName: StringName { "RegExMatch" }
+    fileprivate static var className = StringName("RegExMatch")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

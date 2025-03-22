@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A two-dimensional array of boolean values, can be used to efficiently store a binary matrix (every matrix element takes only one bit) and query the values using natural cartesian coordinates.
 open class BitMap: Resource {
-    override open class var godotClassName: StringName { "BitMap" }
+    fileprivate static var className = StringName("BitMap")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Gizmo that is used for providing custom visualization and editing (handles and subgizmos) for ``Node3D`` objects. Can be overridden to create custom gizmos, but for simple gizmos creating a ``EditorNode3DGizmoPlugin`` is usually recommended.
 open class EditorNode3DGizmo: Node3DGizmo {
-    override open class var godotClassName: StringName { "EditorNode3DGizmo" }
+    fileprivate static var className = StringName("EditorNode3DGizmo")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to add all the gizmo elements whenever a gizmo update is requested. It's common to call ``clear()`` at the beginning of this method and then add visual elements depending on the node's properties.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneData: Object {
-    override open class var godotClassName: StringName { "RenderSceneData" }
+    fileprivate static var className = StringName("RenderSceneData")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_cam_transform: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_cam_transform")

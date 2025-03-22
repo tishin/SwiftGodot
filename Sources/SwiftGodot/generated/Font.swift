@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Abstract base class for different font types. It has methods for drawing text and font character introspection.
 open class Font: Resource {
-    override open class var godotClassName: StringName { "Font" }
+    fileprivate static var className = StringName("Font")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

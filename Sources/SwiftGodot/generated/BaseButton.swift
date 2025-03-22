@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// - ``buttonDown``
 /// - ``toggled``
 open class BaseButton: Control {
-    override open class var godotClassName: StringName { "BaseButton" }
+    fileprivate static var className = StringName("BaseButton")
+    override open class var godotClassName: StringName { className }
     public enum DrawMode: Int64, CaseIterable {
         /// The normal state (i.e. not pressed, not hovered, not toggled and enabled) of buttons.
         case normal = 0 // DRAW_NORMAL

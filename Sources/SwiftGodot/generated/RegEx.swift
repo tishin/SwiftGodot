@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// **Tip:** You can use <a href="https://regexr.com/">Regexr</a> to test regular expressions online.
 /// 
 open class RegEx: RefCounted {
-    override open class var godotClassName: StringName { "RegEx" }
+    fileprivate static var className = StringName("RegEx")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_from_string: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_from_string")

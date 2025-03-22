@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// The WorldPositionFromDepth node reconstructs the depth position of the pixel in world space. This can be used to obtain world space UVs for projection mapping like Caustics.
 open class VisualShaderNodeWorldPositionFromDepth: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeWorldPositionFromDepth" }
+    fileprivate static var className = StringName("VisualShaderNodeWorldPositionFromDepth")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Creating a reference to a ``VisualShaderNodeParameter`` allows you to reuse this parameter in different shaders or shader stages easily.
 open class VisualShaderNodeParameterRef: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParameterRef" }
+    fileprivate static var className = StringName("VisualShaderNodeParameterRef")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

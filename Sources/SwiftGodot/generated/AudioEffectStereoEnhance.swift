@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An audio effect that can be used to adjust the intensity of stereo panning.
 open class AudioEffectStereoEnhance: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectStereoEnhance" }
+    fileprivate static var className = StringName("AudioEffectStereoEnhance")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

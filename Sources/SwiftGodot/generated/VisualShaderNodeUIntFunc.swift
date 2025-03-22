@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Accept an unsigned integer scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeUIntFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeUIntFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeUIntFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Negates the `x` using `-(x)`.
         case negate = 0 // FUNC_NEGATE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// This is an abstract class. See the derived types for descriptions of the possible values.
 open class VisualShaderNodeConstant: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeConstant")
+    override open class var godotClassName: StringName { className }
 }
 

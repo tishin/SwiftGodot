@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// The relative system now would take the 1:2 ratio of the two left corners to calculate the actual corner width. Both corners added will **never** be more than the height. Result:
 /// 
 open class StyleBoxFlat: StyleBox {
-    override open class var godotClassName: StringName { "StyleBoxFlat" }
+    fileprivate static var className = StringName("StyleBoxFlat")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

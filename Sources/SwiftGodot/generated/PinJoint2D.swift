@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that attaches two 2D physics bodies at a single point, allowing them to freely rotate. For example, a ``RigidBody2D`` can be attached to a ``StaticBody2D`` to create a pendulum or a seesaw.
 open class PinJoint2D: Joint2D {
-    override open class var godotClassName: StringName { "PinJoint2D" }
+    fileprivate static var className = StringName("PinJoint2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

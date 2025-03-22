@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// To use ``EditorExportPlugin``, register it using the ``EditorPlugin/addExportPlugin(_:)`` method first.
 /// 
 open class EditorExportPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorExportPlugin" }
+    fileprivate static var className = StringName("EditorExportPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Virtual method to be overridden by the user. Called for each exported file, providing arguments that can be used to identify the file. `path` is the path of the file, `type` is the ``Resource`` represented by the file (e.g. ``PackedScene``) and `features` is the list of features for the export.
     /// 

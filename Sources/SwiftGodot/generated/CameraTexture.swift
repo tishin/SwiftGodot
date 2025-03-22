@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Many cameras supply YCbCr images which need to be converted in a shader.
 /// 
 open class CameraTexture: Texture2D {
-    override open class var godotClassName: StringName { "CameraTexture" }
+    fileprivate static var className = StringName("CameraTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

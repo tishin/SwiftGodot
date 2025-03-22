@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the shape, you can configure the parameters for ``PhysicsDirectSpaceState3D/intersectShape(parameters:maxResults:)``.
 open class PhysicsShapeQueryParameters3D: RefCounted {
-    override open class var godotClassName: StringName { "PhysicsShapeQueryParameters3D" }
+    fileprivate static var className = StringName("PhysicsShapeQueryParameters3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Most custom data stored in GLTF does not need accessors, only buffer views (see ``GLTFBufferView``). Accessors are for more advanced use cases such as interleaved mesh data encoded for the GPU.
 /// 
 open class GLTFAccessor: Resource {
-    override open class var godotClassName: StringName { "GLTFAccessor" }
+    fileprivate static var className = StringName("GLTFAccessor")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: CSG nodes are intended to be used for level prototyping. Creating CSG nodes has a significant CPU cost compared to creating a ``MeshInstance3D`` with a ``PrimitiveMesh``. Moving a CSG node within another CSG node also has a significant CPU cost, so it should be avoided during gameplay.
 /// 
 open class CSGShape3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "CSGShape3D" }
+    fileprivate static var className = StringName("CSGShape3D")
+    override open class var godotClassName: StringName { className }
     public enum Operation: Int64, CaseIterable {
         /// Geometry of both primitives is merged, intersecting geometry is removed.
         case union = 0 // OPERATION_UNION

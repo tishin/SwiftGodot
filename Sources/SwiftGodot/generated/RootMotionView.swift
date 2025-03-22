@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``RootMotionView`` is only visible in the editor. It will be hidden automatically in the running project.
 /// 
 open class RootMotionView: VisualInstance3D {
-    override open class var godotClassName: StringName { "RootMotionView" }
+    fileprivate static var className = StringName("RootMotionView")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

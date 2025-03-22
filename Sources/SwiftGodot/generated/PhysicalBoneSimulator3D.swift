@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Node that can be the parent of ``PhysicalBone3D`` and can apply the simulation results to ``Skeleton3D``.
 open class PhysicalBoneSimulator3D: SkeletonModifier3D {
-    override open class var godotClassName: StringName { "PhysicalBoneSimulator3D" }
+    fileprivate static var className = StringName("PhysicalBoneSimulator3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_is_simulating_physics: GDExtensionMethodBindPtr = {
         let methodName = StringName("is_simulating_physics")

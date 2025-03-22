@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ``BitMap`` resources are typically used as click masks in ``TextureButton`` and ``TouchScreenButton``.
 open class ResourceImporterBitMap: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterBitMap" }
+    fileprivate static var className = StringName("ResourceImporterBitMap")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Varying values are shader variables that can be passed between shader functions, e.g. from Vertex shader to Fragment shader.
 open class VisualShaderNodeVarying: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeVarying" }
+    fileprivate static var className = StringName("VisualShaderNodeVarying")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A vertical scrollbar, typically used to navigate through content that extends beyond the visible height of a control. It is a ``Range``-based control and goes from top (min) to bottom (max). Note that this direction is the opposite of ``VSlider``'s.
 open class VScrollBar: ScrollBar {
-    override open class var godotClassName: StringName { "VScrollBar" }
+    fileprivate static var className = StringName("VScrollBar")
+    override open class var godotClassName: StringName { className }
 }
 

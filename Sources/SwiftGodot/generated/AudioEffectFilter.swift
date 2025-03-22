@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Allows frequencies other than the ``cutoffHz`` to pass.
 open class AudioEffectFilter: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectFilter" }
+    fileprivate static var className = StringName("AudioEffectFilter")
+    override open class var godotClassName: StringName { className }
     public enum FilterDB: Int64, CaseIterable {
         /// 
         case filter6db = 0 // FILTER_6DB

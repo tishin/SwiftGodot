@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// For more information see the <a href="https://www.khronos.org/registry/OpenXR/specs/1.0/html/xrspec.html#semantic-path-interaction-profiles">interaction profiles info in the OpenXR specification</a>.
 /// 
 open class OpenXRInteractionProfile: Resource {
-    override open class var godotClassName: StringName { "OpenXRInteractionProfile" }
+    fileprivate static var className = StringName("OpenXRInteractionProfile")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

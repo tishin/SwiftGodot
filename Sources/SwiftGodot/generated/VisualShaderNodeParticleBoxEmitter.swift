@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in box shape with the specified extents.
 open class VisualShaderNodeParticleBoxEmitter: VisualShaderNodeParticleEmitter {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleBoxEmitter" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleBoxEmitter")
+    override open class var godotClassName: StringName { className }
 }
 

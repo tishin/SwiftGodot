@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// The compositor resource stores attributes used to customize how a ``Viewport`` is rendered.
 open class Compositor: Resource {
-    override open class var godotClassName: StringName { "Compositor" }
+    fileprivate static var className = StringName("Compositor")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This plugin type exists to modify the process of importing scenes, allowing to change the content as well as add importer options at every stage of the process.
 open class EditorScenePostImportPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorScenePostImportPlugin" }
+    fileprivate static var className = StringName("EditorScenePostImportPlugin")
+    override open class var godotClassName: StringName { className }
     public enum InternalImportCategory: Int64, CaseIterable {
         /// 
         case node = 0 // INTERNAL_IMPORT_CATEGORY_NODE

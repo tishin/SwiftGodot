@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// ``Node3DGizmo`` by itself has no exposed API, refer to ``Node3D/addGizmo(_:)`` and pass it an ``EditorNode3DGizmo`` instance.
 /// 
 open class Node3DGizmo: RefCounted {
-    override open class var godotClassName: StringName { "Node3DGizmo" }
+    fileprivate static var className = StringName("Node3DGizmo")
+    override open class var godotClassName: StringName { className }
 }
 

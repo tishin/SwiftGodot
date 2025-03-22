@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// This is a pure virtual class that is inherited by ``CameraAttributesPhysical`` and ``CameraAttributesPractical``.
 /// 
 open class CameraAttributes: Resource {
-    override open class var godotClassName: StringName { "CameraAttributes" }
+    fileprivate static var className = StringName("CameraAttributes")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

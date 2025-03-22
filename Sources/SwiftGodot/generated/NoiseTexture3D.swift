@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The class uses ``Thread``s to generate the texture data internally, so ``Texture3D/getData()`` may return `null` if the generation process has not completed yet. In that case, you need to wait for the texture to be generated before accessing the image:
 /// 
 open class NoiseTexture3D: Texture3D {
-    override open class var godotClassName: StringName { "NoiseTexture3D" }
+    fileprivate static var className = StringName("NoiseTexture3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

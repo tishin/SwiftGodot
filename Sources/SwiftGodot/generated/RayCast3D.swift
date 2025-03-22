@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// To sweep over a region of 3D space, you can approximate the region with multiple ``RayCast3D``s or use ``ShapeCast3D``.
 /// 
 open class RayCast3D: Node3D {
-    override open class var godotClassName: StringName { "RayCast3D" }
+    fileprivate static var className = StringName("RayCast3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

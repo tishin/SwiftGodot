@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Provides direct access to a physics body in the ``PhysicsServer2D``, allowing safe changes to physics properties. This object is passed via the direct state callback of ``RigidBody2D``, and is intended for changing the direct state of that body. See ``RigidBody2D/_integrateForces(state:)``.
 open class PhysicsDirectBodyState2D: Object {
-    override open class var godotClassName: StringName { "PhysicsDirectBodyState2D" }
+    fileprivate static var className = StringName("PhysicsDirectBodyState2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

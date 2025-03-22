@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Accept a floating-point scalar (`x`) to the input port and transform it according to ``function``.
 open class VisualShaderNodeFloatFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeFloatFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeFloatFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Returns the sine of the parameter. Translates to `sin(x)` in the Godot Shader Language.
         case sin = 0 // FUNC_SIN

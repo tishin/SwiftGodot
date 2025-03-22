@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class Geometry3D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Geometry3D" }
+    fileprivate static var className = StringName("Geometry3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_compute_convex_mesh_points: GDExtensionMethodBindPtr = {
         let methodName = StringName("compute_convex_mesh_points")

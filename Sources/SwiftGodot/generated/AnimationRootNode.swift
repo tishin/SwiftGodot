@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// Examples of built-in root nodes include ``AnimationNodeBlendTree`` (allows blending nodes between each other using various modes), ``AnimationNodeStateMachine`` (allows to configure blending and transitions between nodes using a state machine pattern), ``AnimationNodeBlendSpace2D`` (allows linear blending between **three** ``AnimationNode``s), ``AnimationNodeBlendSpace1D`` (allows linear blending only between **two** ``AnimationNode``s).
 /// 
 open class AnimationRootNode: AnimationNode {
-    override open class var godotClassName: StringName { "AnimationRootNode" }
+    fileprivate static var className = StringName("AnimationRootNode")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// InputEventShortcut is a special event that can be received in ``Node/_unhandledKeyInput(event:)``. It is typically sent by the editor's Command Palette to trigger actions, but can also be sent manually using ``Viewport/pushInput(event:inLocalCoords:)``.
 open class InputEventShortcut: InputEvent {
-    override open class var godotClassName: StringName { "InputEventShortcut" }
+    fileprivate static var className = StringName("InputEventShortcut")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

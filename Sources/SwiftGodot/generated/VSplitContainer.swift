@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A container that accepts only two child controls, then arranges them vertically and creates a divisor between them. The divisor can be dragged around to change the size relation between the child controls.
 open class VSplitContainer: SplitContainer {
-    override open class var godotClassName: StringName { "VSplitContainer" }
+    fileprivate static var className = StringName("VSplitContainer")
+    override open class var godotClassName: StringName { className }
 }
 

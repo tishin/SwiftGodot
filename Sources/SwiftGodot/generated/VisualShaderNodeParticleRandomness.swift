@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
 open class VisualShaderNodeParticleRandomness: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleRandomness" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleRandomness")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR

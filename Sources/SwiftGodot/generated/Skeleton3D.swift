@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - ``boneListChanged``
 /// - ``showRestOnlyChanged``
 open class Skeleton3D: Node3D {
-    override open class var godotClassName: StringName { "Skeleton3D" }
+    fileprivate static var className = StringName("Skeleton3D")
+    override open class var godotClassName: StringName { className }
     public enum ModifierCallbackModeProcess: Int64, CaseIterable {
         /// Set a flag to process modification during physics frames (see ``Node/notificationInternalPhysicsProcess``).
         case physics = 0 // MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS

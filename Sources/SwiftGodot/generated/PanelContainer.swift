@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A container that keeps its child controls within the area of a ``StyleBox``. Useful for giving controls an outline.
 open class PanelContainer: Container {
-    override open class var godotClassName: StringName { "PanelContainer" }
+    fileprivate static var className = StringName("PanelContainer")
+    override open class var godotClassName: StringName { className }
 }
 

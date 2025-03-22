@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Stores position, muting, solo, bypass, effects, effect position, volume, and the connections between buses. See ``AudioServer`` for usage.
 open class AudioBusLayout: Resource {
-    override open class var godotClassName: StringName { "AudioBusLayout" }
+    fileprivate static var className = StringName("AudioBusLayout")
+    override open class var godotClassName: StringName { className }
 }
 

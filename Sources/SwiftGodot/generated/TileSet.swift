@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// See the functions to add new layers for more information.
 /// 
 open class TileSet: Resource {
-    override open class var godotClassName: StringName { "TileSet" }
+    fileprivate static var className = StringName("TileSet")
+    override open class var godotClassName: StringName { className }
     public enum TileShape: Int64, CaseIterable {
         /// Rectangular tile shape.
         case square = 0 // TILE_SHAPE_SQUARE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To use an ``EditorResourceConversionPlugin``, register it using the ``EditorPlugin/addResourceConversionPlugin(_:)`` method first.
 /// 
 open class EditorResourceConversionPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorResourceConversionPlugin" }
+    fileprivate static var className = StringName("EditorResourceConversionPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns the class name of the target type of ``Resource`` that this plugin converts source resources to.
     @_documentation(visibility: public)

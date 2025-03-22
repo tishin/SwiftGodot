@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: When using a cross-fade, `current_state` and `current_index` change to the next state immediately after the cross-fade begins.
 /// 
 open class AnimationNodeTransition: AnimationNodeSync {
-    override open class var godotClassName: StringName { "AnimationNodeTransition" }
+    fileprivate static var className = StringName("AnimationNodeTransition")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

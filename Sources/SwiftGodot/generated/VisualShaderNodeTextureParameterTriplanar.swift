@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Performs a lookup operation on the texture provided as a uniform for the shader, with support for triplanar mapping.
 open class VisualShaderNodeTextureParameterTriplanar: VisualShaderNodeTextureParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeTextureParameterTriplanar" }
+    fileprivate static var className = StringName("VisualShaderNodeTextureParameterTriplanar")
+    override open class var godotClassName: StringName { className }
 }
 

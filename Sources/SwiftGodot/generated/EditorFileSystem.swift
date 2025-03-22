@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// - ``resourcesReimported``
 /// - ``resourcesReload``
 open class EditorFileSystem: Node {
-    override open class var godotClassName: StringName { "EditorFileSystem" }
+    fileprivate static var className = StringName("EditorFileSystem")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_filesystem: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_filesystem")

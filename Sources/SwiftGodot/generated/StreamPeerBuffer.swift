@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// A ``StreamPeerBuffer`` object keeps an internal cursor which is the offset in bytes to the start of the buffer. Get and put operations are performed at the cursor position and will move the cursor accordingly.
 /// 
 open class StreamPeerBuffer: StreamPeer {
-    override open class var godotClassName: StringName { "StreamPeerBuffer" }
+    fileprivate static var className = StringName("StreamPeerBuffer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

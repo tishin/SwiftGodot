@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -42,7 +44,8 @@ import Musl
 /// - ``historyChanged``
 /// - ``versionChanged``
 open class EditorUndoRedoManager: Object {
-    override open class var godotClassName: StringName { "EditorUndoRedoManager" }
+    fileprivate static var className = StringName("EditorUndoRedoManager")
+    override open class var godotClassName: StringName { className }
     public enum SpecialHistory: Int64, CaseIterable {
         /// Global history not associated with any scene, but with external resources etc.
         case globalHistory = 0 // GLOBAL_HISTORY

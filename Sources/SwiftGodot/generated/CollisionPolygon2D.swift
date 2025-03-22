@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Warning: A non-uniformly scaled ``CollisionShape2D`` will likely not behave as expected. Make sure to keep its scale the same on all axes and adjust its shape resource instead.
 /// 
 open class CollisionPolygon2D: Node2D {
-    override open class var godotClassName: StringName { "CollisionPolygon2D" }
+    fileprivate static var className = StringName("CollisionPolygon2D")
+    override open class var godotClassName: StringName { className }
     public enum BuildMode: Int64, CaseIterable {
         /// Collisions will include the polygon and its contained area. In this mode the node has the same effect as several ``ConvexPolygonShape2D`` nodes, one for each convex shape in the convex decomposition of the polygon (but without the overhead of multiple nodes).
         case solids = 0 // BUILD_SOLIDS

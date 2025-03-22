@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``FogVolume``s only have a visible effect if ``Environment/volumetricFogEnabled`` is `true`. If you don't want fog to be globally visible (but only within ``FogVolume`` nodes), set ``Environment/volumetricFogDensity`` to `0.0`.
 /// 
 open class FogVolume: VisualInstance3D {
-    override open class var godotClassName: StringName { "FogVolume" }
+    fileprivate static var className = StringName("FogVolume")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

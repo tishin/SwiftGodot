@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``CenterContainer`` is a container that keeps all of its child controls in its center at their minimum size.
 open class CenterContainer: Container {
-    override open class var godotClassName: StringName { "CenterContainer" }
+    fileprivate static var className = StringName("CenterContainer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

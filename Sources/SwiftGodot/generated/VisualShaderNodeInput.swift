@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``inputTypeChanged``
 open class VisualShaderNodeInput: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeInput" }
+    fileprivate static var className = StringName("VisualShaderNodeInput")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

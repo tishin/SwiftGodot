@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ open class ResourceLoader: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ResourceLoader" }
+    fileprivate static var className = StringName("ResourceLoader")
+    override open class var godotClassName: StringName { className }
     public enum ThreadLoadStatus: Int64, CaseIterable {
         /// The resource is invalid, or has not been loaded with ``loadThreadedRequest(path:typeHint:useSubThreads:cacheMode:)``.
         case invalidResource = 0 // THREAD_LOAD_INVALID_RESOURCE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``textureChanged``
 open class NinePatchRect: Control {
-    override open class var godotClassName: StringName { "NinePatchRect" }
+    fileprivate static var className = StringName("NinePatchRect")
+    override open class var godotClassName: StringName { className }
     public enum AxisStretchMode: Int64, CaseIterable {
         /// Stretches the center texture across the NinePatchRect. This may cause the texture to be distorted.
         case stretch = 0 // AXIS_STRETCH_MODE_STRETCH

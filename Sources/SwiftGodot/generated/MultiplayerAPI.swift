@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``connectionFailed``
 /// - ``serverDisconnected``
 open class MultiplayerAPI: RefCounted {
-    override open class var godotClassName: StringName { "MultiplayerAPI" }
+    fileprivate static var className = StringName("MultiplayerAPI")
+    override open class var godotClassName: StringName { className }
     public enum RPCMode: Int64, CaseIterable {
         /// Used with ``Node/rpcConfig(method:config:)`` to disable a method or property for all RPC calls, making it unavailable. Default for all methods.
         case disabled = 0 // RPC_MODE_DISABLED

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ open class JavaScriptBridge: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "JavaScriptBridge" }
+    fileprivate static var className = StringName("JavaScriptBridge")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_eval: GDExtensionMethodBindPtr = {
         let methodName = StringName("eval")

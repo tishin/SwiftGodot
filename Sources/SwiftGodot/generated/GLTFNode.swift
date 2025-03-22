@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// GLTF nodes generally exist inside of ``GLTFState`` which represents all data of a GLTF file. Most of GLTFNode's properties are indices of other data in the GLTF file. You can extend a GLTF node with additional properties by using ``getAdditionalData(extensionName:)`` and ``setAdditionalData(extensionName:additionalData:)``.
 /// 
 open class GLTFNode: Resource {
-    override open class var godotClassName: StringName { "GLTFNode" }
+    fileprivate static var className = StringName("GLTFNode")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

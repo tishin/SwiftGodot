@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Performance:** Primitive shapes, especially ``CircleShape2D``, are fast to check collisions against. ``ConvexPolygonShape2D`` is slower, and ``ConcavePolygonShape2D`` is the slowest.
 /// 
 open class Shape2D: Resource {
-    override open class var godotClassName: StringName { "Shape2D" }
+    fileprivate static var className = StringName("Shape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

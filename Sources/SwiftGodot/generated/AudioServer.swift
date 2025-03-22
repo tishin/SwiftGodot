@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ open class AudioServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "AudioServer" }
+    fileprivate static var className = StringName("AudioServer")
+    override open class var godotClassName: StringName { className }
     public enum SpeakerMode: Int64, CaseIterable {
         /// Two or fewer speakers were detected.
         case modeStereo = 0 // SPEAKER_MODE_STEREO

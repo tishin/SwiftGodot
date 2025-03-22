@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// If you are looking for GDScript's built-in functions, see [@GDScript] instead.
 /// 
 open class GDScript: Script {
-    override open class var godotClassName: StringName { "GDScript" }
+    fileprivate static var className = StringName("GDScript")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_new: GDExtensionMethodBindPtr = {
         let methodName = StringName("new")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By adjusting various properties of this resource, you can change the colors of strings, comments, numbers, and other text patterns inside a ``TextEdit`` control.
 open class CodeHighlighter: SyntaxHighlighter {
-    override open class var godotClassName: StringName { "CodeHighlighter" }
+    fileprivate static var className = StringName("CodeHighlighter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

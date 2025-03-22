@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ import Musl
 /// 
 /// - ``versionChanged``
 open class UndoRedo: Object {
-    override open class var godotClassName: StringName { "UndoRedo" }
+    fileprivate static var className = StringName("UndoRedo")
+    override open class var godotClassName: StringName { className }
     public enum MergeMode: Int64, CaseIterable {
         /// Makes "do"/"undo" operations stay in separate actions.
         case disable = 0 // MERGE_DISABLE

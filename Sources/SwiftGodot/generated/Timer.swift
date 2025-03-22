@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// 
 /// - ``timeout``
 open class Timer: Node {
-    override open class var godotClassName: StringName { "Timer" }
+    fileprivate static var className = StringName("Timer")
+    override open class var godotClassName: StringName { className }
     public enum TimerProcessCallback: Int64, CaseIterable {
         /// Update the timer every physics process frame (see ``Node/notificationInternalPhysicsProcess``).
         case physics = 0 // TIMER_PROCESS_PHYSICS

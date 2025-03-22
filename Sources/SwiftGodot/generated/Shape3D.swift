@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Performance:** Primitive shapes, especially ``SphereShape3D``, are fast to check collisions against. ``ConvexPolygonShape3D`` and ``HeightMapShape3D`` are slower, and ``ConcavePolygonShape3D`` is the slowest.
 /// 
 open class Shape3D: Resource {
-    override open class var godotClassName: StringName { "Shape3D" }
+    fileprivate static var className = StringName("Shape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// The command line argument `--text-driver Dummy` (case-sensitive) can be used to force the "Dummy" ``TextServer`` on any project.
 /// 
 open class TextServerDummy: TextServerExtension {
-    override open class var godotClassName: StringName { "TextServerDummy" }
+    fileprivate static var className = StringName("TextServerDummy")
+    override open class var godotClassName: StringName { className }
 }
 

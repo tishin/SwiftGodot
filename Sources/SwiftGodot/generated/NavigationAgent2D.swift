@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// - ``navigationFinished``
 /// - ``velocityComputed``
 open class NavigationAgent2D: Node {
-    override open class var godotClassName: StringName { "NavigationAgent2D" }
+    fileprivate static var className = StringName("NavigationAgent2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that connects two 2D physics bodies with a spring-like force. This resembles a spring that always wants to stretch to a given length.
 open class DampedSpringJoint2D: Joint2D {
-    override open class var godotClassName: StringName { "DampedSpringJoint2D" }
+    fileprivate static var className = StringName("DampedSpringJoint2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

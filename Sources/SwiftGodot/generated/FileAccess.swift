@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Files are automatically closed only if the process exits "normally" (such as by clicking the window manager's close button or pressing **Alt + F4**). If you stop the project execution by pressing **F8** while the project is running, the file won't be closed as the game process will be killed. You can work around this by calling ``flush()`` at regular intervals.
 /// 
 open class FileAccess: RefCounted {
-    override open class var godotClassName: StringName { "FileAccess" }
+    fileprivate static var className = StringName("FileAccess")
+    override open class var godotClassName: StringName { className }
     public enum ModeFlags: Int64, CaseIterable {
         /// Opens the file for read operations. The cursor is positioned at the beginning of the file.
         case read = 1 // READ

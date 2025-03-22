@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// After setting the request and changing the animation playback, the one-shot node automatically clears the request on the next process frame by setting its `request` value to ``OneShotRequest/none``.
 /// 
 open class AnimationNodeOneShot: AnimationNodeSync {
-    override open class var godotClassName: StringName { "AnimationNodeOneShot" }
+    fileprivate static var className = StringName("AnimationNodeOneShot")
+    override open class var godotClassName: StringName { className }
     public enum OneShotRequest: Int64, CaseIterable {
         /// The default state of the request. Nothing is done.
         case none = 0 // ONE_SHOT_REQUEST_NONE

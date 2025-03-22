@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,6 +34,7 @@ import Musl
 /// If the absolute value of the amount is greater than `1.0`, the animation connected to "in" port is blended with the amplified animation connected to "-add"/"+add" port.
 /// 
 open class AnimationNodeAdd3: AnimationNodeSync {
-    override open class var godotClassName: StringName { "AnimationNodeAdd3" }
+    fileprivate static var className = StringName("AnimationNodeAdd3")
+    override open class var godotClassName: StringName { className }
 }
 

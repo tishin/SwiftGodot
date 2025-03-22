@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// > Note: All ``ShaderGlobalsOverride`` nodes are made part of a `"shader_overrides_group"` group when they are added to the scene tree. The currently active ``ShaderGlobalsOverride`` node also has a `"shader_overrides_group_active"` group added to it. You can use this to check which ``ShaderGlobalsOverride`` node is currently active.
 /// 
 open class ShaderGlobalsOverride: Node {
-    override open class var godotClassName: StringName { "ShaderGlobalsOverride" }
+    fileprivate static var className = StringName("ShaderGlobalsOverride")
+    override open class var godotClassName: StringName { className }
 }
 

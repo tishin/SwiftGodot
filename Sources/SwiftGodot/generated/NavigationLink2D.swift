@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A link between two positions on ``NavigationRegion2D``s that agents can be routed through. These positions can be on the same ``NavigationRegion2D`` or on two different ones. Links are useful to express navigation methods other than traveling along the surface of the navigation polygon, such as ziplines, teleporters, or gaps that can be jumped across.
 open class NavigationLink2D: Node2D {
-    override open class var godotClassName: StringName { "NavigationLink2D" }
+    fileprivate static var className = StringName("NavigationLink2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

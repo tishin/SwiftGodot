@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This node helps to multiply a position input vector by rotation using specific axis. Intended to work with emitters.
 open class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleMultiplyByAxisAngle" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleMultiplyByAxisAngle")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

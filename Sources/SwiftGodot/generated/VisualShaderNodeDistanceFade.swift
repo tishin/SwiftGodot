@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// The distance fade effect fades out each pixel based on its distance to another object.
 open class VisualShaderNodeDistanceFade: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeDistanceFade" }
+    fileprivate static var className = StringName("VisualShaderNodeDistanceFade")
+    override open class var godotClassName: StringName { className }
 }
 

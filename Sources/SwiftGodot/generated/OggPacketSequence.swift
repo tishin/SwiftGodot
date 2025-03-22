@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A sequence of Ogg packets.
 open class OggPacketSequence: Resource {
-    override open class var godotClassName: StringName { "OggPacketSequence" }
+    fileprivate static var className = StringName("OggPacketSequence")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

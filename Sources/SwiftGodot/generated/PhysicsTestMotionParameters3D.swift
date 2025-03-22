@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the motion, you can configure the parameters for ``PhysicsServer3D/bodyTestMotion(body:parameters:result:)``.
 open class PhysicsTestMotionParameters3D: RefCounted {
-    override open class var godotClassName: StringName { "PhysicsTestMotionParameters3D" }
+    fileprivate static var className = StringName("PhysicsTestMotionParameters3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

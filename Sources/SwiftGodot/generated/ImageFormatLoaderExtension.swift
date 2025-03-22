@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Be sure to respect the documented return types and values. You should create an instance of it, and call ``addFormatLoader()`` to register that loader during the initialization phase.
 /// 
 open class ImageFormatLoaderExtension: ImageFormatLoader {
-    override open class var godotClassName: StringName { "ImageFormatLoaderExtension" }
+    fileprivate static var className = StringName("ImageFormatLoaderExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns the list of file extensions for this image format. Files with the given extensions will be treated as image file and loaded using this class.
     @_documentation(visibility: public)

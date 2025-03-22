@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Attenuates the frequencies inside of a range around the ``AudioEffectFilter/cutoffHz`` and cuts frequencies outside of this band.
 open class AudioEffectBandPassFilter: AudioEffectFilter {
-    override open class var godotClassName: StringName { "AudioEffectBandPassFilter" }
+    fileprivate static var className = StringName("AudioEffectBandPassFilter")
+    override open class var godotClassName: StringName { className }
 }
 

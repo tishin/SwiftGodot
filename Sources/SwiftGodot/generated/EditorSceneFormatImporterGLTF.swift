@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,6 +20,7 @@ import Musl
 
 
 open class EditorSceneFormatImporterGLTF: EditorSceneFormatImporter {
-    override open class var godotClassName: StringName { "EditorSceneFormatImporterGLTF" }
+    fileprivate static var className = StringName("EditorSceneFormatImporterGLTF")
+    override open class var godotClassName: StringName { className }
 }
 

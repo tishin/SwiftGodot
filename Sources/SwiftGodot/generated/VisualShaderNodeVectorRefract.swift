@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translated to `refract(I, N, eta)` in the shader language, where `I` is the incident vector, `N` is the normal vector and `eta` is the ratio of the indices of the refraction.
 open class VisualShaderNodeVectorRefract: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorRefract" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorRefract")
+    override open class var godotClassName: StringName { className }
 }
 

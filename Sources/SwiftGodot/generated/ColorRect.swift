@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Displays a rectangle filled with a solid ``color``. If you need to display the border alone, consider using a ``Panel`` instead.
 open class ColorRect: Control {
-    override open class var godotClassName: StringName { "ColorRect" }
+    fileprivate static var className = StringName("ColorRect")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

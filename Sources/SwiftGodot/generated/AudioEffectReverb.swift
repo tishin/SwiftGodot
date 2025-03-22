@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Simulates the sound of acoustic environments such as rooms, concert halls, caverns, or an open spaces.
 open class AudioEffectReverb: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectReverb" }
+    fileprivate static var className = StringName("AudioEffectReverb")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// See also ``BaseButton`` which contains common properties and methods associated with this node.
 /// 
 open class CheckButton: Button {
-    override open class var godotClassName: StringName { "CheckButton" }
+    fileprivate static var className = StringName("CheckButton")
+    override open class var godotClassName: StringName { className }
 }
 

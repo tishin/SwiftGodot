@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A node that displays 2D texture information in a 3D environment. See also ``Sprite3D`` where many other properties are defined.
 open class SpriteBase3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "SpriteBase3D" }
+    fileprivate static var className = StringName("SpriteBase3D")
+    override open class var godotClassName: StringName { className }
     public enum DrawFlags: Int64, CaseIterable {
         /// If set, the texture's transparency and the opacity are used to make those parts of the sprite invisible.
         case transparent = 0 // FLAG_TRANSPARENT

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class ClassDB: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ClassDB" }
+    fileprivate static var className = StringName("ClassDB")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_class_list: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_class_list")

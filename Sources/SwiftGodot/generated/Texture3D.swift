@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To create such a texture file yourself, reimport your image files using the Godot Editor import presets.
 /// 
 open class Texture3D: Texture {
-    override open class var godotClassName: StringName { "Texture3D" }
+    fileprivate static var className = StringName("Texture3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when the ``Texture3D``'s format is queried.
     @_documentation(visibility: public)

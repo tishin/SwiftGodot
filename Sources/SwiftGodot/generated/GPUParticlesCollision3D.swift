@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Particles pushed by a collider that is being moved will not be interpolated, which can result in visible stuttering. This can be alleviated by setting ``GPUParticles3D/fixedFps`` to `0` or a value that matches or exceeds the target framerate.
 /// 
 open class GPUParticlesCollision3D: VisualInstance3D {
-    override open class var godotClassName: StringName { "GPUParticlesCollision3D" }
+    fileprivate static var className = StringName("GPUParticlesCollision3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

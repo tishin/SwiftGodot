@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Abstract base class for separators, used for separating other controls. ``Separator``s are purely visual and normally drawn as a ``StyleBoxLine``.
 open class Separator: Control {
-    override open class var godotClassName: StringName { "Separator" }
+    fileprivate static var className = StringName("Separator")
+    override open class var godotClassName: StringName { className }
 }
 

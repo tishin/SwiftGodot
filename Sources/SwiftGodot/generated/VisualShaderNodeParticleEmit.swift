@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This node internally calls `emit_subparticle` shader method. It will emit a particle from the configured sub-emitter and also allows to customize how its emitted. Requires a sub-emitter assigned to the particles node with this shader.
 open class VisualShaderNodeParticleEmit: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleEmit" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleEmit")
+    override open class var godotClassName: StringName { className }
     public enum EmitFlags: Int64, CaseIterable {
         /// If enabled, the particle starts with the position defined by this node.
         case position = 1 // EMIT_FLAG_POSITION

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: For 3D position/rotation/scale, using the dedicated ``TrackType/position3d``, ``TrackType/rotation3d`` and ``TrackType/scale3d`` track types instead of ``TrackType/value`` is recommended for performance reasons.
 /// 
 open class Animation: Resource {
-    override open class var godotClassName: StringName { "Animation" }
+    fileprivate static var className = StringName("Animation")
+    override open class var godotClassName: StringName { className }
     public enum TrackType: Int64, CaseIterable {
         /// Value tracks set values in node properties, but only those which can be interpolated. For 3D position/rotation/scale, using the dedicated ``TrackType/position3d``, ``TrackType/rotation3d`` and ``TrackType/scale3d`` track types instead of ``TrackType/value`` is recommended for performance reasons.
         case value = 0 // TYPE_VALUE

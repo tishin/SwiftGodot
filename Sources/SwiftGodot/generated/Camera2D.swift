@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// Note that the ``Camera2D`` node's `position` doesn't represent the actual position of the screen, which may differ due to applied smoothing or limits. You can use ``getScreenCenterPosition()`` to get the real position.
 /// 
 open class Camera2D: Node2D {
-    override open class var godotClassName: StringName { "Camera2D" }
+    fileprivate static var className = StringName("Camera2D")
+    override open class var godotClassName: StringName { className }
     public enum AnchorMode: Int64, CaseIterable {
         /// The camera's position is fixed so that the top-left corner is always at the origin.
         case fixedTopLeft = 0 // ANCHOR_MODE_FIXED_TOP_LEFT

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``folderColorChanged``
 /// - ``displayModeChanged``
 open class FileSystemDock: VBoxContainer {
-    override open class var godotClassName: StringName { "FileSystemDock" }
+    fileprivate static var className = StringName("FileSystemDock")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_navigate_to_path: GDExtensionMethodBindPtr = {
         let methodName = StringName("navigate_to_path")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,7 +21,8 @@ import Musl
 
 /// Configuration for properties to synchronize with a ``MultiplayerSynchronizer``.
 open class SceneReplicationConfig: Resource {
-    override open class var godotClassName: StringName { "SceneReplicationConfig" }
+    fileprivate static var className = StringName("SceneReplicationConfig")
+    override open class var godotClassName: StringName { className }
     public enum ReplicationMode: Int64, CaseIterable {
         /// Do not keep the given property synchronized.
         case never = 0 // REPLICATION_MODE_NEVER

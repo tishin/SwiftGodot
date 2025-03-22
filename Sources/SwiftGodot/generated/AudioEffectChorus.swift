@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Adds a chorus audio effect. The effect applies a filter with voices to duplicate the audio source and manipulate it through the filter.
 open class AudioEffectChorus: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectChorus" }
+    fileprivate static var className = StringName("AudioEffectChorus")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

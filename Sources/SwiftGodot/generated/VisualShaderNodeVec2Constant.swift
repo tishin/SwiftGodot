@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A constant ``Vector2``, which can be used as an input node.
 open class VisualShaderNodeVec2Constant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeVec2Constant" }
+    fileprivate static var className = StringName("VisualShaderNodeVec2Constant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: When using the Mobile or Compatibility rendering methods, omni lights will only correctly affect meshes whose visibility AABB intersects with the light's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the light may not be visible on the mesh.
 /// 
 open class OmniLight3D: Light3D {
-    override open class var godotClassName: StringName { "OmniLight3D" }
+    fileprivate static var className = StringName("OmniLight3D")
+    override open class var godotClassName: StringName { className }
     public enum ShadowMode: Int64, CaseIterable {
         /// Shadows are rendered to a dual-paraboloid texture. Faster than ``ShadowMode/cube``, but lower-quality.
         case dualParaboloid = 0 // SHADOW_DUAL_PARABOLOID

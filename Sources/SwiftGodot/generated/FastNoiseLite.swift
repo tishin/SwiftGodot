@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Most generated noise values are in the range of `[-1, 1]`, but not always. Some of the cellular noise algorithms return results above `1`.
 /// 
 open class FastNoiseLite: Noise {
-    override open class var godotClassName: StringName { "FastNoiseLite" }
+    fileprivate static var className = StringName("FastNoiseLite")
+    override open class var godotClassName: StringName { className }
     public enum NoiseType: Int64, CaseIterable {
         /// A lattice of points are assigned random values then interpolated based on neighboring values.
         case value = 5 // TYPE_VALUE

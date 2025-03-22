@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``dragged``
 open class SplitContainer: Container {
-    override open class var godotClassName: StringName { "SplitContainer" }
+    fileprivate static var className = StringName("SplitContainer")
+    override open class var godotClassName: StringName { className }
     public enum DraggerVisibility: Int64, CaseIterable {
         /// The split dragger is visible when the cursor hovers it.
         case visible = 0 // DRAGGER_VISIBLE

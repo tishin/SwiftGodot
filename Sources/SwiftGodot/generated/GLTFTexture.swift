@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,7 +21,8 @@ import Musl
 
 /// GLTFTexture represents a texture in a GLTF file.
 open class GLTFTexture: Resource {
-    override open class var godotClassName: StringName { "GLTFTexture" }
+    fileprivate static var className = StringName("GLTFTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

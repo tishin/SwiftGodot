@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Defines the API that the editor uses to extract information from the underlying VCS. The implementation of this API is included in VCS plugins, which are GDExtension plugins that inherit ``EditorVCSInterface`` and are attached (on demand) to the singleton instance of ``EditorVCSInterface``. Instead of performing the task themselves, all the virtual functions listed below are calling the internally overridden functions in the VCS plugins to provide a plug-n-play experience. A custom VCS plugin is supposed to inherit from ``EditorVCSInterface`` and override each of these virtual functions.
 open class EditorVCSInterface: Object {
-    override open class var godotClassName: StringName { "EditorVCSInterface" }
+    fileprivate static var className = StringName("EditorVCSInterface")
+    override open class var godotClassName: StringName { className }
     public enum ChangeType: Int64, CaseIterable {
         /// A new file has been added.
         case new = 0 // CHANGE_TYPE_NEW

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// ``Panel`` is a GUI control that displays a ``StyleBox``. See also ``PanelContainer``.
 open class Panel: Control {
-    override open class var godotClassName: StringName { "Panel" }
+    fileprivate static var className = StringName("Panel")
+    override open class var godotClassName: StringName { className }
 }
 

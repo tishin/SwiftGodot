@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``symbolLookup``
 /// - ``symbolValidate``
 open class CodeEdit: TextEdit {
-    override open class var godotClassName: StringName { "CodeEdit" }
+    fileprivate static var className = StringName("CodeEdit")
+    override open class var godotClassName: StringName { className }
     public enum CodeCompletionKind: Int64, CaseIterable {
         /// Marks the option as a class.
         case `class` = 0 // KIND_CLASS

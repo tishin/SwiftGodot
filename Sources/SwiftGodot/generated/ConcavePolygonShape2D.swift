@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// **Performance:** Due to its complexity, ``ConcavePolygonShape2D`` is the slowest 2D collision shape to check collisions against. Its use should generally be limited to level geometry. If the polyline is closed, ``CollisionPolygon2D``'s ``CollisionPolygon2D/BuildMode/solids`` mode can be used, which decomposes the polygon into convex ones; see ``ConvexPolygonShape2D``'s documentation for instructions.
 /// 
 open class ConcavePolygonShape2D: Shape2D {
-    override open class var godotClassName: StringName { "ConcavePolygonShape2D" }
+    fileprivate static var className = StringName("ConcavePolygonShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

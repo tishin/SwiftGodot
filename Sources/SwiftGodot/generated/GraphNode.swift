@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``slotUpdated``
 open class GraphNode: GraphElement {
-    override open class var godotClassName: StringName { "GraphNode" }
+    fileprivate static var className = StringName("GraphNode")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Generic 2D position hint for editing. It's just like a plain ``Node2D``, but it displays as a cross in the 2D editor at all times. You can set the cross' visual size by using the gizmo in the 2D editor while the node is selected.
 open class Marker2D: Node2D {
-    override open class var godotClassName: StringName { "Marker2D" }
+    fileprivate static var className = StringName("Marker2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// - ``mouseEntered``
 /// - ``mouseExited``
 open class CollisionObject3D: Node3D {
-    override open class var godotClassName: StringName { "CollisionObject3D" }
+    fileprivate static var className = StringName("CollisionObject3D")
+    override open class var godotClassName: StringName { className }
     public enum DisableMode: Int64, CaseIterable {
         /// When ``Node/processMode`` is set to ``Node/ProcessMode/disabled``, remove from the physics simulation to stop all physics interactions with this ``CollisionObject3D``.
         /// 

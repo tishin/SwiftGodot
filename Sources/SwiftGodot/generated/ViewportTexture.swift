@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Instantiating scenes containing a high-resolution ``ViewportTexture`` may cause noticeable stutter.
 /// 
 open class ViewportTexture: Texture2D {
-    override open class var godotClassName: StringName { "ViewportTexture" }
+    fileprivate static var className = StringName("ViewportTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

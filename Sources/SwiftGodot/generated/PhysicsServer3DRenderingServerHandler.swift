@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,7 +21,8 @@ import Musl
 
 /// A class used to provide ``PhysicsServer3DExtension/_softBodyUpdateRenderingServer(body:renderingServerHandler:)`` with a rendering handler for soft bodies.
 open class PhysicsServer3DRenderingServerHandler: Object {
-    override open class var godotClassName: StringName { "PhysicsServer3DRenderingServerHandler" }
+    fileprivate static var className = StringName("PhysicsServer3DRenderingServerHandler")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called by the ``PhysicsServer3D`` to set the position for the ``SoftBody3D`` vertex at the index specified by `vertexId`.
     /// 

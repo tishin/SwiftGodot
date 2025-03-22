@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``finished``
 open class Tweener: RefCounted {
-    override open class var godotClassName: StringName { "Tweener" }
+    fileprivate static var className = StringName("Tweener")
+    override open class var godotClassName: StringName { className }
     // Signals 
     /// Emitted when the ``Tweener`` has just finished its job.
     ///

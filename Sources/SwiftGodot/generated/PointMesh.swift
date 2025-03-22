@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// When using PointMeshes, properties that normally alter vertices will be ignored, including billboard mode, grow, and cull face.
 /// 
 open class PointMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "PointMesh" }
+    fileprivate static var className = StringName("PointMesh")
+    override open class var godotClassName: StringName { className }
 }
 

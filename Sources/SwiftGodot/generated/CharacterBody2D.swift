@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// For game objects that don't require complex movement or collision detection, such as moving platforms, ``AnimatableBody2D`` is simpler to configure.
 /// 
 open class CharacterBody2D: PhysicsBody2D {
-    override open class var godotClassName: StringName { "CharacterBody2D" }
+    fileprivate static var className = StringName("CharacterBody2D")
+    override open class var godotClassName: StringName { className }
     public enum MotionMode: Int64, CaseIterable {
         /// Apply when notions of walls, ceiling and floor are relevant. In this mode the body motion will react to slopes (acceleration/slowdown). This mode is suitable for sided games like platformers.
         case grounded = 0 // MOTION_MODE_GROUNDED

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ open class NativeMenu: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "NativeMenu" }
+    fileprivate static var className = StringName("NativeMenu")
+    override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// ``NativeMenu`` supports native global main menu.
         case globalMenu = 0 // FEATURE_GLOBAL_MENU

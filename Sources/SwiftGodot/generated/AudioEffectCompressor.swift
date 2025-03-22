@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - Accentuates transients by using a wider attack, making effects sound more punchy.
 /// 
 open class AudioEffectCompressor: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectCompressor" }
+    fileprivate static var className = StringName("AudioEffectCompressor")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

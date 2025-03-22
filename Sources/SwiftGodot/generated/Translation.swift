@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``Translation``s are resources that can be loaded and unloaded on demand. They map a collection of strings to their individual translations, and they also provide convenience methods for pluralization.
 open class Translation: Resource {
-    override open class var godotClassName: StringName { "Translation" }
+    fileprivate static var className = StringName("Translation")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

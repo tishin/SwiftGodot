@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// It can be set to update another Node's position, rotation and/or scale. It can use either global or local coordinates.
 /// 
 open class RemoteTransform3D: Node3D {
-    override open class var godotClassName: StringName { "RemoteTransform3D" }
+    fileprivate static var className = StringName("RemoteTransform3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

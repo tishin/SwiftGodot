@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// To use ``EditorSceneFormatImporter``, register it using the ``EditorPlugin/addSceneFormatImporterPlugin(sceneFormatImporter:firstPriority:)`` method first.
 /// 
 open class EditorSceneFormatImporter: RefCounted {
-    override open class var godotClassName: StringName { "EditorSceneFormatImporter" }
+    fileprivate static var className = StringName("EditorSceneFormatImporter")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// 
     public static let importScene = 1

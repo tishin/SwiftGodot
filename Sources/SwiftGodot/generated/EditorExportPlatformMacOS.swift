@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,6 +21,7 @@ import Musl
 
 /// Exporter for macOS.
 open class EditorExportPlatformMacOS: EditorExportPlatform {
-    override open class var godotClassName: StringName { "EditorExportPlatformMacOS" }
+    fileprivate static var className = StringName("EditorExportPlatformMacOS")
+    override open class var godotClassName: StringName { className }
 }
 

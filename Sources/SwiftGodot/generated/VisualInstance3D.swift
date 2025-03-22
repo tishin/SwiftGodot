@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// The ``VisualInstance3D`` is used to connect a resource to a visual representation. All visual 3D nodes inherit from the ``VisualInstance3D``. In general, you should not access the ``VisualInstance3D`` properties directly as they are accessed and managed by the nodes that inherit from ``VisualInstance3D``. ``VisualInstance3D`` is the node representation of the ``RenderingServer`` instance.
 open class VisualInstance3D: Node3D {
-    override open class var godotClassName: StringName { "VisualInstance3D" }
+    fileprivate static var className = StringName("VisualInstance3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

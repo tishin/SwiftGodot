@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Allows to scale the speed of the animation (or reverse it) in any child ``AnimationNode``s. Setting it to `0.0` will pause the animation.
 open class AnimationNodeTimeScale: AnimationNode {
-    override open class var godotClassName: StringName { "AnimationNodeTimeScale" }
+    fileprivate static var className = StringName("AnimationNodeTimeScale")
+    override open class var godotClassName: StringName { className }
 }
 

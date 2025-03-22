@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,6 +32,7 @@ import Musl
 /// Internally, the EditorSceneFormatImporterBlend uses the Blender glTF "Use Original" mode to reference external textures.
 /// 
 open class EditorSceneFormatImporterBlend: EditorSceneFormatImporter {
-    override open class var godotClassName: StringName { "EditorSceneFormatImporterBlend" }
+    fileprivate static var className = StringName("EditorSceneFormatImporterBlend")
+    override open class var godotClassName: StringName { className }
 }
 

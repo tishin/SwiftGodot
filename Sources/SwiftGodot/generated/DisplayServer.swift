@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class DisplayServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "DisplayServer" }
+    fileprivate static var className = StringName("DisplayServer")
+    override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// Display server supports global menu. This allows the application to display its menu items in the operating system's top bar. **macOS**
         case globalMenu = 0 // FEATURE_GLOBAL_MENU

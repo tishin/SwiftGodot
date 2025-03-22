@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``SubViewport`` is a ``Viewport`` that isn't a ``Window``, i.e. it doesn't draw anything by itself. To display anything, ``SubViewport`` must have a non-zero size and be either put inside a ``SubViewportContainer`` or assigned to a ``ViewportTexture``.
 /// 
 open class SubViewport: Viewport {
-    override open class var godotClassName: StringName { "SubViewport" }
+    fileprivate static var className = StringName("SubViewport")
+    override open class var godotClassName: StringName { className }
     public enum ClearMode: Int64, CaseIterable {
         /// Always clear the render target before drawing.
         case always = 0 // CLEAR_MODE_ALWAYS

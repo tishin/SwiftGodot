@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: When using the Mobile rendering method, reflection probes will only correctly affect meshes whose visibility AABB intersects with the reflection probe's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the reflection probe may not be visible on the mesh.
 /// 
 open class ReflectionProbe: VisualInstance3D {
-    override open class var godotClassName: StringName { "ReflectionProbe" }
+    fileprivate static var className = StringName("ReflectionProbe")
+    override open class var godotClassName: StringName { className }
     public enum UpdateMode: Int64, CaseIterable {
         /// Update the probe once on the next frame (recommended for most objects). The corresponding radiance map will be generated over the following six frames. This takes more time to update than ``UpdateMode/always``, but it has a lower performance cost and can result in higher-quality reflections. The ReflectionProbe is updated when its transform changes, but not when nearby geometry changes. You can force a ``ReflectionProbe`` update by moving the ``ReflectionProbe`` slightly in any direction.
         case once = 0 // UPDATE_ONCE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A control that displays a texture, for example an icon inside a GUI. The texture's placement can be controlled with the ``stretchMode`` property. It can scale, tile, or stay centered inside its bounding rectangle.
 open class TextureRect: Control {
-    override open class var godotClassName: StringName { "TextureRect" }
+    fileprivate static var className = StringName("TextureRect")
+    override open class var godotClassName: StringName { className }
     public enum ExpandMode: Int64, CaseIterable {
         /// The minimum size will be equal to texture size, i.e. ``TextureRect`` can't be smaller than the texture.
         case keepSize = 0 // EXPAND_KEEP_SIZE

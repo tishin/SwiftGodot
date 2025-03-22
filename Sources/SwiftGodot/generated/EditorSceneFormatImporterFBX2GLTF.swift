@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// This importer is only used if ``ProjectSettings/filesystem/import/fbx2gltf/enabled`` is set to `true`.
 /// 
 open class EditorSceneFormatImporterFBX2GLTF: EditorSceneFormatImporter {
-    override open class var godotClassName: StringName { "EditorSceneFormatImporterFBX2GLTF" }
+    fileprivate static var className = StringName("EditorSceneFormatImporterFBX2GLTF")
+    override open class var godotClassName: StringName { className }
 }
 

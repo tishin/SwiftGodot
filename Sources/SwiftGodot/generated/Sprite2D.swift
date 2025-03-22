@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// - ``frameChanged``
 /// - ``textureChanged``
 open class Sprite2D: Node2D {
-    override open class var godotClassName: StringName { "Sprite2D" }
+    fileprivate static var className = StringName("Sprite2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

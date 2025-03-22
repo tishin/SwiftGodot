@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Like GLTFDocument itself, all GLTFDocumentExtension classes must be stateless in order to function properly. If you need to store data, use the `set_additional_data` and `get_additional_data` methods in ``GLTFState`` or ``GLTFNode``.
 /// 
 open class GLTFDocumentExtension: Resource {
-    override open class var godotClassName: StringName { "GLTFDocumentExtension" }
+    fileprivate static var className = StringName("GLTFDocumentExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Part of the import process. This method is run first, before all other parts of the import process.
     /// 

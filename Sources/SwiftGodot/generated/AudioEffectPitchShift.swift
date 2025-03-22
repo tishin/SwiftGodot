@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// 
 /// Allows modulation of pitch independently of tempo. All frequencies can be increased/decreased with minimal effect on transients.
 open class AudioEffectPitchShift: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectPitchShift" }
+    fileprivate static var className = StringName("AudioEffectPitchShift")
+    override open class var godotClassName: StringName { className }
     public enum FFTSize: Int64, CaseIterable {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
         case fftSize256 = 0 // FFT_SIZE_256

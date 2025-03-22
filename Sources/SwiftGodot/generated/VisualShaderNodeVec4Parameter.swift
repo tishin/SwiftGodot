@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to `uniform vec4` in the shader language.
 open class VisualShaderNodeVec4Parameter: VisualShaderNodeParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeVec4Parameter" }
+    fileprivate static var className = StringName("VisualShaderNodeVec4Parameter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

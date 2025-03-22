@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// > Note: If none of the font data sources contain glyphs for a character used in a string, the character in question will be replaced with a box displaying its hexadecimal code.
 /// 
 open class FontFile: Font {
-    override open class var godotClassName: StringName { "FontFile" }
+    fileprivate static var className = StringName("FontFile")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

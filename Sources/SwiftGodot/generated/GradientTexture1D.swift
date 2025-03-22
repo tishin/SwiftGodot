@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A 1D texture that obtains colors from a ``Gradient`` to fill the texture data. The texture is filled by sampling the gradient for each pixel. Therefore, the texture does not necessarily represent an exact copy of the gradient, as it may miss some colors if there are not enough pixels. See also ``GradientTexture2D``, ``CurveTexture`` and ``CurveXYZTexture``.
 open class GradientTexture1D: Texture2D {
-    override open class var godotClassName: StringName { "GradientTexture1D" }
+    fileprivate static var className = StringName("GradientTexture1D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

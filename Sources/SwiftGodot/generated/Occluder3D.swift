@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See ``OccluderInstance3D``'s documentation for instructions on setting up occlusion culling.
 /// 
 open class Occluder3D: Resource {
-    override open class var godotClassName: StringName { "Occluder3D" }
+    fileprivate static var className = StringName("Occluder3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_vertices: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_vertices")

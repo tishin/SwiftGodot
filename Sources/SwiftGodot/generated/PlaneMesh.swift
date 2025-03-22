@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: When using a large textured ``PlaneMesh`` (e.g. as a floor), you may stumble upon UV jittering issues depending on the camera angle. To solve this, increase ``subdivideDepth`` and ``subdivideWidth`` until you no longer notice UV jittering.
 /// 
 open class PlaneMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "PlaneMesh" }
+    fileprivate static var className = StringName("PlaneMesh")
+    override open class var godotClassName: StringName { className }
     public enum Orientation: Int64, CaseIterable {
         /// ``PlaneMesh`` will face the positive X-axis.
         case x = 0 // FACE_X

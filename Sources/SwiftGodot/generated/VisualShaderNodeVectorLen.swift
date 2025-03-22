@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translated to `length(p0)` in the shader language.
 open class VisualShaderNodeVectorLen: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorLen" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorLen")
+    override open class var godotClassName: StringName { className }
 }
 

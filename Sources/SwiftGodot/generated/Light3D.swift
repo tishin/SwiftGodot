@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Light3D is the _abstract_ base class for light nodes. As it can't be instantiated, it shouldn't be used directly. Other types of light nodes inherit from it. Light3D contains the common variables and parameters used for lighting.
 open class Light3D: VisualInstance3D {
-    override open class var godotClassName: StringName { "Light3D" }
+    fileprivate static var className = StringName("Light3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// Constant for accessing ``lightEnergy``.
         case energy = 0 // PARAM_ENERGY

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,6 +30,7 @@ import Musl
 /// > Note: This calculation is different from using a negative value in ``AnimationNodeAdd2``, since the transformation matrices do not satisfy the commutative law. ``AnimationNodeSub2`` multiplies the transformation matrix of the inverted animation from the left side, while negative ``AnimationNodeAdd2`` multiplies it from the right side.
 /// 
 open class AnimationNodeSub2: AnimationNodeSync {
-    override open class var godotClassName: StringName { "AnimationNodeSub2" }
+    fileprivate static var className = StringName("AnimationNodeSub2")
+    override open class var godotClassName: StringName { className }
 }
 

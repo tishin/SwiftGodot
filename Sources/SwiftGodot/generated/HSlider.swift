@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A horizontal slider, used to adjust a value by moving a grabber along a horizontal axis. It is a ``Range``-based control and goes from left (min) to right (max).
 open class HSlider: Slider {
-    override open class var godotClassName: StringName { "HSlider" }
+    fileprivate static var className = StringName("HSlider")
+    override open class var godotClassName: StringName { className }
 }
 

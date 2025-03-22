@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// As face trackers are turned on they are registered with the ``XRServer``.
 /// 
 open class XRFaceTracker: XRTracker {
-    override open class var godotClassName: StringName { "XRFaceTracker" }
+    fileprivate static var className = StringName("XRFaceTracker")
+    override open class var godotClassName: StringName { className }
     public enum BlendShapeEntry: Int64, CaseIterable {
         /// Right eye looks outwards.
         case eyeLookOutRight = 0 // FT_EYE_LOOK_OUT_RIGHT

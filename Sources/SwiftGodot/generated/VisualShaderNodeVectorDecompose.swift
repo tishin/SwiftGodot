@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Takes a `vec2`, `vec3` or `vec4` and decomposes it into scalar values that can be used as separate outputs.
 open class VisualShaderNodeVectorDecompose: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorDecompose" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorDecompose")
+    override open class var godotClassName: StringName { className }
 }
 

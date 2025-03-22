@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An optimized translation, used by default for CSV Translations. Uses real-time compressed translations, which results in very small dictionaries.
 open class OptimizedTranslation: Translation {
-    override open class var godotClassName: StringName { "OptimizedTranslation" }
+    fileprivate static var className = StringName("OptimizedTranslation")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_generate: GDExtensionMethodBindPtr = {
         let methodName = StringName("generate")

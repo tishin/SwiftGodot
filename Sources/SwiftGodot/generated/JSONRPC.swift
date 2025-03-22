@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// <a href="https://www.jsonrpc.org/">JSON-RPC</a> is a standard which wraps a method call in a ``JSON`` object. The object has a particular structure and identifies which method is called, the parameters to that function, and carries an ID to keep track of responses. This class implements that standard on top of ``GDictionary``; you will have to convert between a ``GDictionary`` and ``JSON`` with other functions.
 open class JSONRPC: Object {
-    override open class var godotClassName: StringName { "JSONRPC" }
+    fileprivate static var className = StringName("JSONRPC")
+    override open class var godotClassName: StringName { className }
     public enum ErrorCode: Int64, CaseIterable {
         /// The request could not be parsed as it was not valid by JSON standard (``JSON/parse(jsonText:keepText:)`` failed).
         case parseError = -32700 // PARSE_ERROR

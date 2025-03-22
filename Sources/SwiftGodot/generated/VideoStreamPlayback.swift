@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class is intended to be overridden by video decoder extensions with custom implementations of ``VideoStream``.
 open class VideoStreamPlayback: Resource {
-    override open class var godotClassName: StringName { "VideoStreamPlayback" }
+    fileprivate static var className = StringName("VideoStreamPlayback")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Stops playback. May be called multiple times before ``_play()``, or in response to ``VideoStreamPlayer/stop()``. ``_isPlaying()`` should return false once stopped.
     @_documentation(visibility: public)

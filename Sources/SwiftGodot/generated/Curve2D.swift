@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// It keeps a cache of precalculated points along the curve, to speed up further calculations.
 /// 
 open class Curve2D: Resource {
-    override open class var godotClassName: StringName { "Curve2D" }
+    fileprivate static var className = StringName("Curve2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

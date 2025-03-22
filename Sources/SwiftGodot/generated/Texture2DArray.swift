@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To create such a texture file yourself, reimport your image files using the Godot Editor import presets.
 /// 
 open class Texture2DArray: ImageTextureLayered {
-    override open class var godotClassName: StringName { "Texture2DArray" }
+    fileprivate static var className = StringName("Texture2DArray")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_placeholder")

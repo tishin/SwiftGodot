@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Creates a `vec2`, `vec3` or `vec4` using scalar values that can be provided from separate inputs.
 open class VisualShaderNodeVectorCompose: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorCompose" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorCompose")
+    override open class var godotClassName: StringName { className }
 }
 

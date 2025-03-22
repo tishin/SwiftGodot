@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -45,7 +47,8 @@ import Musl
 /// - ``editedObjectChanged``
 /// - ``restartRequested``
 open class EditorInspector: ScrollContainer {
-    override open class var godotClassName: StringName { "EditorInspector" }
+    fileprivate static var className = StringName("EditorInspector")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_selected_path: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_selected_path")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// This importer imports ``CompressedTexture2D`` resources. If you need to process the image in scripts in a more convenient way, use ``ResourceImporterImage`` instead. See also ``ResourceImporterLayeredTexture``.
 open class ResourceImporterTexture: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterTexture" }
+    fileprivate static var className = StringName("ResourceImporterTexture")
+    override open class var godotClassName: StringName { className }
 }
 

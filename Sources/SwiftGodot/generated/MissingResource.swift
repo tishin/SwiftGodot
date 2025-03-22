@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Warning: Ignore missing resources unless you know what you are doing. Existing properties on a missing resource can be freely modified in code, regardless of the type they are intended to be.
 /// 
 open class MissingResource: Resource {
-    override open class var godotClassName: StringName { "MissingResource" }
+    fileprivate static var className = StringName("MissingResource")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

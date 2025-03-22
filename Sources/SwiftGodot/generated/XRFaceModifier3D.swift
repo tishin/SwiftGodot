@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The node attempts to identify blend shapes based on name matching. Blend shapes should match the names listed in the <a href="https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview">Unified Expressions Compatibility</a> chart.
 /// 
 open class XRFaceModifier3D: Node3D {
-    override open class var godotClassName: StringName { "XRFaceModifier3D" }
+    fileprivate static var className = StringName("XRFaceModifier3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An OpenXR composition layer that allows rendering a ``SubViewport`` on a quad.
 open class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
-    override open class var godotClassName: StringName { "OpenXRCompositionLayerQuad" }
+    fileprivate static var className = StringName("OpenXRCompositionLayerQuad")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// To manage editor feature profiles visually, use **Editor > Manage Feature Profiles...** at the top of the editor window.
 /// 
 open class EditorFeatureProfile: RefCounted {
-    override open class var godotClassName: StringName { "EditorFeatureProfile" }
+    fileprivate static var className = StringName("EditorFeatureProfile")
+    override open class var godotClassName: StringName { className }
     public enum Feature: Int64, CaseIterable {
         /// The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
         case feature3d = 0 // FEATURE_3D

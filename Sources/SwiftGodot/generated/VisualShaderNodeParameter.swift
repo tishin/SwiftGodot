@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A parameter represents a variable in the shader which is set externally, i.e. from the ``ShaderMaterial``. Parameters are exposed as properties in the ``ShaderMaterial`` and can be assigned from the Inspector or from a script.
 open class VisualShaderNodeParameter: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeParameter")
+    override open class var godotClassName: StringName { className }
     public enum Qualifier: Int64, CaseIterable {
         /// The parameter will be tied to the ``ShaderMaterial`` using this shader.
         case none = 0 // QUAL_NONE

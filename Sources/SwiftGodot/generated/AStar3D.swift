@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// If the default ``_estimateCost(fromId:toId:)`` and ``_computeCost(fromId:toId:)`` methods are used, or if the supplied ``_estimateCost(fromId:toId:)`` method returns a lower bound of the cost, then the paths returned by A* will be the lowest-cost paths. Here, the cost of a path equals the sum of the ``_computeCost(fromId:toId:)`` results of all segments in the path multiplied by the `weight_scale`s of the endpoints of the respective segments. If the default methods are used and the `weight_scale`s of all points are set to `1.0`, then this equals the sum of Euclidean distances of all segments in the path.
 /// 
 open class AStar3D: RefCounted {
-    override open class var godotClassName: StringName { "AStar3D" }
+    fileprivate static var className = StringName("AStar3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when estimating the cost between a point and the path's ending point.
     /// 

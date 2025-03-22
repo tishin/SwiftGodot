@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Performs a lookup operation on the provided texture, with support for multiple texture sources to choose from.
 open class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
-    override open class var godotClassName: StringName { "VisualShaderNodeTexture3D" }
+    fileprivate static var className = StringName("VisualShaderNodeTexture3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

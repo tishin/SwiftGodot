@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -22,7 +24,8 @@ import Musl
 /// This class implements a reader that can extract the content of individual files inside a zip archive.
 /// 
 open class ZIPReader: RefCounted {
-    override open class var godotClassName: StringName { "ZIPReader" }
+    fileprivate static var className = StringName("ZIPReader")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_open: GDExtensionMethodBindPtr = {
         let methodName = StringName("open")

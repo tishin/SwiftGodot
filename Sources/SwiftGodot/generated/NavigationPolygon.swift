@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Adding vertices and polygon indices manually.
 /// 
 open class NavigationPolygon: Resource {
-    override open class var godotClassName: StringName { "NavigationPolygon" }
+    fileprivate static var className = StringName("NavigationPolygon")
+    override open class var godotClassName: StringName { className }
     public enum ParsedGeometryType: Int64, CaseIterable {
         /// Parses mesh instances as obstruction geometry. This includes ``Polygon2D``, ``MeshInstance2D``, ``MultiMeshInstance2D``, and ``TileMap`` nodes.
         /// 

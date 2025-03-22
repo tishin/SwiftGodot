@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Meta class for playing back audio samples.
 open class AudioSamplePlayback: RefCounted {
-    override open class var godotClassName: StringName { "AudioSamplePlayback" }
+    fileprivate static var className = StringName("AudioSamplePlayback")
+    override open class var godotClassName: StringName { className }
 }
 

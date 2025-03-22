@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// - ``poseRecentered``
 /// - ``refreshRateChanged``
 open class OpenXRInterface: XRInterface {
-    override open class var godotClassName: StringName { "OpenXRInterface" }
+    fileprivate static var className = StringName("OpenXRInterface")
+    override open class var godotClassName: StringName { className }
     public enum Hand: Int64, CaseIterable {
         /// Left hand.
         case left = 0 // HAND_LEFT

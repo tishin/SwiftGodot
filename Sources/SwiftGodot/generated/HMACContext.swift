@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -22,7 +24,8 @@ import Musl
 /// The HMACContext class is useful for advanced HMAC use cases, such as streaming the message as it supports creating the message over time rather than providing it all at once.
 /// 
 open class HMACContext: RefCounted {
-    override open class var godotClassName: StringName { "HMACContext" }
+    fileprivate static var className = StringName("HMACContext")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_start: GDExtensionMethodBindPtr = {
         let methodName = StringName("start")

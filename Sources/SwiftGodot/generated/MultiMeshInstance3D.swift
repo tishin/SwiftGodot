@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This is useful to optimize the rendering of a high number of instances of a given mesh (for example trees in a forest or grass strands).
 /// 
 open class MultiMeshInstance3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "MultiMeshInstance3D" }
+    fileprivate static var className = StringName("MultiMeshInstance3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

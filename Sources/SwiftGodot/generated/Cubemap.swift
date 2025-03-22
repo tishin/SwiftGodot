@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Godot doesn't support using cubemaps in a ``PanoramaSkyMaterial``. You can use <a href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map.
 /// 
 open class Cubemap: ImageTextureLayered {
-    override open class var godotClassName: StringName { "Cubemap" }
+    fileprivate static var className = StringName("Cubemap")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_placeholder")

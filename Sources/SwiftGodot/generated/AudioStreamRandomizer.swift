@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Picks a random AudioStream from the pool, depending on the playback mode, and applies random pitch shifting and volume shifting during playback.
 open class AudioStreamRandomizer: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamRandomizer" }
+    fileprivate static var className = StringName("AudioStreamRandomizer")
+    override open class var godotClassName: StringName { className }
     public enum PlaybackMode: Int64, CaseIterable {
         /// Pick a stream at random according to the probability weights chosen for each stream, but avoid playing the same stream twice in a row whenever possible. If only 1 sound is present in the pool, the same sound will always play, effectively allowing repeats to occur.
         case randomNoRepeats = 0 // PLAYBACK_RANDOM_NO_REPEATS

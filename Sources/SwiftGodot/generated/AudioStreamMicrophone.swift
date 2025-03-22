@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: ``ProjectSettings/audio/driver/enableInput`` must be `true` for audio input to work. See also that setting's description for caveats related to permissions and operating system privacy settings.
 /// 
 open class AudioStreamMicrophone: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamMicrophone" }
+    fileprivate static var className = StringName("AudioStreamMicrophone")
+    override open class var godotClassName: StringName { className }
 }
 

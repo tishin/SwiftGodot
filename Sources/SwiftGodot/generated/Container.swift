@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// - ``preSortChildren``
 /// - ``sortChildren``
 open class Container: Control {
-    override open class var godotClassName: StringName { "Container" }
+    fileprivate static var className = StringName("Container")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Notification just before children are going to be sorted, in case there's something to process beforehand.
     public static let notificationPreSortChildren = 50

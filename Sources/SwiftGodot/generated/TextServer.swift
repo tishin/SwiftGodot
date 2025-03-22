@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// This is an abstract class, so to get the currently active ``TextServer`` instance, use the following code:
 /// 
 open class TextServer: RefCounted {
-    override open class var godotClassName: StringName { "TextServer" }
+    fileprivate static var className = StringName("TextServer")
+    override open class var godotClassName: StringName { className }
     public enum FontAntialiasing: Int64, CaseIterable {
         /// Font glyphs are rasterized as 1-bit bitmaps.
         case none = 0 // FONT_ANTIALIASING_NONE

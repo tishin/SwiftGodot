@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// A heightmap collision shape can also be build by using an ``Image`` reference:
 /// 
 open class HeightMapShape3D: Shape3D {
-    override open class var godotClassName: StringName { "HeightMapShape3D" }
+    fileprivate static var className = StringName("HeightMapShape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

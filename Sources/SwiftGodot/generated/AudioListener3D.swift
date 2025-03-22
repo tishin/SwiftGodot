@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Once added to the scene tree and enabled using ``makeCurrent()``, this node will override the location sounds are heard from. This can be used to listen from a location different from the ``Camera3D``.
 open class AudioListener3D: Node3D {
-    override open class var godotClassName: StringName { "AudioListener3D" }
+    fileprivate static var className = StringName("AudioListener3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_make_current: GDExtensionMethodBindPtr = {
         let methodName = StringName("make_current")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: While Ogg Theora videos can also have an `.ogg` extension, you will have to rename the extension to `.ogv` to use those videos within Godot.
 /// 
 open class VideoStreamTheora: VideoStream {
-    override open class var godotClassName: StringName { "VideoStreamTheora" }
+    fileprivate static var className = StringName("VideoStreamTheora")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A texture-based nine-patch ``StyleBox``, in a way similar to ``NinePatchRect``. This stylebox performs a 3×3 scaling of a texture, where only the center cell is fully stretched. This makes it possible to design bordered styles regardless of the stylebox's size.
 open class StyleBoxTexture: StyleBox {
-    override open class var godotClassName: StringName { "StyleBoxTexture" }
+    fileprivate static var className = StringName("StyleBoxTexture")
+    override open class var godotClassName: StringName { className }
     public enum AxisStretchMode: Int64, CaseIterable {
         /// Stretch the stylebox's texture. This results in visible distortion unless the texture size matches the stylebox's size perfectly.
         case stretch = 0 // AXIS_STRETCH_MODE_STRETCH

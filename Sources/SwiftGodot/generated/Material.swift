@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Importantly, you can inherit from ``Material`` to create your own custom material type in script or in GDExtension.
 /// 
 open class Material: Resource {
-    override open class var godotClassName: StringName { "Material" }
+    fileprivate static var className = StringName("Material")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Maximum value for the ``renderPriority`` parameter.
     public static let renderPriorityMax = 127

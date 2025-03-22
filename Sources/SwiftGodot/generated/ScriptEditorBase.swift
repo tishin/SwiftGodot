@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - ``replaceInFilesRequested``
 /// - ``goToMethod``
 open class ScriptEditorBase: VBoxContainer {
-    override open class var godotClassName: StringName { "ScriptEditorBase" }
+    fileprivate static var className = StringName("ScriptEditorBase")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_base_editor: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_base_editor")

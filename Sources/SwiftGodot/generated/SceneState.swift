@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This class cannot be instantiated directly, it is retrieved for a given scene as the result of ``PackedScene/getState()``.
 /// 
 open class SceneState: RefCounted {
-    override open class var godotClassName: StringName { "SceneState" }
+    fileprivate static var className = StringName("SceneState")
+    override open class var godotClassName: StringName { className }
     public enum GenEditState: Int64, CaseIterable {
         /// If passed to ``PackedScene/instantiate(editState:)``, blocks edits to the scene state.
         case disabled = 0 // GEN_EDIT_STATE_DISABLED

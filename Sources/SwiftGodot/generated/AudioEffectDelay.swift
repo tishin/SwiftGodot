@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// 
 /// Plays input signal back after a period of time. The delayed signal may be played back multiple times to create the sound of a repeating, decaying echo. Delay effects range from a subtle echo effect to a pronounced blending of previous sounds with new sounds.
 open class AudioEffectDelay: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectDelay" }
+    fileprivate static var className = StringName("AudioEffectDelay")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class ScriptExtension: Script {
-    override open class var godotClassName: StringName { "ScriptExtension" }
+    fileprivate static var className = StringName("ScriptExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// 
     @_documentation(visibility: public)

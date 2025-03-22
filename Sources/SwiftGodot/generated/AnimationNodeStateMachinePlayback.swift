@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Example:**
 /// 
 open class AnimationNodeStateMachinePlayback: Resource {
-    override open class var godotClassName: StringName { "AnimationNodeStateMachinePlayback" }
+    fileprivate static var className = StringName("AnimationNodeStateMachinePlayback")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_travel: GDExtensionMethodBindPtr = {
         let methodName = StringName("travel")

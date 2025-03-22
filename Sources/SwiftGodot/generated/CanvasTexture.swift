@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``CanvasTexture`` cannot be used in 3D. It will not display correctly when applied to any ``VisualInstance3D``, such as ``Sprite3D`` or ``Decal``. For physically-based materials in 3D, use ``BaseMaterial3D`` instead.
 /// 
 open class CanvasTexture: Texture2D {
-    override open class var godotClassName: StringName { "CanvasTexture" }
+    fileprivate static var className = StringName("CanvasTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

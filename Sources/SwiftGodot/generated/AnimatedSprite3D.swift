@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - ``animationLooped``
 /// - ``animationFinished``
 open class AnimatedSprite3D: SpriteBase3D {
-    override open class var godotClassName: StringName { "AnimatedSprite3D" }
+    fileprivate static var className = StringName("AnimatedSprite3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

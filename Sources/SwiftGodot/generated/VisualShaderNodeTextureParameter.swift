@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Performs a lookup operation on the texture provided as a uniform for the shader.
 open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeTextureParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeTextureParameter")
+    override open class var godotClassName: StringName { className }
     public enum TextureType: Int64, CaseIterable {
         /// No hints are added to the uniform declaration.
         case data = 0 // TYPE_DATA

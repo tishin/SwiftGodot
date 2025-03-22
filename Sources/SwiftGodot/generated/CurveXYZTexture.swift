@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// If you only need to store one curve within a single texture, use ``CurveTexture`` instead. See also ``GradientTexture1D`` and ``GradientTexture2D``.
 /// 
 open class CurveXYZTexture: Texture2D {
-    override open class var godotClassName: StringName { "CurveXYZTexture" }
+    fileprivate static var className = StringName("CurveXYZTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

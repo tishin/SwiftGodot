@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -41,7 +43,8 @@ import Musl
 /// - ``dpiChanged``
 /// - ``titlebarChanged``
 open class Window: Viewport {
-    override open class var godotClassName: StringName { "Window" }
+    fileprivate static var className = StringName("Window")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Windowed mode, i.e. ``Window`` doesn't occupy the whole screen (unless set to the size of the screen).
         case windowed = 0 // MODE_WINDOWED

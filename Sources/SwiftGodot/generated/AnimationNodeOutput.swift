@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A node created automatically in an ``AnimationNodeBlendTree`` that outputs the final animation.
 open class AnimationNodeOutput: AnimationNode {
-    override open class var godotClassName: StringName { "AnimationNodeOutput" }
+    fileprivate static var className = StringName("AnimationNodeOutput")
+    override open class var godotClassName: StringName { className }
 }
 

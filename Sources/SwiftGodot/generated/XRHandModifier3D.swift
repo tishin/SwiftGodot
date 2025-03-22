@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The hand tracking position-data is scaled by ``Skeleton3D/motionScale`` when applied to the skeleton, which can be used to adjust the tracked hand to match the scale of the hand model.
 /// 
 open class XRHandModifier3D: SkeletonModifier3D {
-    override open class var godotClassName: StringName { "XRHandModifier3D" }
+    fileprivate static var className = StringName("XRHandModifier3D")
+    override open class var godotClassName: StringName { className }
     public enum BoneUpdate: Int64, CaseIterable {
         /// The skeleton's bones are fully updated (both position and rotation) to match the tracked bones.
         case full = 0 // BONE_UPDATE_FULL

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// - ``sizeChanged``
 /// - ``guiFocusChanged``
 open class Viewport: Node {
-    override open class var godotClassName: StringName { "Viewport" }
+    fileprivate static var className = StringName("Viewport")
+    override open class var godotClassName: StringName { className }
     public enum PositionalShadowAtlasQuadrantSubdiv: Int64, CaseIterable {
         /// This quadrant will not be used.
         case disabled = 0 // SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED

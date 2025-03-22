@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base resource type for all video streams. Classes that derive from ``VideoStream`` can all be used as resource types to play back videos in ``VideoStreamPlayer``.
 open class VideoStream: Resource {
-    override open class var godotClassName: StringName { "VideoStream" }
+    fileprivate static var className = StringName("VideoStream")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

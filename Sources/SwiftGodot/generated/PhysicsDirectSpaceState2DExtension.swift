@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsDirectSpaceState2D``.
 /// 
 open class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
-    override open class var godotClassName: StringName { "PhysicsDirectSpaceState2DExtension" }
+    fileprivate static var className = StringName("PhysicsDirectSpaceState2DExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_is_body_excluded_from_query: GDExtensionMethodBindPtr = {
         let methodName = StringName("is_body_excluded_from_query")

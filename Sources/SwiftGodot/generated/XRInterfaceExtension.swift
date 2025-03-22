@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// External XR interface plugins should inherit from this class.
 open class XRInterfaceExtension: XRInterface {
-    override open class var godotClassName: StringName { "XRInterfaceExtension" }
+    fileprivate static var className = StringName("XRInterfaceExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns the name of this interface.
     @_documentation(visibility: public)

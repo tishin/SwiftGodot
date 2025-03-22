@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Soft clipping starts to reduce the peaks a little below the threshold level and progressively increases its effect as the input level increases such that the threshold is never exceeded.
 /// 
 open class AudioEffectLimiter: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectLimiter" }
+    fileprivate static var className = StringName("AudioEffectLimiter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

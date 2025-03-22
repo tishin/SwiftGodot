@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ open class Time: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Time" }
+    fileprivate static var className = StringName("Time")
+    override open class var godotClassName: StringName { className }
     public enum Month: Int64, CaseIterable {
         /// The month of January, represented numerically as `01`.
         case january = 1 // MONTH_JANUARY

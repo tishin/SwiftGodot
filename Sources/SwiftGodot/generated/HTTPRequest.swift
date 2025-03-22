@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ import Musl
 /// 
 /// - ``requestCompleted``
 open class HTTPRequest: Node {
-    override open class var godotClassName: StringName { "HTTPRequest" }
+    fileprivate static var className = StringName("HTTPRequest")
+    override open class var godotClassName: StringName { className }
     public enum Result: Int64, CaseIterable {
         /// Request successful.
         case success = 0 // RESULT_SUCCESS

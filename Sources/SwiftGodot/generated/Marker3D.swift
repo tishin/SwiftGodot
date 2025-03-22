@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Generic 3D position hint for editing. It's just like a plain ``Node3D``, but it displays as a cross in the 3D editor at all times.
 open class Marker3D: Node3D {
-    override open class var godotClassName: StringName { "Marker3D" }
+    fileprivate static var className = StringName("Marker3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

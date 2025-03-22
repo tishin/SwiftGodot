@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Blend Shapes will be ignored if used in a MultiMesh.
 /// 
 open class MultiMesh: Resource {
-    override open class var godotClassName: StringName { "MultiMesh" }
+    fileprivate static var className = StringName("MultiMesh")
+    override open class var godotClassName: StringName { className }
     public enum TransformFormat: Int64, CaseIterable {
         /// Use this when using 2D transforms.
         case transform2d = 0 // TRANSFORM_2D

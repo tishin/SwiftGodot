@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A horizontal menu bar that creates a ``MenuButton`` for each ``PopupMenu`` child. New items are created by adding ``PopupMenu``s to this node.
 open class MenuBar: Control {
-    override open class var godotClassName: StringName { "MenuBar" }
+    fileprivate static var className = StringName("MenuBar")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

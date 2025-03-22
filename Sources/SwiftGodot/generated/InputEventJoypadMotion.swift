@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Stores information about joystick motions. One ``InputEventJoypadMotion`` represents one axis at a time. For gamepad buttons, see ``InputEventJoypadButton``.
 open class InputEventJoypadMotion: InputEvent {
-    override open class var godotClassName: StringName { "InputEventJoypadMotion" }
+    fileprivate static var className = StringName("InputEventJoypadMotion")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

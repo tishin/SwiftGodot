@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// ``ProceduralSkyMaterial`` uses a lightweight shader to draw the sky and is therefore suited for real-time updates. This makes it a great option for a sky that is simple and computationally cheap, but unrealistic. If you need a more realistic procedural option, use ``PhysicalSkyMaterial``.
 /// 
 open class ProceduralSkyMaterial: Material {
-    override open class var godotClassName: StringName { "ProceduralSkyMaterial" }
+    fileprivate static var className = StringName("ProceduralSkyMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

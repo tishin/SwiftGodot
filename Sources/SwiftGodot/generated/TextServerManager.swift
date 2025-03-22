@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ open class TextServerManager: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "TextServerManager" }
+    fileprivate static var className = StringName("TextServerManager")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_add_interface: GDExtensionMethodBindPtr = {
         let methodName = StringName("add_interface")

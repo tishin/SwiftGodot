@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ import Musl
 /// To use ``EditorInspectorPlugin``, register it using the ``EditorPlugin/addInspectorPlugin(_:)`` method first.
 /// 
 open class EditorInspectorPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorInspectorPlugin" }
+    fileprivate static var className = StringName("EditorInspectorPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns `true` if this object can be handled by this plugin.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Simple texture that uses a mesh to draw itself. It's limited because flags can't be changed and region drawing is not supported.
 open class MeshTexture: Texture2D {
-    override open class var godotClassName: StringName { "MeshTexture" }
+    fileprivate static var className = StringName("MeshTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

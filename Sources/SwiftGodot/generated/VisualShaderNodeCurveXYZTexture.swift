@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Comes with a built-in editor for texture's curves.
 open class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeCurveXYZTexture" }
+    fileprivate static var className = StringName("VisualShaderNodeCurveXYZTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

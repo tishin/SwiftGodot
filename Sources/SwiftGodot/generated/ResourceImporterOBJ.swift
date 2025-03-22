@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// See also ``ResourceImporterScene``, which is used for more advanced 3D formats such as glTF.
 /// 
 open class ResourceImporterOBJ: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterOBJ" }
+    fileprivate static var className = StringName("ResourceImporterOBJ")
+    override open class var godotClassName: StringName { className }
 }
 

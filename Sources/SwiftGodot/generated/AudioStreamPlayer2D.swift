@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``finished``
 open class AudioStreamPlayer2D: Node2D {
-    override open class var godotClassName: StringName { "AudioStreamPlayer2D" }
+    fileprivate static var className = StringName("AudioStreamPlayer2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

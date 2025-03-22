@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Orientation, location, linear velocity and angular velocity are all provided for each pose by the XR runtime. This object contains this state of a pose.
 /// 
 open class XRPose: RefCounted {
-    override open class var godotClassName: StringName { "XRPose" }
+    fileprivate static var className = StringName("XRPose")
+    override open class var godotClassName: StringName { className }
     public enum TrackingConfidence: Int64, CaseIterable {
         /// No tracking information is available for this pose.
         case none = 0 // XR_TRACKING_CONFIDENCE_NONE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: ``RenderingDevice`` is not available when running in headless mode or when using the Compatibility rendering method.
 /// 
 open class RenderingDevice: Object {
-    override open class var godotClassName: StringName { "RenderingDevice" }
+    fileprivate static var className = StringName("RenderingDevice")
+    override open class var godotClassName: StringName { className }
     public enum DeviceType: Int64, CaseIterable {
         /// Rendering device type does not match any of the other enum values or is unknown.
         case other = 0 // DEVICE_TYPE_OTHER

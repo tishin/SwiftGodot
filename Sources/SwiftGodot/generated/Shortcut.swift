@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// One shortcut can contain multiple ``InputEvent``'s, allowing the possibility of triggering one action with multiple different inputs.
 /// 
 open class Shortcut: Resource {
-    override open class var godotClassName: StringName { "Shortcut" }
+    fileprivate static var className = StringName("Shortcut")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - ``animationNodeRenamed``
 /// - ``animationNodeRemoved``
 open class AnimationNode: Resource {
-    override open class var godotClassName: StringName { "AnimationNode" }
+    fileprivate static var className = StringName("AnimationNode")
+    override open class var godotClassName: StringName { className }
     public enum FilterAction: Int64, CaseIterable {
         /// Do not use filtering.
         case ignore = 0 // FILTER_IGNORE

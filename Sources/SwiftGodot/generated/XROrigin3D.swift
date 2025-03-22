@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// For example, if your character is driving a car, the ``XROrigin3D`` node should be a child node of this car. Or, if you're implementing a teleport system to move your character, you should change the position of this node.
 /// 
 open class XROrigin3D: Node3D {
-    override open class var godotClassName: StringName { "XROrigin3D" }
+    fileprivate static var className = StringName("XROrigin3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// - Certain errors, such as invalid Unicode sequences, do not cause a parser error. Instead, the string is cleansed and an error is logged to the console.
 /// 
 open class JSON: Resource {
-    override open class var godotClassName: StringName { "JSON" }
+    fileprivate static var className = StringName("JSON")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

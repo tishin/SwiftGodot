@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -58,7 +60,8 @@ import Musl
 /// - ``replacingBy``
 /// - ``editorDescriptionChanged``
 open class Node: Object {
-    override open class var godotClassName: StringName { "Node" }
+    fileprivate static var className = StringName("Node")
+    override open class var godotClassName: StringName { className }
     public enum ProcessMode: Int64, CaseIterable {
         /// Inherits ``processMode`` from the node's parent. This is the default for any newly created node.
         case inherit = 0 // PROCESS_MODE_INHERIT

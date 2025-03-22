@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - ``boneMapUpdated``
 /// - ``profileUpdated``
 open class BoneMap: Resource {
-    override open class var godotClassName: StringName { "BoneMap" }
+    fileprivate static var className = StringName("BoneMap")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

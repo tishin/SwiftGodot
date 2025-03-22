@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Reduces all frequencies below the ``AudioEffectFilter/cutoffHz``.
 open class AudioEffectLowShelfFilter: AudioEffectFilter {
-    override open class var godotClassName: StringName { "AudioEffectLowShelfFilter" }
+    fileprivate static var className = StringName("AudioEffectLowShelfFilter")
+    override open class var godotClassName: StringName { className }
 }
 

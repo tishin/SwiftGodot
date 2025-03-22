@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// When events are compared, properties are checked in the following priority - ``keycode``, ``physicalKeycode`` and ``unicode``. Events with the first matching value will be considered equal.
 /// 
 open class InputEventKey: InputEventWithModifiers {
-    override open class var godotClassName: StringName { "InputEventKey" }
+    fileprivate static var className = StringName("InputEventKey")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

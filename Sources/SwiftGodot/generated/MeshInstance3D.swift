@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// MeshInstance3D is a node that takes a ``Mesh`` resource and adds it to the current scenario by creating an instance of it. This is the class most often used render 3D geometry and can be used to instance a single ``Mesh`` in many places. This allows reusing geometry, which can save on resources. When a ``Mesh`` has to be instantiated more than thousands of times at close proximity, consider using a ``MultiMesh`` in a ``MultiMeshInstance3D`` instead.
 open class MeshInstance3D: GeometryInstance3D {
-    override open class var godotClassName: StringName { "MeshInstance3D" }
+    fileprivate static var className = StringName("MeshInstance3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

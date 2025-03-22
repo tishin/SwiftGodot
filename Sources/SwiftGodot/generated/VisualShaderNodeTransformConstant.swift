@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A constant ``Transform3D``, which can be used as an input node.
 open class VisualShaderNodeTransformConstant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeTransformConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeTransformConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

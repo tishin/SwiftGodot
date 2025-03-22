@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// - ``navigationMeshChanged``
 /// - ``bakeFinished``
 open class NavigationRegion3D: Node3D {
-    override open class var godotClassName: StringName { "NavigationRegion3D" }
+    fileprivate static var className = StringName("NavigationRegion3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

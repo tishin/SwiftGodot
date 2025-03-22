@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// In the following example we use a ``LineEdit`` node to write our expression and show the result.
 /// 
 open class Expression: RefCounted {
-    override open class var godotClassName: StringName { "Expression" }
+    fileprivate static var className = StringName("Expression")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_parse: GDExtensionMethodBindPtr = {
         let methodName = StringName("parse")

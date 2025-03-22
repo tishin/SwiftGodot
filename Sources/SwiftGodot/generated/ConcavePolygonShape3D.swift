@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// **Performance:** Due to its complexity, ``ConcavePolygonShape3D`` is the slowest 3D collision shape to check collisions against. Its use should generally be limited to level geometry. For convex geometry, ``ConvexPolygonShape3D`` should be used. For dynamic physics bodies that need concave collision, several ``ConvexPolygonShape3D``s can be used to represent its collision by using convex decomposition; see ``ConvexPolygonShape3D``'s documentation for instructions.
 /// 
 open class ConcavePolygonShape3D: Shape3D {
-    override open class var godotClassName: StringName { "ConcavePolygonShape3D" }
+    fileprivate static var className = StringName("ConcavePolygonShape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ import Musl
 /// To use ``EditorTranslationParserPlugin``, register it using the ``EditorPlugin/addTranslationParserPlugin(parser:)`` method first.
 /// 
 open class EditorTranslationParserPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorTranslationParserPlugin" }
+    fileprivate static var className = StringName("EditorTranslationParserPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to define a custom parsing logic to extract the translatable strings.
     @_documentation(visibility: public)

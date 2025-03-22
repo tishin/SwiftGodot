@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to [code skip-lint]float` in the shader language.
 open class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeFloatConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeFloatConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

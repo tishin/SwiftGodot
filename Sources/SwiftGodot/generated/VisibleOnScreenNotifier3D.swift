@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// - ``screenEntered``
 /// - ``screenExited``
 open class VisibleOnScreenNotifier3D: VisualInstance3D {
-    override open class var godotClassName: StringName { "VisibleOnScreenNotifier3D" }
+    fileprivate static var className = StringName("VisibleOnScreenNotifier3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

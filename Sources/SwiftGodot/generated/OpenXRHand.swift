@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// By default the skeleton hand bones are repositioned to match the size of the tracked hand. To preserve the modeled bone sizes change ``boneUpdate`` to apply rotation only.
 /// 
 open class OpenXRHand: Node3D {
-    override open class var godotClassName: StringName { "OpenXRHand" }
+    fileprivate static var className = StringName("OpenXRHand")
+    override open class var godotClassName: StringName { className }
     public enum Hands: Int64, CaseIterable {
         /// Tracking the player's left hand.
         case left = 0 // HAND_LEFT

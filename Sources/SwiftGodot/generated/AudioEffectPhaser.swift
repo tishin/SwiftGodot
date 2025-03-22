@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// 
 /// Combines phase-shifted signals with the original signal. The movement of the phase-shifted signals is controlled using a low-frequency oscillator.
 open class AudioEffectPhaser: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectPhaser" }
+    fileprivate static var className = StringName("AudioEffectPhaser")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

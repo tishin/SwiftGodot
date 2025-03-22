@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Uniform set cache manager for Rendering Device based renderers. Provides a way to create a uniform set and reuse it in subsequent calls for as long as the uniform set exists. Uniform set will automatically be cleaned up when dependent objects are freed.
 open class UniformSetCacheRD: Object {
-    override open class var godotClassName: StringName { "UniformSetCacheRD" }
+    fileprivate static var className = StringName("UniformSetCacheRD")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_cache: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_cache")

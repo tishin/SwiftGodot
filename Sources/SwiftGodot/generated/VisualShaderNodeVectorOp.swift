@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A visual shader node for use of vector operators. Operates on vector `a` and vector `b`.
 open class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorOp" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorOp")
+    override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Adds two vectors.
         case add = 0 // OP_ADD

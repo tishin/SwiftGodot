@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class TranslationServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "TranslationServer" }
+    fileprivate static var className = StringName("TranslationServer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

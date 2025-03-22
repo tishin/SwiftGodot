@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Warning: Ignore missing nodes unless you know what you are doing. Existing properties on a missing node can be freely modified in code, regardless of the type they are intended to be.
 /// 
 open class MissingNode: Node {
-    override open class var godotClassName: StringName { "MissingNode" }
+    fileprivate static var className = StringName("MissingNode")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

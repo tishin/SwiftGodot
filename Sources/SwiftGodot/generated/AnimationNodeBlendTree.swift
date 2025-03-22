@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``nodeChanged``
 open class AnimationNodeBlendTree: AnimationRootNode {
-    override open class var godotClassName: StringName { "AnimationNodeBlendTree" }
+    fileprivate static var className = StringName("AnimationNodeBlendTree")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// The connection was successful.
     public static let connectionOk = 0

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// You can use <a href="https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html">this tool</a> to convert a cubemap to an equirectangular sky map.
 /// 
 open class PanoramaSkyMaterial: Material {
-    override open class var godotClassName: StringName { "PanoramaSkyMaterial" }
+    fileprivate static var className = StringName("PanoramaSkyMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

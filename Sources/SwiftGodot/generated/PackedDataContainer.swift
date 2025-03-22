@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Nested containers will be packed recursively. While iterating, they will be returned as ``PackedDataContainerRef``.
 /// 
 open class PackedDataContainer: Resource {
-    override open class var godotClassName: StringName { "PackedDataContainer" }
+    fileprivate static var className = StringName("PackedDataContainer")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_pack: GDExtensionMethodBindPtr = {
         let methodName = StringName("pack")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``popupHide``
 open class Popup: Window {
-    override open class var godotClassName: StringName { "Popup" }
+    fileprivate static var className = StringName("Popup")
+    override open class var godotClassName: StringName { className }
     // Signals 
     /// Emitted when the popup is hidden.
     ///

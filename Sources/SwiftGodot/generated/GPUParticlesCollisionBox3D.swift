@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
-    override open class var godotClassName: StringName { "GPUParticlesCollisionBox3D" }
+    fileprivate static var className = StringName("GPUParticlesCollisionBox3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

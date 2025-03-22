@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A variant of ``FlowContainer`` that can only arrange its child controls vertically, wrapping them around at the borders. This is similar to how text in a book wraps around when no more words can fit on a line, except vertically.
 open class VFlowContainer: FlowContainer {
-    override open class var godotClassName: StringName { "VFlowContainer" }
+    fileprivate static var className = StringName("VFlowContainer")
+    override open class var godotClassName: StringName { className }
 }
 

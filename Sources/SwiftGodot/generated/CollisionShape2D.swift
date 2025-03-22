@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A node that provides a ``Shape2D`` to a ``CollisionObject2D`` parent and allows to edit it. This can give a detection shape to an ``Area2D`` or turn a ``PhysicsBody2D`` into a solid object.
 open class CollisionShape2D: Node2D {
-    override open class var godotClassName: StringName { "CollisionShape2D" }
+    fileprivate static var className = StringName("CollisionShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

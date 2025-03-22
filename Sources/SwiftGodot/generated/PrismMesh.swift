@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Class representing a prism-shaped ``PrimitiveMesh``.
 open class PrismMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "PrismMesh" }
+    fileprivate static var className = StringName("PrismMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``Tween/tweenMethod(_:from:to:duration:)`` is the only correct way to create ``MethodTweener``. Any ``MethodTweener`` created manually will not function correctly.
 /// 
 open class MethodTweener: Tweener {
-    override open class var godotClassName: StringName { "MethodTweener" }
+    fileprivate static var className = StringName("MethodTweener")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_delay: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_delay")

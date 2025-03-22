@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Stores information about multi-touch press/release input events. Supports touch press, touch release and ``index`` for multi-touch count and order.
 open class InputEventScreenTouch: InputEventFromWindow {
-    override open class var godotClassName: StringName { "InputEventScreenTouch" }
+    fileprivate static var className = StringName("InputEventScreenTouch")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

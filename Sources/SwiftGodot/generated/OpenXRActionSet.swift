@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Action sets can contain the same action with the same name, if such action sets are active at the same time the action set with the highest priority defines which binding is active.
 /// 
 open class OpenXRActionSet: Resource {
-    override open class var godotClassName: StringName { "OpenXRActionSet" }
+    fileprivate static var className = StringName("OpenXRActionSet")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

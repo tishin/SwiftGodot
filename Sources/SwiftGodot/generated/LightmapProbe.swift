@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// > Note: ``LightmapProbe`` nodes that are placed after baking lightmaps are ignored by dynamic objects. You must bake lightmaps again after creating or modifying ``LightmapProbe``s for the probes to be effective.
 /// 
 open class LightmapProbe: Node3D {
-    override open class var godotClassName: StringName { "LightmapProbe" }
+    fileprivate static var className = StringName("LightmapProbe")
+    override open class var godotClassName: StringName { className }
 }
 

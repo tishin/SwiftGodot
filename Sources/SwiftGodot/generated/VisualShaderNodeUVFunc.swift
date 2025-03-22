@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// UV functions are similar to ``Vector2`` functions, but the input port of this node uses the shader's UV value by default.
 open class VisualShaderNodeUVFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeUVFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeUVFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Translates `uv` by using `scale` and `offset` values using the following formula: `uv = uv + offset * scale`. `uv` port is connected to `UV` built-in by default.
         case panning = 0 // FUNC_PANNING

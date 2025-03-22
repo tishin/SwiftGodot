@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class is meant to be used with ``AudioStreamGenerator`` to play back the generated audio in real-time.
 open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
-    override open class var godotClassName: StringName { "AudioStreamGeneratorPlayback" }
+    fileprivate static var className = StringName("AudioStreamGeneratorPlayback")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_push_frame: GDExtensionMethodBindPtr = {
         let methodName = StringName("push_frame")

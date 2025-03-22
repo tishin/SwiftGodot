@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The first 3 DOF represent the linear motion of the physics bodies and the last 3 DOF represent the angular motion of the physics bodies. Each axis can be either locked, or limited.
 /// 
 open class Generic6DOFJoint3D: Joint3D {
-    override open class var godotClassName: StringName { "Generic6DOFJoint3D" }
+    fileprivate static var className = StringName("Generic6DOFJoint3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// The minimum difference between the pivot points' axes.
         case linearLowerLimit = 0 // PARAM_LINEAR_LOWER_LIMIT

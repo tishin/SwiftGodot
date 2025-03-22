@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Provides direct access to a physics space in the ``PhysicsServer3D``. It's used mainly to do queries against objects and areas residing in a given space.
 open class PhysicsDirectSpaceState3D: Object {
-    override open class var godotClassName: StringName { "PhysicsDirectSpaceState3D" }
+    fileprivate static var className = StringName("PhysicsDirectSpaceState3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_intersect_point: GDExtensionMethodBindPtr = {
         let methodName = StringName("intersect_point")

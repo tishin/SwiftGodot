@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// This resource is intended to be created from code.
 /// 
 open class PortableCompressedTexture2D: Texture2D {
-    override open class var godotClassName: StringName { "PortableCompressedTexture2D" }
+    fileprivate static var className = StringName("PortableCompressedTexture2D")
+    override open class var godotClassName: StringName { className }
     public enum CompressionMode: Int64, CaseIterable {
         /// 
         case lossless = 0 // COMPRESSION_MODE_LOSSLESS

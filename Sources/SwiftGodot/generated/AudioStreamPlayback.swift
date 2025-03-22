@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Can play, loop, pause a scroll through audio. See ``AudioStream`` and ``AudioStreamOggVorbis`` for usage.
 open class AudioStreamPlayback: RefCounted {
-    override open class var godotClassName: StringName { "AudioStreamPlayback" }
+    fileprivate static var className = StringName("AudioStreamPlayback")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to customize what happens when the playback starts at the given position, such as by calling ``AudioStreamPlayer/play(fromPosition:)``.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// If in the editor, you can set the rest pose of an entire skeleton using a menu option, from the code, you need to iterate over the bones to set their individual rest poses.
 /// 
 open class Bone2D: Node2D {
-    override open class var godotClassName: StringName { "Bone2D" }
+    fileprivate static var className = StringName("Bone2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// This visual shader node is present in all shader graphs in form of "Output" block with multiple output value ports.
 open class VisualShaderNodeOutput: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeOutput" }
+    fileprivate static var className = StringName("VisualShaderNodeOutput")
+    override open class var godotClassName: StringName { className }
 }
 

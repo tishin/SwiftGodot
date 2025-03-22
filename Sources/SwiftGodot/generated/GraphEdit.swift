@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -48,7 +50,8 @@ import Musl
 /// - ``graphElementsLinkedToFrameRequest``
 /// - ``scrollOffsetChanged``
 open class GraphEdit: Control {
-    override open class var godotClassName: StringName { "GraphEdit" }
+    fileprivate static var className = StringName("GraphEdit")
+    override open class var godotClassName: StringName { className }
     public enum PanningScheme: Int64, CaseIterable {
         /// [kbd]Mouse Wheel[/kbd] will zoom, [kbd]Ctrl + Mouse Wheel[/kbd] will move the view.
         case zooms = 0 // SCROLL_ZOOMS

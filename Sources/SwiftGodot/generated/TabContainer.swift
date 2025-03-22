@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - ``tabButtonPressed``
 /// - ``prePopupPressed``
 open class TabContainer: Container {
-    override open class var godotClassName: StringName { "TabContainer" }
+    fileprivate static var className = StringName("TabContainer")
+    override open class var godotClassName: StringName { className }
     public enum TabPosition: Int64, CaseIterable {
         /// Places the tab bar at the top.
         case top = 0 // POSITION_TOP

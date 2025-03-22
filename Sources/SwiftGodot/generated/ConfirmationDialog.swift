@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// To get cancel action, you can use:
 /// 
 open class ConfirmationDialog: AcceptDialog {
-    override open class var godotClassName: StringName { "ConfirmationDialog" }
+    fileprivate static var className = StringName("ConfirmationDialog")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The `new` method of a script subclass creates a new instance. ``Object/setScript(_:)`` extends an existing object, if that object's class matches one of the script's base classes.
 /// 
 open class Script: Resource {
-    override open class var godotClassName: StringName { "Script" }
+    fileprivate static var className = StringName("Script")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

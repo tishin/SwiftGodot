@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: For performance reasons, the [signal Resource.changed] signal is only emitted when the ``Resource/resourceName`` changes. Only in editor, it is also emitted for ``shader`` changes.
 /// 
 open class ShaderMaterial: Material {
-    override open class var godotClassName: StringName { "ShaderMaterial" }
+    fileprivate static var className = StringName("ShaderMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

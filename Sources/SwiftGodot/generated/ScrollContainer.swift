@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// - ``scrollStarted``
 /// - ``scrollEnded``
 open class ScrollContainer: Container {
-    override open class var godotClassName: StringName { "ScrollContainer" }
+    fileprivate static var className = StringName("ScrollContainer")
+    override open class var godotClassName: StringName { className }
     public enum ScrollMode: Int64, CaseIterable {
         /// Scrolling disabled, scrollbar will be invisible.
         case disabled = 0 // SCROLL_MODE_DISABLED

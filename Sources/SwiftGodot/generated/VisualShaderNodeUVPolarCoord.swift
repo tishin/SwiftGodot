@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// UV polar coord node will transform UV values into polar coordinates, with specified scale, zoom strength and repeat parameters. It can be used to create various swirl distortions.
 open class VisualShaderNodeUVPolarCoord: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeUVPolarCoord" }
+    fileprivate static var className = StringName("VisualShaderNodeUVPolarCoord")
+    override open class var godotClassName: StringName { className }
 }
 

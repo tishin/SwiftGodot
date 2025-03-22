@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``CanvasModulate`` applies a color tint to all nodes on a canvas. Only one can be used to tint a canvas, but ``CanvasLayer``s can be used to render things independently.
 open class CanvasModulate: Node2D {
-    override open class var godotClassName: StringName { "CanvasModulate" }
+    fileprivate static var className = StringName("CanvasModulate")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

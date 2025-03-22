@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// When ``AnimatableBody3D`` is moved, its linear and angular velocity are estimated and used to affect other physics bodies in its path. This makes it useful for moving platforms, doors, and other moving objects.
 /// 
 open class AnimatableBody3D: StaticBody3D {
-    override open class var godotClassName: StringName { "AnimatableBody3D" }
+    fileprivate static var className = StringName("AnimatableBody3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

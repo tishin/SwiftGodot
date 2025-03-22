@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Casts a ray against the screen SDF (signed-distance field) and returns the distance travelled.
 open class VisualShaderNodeSDFRaymarch: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeSDFRaymarch" }
+    fileprivate static var className = StringName("VisualShaderNodeSDFRaymarch")
+    override open class var godotClassName: StringName { className }
 }
 

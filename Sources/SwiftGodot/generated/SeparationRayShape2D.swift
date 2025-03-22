@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A 2D ray shape, intended for use in physics. Usually used to provide a shape for a ``CollisionShape2D``. When a ``SeparationRayShape2D`` collides with an object, it tries to separate itself from it by moving its endpoint to the collision point. For example, a ``SeparationRayShape2D`` next to a character can allow it to instantly move up when touching stairs.
 open class SeparationRayShape2D: Shape2D {
-    override open class var godotClassName: StringName { "SeparationRayShape2D" }
+    fileprivate static var className = StringName("SeparationRayShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

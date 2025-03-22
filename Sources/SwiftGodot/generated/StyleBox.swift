@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: For control nodes that have _Theme Properties_, the `focus` ``StyleBox`` is displayed over the `normal`, `hover` or `pressed` ``StyleBox``. This makes the `focus` ``StyleBox`` more reusable across different nodes.
 /// 
 open class StyleBox: Resource {
-    override open class var godotClassName: StringName { "StyleBox" }
+    fileprivate static var className = StringName("StyleBox")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

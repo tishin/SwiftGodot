@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// - ``dragged``
 /// - ``positionOffsetChanged``
 open class GraphElement: Container {
-    override open class var godotClassName: StringName { "GraphElement" }
+    fileprivate static var className = StringName("GraphElement")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

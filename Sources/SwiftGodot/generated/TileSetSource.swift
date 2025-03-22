@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Warning: ``TileSetSource`` can only be added to one TileSet at the same time. Calling ``TileSet/addSource(_:atlasSourceIdOverride:)`` on a second ``TileSet`` will remove the source from the first one.
 /// 
 open class TileSetSource: Resource {
-    override open class var godotClassName: StringName { "TileSetSource" }
+    fileprivate static var className = StringName("TileSetSource")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_tiles_count: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_tiles_count")

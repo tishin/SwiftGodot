@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Casts light in a 2D environment. This light's shape is defined by a (usually grayscale) texture.
 open class PointLight2D: Light2D {
-    override open class var godotClassName: StringName { "PointLight2D" }
+    fileprivate static var className = StringName("PointLight2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

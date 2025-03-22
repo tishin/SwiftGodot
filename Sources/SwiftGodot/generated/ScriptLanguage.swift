@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class ScriptLanguage: Object {
-    override open class var godotClassName: StringName { "ScriptLanguage" }
+    fileprivate static var className = StringName("ScriptLanguage")
+    override open class var godotClassName: StringName { className }
     public enum ScriptNameCasing: Int64, CaseIterable {
         /// 
         case auto = 0 // SCRIPT_NAME_CASING_AUTO

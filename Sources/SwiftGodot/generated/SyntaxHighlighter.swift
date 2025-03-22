@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: A ``SyntaxHighlighter`` instance should not be used across multiple ``TextEdit`` nodes.
 /// 
 open class SyntaxHighlighter: Resource {
-    override open class var godotClassName: StringName { "SyntaxHighlighter" }
+    fileprivate static var className = StringName("SyntaxHighlighter")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Virtual method which can be overridden to return syntax highlighting data.
     /// 

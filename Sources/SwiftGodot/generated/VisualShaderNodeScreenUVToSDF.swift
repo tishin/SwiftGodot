@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translates to `screen_uv_to_sdf(uv)` in the shader language. If the UV port isn't connected, `SCREEN_UV` is used instead.
 open class VisualShaderNodeScreenUVToSDF: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeScreenUVToSDF" }
+    fileprivate static var className = StringName("VisualShaderNodeScreenUVToSDF")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// An animation node used to combine, mix, or blend two or more animations together while keeping them synchronized within an ``AnimationTree``.
 open class AnimationNodeSync: AnimationNode {
-    override open class var godotClassName: StringName { "AnimationNodeSync" }
+    fileprivate static var className = StringName("AnimationNodeSync")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

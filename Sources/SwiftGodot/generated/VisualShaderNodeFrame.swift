@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Its title, description and color can be customized.
 /// 
 open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeFrame" }
+    fileprivate static var className = StringName("VisualShaderNodeFrame")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

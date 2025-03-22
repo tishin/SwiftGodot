@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The ``InstancePlaceholder`` does not have a transform. This causes any child nodes to be positioned relatively to the ``Viewport`` from point (0,0), rather than their parent as displayed in the editor. Replacing the placeholder with a scene with a transform will transform children relatively to their parent again.
 /// 
 open class InstancePlaceholder: Node {
-    override open class var godotClassName: StringName { "InstancePlaceholder" }
+    fileprivate static var className = StringName("InstancePlaceholder")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_stored_values: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_stored_values")

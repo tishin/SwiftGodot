@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -55,7 +57,8 @@ import Musl
 /// - ``loopFinished``
 /// - ``finished``
 open class Tween: RefCounted {
-    override open class var godotClassName: StringName { "Tween" }
+    fileprivate static var className = StringName("Tween")
+    override open class var godotClassName: StringName { className }
     public enum TweenProcessMode: Int64, CaseIterable {
         /// The ``Tween`` updates after each physics frame (see ``Node/_physicsProcess(delta:)``).
         case physics = 0 // TWEEN_PROCESS_PHYSICS

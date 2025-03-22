@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// 
 /// - ``finished``
 open class AudioStreamPlayer: Node {
-    override open class var godotClassName: StringName { "AudioStreamPlayer" }
+    fileprivate static var className = StringName("AudioStreamPlayer")
+    override open class var godotClassName: StringName { className }
     public enum MixTarget: Int64, CaseIterable {
         /// The audio will be played only on the first channel. This is the default.
         case stereo = 0 // MIX_TARGET_STEREO

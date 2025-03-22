@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base class for ``Texture2DArray``, ``Cubemap`` and ``CubemapArray``. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types. See also ``Texture3D``.
 open class ImageTextureLayered: TextureLayered {
-    override open class var godotClassName: StringName { "ImageTextureLayered" }
+    fileprivate static var className = StringName("ImageTextureLayered")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_from_images: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_from_images")

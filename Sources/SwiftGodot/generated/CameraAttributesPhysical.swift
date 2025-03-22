@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Depth of field blur is only supported in the Forward+ and Mobile rendering methods, not Compatibility.
 /// 
 open class CameraAttributesPhysical: CameraAttributes {
-    override open class var godotClassName: StringName { "CameraAttributesPhysical" }
+    fileprivate static var className = StringName("CameraAttributesPhysical")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

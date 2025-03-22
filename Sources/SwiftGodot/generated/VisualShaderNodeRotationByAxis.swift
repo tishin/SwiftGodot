@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// RotationByAxis node will transform the vertices of a mesh with specified axis and angle in radians. It can be used to rotate an object in an arbitrary axis.
 open class VisualShaderNodeRotationByAxis: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeRotationByAxis" }
+    fileprivate static var className = StringName("VisualShaderNodeRotationByAxis")
+    override open class var godotClassName: StringName { className }
 }
 

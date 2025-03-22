@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: Godot uses clockwise <a href="https://learnopengl.com/Advanced-OpenGL/Face-culling">winding order</a> for front faces of triangle primitive modes.
 /// 
 open class MeshDataTool: RefCounted {
-    override open class var godotClassName: StringName { "MeshDataTool" }
+    fileprivate static var className = StringName("MeshDataTool")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_clear: GDExtensionMethodBindPtr = {
         let methodName = StringName("clear")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: This class has known issues and isn't designed to provide realistic 3D vehicle physics. If you want advanced vehicle physics, you may have to write your own physics integration using ``CharacterBody3D`` or ``RigidBody3D``.
 /// 
 open class VehicleBody3D: RigidBody3D {
-    override open class var godotClassName: StringName { "VehicleBody3D" }
+    fileprivate static var className = StringName("VehicleBody3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

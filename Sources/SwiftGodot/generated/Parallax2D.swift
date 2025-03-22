@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Any changes to this node's position made after it enters the scene tree will be overridden if ``ignoreCameraScroll`` is `false` or ``screenOffset`` is modified.
 /// 
 open class Parallax2D: Node2D {
-    override open class var godotClassName: StringName { "Parallax2D" }
+    fileprivate static var className = StringName("Parallax2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// - ``dragStarted``
 /// - ``dragEnded``
 open class Slider: Range {
-    override open class var godotClassName: StringName { "Slider" }
+    fileprivate static var className = StringName("Slider")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

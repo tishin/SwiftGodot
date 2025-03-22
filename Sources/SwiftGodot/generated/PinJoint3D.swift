@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that attaches two 3D physics bodies at a single point, allowing them to freely rotate. For example, a ``RigidBody3D`` can be attached to a ``StaticBody3D`` to create a pendulum or a seesaw.
 open class PinJoint3D: Joint3D {
-    override open class var godotClassName: StringName { "PinJoint3D" }
+    fileprivate static var className = StringName("PinJoint3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// The force with which the pinned objects stay in positional relation to each other. The higher, the stronger.
         case bias = 0 // PARAM_BIAS

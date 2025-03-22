@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The UV layout is arranged in 4 horizontal strips, top to bottom: 40% of the height for the front face, 40% for the back face, 10% for the outer edges and 10% for the inner edges.
 /// 
 open class TextMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "TextMesh" }
+    fileprivate static var className = StringName("TextMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

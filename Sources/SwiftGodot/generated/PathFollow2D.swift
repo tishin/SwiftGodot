@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// It is useful for making other nodes follow a path, without coding the movement pattern. For that, the nodes must be children of this node. The descendant nodes will then move accordingly when setting the ``progress`` in this node.
 /// 
 open class PathFollow2D: Node2D {
-    override open class var godotClassName: StringName { "PathFollow2D" }
+    fileprivate static var className = StringName("PathFollow2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

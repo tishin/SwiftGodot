@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// By default, Godot saves resources as `.tres` (text-based), `.res` (binary) or another built-in format, but you can choose to create your own format by extending this class. Be sure to respect the documented return types and values. You should give it a global class name with `class_name` for it to be registered. Like built-in ResourceFormatSavers, it will be called automatically when saving resources of its recognized type(s). You may also implement a ``ResourceFormatLoader``.
 /// 
 open class ResourceFormatSaver: RefCounted {
-    override open class var godotClassName: StringName { "ResourceFormatSaver" }
+    fileprivate static var className = StringName("ResourceFormatSaver")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Saves the given resource object to a file at the target `path`. `flags` is a bitmask composed with ``ResourceSaver.SaverFlags`` constants.
     /// 

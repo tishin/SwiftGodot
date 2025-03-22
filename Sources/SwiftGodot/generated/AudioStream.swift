@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// 
 /// - ``parameterListChanged``
 open class AudioStream: Resource {
-    override open class var godotClassName: StringName { "AudioStream" }
+    fileprivate static var className = StringName("AudioStream")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to customize the returned value of ``instantiatePlayback()``. Should returned a new ``AudioStreamPlayback`` created when the stream is played (such as by an ``AudioStreamPlayer``)..
     @_documentation(visibility: public)

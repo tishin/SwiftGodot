@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ open class Input: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Input" }
+    fileprivate static var className = StringName("Input")
+    override open class var godotClassName: StringName { className }
     public enum MouseMode: Int64, CaseIterable {
         /// Makes the mouse cursor visible if it is hidden.
         case visible = 0 // MOUSE_MODE_VISIBLE

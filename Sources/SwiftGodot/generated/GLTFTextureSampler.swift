@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Represents a texture sampler as defined by the base GLTF spec. Texture samplers in GLTF specify how to sample data from the texture's base image, when rendering the texture on an object.
 open class GLTFTextureSampler: Resource {
-    override open class var godotClassName: StringName { "GLTFTextureSampler" }
+    fileprivate static var className = StringName("GLTFTextureSampler")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

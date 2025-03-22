@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``Camera3D`` is a special node that displays what is visible from its current location. Cameras register themselves in the nearest ``Viewport`` node (when ascending the tree). Only one camera can be active per viewport. If no viewport is available ascending the tree, the camera will register in the global viewport. In other words, a camera just provides 3D display capabilities to a ``Viewport``, and, without one, a scene registered in that ``Viewport`` (or higher viewports) can't be displayed.
 open class Camera3D: Node3D {
-    override open class var godotClassName: StringName { "Camera3D" }
+    fileprivate static var className = StringName("Camera3D")
+    override open class var godotClassName: StringName { className }
     public enum ProjectionType: Int64, CaseIterable {
         /// Perspective projection. Objects on the screen becomes smaller when they are far away.
         case perspective = 0 // PROJECTION_PERSPECTIVE

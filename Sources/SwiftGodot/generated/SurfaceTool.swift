@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Godot uses clockwise <a href="https://learnopengl.com/Advanced-OpenGL/Face-culling">winding order</a> for front faces of triangle primitive modes.
 /// 
 open class SurfaceTool: RefCounted {
-    override open class var godotClassName: StringName { "SurfaceTool" }
+    fileprivate static var className = StringName("SurfaceTool")
+    override open class var godotClassName: StringName { className }
     public enum CustomFormat: Int64, CaseIterable {
         /// Limits range of data passed to ``setCustom(channelIndex:customColor:)`` to unsigned normalized 0 to 1 stored in 8 bits per channel. See ``Mesh/ArrayCustomFormat/rgba8Unorm``.
         case rgba8Unorm = 0 // CUSTOM_RGBA8_UNORM

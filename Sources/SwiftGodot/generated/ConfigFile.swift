@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// > Note: The file extension given to a ConfigFile does not have any impact on its formatting or behavior. By convention, the `.cfg` extension is used here, but any other extension such as `.ini` is also valid. Since neither `.cfg` nor `.ini` are standardized, Godot's ConfigFile formatting may differ from files written by other programs.
 /// 
 open class ConfigFile: RefCounted {
-    override open class var godotClassName: StringName { "ConfigFile" }
+    fileprivate static var className = StringName("ConfigFile")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_value: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_value")

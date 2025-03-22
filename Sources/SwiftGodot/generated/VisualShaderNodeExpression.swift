@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The provided code is directly injected into the graph's matching shader function (`vertex`, `fragment`, or `light`), so it cannot be used to declare functions, varyings, uniforms, or global constants. See ``VisualShaderNodeGlobalExpression`` for such global definitions.
 /// 
 open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeExpression" }
+    fileprivate static var className = StringName("VisualShaderNodeExpression")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

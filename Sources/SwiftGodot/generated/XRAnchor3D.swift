@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Keep in mind that, as long as plane detection is enabled, the size, placing and orientation of an anchor will be updated as the detection logic learns more about the real world out there especially if only part of the surface is in view.
 /// 
 open class XRAnchor3D: XRNode3D {
-    override open class var godotClassName: StringName { "XRAnchor3D" }
+    fileprivate static var className = StringName("XRAnchor3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_size: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_size")

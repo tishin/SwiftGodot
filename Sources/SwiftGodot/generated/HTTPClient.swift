@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -40,7 +42,8 @@ import Musl
 /// > Warning: TLS certificate revocation and certificate pinning are currently not supported. Revoked certificates are accepted as long as they are otherwise valid. If this is a concern, you may want to use automatically managed certificates with a short validity period.
 /// 
 open class HTTPClient: RefCounted {
-    override open class var godotClassName: StringName { "HTTPClient" }
+    fileprivate static var className = StringName("HTTPClient")
+    override open class var godotClassName: StringName { className }
     public enum Method: Int64, CaseIterable {
         /// HTTP GET method. The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
         case get = 0 // METHOD_GET

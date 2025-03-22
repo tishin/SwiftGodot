@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base class for all primitive meshes. Handles applying a ``Material`` to a primitive mesh. Examples include ``BoxMesh``, ``CapsuleMesh``, ``CylinderMesh``, ``PlaneMesh``, ``PrismMesh``, and ``SphereMesh``.
 open class PrimitiveMesh: Mesh {
-    override open class var godotClassName: StringName { "PrimitiveMesh" }
+    fileprivate static var className = StringName("PrimitiveMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``DirectionalLight2D`` does not support light cull masks (but it supports shadow cull masks). It will always light up 2D nodes, regardless of the 2D node's ``CanvasItem/lightMask``.
 /// 
 open class DirectionalLight2D: Light2D {
-    override open class var godotClassName: StringName { "DirectionalLight2D" }
+    fileprivate static var className = StringName("DirectionalLight2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

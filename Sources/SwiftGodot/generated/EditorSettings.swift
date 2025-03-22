@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``settingsChanged``
 open class EditorSettings: Resource {
-    override open class var godotClassName: StringName { "EditorSettings" }
+    fileprivate static var className = StringName("EditorSettings")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Emitted after any editor setting has changed. It's used by various editor plugins to update their visuals on theme changes or logic on configuration changes.
     public static let notificationEditorSettingsChanged = 10000

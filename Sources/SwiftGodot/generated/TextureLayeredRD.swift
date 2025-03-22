@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base class for ``Texture2DArrayRD``, ``TextureCubemapRD`` and ``TextureCubemapArrayRD``. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types.
 open class TextureLayeredRD: TextureLayered {
-    override open class var godotClassName: StringName { "TextureLayeredRD" }
+    fileprivate static var className = StringName("TextureLayeredRD")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

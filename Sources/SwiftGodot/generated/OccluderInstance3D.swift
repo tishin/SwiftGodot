@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Due to memory constraints, occlusion culling is not supported by default in Web export templates. It can be enabled by compiling custom Web export templates with `module_raycast_enabled=yes`.
 /// 
 open class OccluderInstance3D: VisualInstance3D {
-    override open class var godotClassName: StringName { "OccluderInstance3D" }
+    fileprivate static var className = StringName("OccluderInstance3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

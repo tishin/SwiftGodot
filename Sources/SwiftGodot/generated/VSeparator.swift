@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A vertical separator used for separating other controls that are arranged **horizontally**. ``VSeparator`` is purely visual and normally drawn as a ``StyleBoxLine``.
 open class VSeparator: Separator {
-    override open class var godotClassName: StringName { "VSeparator" }
+    fileprivate static var className = StringName("VSeparator")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Below a small example of how to use it:
 /// 
 open class DTLSServer: RefCounted {
-    override open class var godotClassName: StringName { "DTLSServer" }
+    fileprivate static var className = StringName("DTLSServer")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_setup: GDExtensionMethodBindPtr = {
         let methodName = StringName("setup")

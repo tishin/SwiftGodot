@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Creates a 4×4 transform matrix using four vectors of type `vec3`. Each vector is one row in the matrix and the last column is a `vec4(0, 0, 0, 1)`.
 open class VisualShaderNodeTransformCompose: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeTransformCompose" }
+    fileprivate static var className = StringName("VisualShaderNodeTransformCompose")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// - ``presetAdded``
 /// - ``presetRemoved``
 open class ColorPicker: VBoxContainer {
-    override open class var godotClassName: StringName { "ColorPicker" }
+    fileprivate static var className = StringName("ColorPicker")
+    override open class var godotClassName: StringName { className }
     public enum ColorModeType: Int64, CaseIterable {
         /// Allows editing the color with Red/Green/Blue sliders.
         case rgb = 0 // MODE_RGB

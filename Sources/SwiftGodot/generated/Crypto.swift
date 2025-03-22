@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Currently, this includes asymmetric key encryption/decryption, signing/verification, and generating cryptographically secure random bytes, RSA keys, HMAC digests, and self-signed ``X509Certificate``s.
 /// 
 open class Crypto: RefCounted {
-    override open class var godotClassName: StringName { "Crypto" }
+    fileprivate static var className = StringName("Crypto")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_generate_random_bytes: GDExtensionMethodBindPtr = {
         let methodName = StringName("generate_random_bytes")

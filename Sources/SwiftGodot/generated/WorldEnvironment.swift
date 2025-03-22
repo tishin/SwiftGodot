@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The ``WorldEnvironment`` allows the user to specify default lighting parameters (e.g. ambient lighting), various post-processing effects (e.g. SSAO, DOF, Tonemapping), and how to draw the background (e.g. solid color, skybox). Usually, these are added in order to improve the realism/color balance of the scene.
 /// 
 open class WorldEnvironment: Node {
-    override open class var godotClassName: StringName { "WorldEnvironment" }
+    fileprivate static var className = StringName("WorldEnvironment")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

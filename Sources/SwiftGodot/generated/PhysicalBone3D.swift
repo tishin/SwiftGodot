@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: In order to detect physical bones with raycasts, the ``SkeletonModifier3D/active`` property of the parent ``PhysicalBoneSimulator3D`` must be `true` and the ``Skeleton3D``'s bone must be assigned to ``PhysicalBone3D`` correctly; it means that ``getBoneId()`` should return a valid id (`>= 0`).
 /// 
 open class PhysicalBone3D: PhysicsBody3D {
-    override open class var godotClassName: StringName { "PhysicalBone3D" }
+    fileprivate static var className = StringName("PhysicalBone3D")
+    override open class var godotClassName: StringName { className }
     public enum DampMode: Int64, CaseIterable {
         /// In this mode, the body's damping value is added to any value set in areas or the default value.
         case combine = 0 // DAMP_MODE_COMBINE

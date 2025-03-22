@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Since ``CanvasGroup`` and ``CanvasItem/clipChildren`` both utilize the backbuffer, children of a ``CanvasGroup`` who have their ``CanvasItem/clipChildren`` set to anything other than ``CanvasItem/ClipChildrenMode/disabled`` will not function correctly.
 /// 
 open class CanvasGroup: Node2D {
-    override open class var godotClassName: StringName { "CanvasGroup" }
+    fileprivate static var className = StringName("CanvasGroup")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

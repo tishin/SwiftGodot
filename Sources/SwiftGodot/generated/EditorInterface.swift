@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class EditorInterface: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "EditorInterface" }
+    fileprivate static var className = StringName("EditorInterface")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

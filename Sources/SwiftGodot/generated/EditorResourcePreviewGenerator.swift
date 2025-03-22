@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Custom code to generate previews. Please check `file_dialog/thumbnail_size` in ``EditorSettings`` to find out the right size to do previews at.
 open class EditorResourcePreviewGenerator: RefCounted {
-    override open class var godotClassName: StringName { "EditorResourcePreviewGenerator" }
+    fileprivate static var className = StringName("EditorResourcePreviewGenerator")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns `true` if your generator supports the resource of type `type`.
     @_documentation(visibility: public)

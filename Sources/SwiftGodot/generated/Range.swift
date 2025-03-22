@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,7 +29,8 @@ import Musl
 /// - ``valueChanged``
 /// - ``changed``
 open class Range: Control {
-    override open class var godotClassName: StringName { "Range" }
+    fileprivate static var className = StringName("Range")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

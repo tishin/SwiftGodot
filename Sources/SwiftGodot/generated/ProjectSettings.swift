@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -41,7 +43,8 @@ open class ProjectSettings: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ProjectSettings" }
+    fileprivate static var className = StringName("ProjectSettings")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_has_setting: GDExtensionMethodBindPtr = {
         let methodName = StringName("has_setting")

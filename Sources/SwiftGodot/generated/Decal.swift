@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: When using the Mobile rendering method, decals will only correctly affect meshes whose visibility AABB intersects with the decal's AABB. If using a shader to deform the mesh in a way that makes it go outside its AABB, ``GeometryInstance3D/extraCullMargin`` must be increased on the mesh. Otherwise, the decal may not be visible on the mesh.
 /// 
 open class Decal: VisualInstance3D {
-    override open class var godotClassName: StringName { "Decal" }
+    fileprivate static var className = StringName("Decal")
+    override open class var godotClassName: StringName { className }
     public enum DecalTexture: Int64, CaseIterable {
         /// ``Texture2D`` corresponding to ``textureAlbedo``.
         case albedo = 0 // TEXTURE_ALBEDO

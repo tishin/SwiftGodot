@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Godot does not support MIDI output, so there is no way to emit MIDI messages from Godot. Only MIDI input is supported.
 /// 
 open class InputEventMIDI: InputEvent {
-    override open class var godotClassName: StringName { "InputEventMIDI" }
+    fileprivate static var className = StringName("InputEventMIDI")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

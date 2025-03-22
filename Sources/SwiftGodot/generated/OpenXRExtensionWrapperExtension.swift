@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``OpenXRExtensionWrapperExtension`` allows clients to implement OpenXR extensions with GDExtension. The extension should be registered with ``registerExtensionWrapper()``.
 open class OpenXRExtensionWrapperExtension: Object {
-    override open class var godotClassName: StringName { "OpenXRExtensionWrapperExtension" }
+    fileprivate static var className = StringName("OpenXRExtensionWrapperExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Returns a ``GDictionary`` of OpenXR extensions related to this extension. The ``GDictionary`` should contain the name of the extension, mapped to a `bool *` cast to an integer:
     /// 

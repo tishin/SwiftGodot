@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to `texture(cubemap, vec3)` in the shader language. Returns a color vector and alpha channel as scalar.
 open class VisualShaderNodeCubemap: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeCubemap" }
+    fileprivate static var className = StringName("VisualShaderNodeCubemap")
+    override open class var godotClassName: StringName { className }
     public enum Source: Int64, CaseIterable {
         /// Use the ``Cubemap`` set via ``cubeMap``. If this is set to ``source``, the `samplerCube` port is ignored.
         case texture = 0 // SOURCE_TEXTURE

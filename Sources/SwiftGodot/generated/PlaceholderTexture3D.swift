@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: This is not intended to be used as an actual texture for rendering. It is not guaranteed to work like one in shaders or materials (for example when calculating UV).
 /// 
 open class PlaceholderTexture3D: Texture3D {
-    override open class var godotClassName: StringName { "PlaceholderTexture3D" }
+    fileprivate static var className = StringName("PlaceholderTexture3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

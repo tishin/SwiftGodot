@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// Inheriting noise classes can optionally override this function to provide a more optimal algorithm.
 /// 
 open class Noise: Resource {
-    override open class var godotClassName: StringName { "Noise" }
+    fileprivate static var className = StringName("Noise")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_noise_1d: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_noise_1d")

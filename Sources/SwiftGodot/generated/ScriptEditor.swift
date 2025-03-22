@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - ``editorScriptChanged``
 /// - ``scriptClose``
 open class ScriptEditor: PanelContainer {
-    override open class var godotClassName: StringName { "ScriptEditor" }
+    fileprivate static var className = StringName("ScriptEditor")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_current_editor: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_current_editor")

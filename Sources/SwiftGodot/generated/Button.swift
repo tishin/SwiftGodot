@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: Buttons do not interpret touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use ``TouchScreenButton`` for buttons that trigger gameplay movement or actions.
 /// 
 open class Button: BaseButton {
-    override open class var godotClassName: StringName { "Button" }
+    fileprivate static var className = StringName("Button")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

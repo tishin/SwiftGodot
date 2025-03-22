@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ import Musl
 /// - ``bodyExited``
 /// - ``sleepingStateChanged``
 open class RigidBody2D: PhysicsBody2D {
-    override open class var godotClassName: StringName { "RigidBody2D" }
+    fileprivate static var className = StringName("RigidBody2D")
+    override open class var godotClassName: StringName { className }
     public enum FreezeMode: Int64, CaseIterable {
         /// Static body freeze mode (default). The body is not affected by gravity and forces. It can be only moved by user code and doesn't collide with other bodies along its path.
         case `static` = 0 // FREEZE_MODE_STATIC

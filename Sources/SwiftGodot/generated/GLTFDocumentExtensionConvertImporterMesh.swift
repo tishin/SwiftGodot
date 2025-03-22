@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,6 +20,7 @@ import Musl
 
 
 open class GLTFDocumentExtensionConvertImporterMesh: GLTFDocumentExtension {
-    override open class var godotClassName: StringName { "GLTFDocumentExtensionConvertImporterMesh" }
+    fileprivate static var className = StringName("GLTFDocumentExtensionConvertImporterMesh")
+    override open class var godotClassName: StringName { className }
 }
 

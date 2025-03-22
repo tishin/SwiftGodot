@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Resizable nodes have a handle that allows the user to adjust their size as needed.
 open class VisualShaderNodeResizableBase: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeResizableBase" }
+    fileprivate static var className = StringName("VisualShaderNodeResizableBase")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

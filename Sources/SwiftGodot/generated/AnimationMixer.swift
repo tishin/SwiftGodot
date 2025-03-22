@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -35,7 +37,8 @@ import Musl
 /// - ``mixerApplied``
 /// - ``mixerUpdated``
 open class AnimationMixer: Node {
-    override open class var godotClassName: StringName { "AnimationMixer" }
+    fileprivate static var className = StringName("AnimationMixer")
+    override open class var godotClassName: StringName { className }
     public enum AnimationCallbackModeProcess: Int64, CaseIterable {
         /// Process animation during physics frames (see ``Node/notificationInternalPhysicsProcess``). This is especially useful when animating physics bodies.
         case physics = 0 // ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS

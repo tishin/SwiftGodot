@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The ``HashingContext/HashType`` enum shows the supported hashing algorithms.
 /// 
 open class HashingContext: RefCounted {
-    override open class var godotClassName: StringName { "HashingContext" }
+    fileprivate static var className = StringName("HashingContext")
+    override open class var godotClassName: StringName { className }
     public enum HashType: Int64, CaseIterable {
         /// Hashing algorithm: MD5.
         case md5 = 0 // HASH_MD5

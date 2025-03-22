@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Stores information about screen drag events. See ``Node/_input(event:)``.
 open class InputEventScreenDrag: InputEventFromWindow {
-    override open class var godotClassName: StringName { "InputEventScreenDrag" }
+    fileprivate static var className = StringName("InputEventScreenDrag")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

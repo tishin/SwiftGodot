@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: To prevent text-based scene files (`.tscn`) from growing too much and becoming slow to load and save, always save ``VoxelGIData`` to an external binary resource file (`.res`) instead of embedding it within the scene. This can be done by clicking the dropdown arrow next to the ``VoxelGIData`` resource, choosing **Edit**, clicking the floppy disk icon at the top of the Inspector then choosing **Save As...**.
 /// 
 open class VoxelGIData: Resource {
-    override open class var godotClassName: StringName { "VoxelGIData" }
+    fileprivate static var className = StringName("VoxelGIData")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

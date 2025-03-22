@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See also ``RDShaderSource``. ``RDShaderFile`` is only meant to be used with the ``RenderingDevice`` API. It should not be confused with Godot's own ``Shader`` resource, which is what Godot's various nodes use for high-level shader programming.
 /// 
 open class RDShaderFile: Resource {
-    override open class var godotClassName: StringName { "RDShaderFile" }
+    fileprivate static var className = StringName("RDShaderFile")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

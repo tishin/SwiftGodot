@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// The Windows exporter customizes how a Windows build is handled. In the editor's "Export" window, it is created when adding a new "Windows" preset.
 open class EditorExportPlatformWindows: EditorExportPlatformPC {
-    override open class var godotClassName: StringName { "EditorExportPlatformWindows" }
+    fileprivate static var className = StringName("EditorExportPlatformWindows")
+    override open class var godotClassName: StringName { className }
 }
 

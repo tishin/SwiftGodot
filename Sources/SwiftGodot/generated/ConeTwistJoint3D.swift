@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that connects two 3D physics bodies in a way that simulates a ball-and-socket joint. The twist axis is initiated as the X axis of the ``ConeTwistJoint3D``. Once the physics bodies swing, the twist axis is calculated as the middle of the X axes of the joint in the local space of the two physics bodies. Useful for limbs like shoulders and hips, lamps hanging off a ceiling, etc.
 open class ConeTwistJoint3D: Joint3D {
-    override open class var godotClassName: StringName { "ConeTwistJoint3D" }
+    fileprivate static var className = StringName("ConeTwistJoint3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// Swing is rotation from side to side, around the axis perpendicular to the twist axis.
         /// 

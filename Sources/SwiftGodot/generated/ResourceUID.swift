@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class ResourceUID: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ResourceUID" }
+    fileprivate static var className = StringName("ResourceUID")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// The value to use for an invalid UID, for example if the resource could not be loaded.
     /// 

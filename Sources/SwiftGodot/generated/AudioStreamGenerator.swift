@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: Due to performance constraints, this class is best used from C# or from a compiled language via GDExtension. If you still want to use this class from GDScript, consider using a lower ``mixRate`` such as 11,025 Hz or 22,050 Hz.
 /// 
 open class AudioStreamGenerator: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamGenerator" }
+    fileprivate static var className = StringName("AudioStreamGenerator")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

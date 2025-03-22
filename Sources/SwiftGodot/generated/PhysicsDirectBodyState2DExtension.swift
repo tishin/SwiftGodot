@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsDirectBodyState2D``.
 /// 
 open class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
-    override open class var godotClassName: StringName { "PhysicsDirectBodyState2DExtension" }
+    fileprivate static var className = StringName("PhysicsDirectBodyState2DExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Implement to override the behavior of ``PhysicsDirectBodyState2D/totalGravity`` and its respective getter.
     @_documentation(visibility: public)

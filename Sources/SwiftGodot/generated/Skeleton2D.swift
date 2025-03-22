@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``boneSetupChanged``
 open class Skeleton2D: Node2D {
-    override open class var godotClassName: StringName { "Skeleton2D" }
+    fileprivate static var className = StringName("Skeleton2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_bone_count: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_bone_count")

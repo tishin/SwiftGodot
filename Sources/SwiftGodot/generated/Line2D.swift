@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``Line2D`` is drawn using a 2D mesh.
 /// 
 open class Line2D: Node2D {
-    override open class var godotClassName: StringName { "Line2D" }
+    fileprivate static var className = StringName("Line2D")
+    override open class var godotClassName: StringName { className }
     public enum LineJointMode: Int64, CaseIterable {
         /// Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on ``sharpLimit``), the joint falls back to ``LineJointMode/bevel`` to prevent very long miters.
         case sharp = 0 // LINE_JOINT_SHARP

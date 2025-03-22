@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``CanvasItemMaterial``s provide a means of modifying the textures associated with a CanvasItem. They specialize in describing blend and lighting behaviors for textures. Use a ``ShaderMaterial`` to more fully customize a material's interactions with a ``CanvasItem``.
 open class CanvasItemMaterial: Material {
-    override open class var godotClassName: StringName { "CanvasItemMaterial" }
+    fileprivate static var className = StringName("CanvasItemMaterial")
+    override open class var godotClassName: StringName { className }
     public enum BlendMode: Int64, CaseIterable {
         /// Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
         case mix = 0 // BLEND_MODE_MIX

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: Many cameras will return YCbCr images which are split into two textures and need to be combined in a shader. Godot does this automatically for you if you set the environment to show the camera image in the background.
 /// 
 open class CameraFeed: RefCounted {
-    override open class var godotClassName: StringName { "CameraFeed" }
+    fileprivate static var className = StringName("CameraFeed")
+    override open class var godotClassName: StringName { className }
     public enum FeedDataType: Int64, CaseIterable {
         /// No image set for the feed.
         case noimage = 0 // FEED_NOIMAGE

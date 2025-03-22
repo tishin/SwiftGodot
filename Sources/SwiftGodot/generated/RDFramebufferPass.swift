@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// This object is used by ``RenderingDevice``.
 /// 
 open class RDFramebufferPass: RefCounted {
-    override open class var godotClassName: StringName { "RDFramebufferPass" }
+    fileprivate static var className = StringName("RDFramebufferPass")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Attachment is unused.
     public static let attachmentUnused = -1

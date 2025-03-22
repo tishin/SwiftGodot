@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Performance:** ``RectangleShape2D`` is fast to check collisions against. It is faster than ``CapsuleShape2D``, but slower than ``CircleShape2D``.
 /// 
 open class RectangleShape2D: Shape2D {
-    override open class var godotClassName: StringName { "RectangleShape2D" }
+    fileprivate static var className = StringName("RectangleShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

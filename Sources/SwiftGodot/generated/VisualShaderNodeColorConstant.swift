@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Translated to `vec3 rgb` and `float alpha` in the shader language.
 /// 
 open class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeColorConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeColorConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

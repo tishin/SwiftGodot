@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// 
 /// - ``changed``
 open class TileMap: Node2D {
-    override open class var godotClassName: StringName { "TileMap" }
+    fileprivate static var className = StringName("TileMap")
+    override open class var godotClassName: StringName { className }
     public enum VisibilityMode: Int64, CaseIterable {
         /// Use the debug settings to determine visibility.
         case `default` = 0 // VISIBILITY_MODE_DEFAULT

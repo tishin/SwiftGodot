@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// InputEventFromWindow represents events specifically received by windows. This includes mouse events, keyboard events in focused windows or touch screen actions.
 open class InputEventFromWindow: InputEvent {
-    override open class var godotClassName: StringName { "InputEventFromWindow" }
+    fileprivate static var className = StringName("InputEventFromWindow")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

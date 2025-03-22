@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// - ``popupClosed``
 /// - ``pickerCreated``
 open class ColorPickerButton: Button {
-    override open class var godotClassName: StringName { "ColorPickerButton" }
+    fileprivate static var className = StringName("ColorPickerButton")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

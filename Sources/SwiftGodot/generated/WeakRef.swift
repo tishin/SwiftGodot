@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A weakref can hold a ``RefCounted`` without contributing to the reference counter. A weakref can be created from an ``Object`` using ``@GlobalScope.weakref``. If this object is not a reference, weakref still works, however, it does not have any effect on the object. Weakrefs are useful in cases where multiple classes have variables that refer to each other. Without weakrefs, using these classes could lead to memory leaks, since both references keep each other from being released. Making part of the variables a weakref can prevent this cyclic dependency, and allows the references to be released.
 open class WeakRef: RefCounted {
-    override open class var godotClassName: StringName { "WeakRef" }
+    fileprivate static var className = StringName("WeakRef")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_ref: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_ref")

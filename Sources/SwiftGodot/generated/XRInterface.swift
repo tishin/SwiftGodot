@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``playAreaChanged``
 open class XRInterface: RefCounted {
-    override open class var godotClassName: StringName { "XRInterface" }
+    fileprivate static var className = StringName("XRInterface")
+    override open class var godotClassName: StringName { className }
     public enum Capabilities: Int64, CaseIterable {
         /// No XR capabilities.
         case none = 0 // XR_NONE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Currently, has no direct usage, use the derived classes instead.
 open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeGroupBase" }
+    fileprivate static var className = StringName("VisualShaderNodeGroupBase")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_inputs: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_inputs")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ import Musl
 /// - ``metaHoverEnded``
 /// - ``finished``
 open class RichTextLabel: Control {
-    override open class var godotClassName: StringName { "RichTextLabel" }
+    fileprivate static var className = StringName("RichTextLabel")
+    override open class var godotClassName: StringName { className }
     public enum ListType: Int64, CaseIterable {
         /// Each list item has a number marker.
         case numbers = 0 // LIST_NUMBERS

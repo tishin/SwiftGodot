@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ open class NavigationMeshGenerator: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "NavigationMeshGenerator" }
+    fileprivate static var className = StringName("NavigationMeshGenerator")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_bake: GDExtensionMethodBindPtr = {
         let methodName = StringName("bake")

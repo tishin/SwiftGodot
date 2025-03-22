@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ import Musl
 /// > Note: The maximum texture size is 16384×16384 pixels due to graphics hardware limitations.
 /// 
 open class ImageTexture: Texture2D {
-    override open class var godotClassName: StringName { "ImageTexture" }
+    fileprivate static var className = StringName("ImageTexture")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_from_image: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_from_image")

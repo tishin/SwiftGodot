@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// When exporting FBX from Blender, use the "FBX Units Scale" option. The "FBX Units Scale" option sets the correct scale factor and avoids manual adjustments when re-importing into Blender, such as through glTF export.
 /// 
 open class FBXDocument: GLTFDocument {
-    override open class var godotClassName: StringName { "FBXDocument" }
+    fileprivate static var className = StringName("FBXDocument")
+    override open class var godotClassName: StringName { className }
 }
 

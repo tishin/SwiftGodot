@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``VisibleOnScreenEnabler3D`` uses an approximate heuristic that doesn't take walls and other occlusion into account, unless occlusion culling is used. It also won't function unless ``Node3D/visible`` is set to `true`.
 /// 
 open class VisibleOnScreenEnabler3D: VisibleOnScreenNotifier3D {
-    override open class var godotClassName: StringName { "VisibleOnScreenEnabler3D" }
+    fileprivate static var className = StringName("VisibleOnScreenEnabler3D")
+    override open class var godotClassName: StringName { className }
     public enum EnableMode: Int64, CaseIterable {
         /// Corresponds to ``Node/ProcessMode/inherit``.
         case inherit = 0 // ENABLE_MODE_INHERIT

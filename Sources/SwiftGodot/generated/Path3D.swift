@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``curveChanged``
 open class Path3D: Node3D {
-    override open class var godotClassName: StringName { "Path3D" }
+    fileprivate static var className = StringName("Path3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

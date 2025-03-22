@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// - ``animationRenamed``
 /// - ``animationChanged``
 open class AnimationLibrary: Resource {
-    override open class var godotClassName: StringName { "AnimationLibrary" }
+    fileprivate static var className = StringName("AnimationLibrary")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_add_animation: GDExtensionMethodBindPtr = {
         let methodName = StringName("add_animation")

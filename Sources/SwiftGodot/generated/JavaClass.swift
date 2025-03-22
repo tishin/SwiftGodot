@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// > Note: This class is not to be confused with ``JavaScriptObject``.
 /// 
 open class JavaClass: RefCounted {
-    override open class var godotClassName: StringName { "JavaClass" }
+    fileprivate static var className = StringName("JavaClass")
+    override open class var godotClassName: StringName { className }
 }
 

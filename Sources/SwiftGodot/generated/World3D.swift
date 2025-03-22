@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Class that has everything pertaining to a world: A physics space, a visual scenario, and a sound space. 3D nodes register their resources into the current 3D world.
 open class World3D: Resource {
-    override open class var godotClassName: StringName { "World3D" }
+    fileprivate static var className = StringName("World3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

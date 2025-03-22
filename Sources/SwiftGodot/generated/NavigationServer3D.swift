@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -51,7 +53,8 @@ open class NavigationServer3D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "NavigationServer3D" }
+    fileprivate static var className = StringName("NavigationServer3D")
+    override open class var godotClassName: StringName { className }
     public enum ProcessInfo: Int64, CaseIterable {
         /// Constant to get the number of active navigation maps.
         case activeMaps = 0 // INFO_ACTIVE_MAPS

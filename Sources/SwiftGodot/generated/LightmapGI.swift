@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: If no custom lightmappers are installed, ``LightmapGI`` can only be baked from devices that support the Forward+ or Mobile rendering backends.
 /// 
 open class LightmapGI: VisualInstance3D {
-    override open class var godotClassName: StringName { "LightmapGI" }
+    fileprivate static var className = StringName("LightmapGI")
+    override open class var godotClassName: StringName { className }
     public enum BakeQuality: Int64, CaseIterable {
         /// Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityRayCount`` and ``ProjectSettings/rendering/lightmapping/bakeQuality/lowQualityProbeRayCount``.
         case low = 0 // BAKE_QUALITY_LOW

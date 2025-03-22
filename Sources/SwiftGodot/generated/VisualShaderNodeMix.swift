@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translates to `mix(a, b, weight)` in the shader language.
 open class VisualShaderNodeMix: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeMix" }
+    fileprivate static var className = StringName("VisualShaderNodeMix")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar.
         case scalar = 0 // OP_TYPE_SCALAR

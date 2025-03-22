@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// They can be used as the server certificate in ``StreamPeerTLS/acceptStream(_:serverOptions:)`` (along with the proper ``CryptoKey``), and to specify the only certificate that should be accepted when connecting to a TLS server via ``StreamPeerTLS/connectToStream(_:commonName:clientOptions:)``.
 /// 
 open class X509Certificate: Resource {
-    override open class var godotClassName: StringName { "X509Certificate" }
+    fileprivate static var className = StringName("X509Certificate")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_save: GDExtensionMethodBindPtr = {
         let methodName = StringName("save")

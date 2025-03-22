@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By setting various properties on this object, you can control how individual characters will be displayed in a ``RichTextEffect``.
 open class CharFXTransform: RefCounted {
-    override open class var godotClassName: StringName { "CharFXTransform" }
+    fileprivate static var className = StringName("CharFXTransform")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

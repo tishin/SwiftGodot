@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ open class WorkerThreadPool: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "WorkerThreadPool" }
+    fileprivate static var className = StringName("WorkerThreadPool")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_add_task: GDExtensionMethodBindPtr = {
         let methodName = StringName("add_task")

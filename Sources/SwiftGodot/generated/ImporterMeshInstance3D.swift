@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -18,7 +20,8 @@ import Musl
 
 
 open class ImporterMeshInstance3D: Node3D {
-    override open class var godotClassName: StringName { "ImporterMeshInstance3D" }
+    fileprivate static var className = StringName("ImporterMeshInstance3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

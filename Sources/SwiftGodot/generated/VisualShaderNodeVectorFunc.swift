@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A visual shader node able to perform different functions using vectors.
 open class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
-    override open class var godotClassName: StringName { "VisualShaderNodeVectorFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeVectorFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Normalizes the vector so that it has a length of `1` but points in the same direction.
         case normalize = 0 // FUNC_NORMALIZE

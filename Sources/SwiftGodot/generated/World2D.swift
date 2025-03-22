@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Class that has everything pertaining to a 2D world: A physics space, a canvas, and a sound space. 2D nodes register their resources into the current 2D world.
 open class World2D: Resource {
-    override open class var godotClassName: StringName { "World2D" }
+    fileprivate static var className = StringName("World2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

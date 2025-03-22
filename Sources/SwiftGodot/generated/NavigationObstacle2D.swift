@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// With ``avoidanceEnabled`` the obstacle can constrain the avoidance velocities of avoidance using agents. If the obstacle's vertices are wound in clockwise order, avoidance agents will be pushed in by the obstacle, otherwise, avoidance agents will be pushed out. Obstacles using vertices and avoidance can warp to a new position but should not be moved every single frame as each change requires a rebuild of the avoidance map.
 /// 
 open class NavigationObstacle2D: Node2D {
-    override open class var godotClassName: StringName { "NavigationObstacle2D" }
+    fileprivate static var className = StringName("NavigationObstacle2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

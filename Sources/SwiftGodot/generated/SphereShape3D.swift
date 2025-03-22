@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Performance:** ``SphereShape3D`` is fast to check collisions against. It is faster than ``BoxShape3D``, ``CapsuleShape3D``, and ``CylinderShape3D``.
 /// 
 open class SphereShape3D: Shape3D {
-    override open class var godotClassName: StringName { "SphereShape3D" }
+    fileprivate static var className = StringName("SphereShape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

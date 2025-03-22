@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// An implementation of ``TextServer`` that uses HarfBuzz, ICU and SIL Graphite to support BiDi, complex text layouts and contextual OpenType features. This is Godot's default primary ``TextServer`` interface.
 open class TextServerAdvanced: TextServerExtension {
-    override open class var godotClassName: StringName { "TextServerAdvanced" }
+    fileprivate static var className = StringName("TextServerAdvanced")
+    override open class var godotClassName: StringName { className }
 }
 

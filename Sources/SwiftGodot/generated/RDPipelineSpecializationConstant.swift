@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This object is used by ``RenderingDevice``.
 /// 
 open class RDPipelineSpecializationConstant: RefCounted {
-    override open class var godotClassName: StringName { "RDPipelineSpecializationConstant" }
+    fileprivate static var className = StringName("RDPipelineSpecializationConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

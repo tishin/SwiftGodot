@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A ``StyleBox`` that displays a single line of a given color and thickness. The line can be either horizontal or vertical. Useful for separators.
 open class StyleBoxLine: StyleBox {
-    override open class var godotClassName: StringName { "StyleBoxLine" }
+    fileprivate static var className = StringName("StyleBoxLine")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

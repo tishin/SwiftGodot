@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The ``_postImport(scene:)`` callback receives the imported scene's root node and returns the modified version of the scene. Usage example:
 /// 
 open class EditorScenePostImport: RefCounted {
-    override open class var godotClassName: StringName { "EditorScenePostImport" }
+    fileprivate static var className = StringName("EditorScenePostImport")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called after the scene was imported. This method must return the modified version of the scene.
     @_documentation(visibility: public)

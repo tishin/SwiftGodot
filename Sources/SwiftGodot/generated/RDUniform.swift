@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This object is used by ``RenderingDevice``.
 open class RDUniform: RefCounted {
-    override open class var godotClassName: StringName { "RDUniform" }
+    fileprivate static var className = StringName("RDUniform")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

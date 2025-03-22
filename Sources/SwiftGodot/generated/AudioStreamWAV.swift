@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This class can also be used to store dynamically-generated PCM audio data. See also ``AudioStreamGenerator`` for procedural audio generation.
 /// 
 open class AudioStreamWAV: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamWAV" }
+    fileprivate static var className = StringName("AudioStreamWAV")
+    override open class var godotClassName: StringName { className }
     public enum Format: Int64, CaseIterable {
         /// 8-bit audio codec.
         case format8Bits = 0 // FORMAT_8_BITS

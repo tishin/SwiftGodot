@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// - ``tabHovered``
 /// - ``activeTabRearranged``
 open class TabBar: Control {
-    override open class var godotClassName: StringName { "TabBar" }
+    fileprivate static var className = StringName("TabBar")
+    override open class var godotClassName: StringName { className }
     public enum AlignmentMode: Int64, CaseIterable {
         /// Places tabs to the left.
         case left = 0 // ALIGNMENT_LEFT

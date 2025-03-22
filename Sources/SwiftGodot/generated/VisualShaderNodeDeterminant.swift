@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translates to `determinant(x)` in the shader language.
 open class VisualShaderNodeDeterminant: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeDeterminant" }
+    fileprivate static var className = StringName("VisualShaderNodeDeterminant")
+    override open class var godotClassName: StringName { className }
 }
 

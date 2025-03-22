@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``ParticleProcessMaterial`` defines particle properties and behavior. It is used in the `process_material` of the ``GPUParticles2D`` and ``GPUParticles3D`` nodes. Some of this material's properties are applied to each particle when emitted, while others can have a ``CurveTexture`` or a ``GradientTexture1D`` applied to vary numerical or color values over the lifetime of the particle.
 open class ParticleProcessMaterial: Material {
-    override open class var godotClassName: StringName { "ParticleProcessMaterial" }
+    fileprivate static var className = StringName("ParticleProcessMaterial")
+    override open class var godotClassName: StringName { className }
     public enum Parameter: Int64, CaseIterable {
         /// Use with ``setParamMin(param:value:)``, ``setParamMax(param:value:)``, and ``setParamTexture(param:texture:)`` to set initial velocity properties.
         case initialLinearVelocity = 0 // PARAM_INITIAL_LINEAR_VELOCITY

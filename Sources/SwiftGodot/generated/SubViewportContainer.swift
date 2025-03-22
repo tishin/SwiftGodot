@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: The ``SubViewportContainer`` forwards mouse-enter and mouse-exit notifications to its sub-viewports.
 /// 
 open class SubViewportContainer: Container {
-    override open class var godotClassName: StringName { "SubViewportContainer" }
+    fileprivate static var className = StringName("SubViewportContainer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

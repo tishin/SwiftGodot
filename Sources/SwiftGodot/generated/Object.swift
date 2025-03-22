@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -48,7 +50,8 @@ import Musl
 /// - ``scriptChanged``
 /// - ``propertyListChanged``
 open class Object: Wrapped {
-    override open class var godotClassName: StringName { "Object" }
+    fileprivate static var className = StringName("Object")
+    override open class var godotClassName: StringName { className }
     public struct ConnectFlags: OptionSet, CustomDebugStringConvertible {
         public let rawValue: Int
         public init (rawValue: Int) {

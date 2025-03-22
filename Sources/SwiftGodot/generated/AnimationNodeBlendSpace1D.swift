@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// You can set the extents of the axis with ``minSpace`` and ``maxSpace``.
 /// 
 open class AnimationNodeBlendSpace1D: AnimationRootNode {
-    override open class var godotClassName: StringName { "AnimationNodeBlendSpace1D" }
+    fileprivate static var className = StringName("AnimationNodeBlendSpace1D")
+    override open class var godotClassName: StringName { className }
     public enum BlendMode: Int64, CaseIterable {
         /// The interpolation between animations is linear.
         case interpolated = 0 // BLEND_MODE_INTERPOLATED

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// This imports a 3-dimensional texture, which can then be used in custom shaders, as a ``FogMaterial`` density map or as a ``GPUParticlesAttractorVectorField3D``. See also ``ResourceImporterTexture`` and ``ResourceImporterTextureAtlas``.
 open class ResourceImporterLayeredTexture: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterLayeredTexture" }
+    fileprivate static var className = StringName("ResourceImporterLayeredTexture")
+    override open class var godotClassName: StringName { className }
 }
 

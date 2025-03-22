@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Applies ```operator``` to two integer inputs: `a` and `b`.
 open class VisualShaderNodeIntOp: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeIntOp" }
+    fileprivate static var className = StringName("VisualShaderNodeIntOp")
+    override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Sums two numbers using `a + b`.
         case add = 0 // OP_ADD

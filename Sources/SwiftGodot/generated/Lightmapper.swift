@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// Godot contains a built-in GPU-based lightmapper ``LightmapperRD`` that uses compute shaders, but custom lightmappers can be implemented by C++ modules.
 /// 
 open class Lightmapper: RefCounted {
-    override open class var godotClassName: StringName { "Lightmapper" }
+    fileprivate static var className = StringName("Lightmapper")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// On the other hand, a ``Skeleton3D`` with multiple ``MeshInstance3D`` nodes which each have different ``MeshInstance3D/skin`` objects may have multiple SkinReference instances (and hence, multiple skeleton ``RID``s).
 /// 
 open class SkinReference: RefCounted {
-    override open class var godotClassName: StringName { "SkinReference" }
+    fileprivate static var className = StringName("SkinReference")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_skeleton: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_skeleton")

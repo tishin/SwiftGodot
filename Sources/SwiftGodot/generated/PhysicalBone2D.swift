@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: The ``PhysicalBone2D`` node does not automatically create a ``Joint2D`` node to keep ``PhysicalBone2D`` nodes together. They must be created manually. For most cases, you want to use a ``PinJoint2D`` node. The ``PhysicalBone2D`` node will automatically configure the ``Joint2D`` node once it's been added as a child node.
 /// 
 open class PhysicalBone2D: RigidBody2D {
-    override open class var godotClassName: StringName { "PhysicalBone2D" }
+    fileprivate static var className = StringName("PhysicalBone2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

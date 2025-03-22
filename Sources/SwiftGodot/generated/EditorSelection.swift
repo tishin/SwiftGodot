@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``selectionChanged``
 open class EditorSelection: Object {
-    override open class var godotClassName: StringName { "EditorSelection" }
+    fileprivate static var className = StringName("EditorSelection")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_clear: GDExtensionMethodBindPtr = {
         let methodName = StringName("clear")

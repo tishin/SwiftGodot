@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to `uniform bool` in the shader language.
 open class VisualShaderNodeBooleanParameter: VisualShaderNodeParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeBooleanParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeBooleanParameter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

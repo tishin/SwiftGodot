@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: You must set the ``scriptOwner`` for the custom context menu items to work.
 /// 
 open class EditorScriptPicker: EditorResourcePicker {
-    override open class var godotClassName: StringName { "EditorScriptPicker" }
+    fileprivate static var className = StringName("EditorScriptPicker")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

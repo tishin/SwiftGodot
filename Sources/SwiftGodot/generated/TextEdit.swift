@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``gutterAdded``
 /// - ``gutterRemoved``
 open class TextEdit: Control {
-    override open class var godotClassName: StringName { "TextEdit" }
+    fileprivate static var className = StringName("TextEdit")
+    override open class var godotClassName: StringName { className }
     public enum MenuItems: Int64, CaseIterable {
         /// Cuts (copies and clears) the selected text.
         case cut = 0 // MENU_CUT

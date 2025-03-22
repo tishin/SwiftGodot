@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: When using a large textured ``BoxMesh`` (e.g. as a floor), you may stumble upon UV jittering issues depending on the camera angle. To solve this, increase ``subdivideDepth``, ``subdivideHeight`` and ``subdivideWidth`` until you no longer notice UV jittering.
 /// 
 open class BoxMesh: PrimitiveMesh {
-    override open class var godotClassName: StringName { "BoxMesh" }
+    fileprivate static var className = StringName("BoxMesh")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

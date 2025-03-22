@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Determines how much of an audio signal is sent to the left and right buses.
 open class AudioEffectPanner: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectPanner" }
+    fileprivate static var className = StringName("AudioEffectPanner")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

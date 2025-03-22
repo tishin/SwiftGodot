@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,6 +40,7 @@ import Musl
 /// See ``Texture2DArray`` for a general description of texture arrays.
 /// 
 open class CompressedTexture2DArray: CompressedTextureLayered {
-    override open class var godotClassName: StringName { "CompressedTexture2DArray" }
+    fileprivate static var className = StringName("CompressedTexture2DArray")
+    override open class var godotClassName: StringName { className }
 }
 

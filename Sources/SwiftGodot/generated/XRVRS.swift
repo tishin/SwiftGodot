@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class is used by various XR interfaces to generate VRS textures that can be used to speed up rendering.
 open class XRVRS: Object {
-    override open class var godotClassName: StringName { "XRVRS" }
+    fileprivate static var className = StringName("XRVRS")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

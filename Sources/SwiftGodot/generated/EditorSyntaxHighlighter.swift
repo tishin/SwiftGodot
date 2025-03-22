@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Add a syntax highlighter to an individual script by calling ``ScriptEditorBase/addSyntaxHighlighter(_:)``. To apply to all scripts on open, call ``ScriptEditor/registerSyntaxHighlighter(_:)``.
 /// 
 open class EditorSyntaxHighlighter: SyntaxHighlighter {
-    override open class var godotClassName: StringName { "EditorSyntaxHighlighter" }
+    fileprivate static var className = StringName("EditorSyntaxHighlighter")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Virtual method which can be overridden to return the syntax highlighter name.
     @_documentation(visibility: public)

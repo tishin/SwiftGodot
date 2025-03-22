@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// To use ``EditorNode3DGizmoPlugin``, register it using the ``EditorPlugin/addNode3dGizmoPlugin(_:)`` method first.
 /// 
 open class EditorNode3DGizmoPlugin: Resource {
-    override open class var godotClassName: StringName { "EditorNode3DGizmoPlugin" }
+    fileprivate static var className = StringName("EditorNode3DGizmoPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to define which Node3D nodes have a gizmo from this plugin. Whenever a ``Node3D`` node is added to a scene this method is called, if it returns `true` the node gets a generic ``EditorNode3DGizmo`` assigned and is added to this plugin's list of active gizmos.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -44,7 +46,8 @@ open class PhysicsServer2D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "PhysicsServer2D" }
+    fileprivate static var className = StringName("PhysicsServer2D")
+    override open class var godotClassName: StringName { className }
     public enum SpaceParameter: Int64, CaseIterable {
         /// Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated. The default value of this parameter is ``ProjectSettings/physics/2d/solver/contactRecycleRadius``.
         case contactRecycleRadius = 0 // SPACE_PARAM_CONTACT_RECYCLE_RADIUS

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: This class is implemented on iOS, Linux, macOS and Windows, on other platforms it will fallback to default theme font.
 /// 
 open class SystemFont: Font {
-    override open class var godotClassName: StringName { "SystemFont" }
+    fileprivate static var className = StringName("SystemFont")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

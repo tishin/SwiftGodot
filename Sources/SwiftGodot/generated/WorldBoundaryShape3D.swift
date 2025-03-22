@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A 3D world boundary shape, intended for use in physics. ``WorldBoundaryShape3D`` works like an infinite plane that forces all physics bodies to stay above it. The ``plane``'s normal determines which direction is considered as "above" and in the editor, the line over the plane represents this direction. It can for example be used for endless flat floors.
 open class WorldBoundaryShape3D: Shape3D {
-    override open class var godotClassName: StringName { "WorldBoundaryShape3D" }
+    fileprivate static var className = StringName("WorldBoundaryShape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

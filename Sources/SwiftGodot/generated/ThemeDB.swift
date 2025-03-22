@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ open class ThemeDB: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "ThemeDB" }
+    fileprivate static var className = StringName("ThemeDB")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

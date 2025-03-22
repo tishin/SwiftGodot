@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The ``PhysicalSkyMaterial`` only supports one sun. The color, energy, and direction of the sun are taken from the first ``DirectionalLight3D`` in the scene tree.
 /// 
 open class PhysicalSkyMaterial: Material {
-    override open class var godotClassName: StringName { "PhysicalSkyMaterial" }
+    fileprivate static var className = StringName("PhysicalSkyMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

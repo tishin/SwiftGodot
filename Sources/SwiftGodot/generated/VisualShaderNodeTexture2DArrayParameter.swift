@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// This parameter allows to provide a collection of textures for the shader. You can use ``VisualShaderNodeTexture2DArray`` to extract the textures from array.
 open class VisualShaderNodeTexture2DArrayParameter: VisualShaderNodeTextureParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeTexture2DArrayParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeTexture2DArrayParameter")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// If you need more advanced effects, use a custom <a href="https://docs.godotengine.org/en//tutorials/shaders/shader_reference/fog_shader.html">fog shader</a>.
 /// 
 open class FogMaterial: Material {
-    override open class var godotClassName: StringName { "FogMaterial" }
+    fileprivate static var className = StringName("FogMaterial")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

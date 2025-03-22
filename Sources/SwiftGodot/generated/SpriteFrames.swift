@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Sprite frame library for an ``AnimatedSprite2D`` or ``AnimatedSprite3D`` node. Contains frames and animation data for playback.
 open class SpriteFrames: Resource {
-    override open class var godotClassName: StringName { "SpriteFrames" }
+    fileprivate static var className = StringName("SpriteFrames")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

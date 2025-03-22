@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// - ``resourceSelected``
 /// - ``resourceChanged``
 open class EditorResourcePicker: HBoxContainer {
-    override open class var godotClassName: StringName { "EditorResourcePicker" }
+    fileprivate static var className = StringName("EditorResourcePicker")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

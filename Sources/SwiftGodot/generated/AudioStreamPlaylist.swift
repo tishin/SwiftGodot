@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -19,7 +21,8 @@ import Musl
 
 /// ``AudioStream`` that includes sub-streams and plays them back like a playlist.
 open class AudioStreamPlaylist: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamPlaylist" }
+    fileprivate static var className = StringName("AudioStreamPlaylist")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Maximum amount of streams supported in the playlist.
     public static let maxStreams = 64

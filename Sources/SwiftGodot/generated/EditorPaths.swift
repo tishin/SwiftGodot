@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: On the Linux/BSD platform, Godot complies with the <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html">XDG Base Directory Specification</a>. You can override environment variables following the specification to change the editor and project data paths.
 /// 
 open class EditorPaths: Object {
-    override open class var godotClassName: StringName { "EditorPaths" }
+    fileprivate static var className = StringName("EditorPaths")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_data_dir: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_data_dir")

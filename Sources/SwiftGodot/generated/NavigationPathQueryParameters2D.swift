@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// By changing various properties of this object, such as the start and target position, you can configure path queries to the ``NavigationServer2D``.
 open class NavigationPathQueryParameters2D: RefCounted {
-    override open class var godotClassName: StringName { "NavigationPathQueryParameters2D" }
+    fileprivate static var className = StringName("NavigationPathQueryParameters2D")
+    override open class var godotClassName: StringName { className }
     public enum PathfindingAlgorithm: Int64, CaseIterable {
         /// The path query uses the default A* pathfinding algorithm.
         case pathfindingAlgorithmAstar = 0 // PATHFINDING_ALGORITHM_ASTAR

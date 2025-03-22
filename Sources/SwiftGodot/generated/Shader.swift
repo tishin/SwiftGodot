@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This class is used by a ``ShaderMaterial`` and allows you to write your own custom behavior for rendering visual items or updating particle information. For a detailed explanation and usage, please see the tutorials linked below.
 /// 
 open class Shader: Resource {
-    override open class var godotClassName: StringName { "Shader" }
+    fileprivate static var className = StringName("Shader")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// Mode used to draw all 3D objects.
         case spatial = 0 // MODE_SPATIAL

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,6 +28,7 @@ import Musl
 /// MP3 requires more CPU to decode than ``ResourceImporterWAV``. If you need to play a lot of simultaneous sounds, it's recommended to use WAV for those sounds instead, especially if targeting low-end devices.
 /// 
 open class ResourceImporterMP3: ResourceImporter {
-    override open class var godotClassName: StringName { "ResourceImporterMP3" }
+    fileprivate static var className = StringName("ResourceImporterMP3")
+    override open class var godotClassName: StringName { className }
 }
 

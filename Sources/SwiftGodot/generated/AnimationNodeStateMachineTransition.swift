@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ import Musl
 /// 
 /// - ``advanceConditionChanged``
 open class AnimationNodeStateMachineTransition: Resource {
-    override open class var godotClassName: StringName { "AnimationNodeStateMachineTransition" }
+    fileprivate static var className = StringName("AnimationNodeStateMachineTransition")
+    override open class var godotClassName: StringName { className }
     public enum SwitchMode: Int64, CaseIterable {
         /// Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
         case immediate = 0 // SWITCH_MODE_IMMEDIATE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,6 +26,7 @@ import Musl
 /// > Note: ``Tween/tweenInterval(time:)`` is the only correct way to create ``IntervalTweener``. Any ``IntervalTweener`` created manually will not function correctly.
 /// 
 open class IntervalTweener: Tweener {
-    override open class var godotClassName: StringName { "IntervalTweener" }
+    fileprivate static var className = StringName("IntervalTweener")
+    override open class var godotClassName: StringName { className }
 }
 

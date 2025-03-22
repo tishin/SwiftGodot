@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A 2D texture that obtains colors from a ``Gradient`` to fill the texture data. This texture is able to transform a color transition into different patterns such as a linear or a radial gradient. The gradient is sampled individually for each pixel so it does not necessarily represent an exact copy of the gradient(see ``width`` and ``height``). See also ``GradientTexture1D``, ``CurveTexture`` and ``CurveXYZTexture``.
 open class GradientTexture2D: Texture2D {
-    override open class var godotClassName: StringName { "GradientTexture2D" }
+    fileprivate static var className = StringName("GradientTexture2D")
+    override open class var godotClassName: StringName { className }
     public enum Fill: Int64, CaseIterable {
         /// The colors are linearly interpolated in a straight line.
         case linear = 0 // FILL_LINEAR

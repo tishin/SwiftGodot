@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
 open class BaseMaterial3D: Material {
-    override open class var godotClassName: StringName { "BaseMaterial3D" }
+    fileprivate static var className = StringName("BaseMaterial3D")
+    override open class var godotClassName: StringName { className }
     public enum TextureParam: Int64, CaseIterable {
         /// Texture specifying per-pixel color.
         case albedo = 0 // TEXTURE_ALBEDO

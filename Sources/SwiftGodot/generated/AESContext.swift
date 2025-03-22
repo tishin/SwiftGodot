@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -22,7 +24,8 @@ import Musl
 /// This class holds the context information required for encryption and decryption operations with AES (Advanced Encryption Standard). Both AES-ECB and AES-CBC modes are supported.
 /// 
 open class AESContext: RefCounted {
-    override open class var godotClassName: StringName { "AESContext" }
+    fileprivate static var className = StringName("AESContext")
+    override open class var godotClassName: StringName { className }
     public enum Mode: Int64, CaseIterable {
         /// AES electronic codebook encryption mode.
         case ecbEncrypt = 0 // MODE_ECB_ENCRYPT

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A container type that arranges its child controls in a way that preserves their proportions automatically when the container is resized. Useful when a container has a dynamic size and the child nodes must adjust their sizes accordingly without losing their aspect ratios.
 open class AspectRatioContainer: Container {
-    override open class var godotClassName: StringName { "AspectRatioContainer" }
+    fileprivate static var className = StringName("AspectRatioContainer")
+    override open class var godotClassName: StringName { className }
     public enum StretchMode: Int64, CaseIterable {
         /// The height of child controls is automatically adjusted based on the width of the container.
         case widthControlsHeight = 0 // STRETCH_WIDTH_CONTROLS_HEIGHT

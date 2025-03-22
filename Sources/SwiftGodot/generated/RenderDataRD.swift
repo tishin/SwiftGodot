@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -27,6 +29,7 @@ import Musl
 /// > Note: This is an internal rendering server object only exposed for GDExtension plugins.
 /// 
 open class RenderDataRD: RenderData {
-    override open class var godotClassName: StringName { "RenderDataRD" }
+    fileprivate static var className = StringName("RenderDataRD")
+    override open class var godotClassName: StringName { className }
 }
 

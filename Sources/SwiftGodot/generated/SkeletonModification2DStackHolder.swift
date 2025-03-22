@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: The modifications in the held ``SkeletonModificationStack2D`` will only be executed if their execution mode matches the execution mode of the SkeletonModification2DStackHolder.
 /// 
 open class SkeletonModification2DStackHolder: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DStackHolder" }
+    fileprivate static var className = StringName("SkeletonModification2DStackHolder")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_held_modification_stack: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_held_modification_stack")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// A plugin must be first registered with ``FileSystemDock/addResourceTooltipPlugin(_:)``. When the user hovers a resource in filesystem dock which is handled by the plugin, ``_makeTooltipForPath(_:metadata:base:)`` is called to create the tooltip. It works similarly to ``Control/_makeCustomTooltip(forText:)``.
 /// 
 open class EditorResourceTooltipPlugin: RefCounted {
-    override open class var godotClassName: StringName { "EditorResourceTooltipPlugin" }
+    fileprivate static var className = StringName("EditorResourceTooltipPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Return `true` if the plugin is going to handle the given ``Resource`` `type`.
     @_documentation(visibility: public)

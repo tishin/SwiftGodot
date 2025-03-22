@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ import Musl
 /// - ``hidden``
 /// - ``itemRectChanged``
 open class CanvasItem: Node {
-    override open class var godotClassName: StringName { "CanvasItem" }
+    fileprivate static var className = StringName("CanvasItem")
+    override open class var godotClassName: StringName { className }
     public enum TextureFilter: Int64, CaseIterable {
         /// The ``CanvasItem`` will inherit the filter from its parent.
         case parentNode = 0 // TEXTURE_FILTER_PARENT_NODE

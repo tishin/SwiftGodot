@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// As TileData properties are stored directly in the TileSetAtlasSource resource, their properties might also be set using `TileSetAtlasSource.set("<coords_x>:<coords_y>/<alternative_id>/<tile_data_property>")`.
 /// 
 open class TileSetAtlasSource: TileSetSource {
-    override open class var godotClassName: StringName { "TileSetAtlasSource" }
+    fileprivate static var className = StringName("TileSetAtlasSource")
+    override open class var godotClassName: StringName { className }
     public enum TileAnimationMode: Int64, CaseIterable {
         /// Tile animations start at same time, looking identical.
         case `default` = 0 // TILE_ANIMATION_MODE_DEFAULT

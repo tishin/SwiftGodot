@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// **Performance:** ``CylinderShape3D`` is fast to check collisions against, but it is slower than ``CapsuleShape3D``, ``BoxShape3D``, and ``SphereShape3D``.
 /// 
 open class CylinderShape3D: Shape3D {
-    override open class var godotClassName: StringName { "CylinderShape3D" }
+    fileprivate static var className = StringName("CylinderShape3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

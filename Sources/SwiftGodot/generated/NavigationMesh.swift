@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A navigation mesh is a collection of polygons that define which areas of an environment are traversable to aid agents in pathfinding through complicated spaces.
 open class NavigationMesh: Resource {
-    override open class var godotClassName: StringName { "NavigationMesh" }
+    fileprivate static var className = StringName("NavigationMesh")
+    override open class var godotClassName: StringName { className }
     public enum SamplePartitionType: Int64, CaseIterable {
         /// Watershed partitioning. Generally the best choice if you precompute the navigation mesh, use this if you have large open areas.
         case watershed = 0 // SAMPLE_PARTITION_WATERSHED

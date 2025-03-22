@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translated to `uniform samplerCube` in the shader language. The output value can be used as port for ``VisualShaderNodeCubemap``.
 open class VisualShaderNodeCubemapParameter: VisualShaderNodeTextureParameter {
-    override open class var godotClassName: StringName { "VisualShaderNodeCubemapParameter" }
+    fileprivate static var className = StringName("VisualShaderNodeCubemapParameter")
+    override open class var godotClassName: StringName { className }
 }
 

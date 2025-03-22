@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: You can also extend ``EditorImportPlugin`` if the resource type you need exists but Godot is unable to load its format. Choosing one way over another depends on if the format is suitable or not for the final exported game. For example, it's better to import `.png` textures as `.ctex` (``CompressedTexture2D``) first, so they can be loaded with better efficiency on the graphics card.
 /// 
 open class ResourceFormatLoader: RefCounted {
-    override open class var godotClassName: StringName { "ResourceFormatLoader" }
+    fileprivate static var className = StringName("ResourceFormatLoader")
+    override open class var godotClassName: StringName { className }
     public enum CacheMode: Int64, CaseIterable {
         /// Neither the main resource (the one requested to be loaded) nor any of its subresources are retrieved from cache nor stored into it. Dependencies (external resources) are loaded with ``CacheMode/reuse``.
         case ignore = 0 // CACHE_MODE_IGNORE

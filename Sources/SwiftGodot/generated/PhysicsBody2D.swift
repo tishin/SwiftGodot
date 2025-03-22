@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``PhysicsBody2D`` is an abstract base class for 2D game objects affected by physics. All 2D physics bodies inherit from it.
 open class PhysicsBody2D: CollisionObject2D {
-    override open class var godotClassName: StringName { "PhysicsBody2D" }
+    fileprivate static var className = StringName("PhysicsBody2D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_move_and_collide: GDExtensionMethodBindPtr = {
         let methodName = StringName("move_and_collide")

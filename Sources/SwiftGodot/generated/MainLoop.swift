@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -31,7 +33,8 @@ import Musl
 /// 
 /// - ``onRequestPermissionsResult``
 open class MainLoop: Object {
-    override open class var godotClassName: StringName { "MainLoop" }
+    fileprivate static var className = StringName("MainLoop")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Notification received from the OS when the application is exceeding its allocated memory.
     /// 

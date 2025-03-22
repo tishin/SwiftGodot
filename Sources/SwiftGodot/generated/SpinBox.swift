@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -34,7 +36,8 @@ import Musl
 /// > Note: If you want to implement drag and drop for the underlying ``LineEdit``, you can use ``Control/setDragForwarding(dragFunc:canDropFunc:dropFunc:)`` on the node returned by ``getLineEdit()``.
 /// 
 open class SpinBox: Range {
-    override open class var godotClassName: StringName { "SpinBox" }
+    fileprivate static var className = StringName("SpinBox")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

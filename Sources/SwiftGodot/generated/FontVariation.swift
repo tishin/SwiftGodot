@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To set the coordinate of multiple variation axes:
 /// 
 open class FontVariation: Font {
-    override open class var godotClassName: StringName { "FontVariation" }
+    fileprivate static var className = StringName("FontVariation")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

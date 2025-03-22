@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This ``SkeletonModification2D`` rotates a bone to look a target. This is extremely helpful for moving character's head to look at the player, rotating a turret to look at a target, or any other case where you want to make a bone rotate towards something quickly and easily.
 open class SkeletonModification2DLookAt: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DLookAt" }
+    fileprivate static var className = StringName("SkeletonModification2DLookAt")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

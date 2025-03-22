@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A 2D line segment shape, intended for use in physics. Usually used to provide a shape for a ``CollisionShape2D``.
 open class SegmentShape2D: Shape2D {
-    override open class var godotClassName: StringName { "SegmentShape2D" }
+    fileprivate static var className = StringName("SegmentShape2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

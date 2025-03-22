@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// - ``objectIdSelected``
 /// - ``selected``
 open class EditorProperty: Container {
-    override open class var godotClassName: StringName { "EditorProperty" }
+    fileprivate static var className = StringName("EditorProperty")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

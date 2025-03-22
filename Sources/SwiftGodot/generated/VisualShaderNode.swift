@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Visual shader graphs consist of various nodes. Each node in the graph is a separate object and they are represented as a rectangular boxes with title and a set of properties. Each node also has connection ports that allow to connect it to another nodes and control the flow of the shader.
 open class VisualShaderNode: Resource {
-    override open class var godotClassName: StringName { "VisualShaderNode" }
+    fileprivate static var className = StringName("VisualShaderNode")
+    override open class var godotClassName: StringName { className }
     public enum PortType: Int64, CaseIterable {
         /// Floating-point scalar. Translated to [code skip-lint]float` type in shader code.
         case scalar = 0 // PORT_TYPE_SCALAR

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// A pattern always start at the `(0,0)` coordinates and cannot have cells with negative coordinates.
 /// 
 open class TileMapPattern: Resource {
-    override open class var godotClassName: StringName { "TileMapPattern" }
+    fileprivate static var className = StringName("TileMapPattern")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_set_cell: GDExtensionMethodBindPtr = {
         let methodName = StringName("set_cell")

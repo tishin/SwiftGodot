@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``inputVector2Changed``
 /// - ``profileChanged``
 open class XRController3D: XRNode3D {
-    override open class var godotClassName: StringName { "XRController3D" }
+    fileprivate static var className = StringName("XRController3D")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_is_button_pressed: GDExtensionMethodBindPtr = {
         let methodName = StringName("is_button_pressed")

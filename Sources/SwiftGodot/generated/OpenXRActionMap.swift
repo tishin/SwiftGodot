@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// The action map therefore needs to be loaded at startup and can't be changed afterwards. This resource is a container for the entire action map.
 /// 
 open class OpenXRActionMap: Resource {
-    override open class var godotClassName: StringName { "OpenXRActionMap" }
+    fileprivate static var className = StringName("OpenXRActionMap")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

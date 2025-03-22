@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Compares `a` and `b` of ``type`` by ``function``. Returns a boolean scalar. Translates to `if` instruction in shader code.
 open class VisualShaderNodeCompare: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeCompare" }
+    fileprivate static var className = StringName("VisualShaderNodeCompare")
+    override open class var godotClassName: StringName { className }
     public enum ComparisonType: Int64, CaseIterable {
         /// A floating-point scalar.
         case scalar = 0 // CTYPE_SCALAR

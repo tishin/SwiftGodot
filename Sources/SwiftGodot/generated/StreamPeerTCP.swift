@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class StreamPeerTCP: StreamPeer {
-    override open class var godotClassName: StringName { "StreamPeerTCP" }
+    fileprivate static var className = StringName("StreamPeerTCP")
+    override open class var godotClassName: StringName { className }
     public enum Status: Int64, CaseIterable {
         /// The initial status of the ``StreamPeerTCP``. This is also the status after disconnecting.
         case none = 0 // STATUS_NONE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Intended for use with GDExtension to create custom implementations of ``PhysicsServer2D``.
 /// 
 open class PhysicsServer2DExtension: PhysicsServer2D {
-    override open class var godotClassName: StringName { "PhysicsServer2DExtension" }
+    fileprivate static var className = StringName("PhysicsServer2DExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Overridable version of ``PhysicsServer2D/worldBoundaryShapeCreate()``.
     @_documentation(visibility: public)

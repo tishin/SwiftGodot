@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// External ``TextServer`` implementations should inherit from this class.
 open class TextServerExtension: TextServer {
-    override open class var godotClassName: StringName { "TextServerExtension" }
+    fileprivate static var className = StringName("TextServerExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// **Required.**
     /// 

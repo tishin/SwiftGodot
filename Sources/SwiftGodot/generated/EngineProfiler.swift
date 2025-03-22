@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// See ``EngineDebugger`` and ``EditorDebuggerPlugin`` for more information.
 /// 
 open class EngineProfiler: RefCounted {
-    override open class var godotClassName: StringName { "EngineProfiler" }
+    fileprivate static var className = StringName("EngineProfiler")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Called when the profiler is enabled/disabled, along with a set of `options`.
     @_documentation(visibility: public)

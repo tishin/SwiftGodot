@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// KHR_materials_pbrSpecularGlossiness is an archived GLTF extension. This means that it is deprecated and not recommended for new files. However, it is still supported for loading old files.
 open class GLTFSpecGloss: Resource {
-    override open class var godotClassName: StringName { "GLTFSpecGloss" }
+    fileprivate static var className = StringName("GLTFSpecGloss")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

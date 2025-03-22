@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ open class GDExtensionManager: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "GDExtensionManager" }
+    fileprivate static var className = StringName("GDExtensionManager")
+    override open class var godotClassName: StringName { className }
     public enum LoadStatus: Int64, CaseIterable {
         /// The extension has loaded successfully.
         case ok = 0 // LOAD_STATUS_OK

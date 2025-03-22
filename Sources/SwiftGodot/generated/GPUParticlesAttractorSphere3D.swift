@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: Particle attractors only affect ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesAttractorSphere3D: GPUParticlesAttractor3D {
-    override open class var godotClassName: StringName { "GPUParticlesAttractorSphere3D" }
+    fileprivate static var className = StringName("GPUParticlesAttractorSphere3D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

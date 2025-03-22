@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Applies ```operator``` to two transform (4×4 matrices) inputs.
 open class VisualShaderNodeTransformOp: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeTransformOp" }
+    fileprivate static var className = StringName("VisualShaderNodeTransformOp")
+    override open class var godotClassName: StringName { className }
     public enum Operator: Int64, CaseIterable {
         /// Multiplies transform `a` by the transform `b`.
         case axb = 0 // OP_AxB

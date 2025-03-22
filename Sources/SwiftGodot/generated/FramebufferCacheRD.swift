@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Framebuffer cache manager for Rendering Device based renderers. Provides a way to create a framebuffer and reuse it in subsequent calls for as long as the used textures exists. Framebuffers will automatically be cleaned up when dependent objects are freed.
 open class FramebufferCacheRD: Object {
-    override open class var godotClassName: StringName { "FramebufferCacheRD" }
+    fileprivate static var className = StringName("FramebufferCacheRD")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_get_cache_multipass: GDExtensionMethodBindPtr = {
         let methodName = StringName("get_cache_multipass")

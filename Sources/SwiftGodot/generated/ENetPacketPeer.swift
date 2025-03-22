@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: When exporting to Android, make sure to enable the `INTERNET` permission in the Android export preset before exporting the project or using one-click deploy. Otherwise, network communication of any kind will be blocked by Android.
 /// 
 open class ENetPacketPeer: PacketPeer {
-    override open class var godotClassName: StringName { "ENetPacketPeer" }
+    fileprivate static var className = StringName("ENetPacketPeer")
+    override open class var godotClassName: StringName { className }
     public enum PeerState: Int64, CaseIterable {
         /// The peer is disconnected.
         case disconnected = 0 // STATE_DISCONNECTED

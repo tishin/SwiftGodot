@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Translated to `uint` in the shader language.
 open class VisualShaderNodeUIntConstant: VisualShaderNodeConstant {
-    override open class var godotClassName: StringName { "VisualShaderNodeUIntConstant" }
+    fileprivate static var className = StringName("VisualShaderNodeUIntConstant")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

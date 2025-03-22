@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: GDExtension itself is not a scripting language and has no relation to ``GDScript`` resources.
 /// 
 open class GDExtension: Resource {
-    override open class var godotClassName: StringName { "GDExtension" }
+    fileprivate static var className = StringName("GDExtension")
+    override open class var godotClassName: StringName { className }
     public enum InitializationLevel: Int64, CaseIterable {
         /// The library is initialized at the same time as the core features of the engine.
         case core = 0 // INITIALIZATION_LEVEL_CORE

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Represents a physics shape as defined by the `OMI_physics_shape` or `OMI_collider` GLTF extensions. This class is an intermediary between the GLTF data and Godot's nodes, and it's abstracted in a way that allows adding support for different GLTF physics extensions in the future.
 open class GLTFPhysicsShape: Resource {
-    override open class var godotClassName: StringName { "GLTFPhysicsShape" }
+    fileprivate static var className = StringName("GLTFPhysicsShape")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

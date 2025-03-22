@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: This is an internal rendering server object, do not instantiate this from script.
 /// 
 open class RenderSceneBuffers: RefCounted {
-    override open class var godotClassName: StringName { "RenderSceneBuffers" }
+    fileprivate static var className = StringName("RenderSceneBuffers")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_configure: GDExtensionMethodBindPtr = {
         let methodName = StringName("configure")

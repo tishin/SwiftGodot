@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ENet's purpose is to provide a relatively thin, simple and robust network communication layer on top of UDP (User Datagram Protocol).
 open class ENetConnection: RefCounted {
-    override open class var godotClassName: StringName { "ENetConnection" }
+    fileprivate static var className = StringName("ENetConnection")
+    override open class var godotClassName: StringName { className }
     public enum CompressionMode: Int64, CaseIterable {
         /// No compression. This uses the most bandwidth, but has the upside of requiring the fewest CPU resources. This option may also be used to make network debugging using tools like Wireshark easier.
         case none = 0 // COMPRESS_NONE

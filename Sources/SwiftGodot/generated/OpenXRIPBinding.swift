@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This binding resource binds an ``OpenXRAction`` to inputs or outputs. As most controllers have left hand and right versions that are handled by the same interaction profile we can specify multiple bindings. For instance an action "Fire" could be bound to both "/user/hand/left/input/trigger" and "/user/hand/right/input/trigger".
 open class OpenXRIPBinding: Resource {
-    override open class var godotClassName: StringName { "OpenXRIPBinding" }
+    fileprivate static var className = StringName("OpenXRIPBinding")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

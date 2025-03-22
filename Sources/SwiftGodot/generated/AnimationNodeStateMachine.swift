@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// **Example:**
 /// 
 open class AnimationNodeStateMachine: AnimationRootNode {
-    override open class var godotClassName: StringName { "AnimationNodeStateMachine" }
+    fileprivate static var className = StringName("AnimationNodeStateMachine")
+    override open class var godotClassName: StringName { className }
     public enum StateMachineType: Int64, CaseIterable {
         /// Seeking to the beginning is treated as playing from the start state. Transition to the end state is treated as exiting the state machine.
         case root = 0 // STATE_MACHINE_TYPE_ROOT

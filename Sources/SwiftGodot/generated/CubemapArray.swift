@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// > Note: ``CubemapArray`` is not supported in the OpenGL 3 rendering backend.
 /// 
 open class CubemapArray: ImageTextureLayered {
-    override open class var godotClassName: StringName { "CubemapArray" }
+    fileprivate static var className = StringName("CubemapArray")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_placeholder: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_placeholder")

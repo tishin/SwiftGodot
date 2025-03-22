@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class Marshalls: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Marshalls" }
+    fileprivate static var className = StringName("Marshalls")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_variant_to_base64: GDExtensionMethodBindPtr = {
         let methodName = StringName("variant_to_base64")

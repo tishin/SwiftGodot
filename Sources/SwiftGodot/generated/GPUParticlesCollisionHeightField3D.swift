@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -30,7 +32,8 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
-    override open class var godotClassName: StringName { "GPUParticlesCollisionHeightField3D" }
+    fileprivate static var className = StringName("GPUParticlesCollisionHeightField3D")
+    override open class var godotClassName: StringName { className }
     public enum Resolution: Int64, CaseIterable {
         /// Generate a 256×256 heightmap. Intended for small-scale scenes, or larger scenes with no distant particles.
         case resolution256 = 0 // RESOLUTION_256

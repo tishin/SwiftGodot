@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// You can initialize this interface as follows:
 /// 
 open class MobileVRInterface: XRInterface {
-    override open class var godotClassName: StringName { "MobileVRInterface" }
+    fileprivate static var className = StringName("MobileVRInterface")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

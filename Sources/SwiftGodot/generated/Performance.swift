@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ open class Performance: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Performance" }
+    fileprivate static var className = StringName("Performance")
+    override open class var godotClassName: StringName { className }
     public enum Monitor: Int64, CaseIterable {
         /// The number of frames rendered in the last second. This metric is only updated once per second, even if queried more often. _Higher is better._
         case timeFps = 0 // TIME_FPS

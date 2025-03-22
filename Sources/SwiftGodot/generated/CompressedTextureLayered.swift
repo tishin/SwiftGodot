@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Base class for ``CompressedTexture2DArray`` and ``CompressedTexture3D``. Cannot be used directly, but contains all the functions necessary for accessing the derived resource types. See also ``TextureLayered``.
 open class CompressedTextureLayered: TextureLayered {
-    override open class var godotClassName: StringName { "CompressedTextureLayered" }
+    fileprivate static var className = StringName("CompressedTextureLayered")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

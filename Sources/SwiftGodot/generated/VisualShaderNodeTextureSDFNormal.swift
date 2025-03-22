@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Translates to `texture_sdf_normal(sdf_pos)` in the shader language.
 open class VisualShaderNodeTextureSDFNormal: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeTextureSDFNormal" }
+    fileprivate static var className = StringName("VisualShaderNodeTextureSDFNormal")
+    override open class var godotClassName: StringName { className }
 }
 

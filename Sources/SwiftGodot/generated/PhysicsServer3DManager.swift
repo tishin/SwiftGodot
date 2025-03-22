@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ open class PhysicsServer3DManager: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "PhysicsServer3DManager" }
+    fileprivate static var className = StringName("PhysicsServer3DManager")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_register_server: GDExtensionMethodBindPtr = {
         let methodName = StringName("register_server")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -33,7 +35,8 @@ import Musl
 /// 
 /// - ``timeout``
 open class SceneTreeTimer: RefCounted {
-    override open class var godotClassName: StringName { "SceneTreeTimer" }
+    fileprivate static var className = StringName("SceneTreeTimer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A directional light is a type of ``Light3D`` node that models an infinite number of parallel rays covering the entire scene. It is used for lights with strong intensity that are located far away from the scene to model sunlight or moonlight. The worldspace location of the DirectionalLight3D transform (origin) is ignored. Only the basis is used to determine light direction.
 open class DirectionalLight3D: Light3D {
-    override open class var godotClassName: StringName { "DirectionalLight3D" }
+    fileprivate static var className = StringName("DirectionalLight3D")
+    override open class var godotClassName: StringName { className }
     public enum ShadowMode: Int64, CaseIterable {
         /// Renders the entire scene's shadow map from an orthogonal point of view. This is the fastest directional shadow mode. May result in blurrier shadows on close objects.
         case orthogonal = 0 // SHADOW_ORTHOGONAL

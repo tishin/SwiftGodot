@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// The ``Sky`` class uses a ``Material`` to render a 3D environment's background and the light it emits by updating the reflection/radiance cubemaps.
 open class Sky: Resource {
-    override open class var godotClassName: StringName { "Sky" }
+    fileprivate static var className = StringName("Sky")
+    override open class var godotClassName: StringName { className }
     public enum RadianceSize: Int64, CaseIterable {
         /// Radiance texture size is 32×32 pixels.
         case radianceSize32 = 0 // RADIANCE_SIZE_32

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Computes an inverse or transpose function on the provided ``Transform3D``.
 open class VisualShaderNodeTransformFunc: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeTransformFunc" }
+    fileprivate static var className = StringName("VisualShaderNodeTransformFunc")
+    override open class var godotClassName: StringName { className }
     public enum Function: Int64, CaseIterable {
         /// Perform the inverse operation on the ``Transform3D`` matrix.
         case inverse = 0 // FUNC_INVERSE

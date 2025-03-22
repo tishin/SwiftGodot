@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -32,7 +34,8 @@ import Musl
 /// > Note: Particle collision only affects ``GPUParticles3D``, not ``CPUParticles3D``.
 /// 
 open class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
-    override open class var godotClassName: StringName { "GPUParticlesCollisionSDF3D" }
+    fileprivate static var className = StringName("GPUParticlesCollisionSDF3D")
+    override open class var godotClassName: StringName { className }
     public enum Resolution: Int64, CaseIterable {
         /// Bake a 16×16×16 signed distance field. This is the fastest option, but also the least precise.
         case resolution16 = 0 // RESOLUTION_16

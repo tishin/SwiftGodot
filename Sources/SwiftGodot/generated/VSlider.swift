@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A vertical slider, used to adjust a value by moving a grabber along a vertical axis. It is a ``Range``-based control and goes from bottom (min) to top (max). Note that this direction is the opposite of ``VScrollBar``'s.
 open class VSlider: Slider {
-    override open class var godotClassName: StringName { "VSlider" }
+    fileprivate static var className = StringName("VSlider")
+    override open class var godotClassName: StringName { className }
 }
 

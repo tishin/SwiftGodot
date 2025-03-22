@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class allows for a RenderSceneBuffer implementation to be made in GDExtension.
 open class RenderSceneBuffersExtension: RenderSceneBuffers {
-    override open class var godotClassName: StringName { "RenderSceneBuffersExtension" }
+    fileprivate static var className = StringName("RenderSceneBuffersExtension")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Implement this in GDExtension to handle the (re)sizing of a viewport.
     @_documentation(visibility: public)

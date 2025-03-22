@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -55,7 +57,8 @@ import Musl
 /// - ``referenceSpaceReset``
 /// - ``displayRefreshRateChanged``
 open class WebXRInterface: XRInterface {
-    override open class var godotClassName: StringName { "WebXRInterface" }
+    fileprivate static var className = StringName("WebXRInterface")
+    override open class var godotClassName: StringName { className }
     public enum TargetRayMode: Int64, CaseIterable {
         /// We don't know the the target ray mode.
         case unknown = 0 // TARGET_RAY_MODE_UNKNOWN

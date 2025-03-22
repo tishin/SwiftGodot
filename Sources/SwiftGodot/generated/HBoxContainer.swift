@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A variant of ``BoxContainer`` that can only arrange its child controls horizontally. Child controls are rearranged automatically when their minimum size changes.
 open class HBoxContainer: BoxContainer {
-    override open class var godotClassName: StringName { "HBoxContainer" }
+    fileprivate static var className = StringName("HBoxContainer")
+    override open class var godotClassName: StringName { className }
 }
 

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Occludes light cast by a Light2D, casting shadows. The LightOccluder2D must be provided with an ``OccluderPolygon2D`` in order for the shadow to be computed.
 open class LightOccluder2D: Node2D {
-    override open class var godotClassName: StringName { "LightOccluder2D" }
+    fileprivate static var className = StringName("LightOccluder2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

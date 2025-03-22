@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// The output port of this node needs to be connected to `Model View Matrix` port of ``VisualShaderNodeOutput``.
 open class VisualShaderNodeBillboard: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeBillboard" }
+    fileprivate static var className = StringName("VisualShaderNodeBillboard")
+    override open class var godotClassName: StringName { className }
     public enum BillboardType: Int64, CaseIterable {
         /// Billboarding is disabled and the node does nothing.
         case disabled = 0 // BILLBOARD_TYPE_DISABLED

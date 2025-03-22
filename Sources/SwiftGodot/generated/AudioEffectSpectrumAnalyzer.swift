@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// See also ``AudioStreamGenerator`` for procedurally generating sounds.
 /// 
 open class AudioEffectSpectrumAnalyzer: AudioEffect {
-    override open class var godotClassName: StringName { "AudioEffectSpectrumAnalyzer" }
+    fileprivate static var className = StringName("AudioEffectSpectrumAnalyzer")
+    override open class var godotClassName: StringName { className }
     public enum FFTSize: Int64, CaseIterable {
         /// Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
         case fftSize256 = 0 // FFT_SIZE_256

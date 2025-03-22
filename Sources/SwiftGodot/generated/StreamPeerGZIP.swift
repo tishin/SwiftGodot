@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// After starting the stream via ``startCompression(useDeflate:bufferSize:)`` (or ``startDecompression(useDeflate:bufferSize:)``), calling ``StreamPeer/putPartialData(_:)`` on this stream will compress (or decompress) the data, writing it to the internal buffer. Calling ``StreamPeer/getAvailableBytes()`` will return the pending bytes in the internal buffer, and ``StreamPeer/getPartialData(bytes:)`` will retrieve the compressed (or decompressed) bytes from it. When the stream is over, you must call ``finish()`` to ensure the internal buffer is properly flushed (make sure to call ``StreamPeer/getAvailableBytes()`` on last time to check if more data needs to be read after that).
 /// 
 open class StreamPeerGZIP: StreamPeer {
-    override open class var godotClassName: StringName { "StreamPeerGZIP" }
+    fileprivate static var className = StringName("StreamPeerGZIP")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_start_compression: GDExtensionMethodBindPtr = {
         let methodName = StringName("start_compression")

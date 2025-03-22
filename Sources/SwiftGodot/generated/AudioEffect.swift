@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// When applied on a bus, an audio effect creates a corresponding ``AudioEffectInstance``. The instance is directly responsible for manipulating the sound, based on the original audio effect's properties.
 /// 
 open class AudioEffect: Resource {
-    override open class var godotClassName: StringName { "AudioEffect" }
+    fileprivate static var className = StringName("AudioEffect")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Override this method to customize the ``AudioEffectInstance`` created when this effect is applied on a bus in the editor's Audio panel, or through ``AudioServer/addBusEffect(busIdx:effect:atPosition:)``.
     /// 

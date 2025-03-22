@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Represents a camera as defined by the base GLTF spec.
 open class GLTFCamera: Resource {
-    override open class var godotClassName: StringName { "GLTFCamera" }
+    fileprivate static var className = StringName("GLTFCamera")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -36,7 +38,8 @@ import Musl
 /// Using **VRAM Compressed** also improves loading times, as VRAM-compressed textures are faster to load compared to textures using lossless or lossy compression. VRAM compression can exhibit noticeable artifacts and is intended to be used for 3D rendering, not 2D.
 /// 
 open class CompressedTexture2D: Texture2D {
-    override open class var godotClassName: StringName { "CompressedTexture2D" }
+    fileprivate static var className = StringName("CompressedTexture2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

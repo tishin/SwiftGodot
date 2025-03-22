@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Playback instance for ``AudioStreamPolyphonic``. After setting the `stream` property of ``AudioStreamPlayer``, ``AudioStreamPlayer2D``, or ``AudioStreamPlayer3D``, the playback instance can be obtained by calling ``AudioStreamPlayer/getStreamPlayback()``, ``AudioStreamPlayer2D/getStreamPlayback()`` or ``AudioStreamPlayer3D/getStreamPlayback()`` methods.
 open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
-    override open class var godotClassName: StringName { "AudioStreamPlaybackPolyphonic" }
+    fileprivate static var className = StringName("AudioStreamPlaybackPolyphonic")
+    override open class var godotClassName: StringName { className }
     /* Constants */
     /// Returned by ``playStream(_:fromOffset:volumeDb:pitchScale:playbackType:bus:)`` in case it could not allocate a stream for playback.
     public static let invalidId = -1

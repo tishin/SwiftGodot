@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// This class is used internally by the editor inspector and script debugger, but can also be used in plugins to pass and display objects as their IDs.
 /// 
 open class EncodedObjectAsID: RefCounted {
-    override open class var godotClassName: StringName { "EncodedObjectAsID" }
+    fileprivate static var className = StringName("EncodedObjectAsID")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

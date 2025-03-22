@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -37,7 +39,8 @@ import Musl
 /// - ``peerAuthenticationFailed``
 /// - ``peerPacket``
 open class SceneMultiplayer: MultiplayerAPI {
-    override open class var godotClassName: StringName { "SceneMultiplayer" }
+    fileprivate static var className = StringName("SceneMultiplayer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

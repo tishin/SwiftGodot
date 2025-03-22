@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// If you need to store up to 3 curves within a single texture, use ``CurveXYZTexture`` instead. See also ``GradientTexture1D`` and ``GradientTexture2D``.
 /// 
 open class CurveTexture: Texture2D {
-    override open class var godotClassName: StringName { "CurveTexture" }
+    fileprivate static var className = StringName("CurveTexture")
+    override open class var godotClassName: StringName { className }
     public enum TextureMode: Int64, CaseIterable {
         /// Store the curve equally across the red, green and blue channels. This uses more video memory, but is more compatible with shaders that only read the green and blue values.
         case rgb = 0 // TEXTURE_MODE_RGB

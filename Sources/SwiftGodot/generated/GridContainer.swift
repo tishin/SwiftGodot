@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: ``GridContainer`` only works with child nodes inheriting from ``Control``. It won't rearrange child nodes inheriting from ``Node2D``.
 /// 
 open class GridContainer: Container {
-    override open class var godotClassName: StringName { "GridContainer" }
+    fileprivate static var className = StringName("GridContainer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

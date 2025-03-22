@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``VisualShaderNodeParticleEmitter`` that makes the particles emitted in a shape of the assigned ``mesh``. It will emit from the mesh's surfaces, either all or only the specified one.
 open class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter {
-    override open class var godotClassName: StringName { "VisualShaderNodeParticleMeshEmitter" }
+    fileprivate static var className = StringName("VisualShaderNodeParticleMeshEmitter")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

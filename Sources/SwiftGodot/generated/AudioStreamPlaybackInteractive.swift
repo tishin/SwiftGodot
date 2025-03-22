@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// Playback component of ``AudioStreamInteractive``. Contains functions to change the currently played clip.
 open class AudioStreamPlaybackInteractive: AudioStreamPlayback {
-    override open class var godotClassName: StringName { "AudioStreamPlaybackInteractive" }
+    fileprivate static var className = StringName("AudioStreamPlaybackInteractive")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_switch_to_clip_by_name: GDExtensionMethodBindPtr = {
         let methodName = StringName("switch_to_clip_by_name")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class stores the result of a 3D navigation path query from the ``NavigationServer3D``.
 open class NavigationPathQueryResult3D: RefCounted {
-    override open class var godotClassName: StringName { "NavigationPathQueryResult3D" }
+    fileprivate static var className = StringName("NavigationPathQueryResult3D")
+    override open class var godotClassName: StringName { className }
     public enum PathSegmentType: Int64, CaseIterable {
         /// This segment of the path goes through a region.
         case region = 0 // PATH_SEGMENT_TYPE_REGION

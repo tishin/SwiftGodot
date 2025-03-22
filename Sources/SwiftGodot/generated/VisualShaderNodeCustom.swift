@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// In order for the node to be registered as an editor addon, you must use the `@tool` annotation and provide a `class_name` for your custom script. For example:
 /// 
 open class VisualShaderNodeCustom: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeCustom" }
+    fileprivate static var className = StringName("VisualShaderNodeCustom")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

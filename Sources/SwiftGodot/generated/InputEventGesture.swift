@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// InputEventGestures are sent when a user performs a supported gesture on a touch screen. Gestures can't be emulated using mouse, because they typically require multi-touch.
 open class InputEventGesture: InputEventWithModifiers {
-    override open class var godotClassName: StringName { "InputEventGesture" }
+    fileprivate static var className = StringName("InputEventGesture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

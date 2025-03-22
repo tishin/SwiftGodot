@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``LabelSettings`` is a resource that provides common settings to customize the text in a ``Label``. It will take priority over the properties defined in ``Control/theme``. The resource can be shared between multiple labels and changed on the fly, so it's convenient and flexible way to setup text style.
 open class LabelSettings: Resource {
-    override open class var godotClassName: StringName { "LabelSettings" }
+    fileprivate static var className = StringName("LabelSettings")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// To remove a point from the pathfinding grid, it must be set as "solid" with ``setPointSolid(_:solid:)``.
 /// 
 open class AStarGrid2D: RefCounted {
-    override open class var godotClassName: StringName { "AStarGrid2D" }
+    fileprivate static var className = StringName("AStarGrid2D")
+    override open class var godotClassName: StringName { className }
     public enum Heuristic: Int64, CaseIterable {
         /// The <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean heuristic</a> to be used for the pathfinding using the following formula:
         /// 

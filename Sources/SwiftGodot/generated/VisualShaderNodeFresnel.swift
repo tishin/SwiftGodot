@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// Returns falloff based on the dot product of surface normal and view direction of camera (pass associated inputs to it).
 open class VisualShaderNodeFresnel: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeFresnel" }
+    fileprivate static var className = StringName("VisualShaderNodeFresnel")
+    override open class var godotClassName: StringName { className }
 }
 

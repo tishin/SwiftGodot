@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// An instance of this class can be acquired with ``AudioServer/getBusEffectInstance(busIdx:effectIdx:channel:)``.
 /// 
 open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
-    override open class var godotClassName: StringName { "AudioEffectSpectrumAnalyzerInstance" }
+    fileprivate static var className = StringName("AudioEffectSpectrumAnalyzerInstance")
+    override open class var godotClassName: StringName { className }
     public enum MagnitudeMode: Int64, CaseIterable {
         /// Use the average value across the frequency range as magnitude.
         case average = 0 // MAGNITUDE_AVERAGE

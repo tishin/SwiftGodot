@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -28,7 +30,8 @@ import Musl
 /// To use ``EditorImportPlugin``, register it using the ``EditorPlugin/addImportPlugin(importer:firstPriority:)`` method first.
 /// 
 open class EditorImportPlugin: ResourceImporter {
-    override open class var godotClassName: StringName { "EditorImportPlugin" }
+    fileprivate static var className = StringName("EditorImportPlugin")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Gets the unique name of the importer.
     @_documentation(visibility: public)

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``RDPipelineDepthStencilState`` controls the way depth and stencil comparisons are performed when sampling those values using ``RenderingDevice``.
 open class RDPipelineDepthStencilState: RefCounted {
-    override open class var godotClassName: StringName { "RDPipelineDepthStencilState" }
+    fileprivate static var className = StringName("RDPipelineDepthStencilState")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

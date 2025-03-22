@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// GDScript has a simplified ``@GDScript.preload`` built-in method which can be used in most situations, leaving the use of ``ResourcePreloader`` for more advanced scenarios.
 /// 
 open class ResourcePreloader: Node {
-    override open class var godotClassName: StringName { "ResourcePreloader" }
+    fileprivate static var className = StringName("ResourcePreloader")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

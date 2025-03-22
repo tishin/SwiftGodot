@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This class is used to query and configure a certain import format. It is used in conjunction with asset format import plugins.
 open class EditorFileSystemImportFormatSupportQuery: RefCounted {
-    override open class var godotClassName: StringName { "EditorFileSystemImportFormatSupportQuery" }
+    fileprivate static var className = StringName("EditorFileSystemImportFormatSupportQuery")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     /// Return whether this importer is active.
     @_documentation(visibility: public)

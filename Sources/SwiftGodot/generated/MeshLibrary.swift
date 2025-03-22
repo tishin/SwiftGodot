@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A library of meshes. Contains a list of ``Mesh`` resources, each with a name and ID. Each item can also include collision and navigation shapes. This resource is used in ``GridMap``.
 open class MeshLibrary: Resource {
-    override open class var godotClassName: StringName { "MeshLibrary" }
+    fileprivate static var className = StringName("MeshLibrary")
+    override open class var godotClassName: StringName { className }
     /* Methods */
     fileprivate static var method_create_item: GDExtensionMethodBindPtr = {
         let methodName = StringName("create_item")

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A rectangle box that displays only a colored border around its rectangle. It is used to visualize the extents of a ``Control``.
 open class ReferenceRect: Control {
-    override open class var godotClassName: StringName { "ReferenceRect" }
+    fileprivate static var className = StringName("ReferenceRect")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Most custom uses of buffers only need to use the ``buffer``, ``byteLength``, and ``byteOffset``. The ``byteStride`` and ``indices`` properties are for more advanced use cases such as interleaved mesh data encoded for the GPU.
 /// 
 open class GLTFBufferView: Resource {
-    override open class var godotClassName: StringName { "GLTFBufferView" }
+    fileprivate static var className = StringName("GLTFBufferView")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

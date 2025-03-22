@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: ``AtlasTexture`` cannot be used in an ``AnimatedTexture``, and may not tile properly in nodes such as ``TextureRect``, when inside other ``AtlasTexture`` resources.
 /// 
 open class AtlasTexture: Texture2D {
-    override open class var godotClassName: StringName { "AtlasTexture" }
+    fileprivate static var className = StringName("AtlasTexture")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

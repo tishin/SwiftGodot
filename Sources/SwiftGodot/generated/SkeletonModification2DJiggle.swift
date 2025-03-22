@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// > Note: The Jiggle modifier has `jiggle_joints`, which are the data objects that hold the data for each joint in the Jiggle chain. This is different from than ``Bone2D`` nodes! Jiggle joints hold the data needed for each ``Bone2D`` in the bone chain used by the Jiggle modification.
 /// 
 open class SkeletonModification2DJiggle: SkeletonModification2D {
-    override open class var godotClassName: StringName { "SkeletonModification2DJiggle" }
+    fileprivate static var className = StringName("SkeletonModification2DJiggle")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

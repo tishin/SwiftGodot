@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -26,7 +28,8 @@ import Musl
 /// ``StaticBody2D`` is useful for completely static objects like floors and walls, as well as moving surfaces like conveyor belts and circular revolving platforms (by using ``constantLinearVelocity`` and ``constantAngularVelocity``).
 /// 
 open class StaticBody2D: PhysicsBody2D {
-    override open class var godotClassName: StringName { "StaticBody2D" }
+    fileprivate static var className = StringName("StaticBody2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// ``LightmapGIData`` contains baked lightmap and dynamic object probe data for ``LightmapGI``. It is replaced every time lightmaps are baked in ``LightmapGI``.
 open class LightmapGIData: Resource {
-    override open class var godotClassName: StringName { "LightmapGIData" }
+    fileprivate static var className = StringName("LightmapGIData")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

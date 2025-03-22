@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A Polygon2D is defined by a set of points. Each point is connected to the next, with the final point being connected to the first, resulting in a closed polygon. Polygon2Ds can be filled with color (solid or gradient) or filled with a given texture.
 open class Polygon2D: Node2D {
-    override open class var godotClassName: StringName { "Polygon2D" }
+    fileprivate static var className = StringName("Polygon2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

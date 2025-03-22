@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -38,7 +40,8 @@ import Musl
 /// - ``processFrame``
 /// - ``physicsFrame``
 open class SceneTree: MainLoop {
-    override open class var godotClassName: StringName { "SceneTree" }
+    fileprivate static var className = StringName("SceneTree")
+    override open class var godotClassName: StringName { className }
     public enum GroupCallFlags: Int64, CaseIterable {
         /// Call nodes within a group with no special behavior (default).
         case `default` = 0 // GROUP_CALL_DEFAULT

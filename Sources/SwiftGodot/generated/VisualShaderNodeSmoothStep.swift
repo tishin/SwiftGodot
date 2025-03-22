@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// Returns `0.0` if `x` is smaller than `edge0` and `1.0` if `x` is larger than `edge1`. Otherwise, the return value is interpolated between `0.0` and `1.0` using Hermite polynomials.
 /// 
 open class VisualShaderNodeSmoothStep: VisualShaderNode {
-    override open class var godotClassName: StringName { "VisualShaderNodeSmoothStep" }
+    fileprivate static var className = StringName("VisualShaderNodeSmoothStep")
+    override open class var godotClassName: StringName { className }
     public enum OpType: Int64, CaseIterable {
         /// A floating-point scalar type.
         case scalar = 0 // OP_TYPE_SCALAR

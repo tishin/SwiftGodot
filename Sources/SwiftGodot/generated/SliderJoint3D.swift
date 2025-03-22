@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// A physics joint that restricts the movement of a 3D physics body along an axis relative to another physics body. For example, Body A could be a ``StaticBody3D`` representing a piston base, while Body B could be a ``RigidBody3D`` representing the piston head, moving up and down.
 open class SliderJoint3D: Joint3D {
-    override open class var godotClassName: StringName { "SliderJoint3D" }
+    fileprivate static var className = StringName("SliderJoint3D")
+    override open class var godotClassName: StringName { className }
     public enum Param: Int64, CaseIterable {
         /// Constant for accessing ``linearLimit/upperDistance``. The maximum difference between the pivot points on their X axis before damping happens.
         case linearLimitUpper = 0 // PARAM_LINEAR_LIMIT_UPPER

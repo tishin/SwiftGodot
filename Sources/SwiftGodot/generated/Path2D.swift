@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: The path is considered as relative to the moved nodes (children of ``PathFollow2D``). As such, the curve should usually start with a zero vector (`(0, 0)`).
 /// 
 open class Path2D: Node2D {
-    override open class var godotClassName: StringName { "Path2D" }
+    fileprivate static var className = StringName("Path2D")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

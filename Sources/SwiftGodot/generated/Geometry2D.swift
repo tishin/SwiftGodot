@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -29,7 +31,8 @@ open class Geometry2D: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "Geometry2D" }
+    fileprivate static var className = StringName("Geometry2D")
+    override open class var godotClassName: StringName { className }
     public enum PolyBooleanOperation: Int64, CaseIterable {
         /// Create regions where either subject or clip polygons (or both) are filled.
         case union = 0 // OPERATION_UNION

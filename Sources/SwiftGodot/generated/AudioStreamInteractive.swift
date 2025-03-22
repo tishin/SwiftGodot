@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// The way this is used is by filling a number of clips, then configuring the transition table. From there, clips are selected for playback and the music will smoothly go from the current to the new one while using the corresponding transition rule defined in the transition table.
 /// 
 open class AudioStreamInteractive: AudioStream {
-    override open class var godotClassName: StringName { "AudioStreamInteractive" }
+    fileprivate static var className = StringName("AudioStreamInteractive")
+    override open class var godotClassName: StringName { className }
     public enum TransitionFromTime: Int64, CaseIterable {
         /// Start transition as soon as possible, don't wait for any specific time position.
         case immediate = 0 // TRANSITION_FROM_TIME_IMMEDIATE

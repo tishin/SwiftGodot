@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,7 +23,8 @@ import Musl
 /// 
 /// This node was replaced by ``VisualShaderNodeFrame`` and only exists to preserve compatibility. In the ``VisualShader`` editor it behaves exactly like ``VisualShaderNodeFrame``.
 open class VisualShaderNodeComment: VisualShaderNodeFrame {
-    override open class var godotClassName: StringName { "VisualShaderNodeComment" }
+    fileprivate static var className = StringName("VisualShaderNodeComment")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

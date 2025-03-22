@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -39,7 +41,8 @@ open class XRServer: Object {
         
     }()
     
-    override open class var godotClassName: StringName { "XRServer" }
+    fileprivate static var className = StringName("XRServer")
+    override open class var godotClassName: StringName { className }
     public enum TrackerType: Int64, CaseIterable {
         /// The tracker tracks the location of the players head. This is usually a location centered between the players eyes. Note that for handheld AR devices this can be the current location of the device.
         case head = 1 // TRACKER_HEAD

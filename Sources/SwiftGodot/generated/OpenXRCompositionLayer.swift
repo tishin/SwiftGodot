@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -24,7 +26,8 @@ import Musl
 /// > Note: If the OpenXR runtime doesn't support the given composition layer type, a fallback mesh can be generated with a ``ViewportTexture``, in order to emulate the composition layer.
 /// 
 open class OpenXRCompositionLayer: Node3D {
-    override open class var godotClassName: StringName { "OpenXRCompositionLayer" }
+    fileprivate static var className = StringName("OpenXRCompositionLayer")
+    override open class var godotClassName: StringName { className }
     
     /* Properties */
     

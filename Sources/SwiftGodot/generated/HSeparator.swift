@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// A horizontal separator used for separating other controls that are arranged **vertically**. ``HSeparator`` is purely visual and normally drawn as a ``StyleBoxLine``.
 open class HSeparator: Separator {
-    override open class var godotClassName: StringName { "HSeparator" }
+    fileprivate static var className = StringName("HSeparator")
+    override open class var godotClassName: StringName { className }
 }
 

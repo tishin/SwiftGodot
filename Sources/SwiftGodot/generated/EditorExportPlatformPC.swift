@@ -7,6 +7,8 @@ import Darwin
 #elseif os(Windows)
 import ucrt
 import WinSDK
+#elseif canImport(Android)
+import Android
 #elseif canImport(Glibc)
 import Glibc
 #elseif canImport(Musl)
@@ -21,6 +23,7 @@ import Musl
 /// 
 /// The base class for the desktop platform exporters. These include Windows and Linux/BSD, but not macOS. See the classes inheriting this one for more details.
 open class EditorExportPlatformPC: EditorExportPlatform {
-    override open class var godotClassName: StringName { "EditorExportPlatformPC" }
+    fileprivate static var className = StringName("EditorExportPlatformPC")
+    override open class var godotClassName: StringName { className }
 }
 
